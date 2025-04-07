@@ -31,6 +31,11 @@ type
     pnl_11: TPanel;
     ds_consultaClientes: TDataSource;
     lbl_aviso2: TLabel;
+    lbl_pesParte1: TLabel;
+    lbl_pesParte2: TLabel;
+    lbl_pesParte3: TLabel;
+    lbl_pesParte4: TLabel;
+    lbl_pesParte5: TLabel;
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -105,6 +110,15 @@ end;
 procedure Tform_cliente_consulta.dbgrd_consultaClientesDblClick(
   Sender: TObject);
 begin
+
+   if edt_nomeCliente.text ='' then
+
+   begin
+      ShowMessage('Será necessário preencher pelo menos uma letra.');
+       edt_nomeCliente.SetFocus;
+      Abort;
+   end ;
+
  if ( not ( dbgrd_consultaClientes.DataSource.DataSet.IsEmpty ) ) then
    begin
 
@@ -143,7 +157,9 @@ begin
      form_cliente_cadastro.Destroy;
     end;
    end;
+
 //     dbgrd_consultaClientes.SetFocus;
+
 end;
 
 procedure Tform_cliente_consulta.dbgrd_consultaClientesKeyDown(Sender: TObject;

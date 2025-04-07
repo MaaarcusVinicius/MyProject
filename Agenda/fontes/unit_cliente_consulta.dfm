@@ -26,21 +26,6 @@ object form_cliente_consulta: Tform_cliente_consulta
     ShowCaption = False
     ShowHint = True
     TabOrder = 0
-    object lbl_nomeProfissional: TLabel
-      Left = 19
-      Top = 69
-      Width = 291
-      Height = 21
-      Caption = 'Digite o nome ou endere'#231'o para pesquisa.'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
     object lbl_obsProfissional: TLabel
       Left = 19
       Top = 141
@@ -140,6 +125,81 @@ object form_cliente_consulta: Tform_cliente_consulta
       ParentColor = False
       ParentFont = False
     end
+    object lbl_pesParte1: TLabel
+      Left = 19
+      Top = 66
+      Width = 54
+      Height = 21
+      Caption = 'Digite o'
+      Color = clGray
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lbl_pesParte2: TLabel
+      Left = 75
+      Top = 66
+      Width = 47
+      Height = 21
+      Caption = 'Nome'
+      Color = clGray
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lbl_pesParte3: TLabel
+      Left = 125
+      Top = 66
+      Width = 18
+      Height = 21
+      Caption = 'ou'
+      Color = clGray
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lbl_pesParte4: TLabel
+      Left = 145
+      Top = 66
+      Width = 71
+      Height = 21
+      Caption = 'Endere'#231'o'
+      Color = clGray
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lbl_pesParte5: TLabel
+      Left = 219
+      Top = 66
+      Width = 99
+      Height = 21
+      Caption = 'para pesquisa.'
+      Color = clGray
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
     object pnl_clientebotoes: TPanel
       Left = 201
       Top = 624
@@ -210,7 +270,7 @@ object form_cliente_consulta: Tform_cliente_consulta
     object edt_nomeCliente: TEdit
       Tag = 5
       Left = 19
-      Top = 96
+      Top = 88
       Width = 496
       Height = 23
       TabOrder = 0
@@ -231,15 +291,15 @@ object form_cliente_consulta: Tform_cliente_consulta
       Top = 168
       Width = 638
       Height = 401
-      Color = clSilver
       DataSource = ds_consultaClientes
-      FixedColor = clCream
+      FixedColor = clMenuHighlight
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
+      Font.Color = clDodgerblue
       Font.Height = -12
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       Options = [dgTitles, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentColor = True
       ParentFont = False
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
@@ -336,7 +396,7 @@ object form_cliente_consulta: Tform_cliente_consulta
     end
     object pnl_novocliente: TPanel
       Left = 521
-      Top = 93
+      Top = 85
       Width = 136
       Height = 27
       BevelOuter = bvNone
@@ -381,7 +441,7 @@ object form_cliente_consulta: Tform_cliente_consulta
           ParentFont = False
           OnClick = btn_1Click
           ExplicitLeft = -1
-          ExplicitHeight = 41
+          ExplicitTop = -8
         end
       end
     end

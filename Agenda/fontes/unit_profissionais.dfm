@@ -270,7 +270,7 @@ object form_profissionais: Tform_profissionais
       DataSource = ds_profissionais
       FixedColor = clCream
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
+      Font.Color = clDodgerblue
       Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
