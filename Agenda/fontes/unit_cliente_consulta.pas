@@ -45,6 +45,7 @@ type
     procedure dbgrd_consultaClientesKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btn_selecionaClick(Sender: TObject);
+    procedure dbgrd_consultaClientesEnter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -111,14 +112,6 @@ procedure Tform_cliente_consulta.dbgrd_consultaClientesDblClick(
   Sender: TObject);
 begin
 
-   if edt_nomeCliente.text ='' then
-
-   begin
-      ShowMessage('Será necessário preencher pelo menos uma letra.');
-       edt_nomeCliente.SetFocus;
-      Abort;
-   end ;
-
  if ( not ( dbgrd_consultaClientes.DataSource.DataSet.IsEmpty ) ) then
    begin
 
@@ -159,6 +152,38 @@ begin
    end;
 
 //     dbgrd_consultaClientes.SetFocus;
+
+end;
+
+procedure Tform_cliente_consulta.dbgrd_consultaClientesEnter(Sender: TObject);
+begin
+
+   if dbgrd_consultaClientes.DataSource.DataSet.IsEmpty then
+        exit;
+   {
+     Existe um erro ao acessar o dbgrid, neste momento ele ainda não existe
+     com isto há um erro de acessviolation, tem que corrigir.
+
+     Ex: Utilizar o --> Assigned <-- para verificar se no momento ele esta
+         Criado, caso esteja da um Exit, caso não esteja da um Create   na
+         consulta.
+   }
+   if  edt_nomeCliente.text = '' then
+     begin
+
+        ShowMessage('Será necessário preencher pelo menos uma letra.');
+         edt_nomeCliente.SetFocus;
+         exit;
+     end else
+      begin
+
+        ShowMessage('Já esta preenchido.');
+
+      end;
+
+     //dbgrd_consultaClientesDblClick()
+
+
 
 end;
 

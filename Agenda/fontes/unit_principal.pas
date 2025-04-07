@@ -78,9 +78,11 @@ begin
 
   form_agendamento          := Tform_agendamento.Create( Self );
   form_agendamento.Parent   := pnl_lateralRigth;
-  form_agendamento.Show;
 
   pnl_lateralLefth.Enabled  := False;
+
+  form_agendamento.Show;
+
 
 end;
 

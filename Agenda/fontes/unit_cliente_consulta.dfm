@@ -308,6 +308,7 @@ object form_cliente_consulta: Tform_cliente_consulta
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       OnDblClick = dbgrd_consultaClientesDblClick
+      OnEnter = dbgrd_consultaClientesEnter
       OnKeyDown = dbgrd_consultaClientesKeyDown
       Columns = <
         item

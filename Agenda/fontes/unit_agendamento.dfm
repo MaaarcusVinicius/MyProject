@@ -461,7 +461,7 @@ object form_agendamento: Tform_agendamento
       ParentShowHint = False
       ShowDayOfWeek = False
       ShowHint = False
-      TabOrder = 0
+      TabOrder = 1
       TextHint = 'select a date'
       Visible = False
     end
@@ -470,6 +470,8 @@ object form_agendamento: Tform_agendamento
       Top = 156
       Width = 129
       Height = 31
+      TabStop = False
+      Color = clSilver
       EditMask = '!99/99/9999;1;_'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -478,7 +480,8 @@ object form_agendamento: Tform_agendamento
       Font.Style = []
       MaxLength = 10
       ParentFont = False
-      TabOrder = 1
+      ReadOnly = True
+      TabOrder = 4
       Text = '  /  /    '
     end
     object medt_horaAgendamento: TMaskEdit
@@ -486,6 +489,8 @@ object form_agendamento: Tform_agendamento
       Top = 156
       Width = 89
       Height = 31
+      TabStop = False
+      Color = clSilver
       EditMask = '!99:99;1;_'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -494,14 +499,17 @@ object form_agendamento: Tform_agendamento
       Font.Style = []
       MaxLength = 5
       ParentFont = False
-      TabOrder = 2
+      ReadOnly = True
+      TabOrder = 5
       Text = '  :  '
     end
     object edt_pesquisaCliente: TEdit
+      Tag = 5
       Left = 42
       Top = 252
       Width = 433
       Height = 31
+      Hint = 'Cliente'
       Color = clSilver
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -510,7 +518,7 @@ object form_agendamento: Tform_agendamento
       Font.Style = [fsBold]
       ParentFont = False
       ReadOnly = True
-      TabOrder = 3
+      TabOrder = 2
     end
     object medt_telefone: TMaskEdit
       Left = 42
@@ -527,7 +535,7 @@ object form_agendamento: Tform_agendamento
       MaxLength = 15
       ParentFont = False
       ReadOnly = True
-      TabOrder = 4
+      TabOrder = 6
       Text = '(   )     -    '
     end
     object medt_celular: TMaskEdit
@@ -545,7 +553,7 @@ object form_agendamento: Tform_agendamento
       MaxLength = 15
       ParentFont = False
       ReadOnly = True
-      TabOrder = 5
+      TabOrder = 7
       Text = '(   )     -    '
     end
     object edt_observacoes: TEdit
@@ -559,17 +567,17 @@ object form_agendamento: Tform_agendamento
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 3
     end
     object pnl_botoes: TPanel
-      Left = 201
+      Left = 110
       Top = 608
       Width = 275
       Height = 41
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
-      TabOrder = 7
+      TabOrder = 8
       object pnl_confirma: TPanel
         Left = 0
         Top = 0
@@ -645,7 +653,7 @@ object form_agendamento: Tform_agendamento
       ListField = 'ds_profissional'
       ListSource = dataSource_profissionais
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 0
     end
   end
   object dataSource_profissionais: TDataSource
