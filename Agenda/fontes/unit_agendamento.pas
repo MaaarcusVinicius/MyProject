@@ -74,8 +74,65 @@ begin
 end;
 
 procedure Tform_agendamento.btn_confirmaClick(Sender: TObject);
+var
+  sErro: string;
 begin
    prcValidarCamposObrigatorios( form_agendamento );
+
+    if Agendamento.fnc_validar_agendamento( dblkcbb_selecionePorfissional.KeyValue,
+                                                        StrToDate( medt_agendamentoData.Text ),
+                                                        medt_horaAgendamento.text ) then
+    begin
+      Agendamento.pro_id_profissional := dblkcbb_selecionePorfissional.KeyValue;
+      Agendamento.dt_data             := StrToDate( medt_agendamentoData.Text ) ;
+      Agendamento.hr_hora             := medt_horaAgendamento.text ;
+      Agendamento.ds_obs              := edt_observacoes.text;
+
+      //Inserir Agendamento
+
+      sErro := Agendamento.fnc_inserir;
+
+     if Agendamento.fnc_inserir = '' then
+       begin
+
+          fnc_criar_menssagem('GRAVANDO DADOS',
+                              'AGENDAR HORÁRIO',
+                              'AGENDAMENTO REALIZADO COM SUCESSO!',
+                               ExtractFilePath(Application.ExeName ) + '\icones\HumanoAviso.png',
+                              'OK')  ;
+
+          form_Principal.pnl_lateralLefth.Enabled := True;
+
+          form_agendamento.Close;
+       end else
+       begin
+       //Mostrar a mensagem para o usuario que ocorreu um erro ao gravar os dados no Banco Dados.
+
+          fnc_criar_menssagem('GRAVANDO DADOS',
+                              'ERRO AO AGENDAR HORÁRIO',
+                              sErro,
+                              ExtractFilePath(Application.ExeName ) + '\icones\HumanoDelete.png',
+                               'OK')  ;
+        medt_horaAgendamento.SetFocus;
+
+       end;
+    end else
+    begin
+
+       fnc_criar_menssagem('VALIDADAR DADOS',
+                           'ERRO AO AGENDAR HORÁRIO',
+                           'DIA OU HORA DO AGENDAMENTO JÁ UTILIZADO!',
+                           ExtractFilePath(Application.ExeName ) + '\icones\HumanoDelete.png',
+                           'OK')  ;
+       medt_horaAgendamento.SetFocus;
+
+    end;
+
+
+
+
+
+
 end;
 
 procedure Tform_agendamento.btn_diaHorarioClick(Sender: TObject);
@@ -86,6 +143,7 @@ begin
 
     if dblkcbb_selecionePorfissional.KeyValue <> null then
        form_agendamento_consulta.dblkcbb_selecionePorfissional.KeyValue := dblkcbb_selecionePorfissional.KeyValue;
+       form_agendamento_consulta.edt_observacoes.text := edt_observacoes.text;
 
     form_agendamento_consulta.ShowModal;
 

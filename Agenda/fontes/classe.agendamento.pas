@@ -34,6 +34,7 @@ uses
     destructor destroy; override;
     function fnc_consulta(id_profissional: Integer; Data: TDateTime): TFDQuery;
     function fnc_validar_agendamento(id_profissional: Integer; Data: TDateTime; hr_hora: string): Boolean;
+    function fnc_inserir: string;
 
   end;
 
@@ -134,6 +135,64 @@ begin
    end;
 
 
+
+end;
+
+function TAgendamento.fnc_inserir: string;
+var
+  QryInserir : TFDQuery;
+
+begin
+  try
+
+    try
+
+      FConexao.Connected := False;
+      FConexao.Connected := True;
+
+      QryInserir := TFDQuery.Create ( nil );
+      QryInserir.Connection := FConexao;
+
+      QryInserir.Close;
+      QryInserir.SQL.Clear;
+      QryInserir.SQL.Add('insert into agendamento           ');
+      QryInserir.SQL.Add('           (id_Agendamento,       ');
+      QryInserir.SQL.Add('            cli_id_cliente,       ');
+      QryInserir.SQL.Add('            pro_id_profissional,  ');
+      QryInserir.SQL.Add('            usu_id_usuarios,      ');
+      QryInserir.SQL.Add('            dt_data,              ');
+      QryInserir.SQL.Add('            hr_hora,              ');
+      QryInserir.SQL.Add('            ds_obs)               ');
+      QryInserir.SQL.Add('     values(:id_agendamento,      ');
+      QryInserir.SQL.Add('            :cli_id_cliente,      ');
+      QryInserir.SQL.Add('            :pro_id_profissional, ');
+      QryInserir.SQL.Add('            :usu_id_usuarios,     ');
+      QryInserir.SQL.Add('            :dt_data,             ');
+      QryInserir.SQL.Add('            :hr_hora,             ');
+      QryInserir.SQL.Add('            :ds_obs)              ');
+
+      QryInserir.ParamByName('id_Agendamento').AsInteger      := fnc_proximo_codigo('agendamento', 'id_Agendamento') ;
+      QryInserir.ParamByName('cli_id_cliente').AsInteger      := Fcli_id_cliente;
+      QryInserir.ParamByName('pro_id_profissional').AsInteger := Fpro_id_profissional;
+      QryInserir.ParamByName('usu_id_usuarios').AsInteger     := 1;
+      QryInserir.ParamByName('dt_data').AsDate                := Fdt_data;
+      QryInserir.ParamByName('hr_hora').AsString              := Fhr_hora;
+      QryInserir.ParamByName('ds_obs').AsString               := Fds_obs;
+
+      Result := '' ;
+
+     except
+
+       On E: Exception Do
+           Result := E.message;
+
+    end;
+
+  finally
+
+    QryInserir.Destroy;
+
+  end;
 
 end;
 

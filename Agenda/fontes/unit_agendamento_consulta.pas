@@ -79,6 +79,7 @@ begin
     begin
 
       form_agendamento.dblkcbb_selecionePorfissional.KeyValue := dblkcbb_selecionePorfissional.KeyValue;
+      form_agendamento.edt_observacoes.text := edt_observacoes.text;
       form_agendamento.medt_agendamentoData.Text :=  DateToStr( clndrpckr_calendario.Date );
       form_agendamento.medt_horaAgendamento.Text :=  ( cbb_hora.Text + ':' + cbb_horarioMinutos.Text );
 
