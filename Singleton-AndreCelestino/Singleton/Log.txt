@@ -1,0 +1,24 @@
+[25/10/2024 09:09:38] Usuário iniciou a aplicação.
+[25/10/2024 09:09:39] Usuário abriu a tela de Cadastro de Participantes.
+[25/10/2024 09:09:50] Participante "Marcus" cadastrado.
+[25/10/2024 09:09:55] Participante "Emilio" cadastrado.
+[25/10/2024 09:10:03] Participante "Leandro" cadastrado.
+[25/10/2024 09:10:07] Participante "David" cadastrado.
+[25/10/2024 09:10:12] Participante "Sueli" cadastrado.
+[25/10/2024 09:10:14] Usuário abriu a tela de Sorteio.
+[25/10/2024 09:10:15] Participante sorteado: Mateus
+[25/10/2024 09:16:15] Usuário iniciou a aplicação.
+[25/10/2024 09:16:16] Usuário abriu a tela de Cadastro de Participantes.
+[25/10/2024 09:16:18] Participante "Sueli" removido.
+[25/10/2024 09:16:20] Participante "David" removido.
+[25/10/2024 09:16:28] Participante "Aline" cadastrado.
+[25/10/2024 09:16:30] Usuário abriu a tela de Sorteio.
+[25/10/2024 09:16:31] Participante sorteado: Nathan
+[25/10/2024 09:16:32] Participante sorteado: Jefferson
+[25/10/2024 09:16:33] Participante sorteado: Emilio
+[25/10/2024 09:16:34] Participante sorteado: Nathan
+[25/10/2024 09:16:34] Participante sorteado: Jefferson
+[25/10/2024 09:16:35] Participante sorteado: Anderson
+[25/10/2024 09:16:35] Participante sorteado: Beatriz
+[25/10/2024 09:17:42] Usuário iniciou a aplicação.
+[25/10/2024 09:17:45] Usuário abriu a tela de Cadastro de Participantes.
