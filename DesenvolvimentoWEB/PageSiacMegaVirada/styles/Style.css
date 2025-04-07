@@ -1,0 +1,154 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    width: fit-content;
+}
+
+body {
+    background-image: url(../components/images/background.jpg);
+    background-repeat: no-repeat;
+}
+
+h1,
+h2,
+h4,
+
+h3 {
+    color: rgb(179, 185, 155);
+}
+
+span {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(244, 242, 247);
+}
+
+main {
+    padding: 16px;
+}
+
+main h3 {
+    display: flex;
+    align-items: center;
+}
+
+/*definição de fontes nas regras*/
+pre {
+    overflow-x: auto;
+    color: aliceblue;
+    font-family: poppinsregular;
+}
+
+li {
+    color: aliceblue;
+}
+
+
+.pix {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: aliceblue;    
+    font-family: poppinsregular;
+}
+ 
+
+#nubank {
+    width: 130px;
+    height: 80px;
+    align-items: center;
+    margin: 0 0 0 30px;
+}
+
+#container {
+    background-image: linear-gradient(103.24deg, rgba(0, 8, 20, 0.3) 23.83%, rgba(0, 8, 29, 0.3) 96.1%);
+    /*background-image: url(../components/images/background.jpg);*/
+    background-size: cover;
+    border: none;
+    padding: 10px;
+    margin: 0 0 50px 0;
+}
+
+#logo-mega {
+    width: 100px;
+}
+
+#logo-siac {
+    width: 200px;
+    margin: 0 0 0 50px;
+}
+
+#qrcode {
+    width: 200px;
+}
+
+#zap {
+    margin: 10px;
+    width: 200px;
+}
+
+#grupozap {
+    color: green;
+}
+
+#header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+#GpZap {
+    color: green;
+}
+
+
+#list {
+    font-family: 'poppinssemibold';
+    margin-left: 50px;
+    color: rgb(251, 249, 252);
+    border: 12px solid rgb(39, 58, 226);
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 0 0 427px;
+    /*margin: 20px;*/
+}
+
+#list:hover {
+    background-color: rgb(240, 241, 247);
+    color: rgb(23, 9, 224);
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        height: unset;
+    }
+
+    body {
+        background-repeat: repeat;
+        background-size: unset;
+    }
+
+    h1 {
+        font-size: 45px;
+    }
+
+    h2 {
+        margin: 10px 0 10px 0;
+    }
+
+    .pix {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }    
+
+    #logo-siac {
+        width: 350px;
+    }
+
+    #header {
+        flex-direction: column;
+        height: 45vh;
+    }
+}

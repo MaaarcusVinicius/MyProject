@@ -1,0 +1,79 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+}
+
+body {
+    background-image: url(../components/images/background.jpg);
+    background-size: cover;
+}
+
+
+/* Estilos para a tabela */
+table {
+    border-collapse: collapse;
+    width: 30%;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #330431;
+  }
+  
+
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+h1{
+  color:white
+}
+
+  h2{
+    color: white;
+  }
+
+  tr{
+    color: white
+  }
+
+
+  #header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+  #container {
+    background-image: linear-gradient(103.24deg, rgba(0, 8, 20, 0.3) 23.83%, rgba(0, 8, 29, 0.3) 96.1%);
+    background-size: cover;
+    border: none;
+    padding: 10px;
+    margin: 0 0 50px 0;
+}
+
+#logo-mega {
+    width: 160px;
+}
+
+#logo-siac {
+    width: 200px;
+}
+
+#total{
+    
+    color: rgb(2, 150, 10);
+}
