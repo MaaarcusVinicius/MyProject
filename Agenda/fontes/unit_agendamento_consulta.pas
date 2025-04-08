@@ -108,7 +108,7 @@ procedure Tform_agendamento_consulta.clndrpckr_calendarioChange(
   Sender: TObject);
 begin
 
-   if clndrpckr_calendario.IsEmpty then
+   if ( clndrpckr_calendario.IsEmpty ) then
       exit;
 
   if ( dblkcbb_selecionePorfissional.KeyValue = null ) then
@@ -120,6 +120,7 @@ begin
                      'OK')  ;
 
        clndrpckr_calendario.IsEmpty := True;
+
        dblkcbb_selecionePorfissional.SetFocus;
 
        Abort;

@@ -92,7 +92,7 @@ begin
 
       sErro := Agendamento.fnc_inserir;
 
-     if Agendamento.fnc_inserir = '' then
+     if sErro = '' then
        begin
 
           fnc_criar_menssagem('GRAVANDO DADOS',
@@ -137,6 +137,7 @@ end;
 
 procedure Tform_agendamento.btn_diaHorarioClick(Sender: TObject);
 begin
+
   try
 
     form_agendamento_consulta := Tform_agendamento_consulta.Create( Self );
@@ -145,7 +146,10 @@ begin
        form_agendamento_consulta.dblkcbb_selecionePorfissional.KeyValue := dblkcbb_selecionePorfissional.KeyValue;
        form_agendamento_consulta.edt_observacoes.text := edt_observacoes.text;
 
+    //form_agendamento_consulta.clndrpckr_calendario.Date := Date;
+
     form_agendamento_consulta.ShowModal;
+
 
   finally
 

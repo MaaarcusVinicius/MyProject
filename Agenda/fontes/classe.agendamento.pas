@@ -179,6 +179,8 @@ begin
       QryInserir.ParamByName('hr_hora').AsString              := Fhr_hora;
       QryInserir.ParamByName('ds_obs').AsString               := Fds_obs;
 
+      QryInserir.ExecSQL;
+
       Result := '' ;
 
      except
