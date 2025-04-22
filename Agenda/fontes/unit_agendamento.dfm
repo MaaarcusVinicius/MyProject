@@ -10,7 +10,7 @@ object form_agendamento: Tform_agendamento
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Position = poDefault
+  Position = poMainFormCenter
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

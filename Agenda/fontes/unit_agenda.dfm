@@ -20,14 +20,15 @@ object form_agenda: Tform_agenda
     Width = 704
     Height = 133
     Align = alTop
+    BevelKind = bkFlat
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
     DesignSize = (
-      704
-      133)
+      700
+      129)
     object btn_encerrar: TSpeedButton
-      Left = 668
+      Left = 664
       Top = 0
       Width = 33
       Height = 22
@@ -91,9 +92,9 @@ object form_agenda: Tform_agenda
     end
     object btn_diaHorario: TSpeedButton
       Left = 475
-      Top = 86
-      Width = 33
-      Height = 41
+      Top = 83
+      Width = 39
+      Height = 36
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
         180000000000000C0000120B0000120B00000000000000000000FFFFFFFFFFFF
@@ -301,13 +302,15 @@ object form_agenda: Tform_agenda
     end
     object pnl_linha: TPanel
       Left = 1
-      Top = 129
-      Width = 702
+      Top = 125
+      Width = 698
       Height = 3
       Align = alBottom
       Color = clGray
       ParentBackground = False
       TabOrder = 0
+      ExplicitTop = 129
+      ExplicitWidth = 702
     end
     object dblkcbb_selecionePorfissional: TDBLookupComboBox
       Tag = 5
@@ -353,12 +356,11 @@ object form_agenda: Tform_agenda
       TextHint = 'Selecione uma Data'
     end
     object edt_consultaCliente: TEdit
-      Left = 16
-      Top = 92
+      Left = 12
+      Top = 95
       Width = 457
       Height = 23
       TabOrder = 3
-      Text = 'edt_consultaCliente'
     end
     object pnl_novoAgendamento: TPanel
       Left = 520
@@ -397,6 +399,7 @@ object form_agenda: Tform_agenda
     Width = 704
     Height = 347
     Align = alClient
+    BevelKind = bkFlat
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
@@ -456,8 +459,8 @@ object form_agenda: Tform_agenda
         end>
     end
     object pnl_confirma: TPanel
-      Left = 264
-      Top = 300
+      Left = 266
+      Top = 298
       Width = 137
       Height = 41
       BevelOuter = bvNone

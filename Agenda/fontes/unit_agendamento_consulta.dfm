@@ -10,7 +10,7 @@ object form_agendamento_consulta: Tform_agendamento_consulta
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Position = poMainFormCenter
+  Position = poOwnerFormCenter
   TextHeight = 15
   object pnl_superior: TPanel
     Left = 0
