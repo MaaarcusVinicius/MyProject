@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
-  unit_cliente_cadastro, classe.clientes, unit_agendamento;
+  unit_cliente_cadastro, classe.clientes, unit_agendamento, classe.agendamento, unit_dados, unit_agenda;
 
 type
   Tform_cliente_consulta = class(TForm)
@@ -60,9 +60,6 @@ var
 
 implementation
 
-uses
-  unit_dados;
-
 
 
 {$R *.dfm}
@@ -94,7 +91,7 @@ begin
     if ( not ( IsEmpty ) ) then
     begin
 
-      form_agendamento.Agendamento.cli_id_cliente := FieldByName('id_cliente').AsInteger;
+      form_agenda.Agendamento.cli_id_cliente := FieldByName('id_cliente').AsInteger;
       form_agendamento.edt_pesquisaCliente.Text   := FieldByName('ds_cliente').AsString;
       form_agendamento.medt_telefone.Text         := FieldByName('nr_telefone').AsString;
       form_agendamento.medt_celular.Text          := FieldByName('nr_telefone2').AsString;

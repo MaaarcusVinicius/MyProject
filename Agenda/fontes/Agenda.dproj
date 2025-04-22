@@ -176,6 +176,10 @@
             <Form>form_agendamento_consulta</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="unit_agenda.pas">
+            <Form>form_agenda</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

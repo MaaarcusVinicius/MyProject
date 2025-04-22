@@ -52,8 +52,6 @@ type
 
   public
     { Public declarations }
-    Agendamento :TAgendamento;
-
   end;
 
 var
@@ -63,7 +61,7 @@ var
 implementation
 
 uses
-  unit_profissionais, unit_cliente_consulta, unit_agendamento_consulta;
+  unit_profissionais, unit_cliente_consulta, unit_agendamento_consulta, unit_agenda;
 
 
 {$R *.dfm}
@@ -79,18 +77,18 @@ var
 begin
    prcValidarCamposObrigatorios( form_agendamento );
 
-    if Agendamento.fnc_validar_agendamento( dblkcbb_selecionePorfissional.KeyValue,
+    if form_agenda.Agendamento.fnc_validar_agendamento( dblkcbb_selecionePorfissional.KeyValue,
                                                         StrToDate( medt_agendamentoData.Text ),
                                                         medt_horaAgendamento.text ) then
     begin
-      Agendamento.pro_id_profissional := dblkcbb_selecionePorfissional.KeyValue;
-      Agendamento.dt_data             := StrToDate( medt_agendamentoData.Text ) ;
-      Agendamento.hr_hora             := medt_horaAgendamento.text ;
-      Agendamento.ds_obs              := edt_observacoes.text;
+      form_agenda.Agendamento.pro_id_profissional := dblkcbb_selecionePorfissional.KeyValue;
+      form_agenda.Agendamento.dt_data             := StrToDate( medt_agendamentoData.Text ) ;
+      form_agenda.Agendamento.hr_hora             := medt_horaAgendamento.text ;
+      form_agenda.Agendamento.ds_obs              := edt_observacoes.text;
 
       //Inserir Agendamento
 
-      sErro := Agendamento.fnc_inserir;
+      sErro := form_agenda.Agendamento.fnc_inserir;
 
      if sErro = '' then
        begin
@@ -195,7 +193,6 @@ procedure Tform_agendamento.FormClose(Sender: TObject;
 begin
 
    form_Principal.pnl_lateralLefth.Enabled  := True;
-   Agendamento.Destroy;
 
   // form_dados.GetProfissional().Destroy;
    Action := caFree;
@@ -204,8 +201,7 @@ end;
 
 procedure Tform_agendamento.FormCreate(Sender: TObject);
 begin
-
-  Agendamento := TAgendamento.Create ( form_dados.FDConnection );
+  form_dados.GetProfissional();
 
 end;
 

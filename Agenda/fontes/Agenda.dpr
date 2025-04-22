@@ -18,7 +18,8 @@ uses
   unit_cliente_cadastro in 'unit_cliente_cadastro.pas' {form_cliente_cadastro},
   classe.clientes in 'classe.clientes.pas',
   classe.agendamento in 'classe.agendamento.pas',
-  unit_agendamento_consulta in 'unit_agendamento_consulta.pas' {form_agendamento_consulta};
+  unit_agendamento_consulta in 'unit_agendamento_consulta.pas' {form_agendamento_consulta},
+  unit_agenda in 'unit_agenda.pas' {form_agenda};
 
 {$R *.res}
 
@@ -27,7 +28,8 @@ begin
   Application.MainFormOnTaskbar := True;
 
   Application.CreateForm(Tform_dados, form_dados);
- // Application.CreateForm(Tform_agendamento_consulta, form_agendamento_consulta);
+
+  // Application.CreateForm(Tform_agendamento_consulta, form_agendamento_consulta);
  // Application.CreateForm(Tform_Principal, form_Principal);
  // Application.CreateForm(Tform_cliente_cadastro, form_cliente_cadastro);
  // Application.CreateForm(Tform_cliente_consulta, form_cliente_consulta);

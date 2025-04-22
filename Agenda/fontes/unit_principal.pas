@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.pngimage, Vcl.Buttons, unit_configurarServidor;
+  Vcl.Imaging.pngimage, Vcl.Buttons, unit_configurarServidor, unit_agenda;
 
 type
   Tform_Principal = class(TForm)
@@ -75,15 +75,12 @@ end;
 
 procedure Tform_Principal.btn_agendamentoClick(Sender: TObject);
 begin
-
-  form_agendamento          := Tform_agendamento.Create( Self );
-  form_agendamento.Parent   := pnl_lateralRigth;
-
-  pnl_lateralLefth.Enabled  := False;
-
-  form_agendamento.Show;
-
-
+  try
+    form_agenda := Tform_agenda.Create( Self );
+    form_agenda.ShowModal;
+  finally
+    form_agenda.Free;
+  end;
 end;
 
 procedure Tform_Principal.btn_closeClick(Sender: TObject);

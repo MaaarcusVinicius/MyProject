@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.DBCtrls,
-  Vcl.StdCtrls, Vcl.WinXCalendars, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  Vcl.StdCtrls, Vcl.WinXCalendars, Data.DB, Vcl.Grids, Vcl.DBGrids, unit_agenda;
 
 type
   Tform_agendamento_consulta = class(TForm)
@@ -73,7 +73,7 @@ begin
        Abort;
    end;
 
-   if form_agendamento.Agendamento.fnc_validar_agendamento( dblkcbb_selecionePorfissional.KeyValue,
+   if form_agenda.Agendamento.fnc_validar_agendamento( dblkcbb_selecionePorfissional.KeyValue,
                                                             clndrpckr_calendario.Date,
                                                             ( cbb_hora.Text + ':' + cbb_horarioMinutos.Text ) ) then
     begin
@@ -128,7 +128,7 @@ begin
     end else
     begin
 
-       ds_consulta.DataSet := form_agendamento.Agendamento.fnc_consulta(
+       ds_consulta.DataSet := form_agenda.Agendamento.fnc_consulta(
        dblkcbb_selecionePorfissional.KeyValue, clndrpckr_calendario.Date);
 
     end;
