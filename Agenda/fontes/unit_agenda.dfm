@@ -1,10 +1,12 @@
 object form_agenda: Tform_agenda
   Left = 0
   Top = 0
+  Align = alCustom
+  AlphaBlend = True
   BorderStyle = bsNone
-  ClientHeight = 480
-  ClientWidth = 704
-  Color = clWhite
+  ClientHeight = 670
+  ClientWidth = 1000
+  Color = clSilver
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -13,86 +15,25 @@ object form_agenda: Tform_agenda
   Position = poMainFormCenter
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
-  object pnl_superior: TPanel
-    Left = 0
-    Top = 0
-    Width = 704
-    Height = 133
-    Align = alTop
-    BevelKind = bkFlat
+  object pnl_central: TPanel
+    Left = 120
+    Top = 81
+    Width = 713
+    Height = 500
+    Align = alCustom
+    AutoSize = True
+    BevelKind = bkTile
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
     DesignSize = (
-      700
-      129)
-    object btn_encerrar: TSpeedButton
-      Left = 664
-      Top = 0
-      Width = 33
-      Height = 22
-      Cursor = crHandPoint
-      Anchors = [akTop, akRight]
-      Caption = 'X'
-      Flat = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -18
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      OnClick = btn_encerrarClick
-      ExplicitLeft = 604
-    end
-    object lbl_selecioneProfissional: TLabel
-      Left = 374
-      Top = 9
-      Width = 84
-      Height = 21
-      Caption = 'Profissional:'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
-    object lbl_data: TLabel
-      Left = 16
-      Top = 10
-      Width = 35
-      Height = 21
-      Caption = 'Data:'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
-    object lbl_cliente: TLabel
-      Left = 16
-      Top = 68
-      Width = 51
-      Height = 21
-      Caption = 'Cliente:'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
-    object btn_diaHorario: TSpeedButton
-      Left = 475
-      Top = 83
+      709
+      496)
+    object btn_consultaCliente: TSpeedButton
+      Left = 477
+      Top = 96
       Width = 39
       Height = 36
       Glyph.Data = {
@@ -194,10 +135,11 @@ object form_agenda: Tform_agenda
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btn_consultaClienteClick
     end
     object btn_consultaProfissionais: TSpeedButton
-      Left = 653
-      Top = 28
+      Left = 650
+      Top = 29
       Width = 36
       Height = 35
       Glyph.Data = {
@@ -299,40 +241,170 @@ object form_agenda: Tform_agenda
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      OnClick = btn_consultaProfissionaisClick
     end
-    object pnl_linha: TPanel
-      Left = 1
-      Top = 125
-      Width = 698
-      Height = 3
-      Align = alBottom
-      Color = clGray
-      ParentBackground = False
-      TabOrder = 0
-      ExplicitTop = 129
-      ExplicitWidth = 702
-    end
-    object dblkcbb_selecionePorfissional: TDBLookupComboBox
-      Tag = 5
-      Left = 374
-      Top = 32
-      Width = 273
-      Height = 31
-      Hint = 'Selecione um Profissional !'
+    object lbl_selecioneProfissional: TLabel
+      Left = 371
+      Top = 17
+      Width = 84
+      Height = 21
+      Caption = 'Profissional:'
+      Color = clWhite
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -17
+      Font.Color = clGray
+      Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = []
-      KeyField = 'id_profissional'
-      ListField = 'ds_profissional'
-      ListSource = form_agendamento.dataSource_profissionais
+      ParentColor = False
+      ParentFont = False
+    end
+    object lbl_data: TLabel
+      Left = 16
+      Top = 18
+      Width = 35
+      Height = 21
+      Caption = 'Data:'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lbl_cliente: TLabel
+      Left = 16
+      Top = 76
+      Width = 51
+      Height = 21
+      Caption = 'Cliente:'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object btn_encerrar: TSpeedButton
+      Left = 675
+      Top = 1
+      Width = 33
+      Height = 22
+      Cursor = crHandPoint
+      Anchors = [akTop, akRight]
+      Caption = 'X'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -18
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      OnClick = btn_encerrarClick
+      ExplicitLeft = 946
+    end
+    object dbgrd_consulta_agenda: TDBGrid
+      Left = 13
+      Top = 155
+      Width = 673
+      Height = 288
+      Color = clSilver
+      DataSource = ds_consulta_agenda
+      FixedColor = clCream
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      Options = [dgTitles, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clHighlight
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Color = clIvory
+          Expanded = False
+          FieldName = 'dt_data'
+          Title.Alignment = taCenter
+          Title.Caption = 'Data'
+          Title.Color = clHighlight
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clNone
+          Title.Font.Height = -12
+          Title.Font.Name = 'Segoe UI'
+          Title.Font.Style = [fsBold]
+          Width = 89
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          ButtonStyle = cbsEllipsis
+          Color = clIvory
+          Expanded = False
+          FieldName = 'hr_hora'
+          Title.Alignment = taCenter
+          Title.Caption = 'Hor'#225'rio'
+          Title.Color = clHighlight
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 213
+          Visible = True
+        end
+        item
+          Color = clIvory
+          Expanded = False
+          FieldName = 'ds_cliente'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cliente'
+          Title.Color = clHighlight
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 386
+          Visible = True
+        end>
+    end
+    object pnl_confirma: TPanel
+      Left = 256
+      Top = 449
+      Width = 137
+      Height = 41
+      BevelOuter = bvNone
+      Color = clSkyBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 19
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentBackground = False
       ParentFont = False
       TabOrder = 1
+      object btn_confirma: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 41
+        Align = alClient
+        Caption = 'Confirmar'
+        Flat = True
+        ExplicitTop = 1
+      end
     end
     object clndrpckr_calendario: TCalendarPicker
-      Left = 16
-      Top = 31
+      Left = 13
+      Top = 39
       Width = 261
       Height = 32
       CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
@@ -355,16 +427,34 @@ object form_agenda: Tform_agenda
       TabOrder = 2
       TextHint = 'Selecione uma Data'
     end
-    object edt_consultaCliente: TEdit
-      Left = 12
-      Top = 95
-      Width = 457
-      Height = 23
+    object dblkcbb_consultaPorfissional: TDBLookupComboBox
+      Tag = 5
+      Left = 371
+      Top = 36
+      Width = 273
+      Height = 31
+      Hint = 'Selecione um Profissional !'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -17
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      KeyField = 'id_profissional'
+      ListField = 'ds_profissional'
+      ListSource = dataSource_profissionais
+      ParentFont = False
       TabOrder = 3
     end
+    object edt_consultaCliente: TEdit
+      Left = 13
+      Top = 103
+      Width = 457
+      Height = 23
+      TabOrder = 4
+    end
     object pnl_novoAgendamento: TPanel
-      Left = 520
-      Top = 92
+      Left = 517
+      Top = 98
       Width = 169
       Height = 30
       BevelOuter = bvNone
@@ -376,7 +466,7 @@ object form_agenda: Tform_agenda
       Font.Style = [fsBold]
       ParentBackground = False
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 5
       object btn_novoAgendamento: TSpeedButton
         Left = 0
         Top = 0
@@ -386,108 +476,16 @@ object form_agenda: Tform_agenda
         Caption = 'Novo Agendamento'
         Flat = True
         OnClick = btn_novoAgendamentoClick
-        ExplicitLeft = 26
-        ExplicitTop = -5
-        ExplicitWidth = 137
-        ExplicitHeight = 41
+        ExplicitLeft = 1
       end
     end
   end
-  object pnl_central: TPanel
-    Left = 0
-    Top = 133
-    Width = 704
-    Height = 347
-    Align = alClient
-    BevelKind = bkFlat
-    Color = clWhite
-    ParentBackground = False
-    TabOrder = 1
-    object dbgrd_profissionais: TDBGrid
-      Left = 16
-      Top = 6
-      Width = 673
-      Height = 288
-      Color = clSilver
-      DataSource = ds_consulta
-      FixedColor = clCream
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      Options = [dgTitles, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      ParentFont = False
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clHighlight
-      TitleFont.Height = -12
-      TitleFont.Name = 'Segoe UI'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Alignment = taCenter
-          ButtonStyle = cbsEllipsis
-          Color = clIvory
-          Expanded = False
-          FieldName = 'hr_hora'
-          Title.Alignment = taCenter
-          Title.Caption = 'Hor'#225'rio'
-          Title.Color = clHighlight
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -12
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 102
-          Visible = True
-        end
-        item
-          Color = clIvory
-          Expanded = False
-          FieldName = 'ds_cliente'
-          Title.Alignment = taCenter
-          Title.Caption = 'Cliente'
-          Title.Color = clHighlight
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -12
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 283
-          Visible = True
-        end>
-    end
-    object pnl_confirma: TPanel
-      Left = 266
-      Top = 298
-      Width = 137
-      Height = 41
-      BevelOuter = bvNone
-      Color = clSkyBlue
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = 19
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentFont = False
-      TabOrder = 1
-      object btn_confirma: TSpeedButton
-        Left = 0
-        Top = 0
-        Width = 137
-        Height = 41
-        Align = alClient
-        Caption = 'Confirmar'
-        Flat = True
-        ExplicitLeft = 26
-        ExplicitTop = -5
-      end
-    end
+  object ds_consulta_agenda: TDataSource
+    Left = 720
+    Top = 528
   end
-  object ds_consulta: TDataSource
-    Left = 656
-    Top = 433
+  object dataSource_profissionais: TDataSource
+    Left = 592
+    Top = 528
   end
 end

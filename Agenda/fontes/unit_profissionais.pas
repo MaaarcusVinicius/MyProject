@@ -42,7 +42,7 @@ type
     procedure dbgrd_profissionaisDblClick(Sender: TObject);
   private
     { Private declarations }
-  public
+  public                                        
     { Public declarations }
   end;
 

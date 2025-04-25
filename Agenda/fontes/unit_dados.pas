@@ -38,6 +38,7 @@ implementation
 procedure Tform_dados.DataModuleCreate(Sender: TObject);
 begin
   Conexao := Tconexao.Create ( FDConnection );
+ // GetProfissional();
 
 end;
 

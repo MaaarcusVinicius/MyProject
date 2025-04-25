@@ -12,7 +12,6 @@ object form_agendamento: Tform_agendamento
   Font.Style = []
   Position = poMainFormCenter
   OnClose = FormClose
-  OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
   object pnl_fundo: TPanel
@@ -22,6 +21,7 @@ object form_agendamento: Tform_agendamento
     Height = 668
     Align = alClient
     BevelOuter = bvNone
+    Color = clWhite
     ParentBackground = False
     ParentShowHint = False
     ShowCaption = False
@@ -643,7 +643,7 @@ object form_agendamento: Tform_agendamento
       Top = 66
       Width = 433
       Height = 31
-      Hint = 'Falta informar o Profissional - Emilio'
+      Hint = 'Falta informar o Profissional'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -17

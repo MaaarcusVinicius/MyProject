@@ -71,7 +71,7 @@ object form_agendamento_consulta: Tform_agendamento_consulta
       Tag = 5
       Left = 16
       Top = 38
-      Width = 609
+      Width = 281
       Height = 31
       Hint = 'Selecione um Profissional !'
       Font.Charset = DEFAULT_CHARSET
@@ -226,7 +226,7 @@ object form_agendamento_consulta: Tform_agendamento_consulta
     end
     object dbgrd_profissionais: TDBGrid
       Left = 298
-      Top = 56
+      Top = 53
       Width = 391
       Height = 313
       Color = clSilver

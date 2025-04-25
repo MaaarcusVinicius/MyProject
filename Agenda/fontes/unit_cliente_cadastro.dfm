@@ -23,6 +23,9 @@ object form_cliente_cadastro: Tform_cliente_cadastro
     ShowCaption = False
     ShowHint = True
     TabOrder = 0
+    DesignSize = (
+      1010
+      739)
     object lbl_nomeProfissional: TLabel
       Left = 10
       Top = 118
@@ -316,6 +319,23 @@ object form_cliente_cadastro: Tform_cliente_cadastro
       Font.Style = []
       ParentColor = False
       ParentFont = False
+    end
+    object btn_encerrar: TSpeedButton
+      Left = 974
+      Top = 1
+      Width = 33
+      Height = 29
+      Cursor = crHandPoint
+      Anchors = [akTop, akRight]
+      Caption = 'X'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -18
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      OnClick = btn_encerrarClick
     end
     object medt_contato: TMaskEdit
       Left = 8
