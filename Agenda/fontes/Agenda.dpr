@@ -26,10 +26,11 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-
   Application.CreateForm(Tform_dados, form_dados);
 
-  // Application.CreateForm(Tform_agendamento_consulta, form_agendamento_consulta);
+    //Application.CreateForm(Tform_agenda,form_agenda);
+
+ // Application.CreateForm(Tform_agendamento_consulta, form_agendamento_consulta);
  // Application.CreateForm(Tform_Principal, form_Principal);
  // Application.CreateForm(Tform_cliente_cadastro, form_cliente_cadastro);
  // Application.CreateForm(Tform_cliente_consulta, form_cliente_consulta);
@@ -59,8 +60,5 @@ begin
       form_configurarServidor.ShowModal;
 
      end;
-
-  // Application.CreateForm(Tform_configurarServidor, form_configurarServidor);
-
 
 end.

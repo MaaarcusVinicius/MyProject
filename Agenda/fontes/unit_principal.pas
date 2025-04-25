@@ -9,19 +9,12 @@ uses
 
 type
   Tform_Principal = class(TForm)
-    lbl_nomeSistema: TLabel;
-    lbl_siacSistemas: TLabel;
     pnl_fundo: TPanel;
-    btn_close: TSpeedButton;
-    btn_minimizar: TSpeedButton;
     pnl_lateralLefth: TPanel;
     pnl_lateralRigth: TPanel;
     pnl_linhaCentral: TPanel;
     pnl_linhaTop: TPanel;
     pnl_linhaBootom: TPanel;
-    pnl_botoesForm: TPanel;
-    img_logoSiacAgenda: TImage;
-    lbl_logoTipo: TLabel;
     img_logoCentral: TImage;
     pnl_user: TPanel;
     btn_user: TSpeedButton;
@@ -31,6 +24,15 @@ type
     btn_1: TSpeedButton;
     pnl_agendamento: TPanel;
     btn_agendamento: TSpeedButton;
+    pnl_rodape: TPanel;
+    lbl_siacSistemas: TLabel;
+    pnl_cabecario: TPanel;
+    lbl_logoTipo: TLabel;
+    img_logoSiacAgenda: TImage;
+    lbl_nomeSistema: TLabel;
+    pnl_botoesForm: TPanel;
+    btn_close: TSpeedButton;
+    btn_minimizar: TSpeedButton;
     procedure FormResize(Sender: TObject);
     procedure btn_closeClick(Sender: TObject);
     procedure btn_minimizarClick(Sender: TObject);

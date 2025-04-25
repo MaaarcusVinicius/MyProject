@@ -57,12 +57,14 @@ type
     ACBrCEP: TACBrCEP;
     lbl_Cep: TLabel;
     medt_cep: TMaskEdit;
+    btn_encerrar: TSpeedButton;
     procedure btn_cancelarClick(Sender: TObject);
     procedure Tipo_PessoaClick(Sender: TObject);
     procedure medt_cpf_cnpjExit(Sender: TObject);
     procedure medt_dt_nascimentoExit(Sender: TObject);
     procedure medt_cepExit(Sender: TObject);
     procedure btn_confirmaClick(Sender: TObject);
+    procedure btn_encerrarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -180,6 +182,11 @@ begin
 
    end;
 
+end;
+
+procedure Tform_cliente_cadastro.btn_encerrarClick(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure Tform_cliente_cadastro.medt_cepExit(Sender: TObject);

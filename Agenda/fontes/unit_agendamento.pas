@@ -43,7 +43,6 @@ type
     procedure btn_incluirProfissionalClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btn_selecionarClienteClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btn_diaHorarioClick(Sender: TObject);
     procedure btn_confirmaClick(Sender: TObject);
   private
@@ -196,12 +195,6 @@ begin
 
   // form_dados.GetProfissional().Destroy;
    Action := caFree;
-
-end;
-
-procedure Tform_agendamento.FormCreate(Sender: TObject);
-begin
-  form_dados.GetProfissional();
 
 end;
 
