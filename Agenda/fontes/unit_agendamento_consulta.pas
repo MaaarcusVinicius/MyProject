@@ -29,6 +29,7 @@ type
     procedure btn__fecharClick(Sender: TObject);
     procedure clndrpckr_calendarioChange(Sender: TObject);
     procedure btn_confirmaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -132,6 +133,11 @@ begin
        dblkcbb_selecionePorfissional.KeyValue, clndrpckr_calendario.Date);
 
     end;
+end;
+
+procedure Tform_agendamento_consulta.FormShow(Sender: TObject);
+begin
+    clndrpckr_calendario.Date := now();
 end;
 
 end.

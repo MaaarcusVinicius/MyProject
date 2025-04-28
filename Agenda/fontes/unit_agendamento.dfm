@@ -1,10 +1,12 @@
 object form_agendamento: Tform_agendamento
   Left = 0
   Top = 0
+  BorderIcons = []
   BorderStyle = bsNone
-  ClientHeight = 668
-  ClientWidth = 495
-  Color = clWhite
+  BorderWidth = 2
+  ClientHeight = 664
+  ClientWidth = 491
+  Color = clSkyBlue
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -17,8 +19,8 @@ object form_agendamento: Tform_agendamento
   object pnl_fundo: TPanel
     Left = 0
     Top = 0
-    Width = 495
-    Height = 668
+    Width = 491
+    Height = 664
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -27,6 +29,8 @@ object form_agendamento: Tform_agendamento
     ShowCaption = False
     ShowHint = True
     TabOrder = 0
+    ExplicitWidth = 495
+    ExplicitHeight = 668
     object lbl_selecioneProfissional: TLabel
       Left = 19
       Top = 39

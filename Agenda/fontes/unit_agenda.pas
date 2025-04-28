@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.DBCtrls,
-  Vcl.StdCtrls, Vcl.WinXCalendars, Data.DB, Vcl.Grids, Vcl.DBGrids, classe.agendamento, unit_dados;
+  Vcl.StdCtrls, Vcl.WinXCalendars, Data.DB, Vcl.Grids, Vcl.DBGrids, classe.agendamento, unit_dados,
+  Datasnap.DBClient;
 
 type
   Tform_agenda = class(TForm)
@@ -26,6 +27,11 @@ type
     btn_encerrar: TSpeedButton;
     ds_consulta_agenda: TDataSource;
     dataSource_profissionais: TDataSource;
+    cds_agenda: TClientDataSet;
+    cds_agendadt_data: TDateField;
+    cds_agendahr_hora: TStringField;
+    cds_agendads_cliente: TStringField;
+    cds_agendads_profissional: TStringField;
     procedure btn_encerrarClick(Sender: TObject);
     procedure btn_novoAgendamentoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -78,9 +84,11 @@ begin
        Abort;
      end;
 
-    ds_consulta_agenda.DataSet := Agendamento.fnc_consulta(dblkcbb_consultaPorfissional.KeyValue,
+    {ds_consulta_agenda.DataSet := Agendamento.fnc_consulta(dblkcbb_consultaPorfissional.KeyValue,
                                                            clndrpckr_calendario.Date );
-
+     }
+   Agendamento.fnc_montar_agenda(clndrpckr_calendario.Date, cds_agenda);
+   ds_consulta_agenda.DataSet := cds_agenda;
 end;
 
 procedure Tform_agenda.btn_consultaClienteClick(Sender: TObject);

@@ -3,7 +3,8 @@ unit classe.agendamento;
 interface
 
 uses
-  FireDAC.Comp.Client, System.SysUtils, Vcl.Forms, unit_funcoes;
+  FireDAC.Comp.Client, System.SysUtils, Vcl.Forms, unit_funcoes,
+  Datasnap.DBClient;
 
 
 
@@ -37,6 +38,7 @@ uses
     function fnc_consulta_por_cliente(nome_cliente: string): TFDQuery;
     function fnc_validar_agendamento(id_profissional: Integer; Data: TDateTime; hr_hora: string): Boolean;
     function fnc_inserir: string;
+    procedure fnc_montar_agenda( dt_data: TDate;  cds_agenda: TClientDataSet );
 
   end;
 
@@ -73,19 +75,22 @@ begin
      QryConsulta.Close;
      QryConsulta.SQL.Clear;
 
-      QryConsulta.SQL.Add('SELECT A.ID_AGENDAMENTO,                ');
-      QryConsulta.SQL.Add('       A.CLI_ID_CLIENTE,                ');
-      QryConsulta.SQL.Add('       C.DS_CLIENTE,                    ');
-      QryConsulta.SQL.Add('       A.PRO_ID_PROFISSIONAL as id_profissional,           ');
-      QryConsulta.SQL.Add('       A.USU_ID_USUARIOS,               ');
-      QryConsulta.SQL.Add('       A.DT_DATA,                       ');
-      QryConsulta.SQL.Add('       A.HR_HORA,                       ');
-      QryConsulta.SQL.Add('       A.DS_OBS                         ');
-      QryConsulta.SQL.Add('  FROM AGENDAMENTO A, CLIENTES C        ');
-      QryConsulta.SQL.Add(' WHERE A.cli_id_cliente = C.ID_CLIENTE  ');
-      QryConsulta.SQL.Add('   AND A.PRO_ID_PROFISSIONAL = :p_id_profissional  ');
-      QryConsulta.SQL.Add('   AND A.DT_DATA             = :p_data             ');
-      QryConsulta.SQL.Add(' ORDER BY A.HR_HORA                     ');
+      QryConsulta.SQL.Add('SELECT A.ID_AGENDAMENTO,                          ');
+      QryConsulta.SQL.Add('       A.CLI_ID_CLIENTE,                          ');
+      QryConsulta.SQL.Add('       C.DS_CLIENTE,                              ');
+      QryConsulta.SQL.Add('       A.PRO_ID_PROFISSIONAL as id_profissional,  ');
+      QryConsulta.SQL.Add('       UPPER(concat(P.ds_profissional, ''  -  '', ');
+      QryConsulta.SQL.Add('       P.ds_especialidade))  as DS_PROFISSIONAL2, ');
+      QryConsulta.SQL.Add('       A.USU_ID_USUARIOS,                         ');
+      QryConsulta.SQL.Add('       A.DT_DATA,                                 ');
+      QryConsulta.SQL.Add('       A.HR_HORA,                                 ');
+      QryConsulta.SQL.Add('       A.DS_OBS                                   ');
+      QryConsulta.SQL.Add('  FROM AGENDAMENTO A, CLIENTES C, profissionais p ');
+      QryConsulta.SQL.Add(' WHERE A.cli_id_cliente = C.ID_CLIENTE            ');
+      QryConsulta.SQL.Add('   AND A.PRO_ID_PROFISSIONAL = p.id_profissional  ');
+      QryConsulta.SQL.Add('   AND A.PRO_ID_PROFISSIONAL = :p_id_profissional ');
+      QryConsulta.SQL.Add('   AND A.DT_DATA             = :p_data            ');
+      QryConsulta.SQL.Add(' ORDER BY A.HR_HORA                               ');
 
      QryConsulta.ParamByName('p_id_profissional').AsInteger := id_profissional;
      QryConsulta.ParamByName('p_data').AsDate               := Data;
@@ -109,18 +114,21 @@ begin
      QryConsulta.Close;
      QryConsulta.SQL.Clear;
 
-      QryConsulta.SQL.Add('SELECT A.ID_AGENDAMENTO,                ');
-      QryConsulta.SQL.Add('       A.CLI_ID_CLIENTE,                ');
-      QryConsulta.SQL.Add('       C.DS_CLIENTE,                    ');
-      QryConsulta.SQL.Add('       A.PRO_ID_PROFISSIONAL,           ');
-      QryConsulta.SQL.Add('       A.USU_ID_USUARIOS,               ');
-      QryConsulta.SQL.Add('       A.DT_DATA,                       ');
-      QryConsulta.SQL.Add('       A.HR_HORA,                       ');
-      QryConsulta.SQL.Add('       A.DS_OBS                         ');
-      QryConsulta.SQL.Add('  FROM AGENDAMENTO A, CLIENTES C        ');
-      QryConsulta.SQL.Add(' WHERE A.cli_id_cliente = C.ID_CLIENTE  ');
-      QryConsulta.SQL.Add('   AND C.DS_CLIENTE like :p_nome_cliente');
-      QryConsulta.SQL.Add(' ORDER BY C.DS_CLIENTE                  ');
+      QryConsulta.SQL.Add('SELECT A.ID_AGENDAMENTO,                          ');
+      QryConsulta.SQL.Add('       A.CLI_ID_CLIENTE,                          ');
+      QryConsulta.SQL.Add('       C.DS_CLIENTE,                              ');
+      QryConsulta.SQL.Add('       A.PRO_ID_PROFISSIONAL,                     ');
+      QryConsulta.SQL.Add('       A.USU_ID_USUARIOS,                         ');
+      QryConsulta.SQL.Add('       UPPER(concat(P.ds_profissional, ''  -  '', ');
+      QryConsulta.SQL.Add('       P.ds_especialidade))  as DS_PROFISSIONAL2, ');
+      QryConsulta.SQL.Add('       A.DT_DATA,                                 ');
+      QryConsulta.SQL.Add('       A.HR_HORA,                                 ');
+      QryConsulta.SQL.Add('       A.DS_OBS                                   ');
+      QryConsulta.SQL.Add('  FROM AGENDAMENTO A, CLIENTES C, profissionais p ');
+      QryConsulta.SQL.Add(' WHERE A.cli_id_cliente = C.ID_CLIENTE            ');
+      QryConsulta.SQL.Add('   AND A.PRO_ID_PROFISSIONAL = p.id_profissional  ');
+      QryConsulta.SQL.Add('   AND C.DS_CLIENTE like :p_nome_cliente          ');
+      QryConsulta.SQL.Add(' ORDER BY C.DS_CLIENTE                            ');
 
      QryConsulta.ParamByName('p_nome_cliente').AsString :=  '%' + nome_cliente + '%';
 
@@ -230,6 +238,25 @@ begin
     QryInserir.Destroy;
 
   end;
+
+end;
+
+procedure TAgendamento.fnc_montar_agenda(dt_data: TDate; cds_agenda: TClientDataSet);
+var
+  Minutos, Hora : Word;
+
+begin
+
+   Minutos := 0;
+
+   for Hora := 8 to 18 do
+   begin
+     cds_agenda.Append;
+     cds_agenda.FieldByName('dt_data').AsDateTime := dt_data;
+     cds_agenda.FieldByName('hr_hora').AsString := IntToStr(Hora) + ':' + IntToStr(Minutos);
+     cds_agenda.Post;
+   end;
+
 
 end;
 

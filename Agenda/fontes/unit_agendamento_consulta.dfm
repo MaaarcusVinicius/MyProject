@@ -2,30 +2,33 @@ object form_agendamento_consulta: Tform_agendamento_consulta
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  ClientHeight = 480
-  ClientWidth = 704
-  Color = clWhite
+  BorderWidth = 2
+  ClientHeight = 476
+  ClientWidth = 700
+  Color = clSkyBlue
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poOwnerFormCenter
+  OnShow = FormShow
   TextHeight = 15
   object pnl_superior: TPanel
     Left = 0
     Top = 0
-    Width = 704
+    Width = 700
     Height = 81
     Align = alTop
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 704
     DesignSize = (
-      704
+      700
       81)
     object btn__fechar: TSpeedButton
-      Left = 668
+      Left = 664
       Top = 0
       Width = 33
       Height = 22
@@ -60,18 +63,19 @@ object form_agendamento_consulta: Tform_agendamento_consulta
     object pnl_linha: TPanel
       Left = 1
       Top = 77
-      Width = 702
+      Width = 698
       Height = 3
       Align = alBottom
       Color = clGray
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 702
     end
     object dblkcbb_selecionePorfissional: TDBLookupComboBox
       Tag = 5
       Left = 16
       Top = 38
-      Width = 281
+      Width = 441
       Height = 31
       Hint = 'Selecione um Profissional !'
       Font.Charset = DEFAULT_CHARSET
@@ -89,12 +93,14 @@ object form_agendamento_consulta: Tform_agendamento_consulta
   object pnl_central: TPanel
     Left = 0
     Top = 81
-    Width = 704
-    Height = 399
+    Width = 700
+    Height = 395
     Align = alClient
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
+    ExplicitWidth = 704
+    ExplicitHeight = 399
     object lbl_horarioHora: TLabel
       Left = 16
       Top = 117

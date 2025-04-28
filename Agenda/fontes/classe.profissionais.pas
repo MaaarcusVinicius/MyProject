@@ -63,7 +63,9 @@ begin
 
      QryConsulta.Close;
      QryConsulta.SQL.Clear;
-     QryConsulta.SQL.Add('SELECT id_profissional, upper(ds_profissional) as ds_profissional, ds_especialidade, nr_contato');
+     QryConsulta.SQL.Add('SELECT id_profissional, ds_profissional, ');
+     QryConsulta.SQL.Add(' UPPER(concat(ds_profissional, ''  -  '', ds_especialidade))  as ds_profissional2,');
+     QryConsulta.SQL.Add(' ds_especialidade, nr_contato');
      QryConsulta.SQL.Add('FROM profissionais where ds_profissional like :p_texto');
      QryConsulta.ParamByName('p_texto').AsString := '%'+texto+'%';
      QryConsulta.Open;

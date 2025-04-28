@@ -4,9 +4,10 @@ object form_agenda: Tform_agenda
   Align = alCustom
   AlphaBlend = True
   BorderStyle = bsNone
-  ClientHeight = 670
-  ClientWidth = 1000
-  Color = clSilver
+  BorderWidth = 10
+  ClientHeight = 650
+  ClientWidth = 980
+  Color = clSkyBlue
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -18,9 +19,9 @@ object form_agenda: Tform_agenda
   OnShow = FormShow
   TextHeight = 15
   object pnl_central: TPanel
-    Left = 120
-    Top = 81
-    Width = 713
+    Left = 56
+    Top = 73
+    Width = 865
     Height = 500
     Align = alCustom
     AutoSize = True
@@ -29,11 +30,11 @@ object form_agenda: Tform_agenda
     ParentBackground = False
     TabOrder = 0
     DesignSize = (
-      709
+      861
       496)
     object btn_consultaCliente: TSpeedButton
-      Left = 477
-      Top = 96
+      Left = 474
+      Top = 85
       Width = 39
       Height = 36
       Glyph.Data = {
@@ -138,9 +139,9 @@ object form_agenda: Tform_agenda
       OnClick = btn_consultaClienteClick
     end
     object btn_consultaProfissionais: TSpeedButton
-      Left = 650
-      Top = 29
-      Width = 36
+      Left = 801
+      Top = 38
+      Width = 40
       Height = 35
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
@@ -244,8 +245,8 @@ object form_agenda: Tform_agenda
       OnClick = btn_consultaProfissionaisClick
     end
     object lbl_selecioneProfissional: TLabel
-      Left = 371
-      Top = 17
+      Left = 310
+      Top = 13
       Width = 84
       Height = 21
       Caption = 'Profissional:'
@@ -275,7 +276,7 @@ object form_agenda: Tform_agenda
     end
     object lbl_cliente: TLabel
       Left = 16
-      Top = 76
+      Top = 71
       Width = 51
       Height = 21
       Caption = 'Cliente:'
@@ -289,7 +290,7 @@ object form_agenda: Tform_agenda
       ParentFont = False
     end
     object btn_encerrar: TSpeedButton
-      Left = 675
+      Left = 827
       Top = 1
       Width = 33
       Height = 22
@@ -308,9 +309,9 @@ object form_agenda: Tform_agenda
     end
     object dbgrd_consulta_agenda: TDBGrid
       Left = 13
-      Top = 155
-      Width = 673
-      Height = 288
+      Top = 127
+      Width = 828
+      Height = 316
       Color = clSilver
       DataSource = ds_consulta_agenda
       FixedColor = clCream
@@ -357,7 +358,7 @@ object form_agenda: Tform_agenda
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 213
+          Width = 144
           Visible = True
         end
         item
@@ -372,15 +373,29 @@ object form_agenda: Tform_agenda
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 386
+          Width = 367
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ds_profissional2'
+          Title.Alignment = taCenter
+          Title.Caption = 'Profissional | Especialidade'
+          Title.Color = clHighlight
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clHighlight
+          Title.Font.Height = -12
+          Title.Font.Name = 'Segoe UI'
+          Title.Font.Style = [fsBold]
+          Width = 219
           Visible = True
         end>
     end
     object pnl_confirma: TPanel
-      Left = 256
-      Top = 449
-      Width = 137
-      Height = 41
+      Left = 346
+      Top = 456
+      Width = 183
+      Height = 34
       BevelOuter = bvNone
       Color = clSkyBlue
       Font.Charset = DEFAULT_CHARSET
@@ -394,12 +409,14 @@ object form_agenda: Tform_agenda
       object btn_confirma: TSpeedButton
         Left = 0
         Top = 0
-        Width = 137
-        Height = 41
+        Width = 183
+        Height = 34
         Align = alClient
         Caption = 'Confirmar'
         Flat = True
-        ExplicitTop = 1
+        ExplicitLeft = -1
+        ExplicitWidth = 265
+        ExplicitHeight = 41
       end
     end
     object clndrpckr_calendario: TCalendarPicker
@@ -429,9 +446,9 @@ object form_agenda: Tform_agenda
     end
     object dblkcbb_consultaPorfissional: TDBLookupComboBox
       Tag = 5
-      Left = 371
-      Top = 36
-      Width = 273
+      Left = 310
+      Top = 40
+      Width = 488
       Height = 31
       Hint = 'Selecione um Profissional !'
       Font.Charset = DEFAULT_CHARSET
@@ -440,22 +457,22 @@ object form_agenda: Tform_agenda
       Font.Name = 'Segoe UI'
       Font.Style = []
       KeyField = 'id_profissional'
-      ListField = 'ds_profissional'
+      ListField = 'ds_profissional2'
       ListSource = dataSource_profissionais
       ParentFont = False
       TabOrder = 3
     end
     object edt_consultaCliente: TEdit
       Left = 13
-      Top = 103
+      Top = 92
       Width = 457
-      Height = 23
+      Height = 29
       TabOrder = 4
     end
     object pnl_novoAgendamento: TPanel
-      Left = 517
-      Top = 98
-      Width = 169
+      Left = 632
+      Top = 91
+      Width = 209
       Height = 30
       BevelOuter = bvNone
       Color = clSkyBlue
@@ -470,22 +487,47 @@ object form_agenda: Tform_agenda
       object btn_novoAgendamento: TSpeedButton
         Left = 0
         Top = 0
-        Width = 169
+        Width = 209
         Height = 30
         Align = alClient
         Caption = 'Novo Agendamento'
         Flat = True
         OnClick = btn_novoAgendamentoClick
-        ExplicitLeft = 1
+        ExplicitTop = 8
       end
     end
   end
   object ds_consulta_agenda: TDataSource
-    Left = 720
-    Top = 528
+    Left = 676
+    Top = 584
   end
   object dataSource_profissionais: TDataSource
-    Left = 592
-    Top = 528
+    Left = 672
+    Top = 56
+  end
+  object cds_agenda: TClientDataSet
+    PersistDataPacket.Data = {
+      890000009619E0BD01000000180000000400000000000300000089000764745F
+      6461746104000600000000000768725F686F7261010049000000010005574944
+      54480200020014000A64735F636C69656E746501004900000001000557494454
+      480200020014000F64735F70726F66697373696F6E616C010049000000010005
+      57494454480200020014000000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 792
+    Top = 584
+    object cds_agendadt_data: TDateField
+      FieldName = 'dt_data'
+    end
+    object cds_agendahr_hora: TStringField
+      FieldName = 'hr_hora'
+    end
+    object cds_agendads_cliente: TStringField
+      FieldName = 'ds_cliente'
+    end
+    object cds_agendads_profissional: TStringField
+      FieldName = 'ds_profissional'
+    end
   end
 end
