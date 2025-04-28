@@ -19,7 +19,10 @@ uses
   classe.clientes in 'classe.clientes.pas',
   classe.agendamento in 'classe.agendamento.pas',
   unit_agendamento_consulta in 'unit_agendamento_consulta.pas' {form_agendamento_consulta},
-  unit_agenda in 'unit_agenda.pas' {form_agenda};
+  unit_agenda in 'unit_agenda.pas' {form_agenda},
+  unit_usuario_consulta in 'unit_usuario_consulta.pas' {form_usuario_consulta},
+  unit_usuario_cadastro in 'unit_usuario_cadastro.pas' {form_usuario_cadastro},
+  classe.usuarios in 'classe.usuarios.pas';
 
 {$R *.res}
 
@@ -27,13 +30,14 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(Tform_dados, form_dados);
-
-    //Application.CreateForm(Tform_agenda,form_agenda);
-
+  // Application.CreateForm(Tform_usuario_consulta, form_usuario_consulta);
+ // Application.CreateForm(Tform_usuario_cadastro, form_usuario_cadastro);
+ //Application.CreateForm(Tform_agenda,form_agenda);
  // Application.CreateForm(Tform_agendamento_consulta, form_agendamento_consulta);
  // Application.CreateForm(Tform_Principal, form_Principal);
  // Application.CreateForm(Tform_cliente_cadastro, form_cliente_cadastro);
  // Application.CreateForm(Tform_cliente_consulta, form_cliente_consulta);
+
   if form_dados.Conexao.fnc_conectar_banco_dados then
      begin
        form_login := Tform_login.Create(nil);

@@ -38,6 +38,7 @@ type
     procedure btn_minimizarClick(Sender: TObject);
     procedure btn_1Click(Sender: TObject);
     procedure btn_agendamentoClick(Sender: TObject);
+    procedure btn_userClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -52,7 +53,7 @@ implementation
 
 {$R *.dfm}
 
-uses unit_funcoes, unit_agendamento;
+uses unit_funcoes, unit_agendamento, unit_usuario_consulta;
 
 
 
@@ -93,6 +94,16 @@ end;
 procedure Tform_Principal.btn_minimizarClick(Sender: TObject);
 begin
   Application.Minimize;
+end;
+
+procedure Tform_Principal.btn_userClick(Sender: TObject);
+begin
+  try
+    form_usuario_consulta := Tform_usuario_consulta.Create( Self );
+    form_usuario_consulta.ShowModal;
+  finally
+    form_usuario_consulta.Free;
+  end;
 end;
 
 procedure Tform_Principal.FormResize(Sender: TObject);

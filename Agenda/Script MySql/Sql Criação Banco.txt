@@ -61,6 +61,8 @@ CREATE TABLE IF NOT EXISTS `agenda`.`usuarios` (
 ENGINE = InnoDB;
 
 
+alter table `agenda`.`usuarios`  add column `cd_permissao` tinyint null after `ds_senha` ;
+
 -- -----------------------------------------------------
 -- Table `agenda`.`agendamento`
 -- -----------------------------------------------------
