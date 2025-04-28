@@ -20,7 +20,6 @@ uses
     Fdt_data            : TDateTime;
     Fusu_id_usuarios    : Integer;
 
-
     public
       property  Conexao       :TFDConnection   read FConexao             write FConexao;
       property  id_agendamento      :Integer   read Fid_agendamento      write Fid_agendamento;
@@ -39,6 +38,7 @@ uses
     function fnc_validar_agendamento(id_profissional: Integer; Data: TDateTime; hr_hora: string): Boolean;
     function fnc_inserir: string;
     procedure fnc_montar_agenda( dt_data: TDate;  cds_agenda: TClientDataSet );
+    procedure prc_deleta_agendamento(id_chave: Integer);
 
   end;
 
@@ -269,6 +269,23 @@ begin
    end;
 
 
+end;
+
+procedure TAgendamento.prc_deleta_agendamento(id_chave: Integer);
+begin
+  if fnc_criar_menssagem('CONFIRMAÇÃO',
+                         'Excluir Dados',
+                         ' Tem certeza que deseja excluir esse HORÁRIO AGENDADO?' ,
+                         ExtractFilePath(Application.ExeName ) + '\icones\HumanoDelete.png',
+                         '')  then
+  begin
+
+//    FConexao.Connected := False;
+    FConexao.Connected := True;
+
+    FConexao.ExecSQL('Delete from agendamento where id_Agendamento = :id_chave' , [id_chave])	;
+
+  end;
 end;
 
 end.

@@ -30,6 +30,8 @@ type
     cds_agendahr_hora: TStringField;
     cds_agendads_cliente: TStringField;
     cds_agendads_profissional: TStringField;
+    lbl_delete: TLabel;
+    cds_agendaid_Agendamento: TIntegerField;
     procedure btn_encerrarClick(Sender: TObject);
     procedure btn_novoAgendamentoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -37,6 +39,8 @@ type
     procedure btn_consultaProfissionaisClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btn_consultaClienteClick(Sender: TObject);
+    procedure dbgrd_consulta_agendaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -106,8 +110,9 @@ begin
        begin
 
          cds_agenda.Edit;
-         cds_agendads_cliente.AsString      :=  qryHorarios.FieldByName('ds_cliente').AsString;
-         cds_agendads_profissional.AsString :=  qryHorarios.FieldByName('ds_profissional').AsString;
+         cds_agendads_cliente.AsString      := qryHorarios.FieldByName('ds_cliente').AsString;
+         cds_agendads_profissional.AsString := qryHorarios.FieldByName('ds_profissional').AsString;
+         cds_agendaid_Agendamento.AsInteger := qryHorarios.FieldByName('id_Agendamento').AsInteger;
          cds_agenda.Post;
 
        end;
@@ -156,6 +161,14 @@ begin
     form_agendamento.Destroy;
   end;
 
+end;
+
+procedure Tform_agenda.dbgrd_consulta_agendaKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = VK_DELETE then
+    Agendamento.prc_deleta_agendamento( dbgrd_consulta_agenda.DataSource.DataSet.FieldByName('id_Agendamento').AsInteger );
+    ds_consulta_agenda.DataSet := nil;
 end;
 
 procedure Tform_agenda.FormClose(Sender: TObject; var Action: TCloseAction);
