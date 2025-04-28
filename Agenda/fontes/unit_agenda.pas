@@ -6,14 +6,12 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.DBCtrls,
   Vcl.StdCtrls, Vcl.WinXCalendars, Data.DB, Vcl.Grids, Vcl.DBGrids, classe.agendamento, unit_dados,
-  Datasnap.DBClient;
+  Datasnap.DBClient, FireDAC.Comp.Client;
 
 type
   Tform_agenda = class(TForm)
     pnl_central: TPanel;
     dbgrd_consulta_agenda: TDBGrid;
-    pnl_confirma: TPanel;
-    btn_confirma: TSpeedButton;
     clndrpckr_calendario: TCalendarPicker;
     btn_consultaCliente: TSpeedButton;
     btn_consultaProfissionais: TSpeedButton;
@@ -57,8 +55,9 @@ uses
 {$R *.dfm}
 
 procedure Tform_agenda.btn_consultaProfissionaisClick(Sender: TObject);
+var
+  qryHorarios : TFDQuery;
 begin
- dbgrd_consulta_agenda.Canvas.CleanupInstance;
 
    if clndrpckr_calendario.IsEmpty then
      begin
@@ -85,9 +84,44 @@ begin
      end;
 
     {ds_consulta_agenda.DataSet := Agendamento.fnc_consulta(dblkcbb_consultaPorfissional.KeyValue,
-                                                           clndrpckr_calendario.Date );
-     }
+                                                           clndrpckr_calendario.Date ); }
+
+   cds_agenda.EmptyDataSet;
+
    Agendamento.fnc_montar_agenda(clndrpckr_calendario.Date, cds_agenda);
+
+   try
+     qryHorarios := TFDQuery.Create( form_agenda );
+     qryHorarios.Connection := form_dados.FDConnection;
+
+     qryHorarios := Agendamento.fnc_consulta( dblkcbb_consultaPorfissional.KeyValue, clndrpckr_calendario.date);
+
+     qryHorarios.First;
+
+     while not qryHorarios.Eof do
+     begin
+       cds_agenda.First;
+
+       if cds_agenda.locate('hr_hora', qryHorarios.FieldByName('hr_hora').AsString , [loCaseInsensitive]) then
+       begin
+
+         cds_agenda.Edit;
+         cds_agendads_cliente.AsString      :=  qryHorarios.FieldByName('ds_cliente').AsString;
+         cds_agendads_profissional.AsString :=  qryHorarios.FieldByName('ds_profissional').AsString;
+         cds_agenda.Post;
+
+       end;
+
+       qryHorarios.Next;
+
+     end;
+
+   finally
+     //qryHorarios.Destroy;
+   end;
+
+   cds_agenda.First;
+
    ds_consulta_agenda.DataSet := cds_agenda;
 end;
 

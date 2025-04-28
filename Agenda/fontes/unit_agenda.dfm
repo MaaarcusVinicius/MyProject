@@ -311,7 +311,7 @@ object form_agenda: Tform_agenda
       Left = 13
       Top = 127
       Width = 828
-      Height = 316
+      Height = 354
       Color = clSilver
       DataSource = ds_consulta_agenda
       FixedColor = clCream
@@ -362,6 +362,7 @@ object form_agenda: Tform_agenda
           Visible = True
         end
         item
+          Alignment = taCenter
           Color = clIvory
           Expanded = False
           FieldName = 'ds_cliente'
@@ -377,10 +378,11 @@ object form_agenda: Tform_agenda
           Visible = True
         end
         item
+          Color = clIvory
           Expanded = False
-          FieldName = 'ds_profissional2'
+          FieldName = 'ds_profissional'
           Title.Alignment = taCenter
-          Title.Caption = 'Profissional | Especialidade'
+          Title.Caption = 'Profissional'
           Title.Color = clHighlight
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clHighlight
@@ -390,34 +392,6 @@ object form_agenda: Tform_agenda
           Width = 219
           Visible = True
         end>
-    end
-    object pnl_confirma: TPanel
-      Left = 346
-      Top = 456
-      Width = 183
-      Height = 34
-      BevelOuter = bvNone
-      Color = clSkyBlue
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = 19
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentFont = False
-      TabOrder = 1
-      object btn_confirma: TSpeedButton
-        Left = 0
-        Top = 0
-        Width = 183
-        Height = 34
-        Align = alClient
-        Caption = 'Confirmar'
-        Flat = True
-        ExplicitLeft = -1
-        ExplicitWidth = 265
-        ExplicitHeight = 41
-      end
     end
     object clndrpckr_calendario: TCalendarPicker
       Left = 13
@@ -441,7 +415,7 @@ object form_agenda: Tform_agenda
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
       TextHint = 'Selecione uma Data'
     end
     object dblkcbb_consultaPorfissional: TDBLookupComboBox
@@ -460,14 +434,14 @@ object form_agenda: Tform_agenda
       ListField = 'ds_profissional2'
       ListSource = dataSource_profissionais
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
     end
     object edt_consultaCliente: TEdit
       Left = 13
       Top = 92
       Width = 457
-      Height = 29
-      TabOrder = 4
+      Height = 23
+      TabOrder = 3
     end
     object pnl_novoAgendamento: TPanel
       Left = 632
@@ -483,7 +457,7 @@ object form_agenda: Tform_agenda
       Font.Style = [fsBold]
       ParentBackground = False
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
       object btn_novoAgendamento: TSpeedButton
         Left = 0
         Top = 0

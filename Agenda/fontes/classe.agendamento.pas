@@ -78,6 +78,7 @@ begin
       QryConsulta.SQL.Add('SELECT A.ID_AGENDAMENTO,                          ');
       QryConsulta.SQL.Add('       A.CLI_ID_CLIENTE,                          ');
       QryConsulta.SQL.Add('       C.DS_CLIENTE,                              ');
+      QryConsulta.SQL.Add('       P.ds_profissional,                         ');
       QryConsulta.SQL.Add('       A.PRO_ID_PROFISSIONAL as id_profissional,  ');
       QryConsulta.SQL.Add('       UPPER(concat(P.ds_profissional, ''  -  '', ');
       QryConsulta.SQL.Add('       P.ds_especialidade))  as DS_PROFISSIONAL2, ');
@@ -119,8 +120,7 @@ begin
       QryConsulta.SQL.Add('       C.DS_CLIENTE,                              ');
       QryConsulta.SQL.Add('       A.PRO_ID_PROFISSIONAL,                     ');
       QryConsulta.SQL.Add('       A.USU_ID_USUARIOS,                         ');
-      QryConsulta.SQL.Add('       UPPER(concat(P.ds_profissional, ''  -  '', ');
-      QryConsulta.SQL.Add('       P.ds_especialidade))  as DS_PROFISSIONAL2, ');
+      QryConsulta.SQL.Add('       P.ds_profissional,                         ');
       QryConsulta.SQL.Add('       A.DT_DATA,                                 ');
       QryConsulta.SQL.Add('       A.HR_HORA,                                 ');
       QryConsulta.SQL.Add('       A.DS_OBS                                   ');
@@ -243,7 +243,7 @@ end;
 
 procedure TAgendamento.fnc_montar_agenda(dt_data: TDate; cds_agenda: TClientDataSet);
 var
-  Minutos, Hora : Word;
+  I ,Minutos, Hora : Word;
 
 begin
 
@@ -251,10 +251,21 @@ begin
 
    for Hora := 8 to 18 do
    begin
-     cds_agenda.Append;
-     cds_agenda.FieldByName('dt_data').AsDateTime := dt_data;
-     cds_agenda.FieldByName('hr_hora').AsString := IntToStr(Hora) + ':' + IntToStr(Minutos);
-     cds_agenda.Post;
+     for I := 0 to 3 do
+     begin
+
+       cds_agenda.Append;
+       cds_agenda.FieldByName('dt_data').AsDateTime := dt_data;
+       cds_agenda.FieldByName('hr_hora').AsString := FormatFloat('00',Hora) + ':' + FormatFloat('00',Minutos);
+
+       cds_agenda.Post;
+
+       Minutos := Minutos + 15;
+
+     end;
+
+     Minutos := 0 ;
+
    end;
 
 
