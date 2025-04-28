@@ -22,7 +22,7 @@ object form_agenda: Tform_agenda
     Left = 56
     Top = 73
     Width = 865
-    Height = 500
+    Height = 512
     Align = alCustom
     AutoSize = True
     BevelKind = bkTile
@@ -31,7 +31,7 @@ object form_agenda: Tform_agenda
     TabOrder = 0
     DesignSize = (
       861
-      496)
+      508)
     object btn_consultaCliente: TSpeedButton
       Left = 474
       Top = 85
@@ -307,6 +307,21 @@ object form_agenda: Tform_agenda
       OnClick = btn_encerrarClick
       ExplicitLeft = 946
     end
+    object lbl_delete: TLabel
+      Left = 13
+      Top = 482
+      Width = 298
+      Height = 21
+      Caption = 'Pressione DEL para excluir o agendamento.'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
     object dbgrd_consulta_agenda: TDBGrid
       Left = 13
       Top = 127
@@ -328,6 +343,7 @@ object form_agenda: Tform_agenda
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      OnKeyDown = dbgrd_consulta_agendaKeyDown
       Columns = <
         item
           Color = clIvory
@@ -481,14 +497,41 @@ object form_agenda: Tform_agenda
   end
   object cds_agenda: TClientDataSet
     PersistDataPacket.Data = {
-      890000009619E0BD01000000180000000400000000000300000089000764745F
+      A00000009619E0BD010000001800000005000000000003000000A0000764745F
       6461746104000600000000000768725F686F7261010049000000010005574944
       54480200020014000A64735F636C69656E746501004900000001000557494454
       480200020014000F64735F70726F66697373696F6E616C010049000000010005
-      57494454480200020014000000}
+      57494454480200020014000E69645F4167656E64616D656E746F040001000000
+      00000000}
     Active = True
     Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'dt_data'
+        DataType = ftDate
+      end
+      item
+        Name = 'hr_hora'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'ds_cliente'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'ds_profissional'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'id_Agendamento'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     Left = 792
     Top = 584
     object cds_agendadt_data: TDateField
@@ -502,6 +545,9 @@ object form_agenda: Tform_agenda
     end
     object cds_agendads_profissional: TStringField
       FieldName = 'ds_profissional'
+    end
+    object cds_agendaid_Agendamento: TIntegerField
+      FieldName = 'id_Agendamento'
     end
   end
 end
