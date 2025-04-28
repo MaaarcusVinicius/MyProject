@@ -441,6 +441,7 @@ object form_Principal: Tform_Principal
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           Layout = blGlyphTop
           ParentFont = False
+          OnClick = btn_userClick
           ExplicitTop = 1
           ExplicitWidth = 100
           ExplicitHeight = 88
@@ -13492,9 +13493,7 @@ object form_Principal: Tform_Principal
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
-      ExplicitLeft = 210
-      ExplicitTop = 3
-      ExplicitHeight = 39
+      ExplicitHeight = 20
     end
     object img_logoSiacAgenda: TImage
       Left = 1
@@ -13612,7 +13611,7 @@ object form_Principal: Tform_Principal
       Left = 733
       Top = 8
       Width = 165
-      Height = 13
+      Height = 15
       Anchors = [akTop, akRight]
       Caption = 'Usu'#225'rio Logado: Administrador'
       Color = clWhite
@@ -13634,9 +13633,6 @@ object form_Principal: Tform_Principal
       Color = clSkyBlue
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 471
-      ExplicitTop = 0
-      ExplicitHeight = 25
       DesignSize = (
         66
         26)

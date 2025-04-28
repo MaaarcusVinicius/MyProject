@@ -180,6 +180,15 @@
             <Form>form_agenda</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="unit_usuario_consulta.pas">
+            <Form>form_usuario_consulta</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_usuario_cadastro.pas">
+            <Form>form_usuario_cadastro</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="classe.usuarios.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
