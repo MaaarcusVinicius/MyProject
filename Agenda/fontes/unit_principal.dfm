@@ -13,6 +13,7 @@ object form_Principal: Tform_Principal
   Font.Style = []
   Position = poMainFormCenter
   OnResize = FormResize
+  OnShow = FormShow
   TextHeight = 15
   object pnl_fundo: TPanel
     Left = 11
@@ -13607,17 +13608,18 @@ object form_Principal: Tform_Principal
       ExplicitTop = -8
       ExplicitHeight = 39
     end
-    object lbl_nomeSistema: TLabel
-      Left = 733
-      Top = 8
-      Width = 165
-      Height = 15
+    object lbl_nomeUser: TLabel
+      Left = 720
+      Top = 0
+      Width = 217
+      Height = 21
+      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = 'Usu'#225'rio Logado: Administrador'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clGray
-      Font.Height = -12
+      Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentColor = False

@@ -29,8 +29,6 @@ object form_agendamento: Tform_agendamento
     ShowCaption = False
     ShowHint = True
     TabOrder = 0
-    ExplicitWidth = 495
-    ExplicitHeight = 668
     object lbl_selecioneProfissional: TLabel
       Left = 19
       Top = 39

@@ -10,6 +10,7 @@ Type
   TUsuarios = Class
 
    private
+    FqryConsulta: TFDQuery;
     Fcd_permissao: Integer;
     Fds_senha: String;
     Fds_login: String;
@@ -18,8 +19,10 @@ Type
     FConexao: TFDConnection;
 
 
+
    public
-    property  Conexao     : TFDConnection read FConexao write FConexao;
+    property QryConsulta : TFDQuery  read FqryConsulta write FqryConsulta;
+    property Conexao     : TFDConnection read FConexao write FConexao;
     property id_usuarios  : Integer read Fid_usuarios  write Fid_usuarios ;
     property ds_usuario   : String  read Fds_usuario   write Fds_usuario ;
     property ds_login     : String  read Fds_login     write Fds_login ;
@@ -33,10 +36,11 @@ Type
 
   End;
 
-  var
-   QryConsulta : TFDQuery;
 
 implementation
+
+uses
+  unit_principal;
 
 { TUsuarios }
 
@@ -44,13 +48,13 @@ constructor TUsuarios.Create(Conexao: TFDConnection);
 begin
   FConexao := Conexao;
 
-  QryConsulta := TFDQuery.Create ( nil );
-  QryConsulta.Connection := FConexao;
+  FqryConsulta := TFDQuery.Create ( nil );
+  FqryConsulta.Connection := FConexao;
 end;
 
 destructor TUsuarios.Destroy;
 begin
-  QryConsulta.Destroy;
+  FqryConsulta.Destroy;
 
   inherited;
 end;
@@ -68,17 +72,17 @@ begin
     if TipoOperacao = 'CONSULTAR' then
     begin
 
-      QryConsulta.Close;
-      QryConsulta.SQL.Clear;
-        QryConsulta.SQL.Add('select id_usuarios,               ');
-        QryConsulta.SQL.Add('       ds_usuario,                ');
-        QryConsulta.SQL.Add('       cd_permissao,              ');
-        QryConsulta.SQL.Add('       ds_login,                  ');
-        QryConsulta.SQL.Add('       ds_senha                   ');
-        QryConsulta.SQL.Add('  from usuarios                   ');
-        QryConsulta.SQL.Add(' where ds_usuario like :parametro ');
-      QryConsulta.ParamByName('').AsString := '%' + parametro + '%' ;
-      QryConsulta.Open;
+      FqryConsulta.Close;
+      FqryConsulta.SQL.Clear;
+        FqryConsulta.SQL.Add('select id_usuarios,               ');
+        FqryConsulta.SQL.Add('       ds_usuario,                ');
+        FqryConsulta.SQL.Add('       cd_permissao,              ');
+        FqryConsulta.SQL.Add('       ds_login,                  ');
+        FqryConsulta.SQL.Add('       ds_senha                   ');
+        FqryConsulta.SQL.Add('  from usuarios                   ');
+        FqryConsulta.SQL.Add(' where ds_usuario like :p_ds_usuario ');
+      FqryConsulta.ParamByName('p_ds_usuario').AsString := '%' + parametro + '%' ;
+      FqryConsulta.Open;
 
     end else
     if TipoOperacao = 'EXCLUIR' then
@@ -128,7 +132,7 @@ begin
         qryAuxiliar.ParamByName('cd_permissao').AsInteger := cd_permissao;
         qryAuxiliar.ParamByName('ds_usuario').AsString    := Fds_usuario;
         qryAuxiliar.ParamByName('ds_login').AsString      := Fds_login;
-        qryAuxiliar.ParamByName('ds_senha').AsString      := Fds_senha;
+        qryAuxiliar.ParamByName('ds_senha').AsString      := MD5( Fds_senha );
         qryAuxiliar.ExecSQL;
 
       finally
@@ -170,8 +174,8 @@ begin
     Qry_Login.SQL.Add('       ds_login,                 ');
     Qry_Login.SQL.Add('       cd_permissao              ');
     Qry_Login.SQL.Add('  from usuarios                  ');
-    Qry_Login.SQL.Add(' where ds_usuario = :p_ds_usuario');
-    Qry_Login.ParamByName('p_ds_usuario').AsString := usuario;
+    Qry_Login.SQL.Add(' where ds_login = :p_ds_login    ');
+    Qry_Login.ParamByName('p_ds_login').AsString := usuario;
     Qry_Login.Open;
 
     if Qry_Login.IsEmpty then

@@ -203,13 +203,14 @@
         end
       end
     end
-    object edt_nomeCliente: TEdit
+    object edt_consulta: TEdit
       Tag = 5
       Left = 19
       Top = 88
       Width = 496
       Height = 23
       TabOrder = 0
+      OnKeyDown = edt_consultaKeyDown
     end
     object pnl_linhaTop: TPanel
       Left = -515
@@ -226,7 +227,7 @@
       Top = 168
       Width = 638
       Height = 401
-      DataSource = ds_consultaUsuario
+      DataSource = ds_consulta
       FixedColor = clMenuHighlight
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clDodgerblue
@@ -242,6 +243,8 @@
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      OnDblClick = dbgrd_consultaUsuarioDblClick
+      OnKeyDown = dbgrd_consultaUsuarioKeyDown
       Columns = <
         item
           Alignment = taCenter
@@ -253,11 +256,11 @@
           Title.Caption = 'C'#243'd.'
           Title.Color = clHighlight
           Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
+          Title.Font.Color = clBlack
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 52
+          Width = 67
           Visible = True
         end
         item
@@ -268,11 +271,26 @@
           Title.Caption = 'Nome Usu'#225'rio'
           Title.Color = clHighlight
           Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
+          Title.Font.Color = clBlack
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 567
+          Width = 405
+          Visible = True
+        end
+        item
+          Color = clIvory
+          Expanded = False
+          FieldName = 'ds_login'
+          Title.Alignment = taCenter
+          Title.Caption = 'Login Sistema'
+          Title.Color = clHighlight
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -12
+          Title.Font.Name = 'Segoe UI'
+          Title.Font.Style = [fsBold]
+          Width = 159
           Visible = True
         end>
     end
@@ -364,8 +382,8 @@
       end
     end
   end
-  object ds_consultaUsuario: TDataSource
-    Left = 56
-    Top = 496
+  object ds_consulta: TDataSource
+    Left = 576
+    Top = 608
   end
 end

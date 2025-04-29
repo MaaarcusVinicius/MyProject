@@ -3,7 +3,7 @@ unit unit_funcoes;
 interface
 
 uses unit_mensagens, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask,  System.SysUtils,
-  FireDAC.Comp.Client, Vcl.DBCtrls;
+  FireDAC.Comp.Client, Vcl.DBCtrls, IdHashMessageDigest;
 
   function Criptografia ( Senha, Chave: String ): string;
 
@@ -16,6 +16,8 @@ uses unit_mensagens, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mas
   function fnc_sonumeros (AString: string): string;
 
   function fnc_proximo_codigo(Tabela, Campo : string): Integer;
+
+  function MD5(const Value:string):string;
 
 var
   var_gbl_nome_usuario : string;
@@ -225,5 +227,16 @@ begin
 
 end;
 
+function MD5(const Value :string):string;
+var
+  xMD5 : TIdHashMessageDigest5;
+begin
+  xMD5 := TIdHashMessageDigest5.Create;
+  try
+    result := xMD5.HashStringAsHex(Value);
+  finally
+    xMD5.Free;
+  end;
+end;
 
 end.
