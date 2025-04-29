@@ -29,7 +29,7 @@ Type
     constructor Create( Conexao : TFDConnection);
     destructor Destroy; override;
     function fnc_operacoes_crud( TipoOperacao, parametro : string; out Erro: String ): Boolean;
-
+    function fnc_valida_login ( usuario, senha : string): Boolean;
 
   End;
 
@@ -146,6 +146,70 @@ begin
      Erro   := E.Message;
      Result := False;
    end;
+  end;
+
+end;
+
+function TUsuarios.fnc_valida_login(usuario, senha: string): Boolean;
+var
+  Qry_Login: TFDQuery;
+
+begin
+  Result := False;
+
+  try
+    Qry_Login := TFDQuery.Create( nil );
+    Qry_Login.Connection := FConexao;
+
+    Qry_Login.Close;
+    Qry_Login.SQL.Clear;
+
+    Qry_Login.SQL.Add('select id_usuarios,              ');
+    Qry_Login.SQL.Add('       ds_usuario,               ');
+    Qry_Login.SQL.Add('       ds_senha,                 ');
+    Qry_Login.SQL.Add('       ds_login,                 ');
+    Qry_Login.SQL.Add('       cd_permissao              ');
+    Qry_Login.SQL.Add('  from usuarios                  ');
+    Qry_Login.SQL.Add(' where ds_usuario = :p_ds_usuario');
+    Qry_Login.ParamByName('p_ds_usuario').AsString := usuario;
+    Qry_Login.Open;
+
+    if Qry_Login.IsEmpty then
+    begin
+    // usuario não encontrado.
+      fnc_criar_menssagem('PROBLEMAS AO ACESSAR O SISTEMA ',
+                          'USUÁRIO OU SENHA INVÁLIDOS!',
+                          'VERIFIQUE COM ADMINISTRADOR DO SISTEMA',
+                          ExtractFilePath(Application.ExeName ) + '\icones\HumanoDelete.png',
+                          'OK')  ;
+      Result := False;
+
+    end else
+    begin
+    // usuario encontrado, inicia validação da senha.
+      if Qry_Login.FieldByName('ds_senha').AsString = senha then
+      begin
+      // preenchendo o nome do usuario logado na variavel global.
+
+      var_gbl_nome_usuario := Qry_Login.FieldByName('ds_usuario').AsString;
+      Result := True;
+
+      end else
+      begin
+        // Usuario = OK porem senha invalida.
+        fnc_criar_menssagem('PROBLEMAS AO ACESSAR O SISTEMA ',
+                    'SENHA INVÁLIDA!',
+                    'VERIFIQUE COM ADMINISTRADOR DO SISTEMA',
+                    ExtractFilePath(Application.ExeName ) + '\icones\HumanoDelete.png',
+                    'OK')  ;
+        Result := False;
+
+      end;
+
+    end;
+
+  finally
+    Qry_Login.Destroy;
   end;
 
 end;

@@ -10064,10 +10064,12 @@ object form_login: Tform_login
         TabOrder = 0
       end
       object edt_userName: TEdit
+        Tag = 5
         Left = 0
         Top = 30
         Width = 278
         Height = 28
+        Hint = 'Usu'#225'rio'
         Align = alClient
         BevelOuter = bvNone
         BorderStyle = bsNone
@@ -10126,10 +10128,12 @@ object form_login: Tform_login
         TabOrder = 0
       end
       object edt_userSenha: TEdit
+        Tag = 5
         Left = 0
         Top = 30
         Width = 278
         Height = 24
+        Hint = 'Senha'
         Align = alClient
         BevelOuter = bvNone
         BorderStyle = bsNone

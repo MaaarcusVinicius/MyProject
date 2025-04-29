@@ -17,6 +17,9 @@ uses unit_mensagens, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mas
 
   function fnc_proximo_codigo(Tabela, Campo : string): Integer;
 
+var
+  var_gbl_nome_usuario : string;
+
 implementation
 
 uses

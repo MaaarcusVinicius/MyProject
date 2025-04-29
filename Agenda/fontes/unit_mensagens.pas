@@ -85,7 +85,7 @@ begin
   if Stipo = 'OK' then
   begin
     pnl_nao.Visible := False;
-    btn_sim.Caption := 'OK (Enter)'
+    btn_sim.Caption := 'OK (Enter)' ;
   end;
 end;
 
