@@ -170,7 +170,7 @@ object form_menssagens: Tform_menssagens
           Caption = 'SIM ( ENTER )'
           Flat = True
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = clBackground
           Font.Height = 20
           Font.Name = 'Segoe UI'
           Font.Style = [fsBold]

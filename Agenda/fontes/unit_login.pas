@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  frxSVGGraphic, Vcl.Buttons, Vcl.Imaging.pngimage;
+  frxSVGGraphic, Vcl.Buttons, Vcl.Imaging.pngimage, unit_dados;
 
 type
   Tform_login = class(TForm)
@@ -40,6 +40,9 @@ var
 
 implementation
 
+uses
+  unit_funcoes;
+
 {$R *.dfm}
 
 procedure Tform_login.FormActivate(Sender: TObject);
@@ -50,7 +53,10 @@ end;
 
 procedure Tform_login.spb_confirmaLoginClick(Sender: TObject);
 begin
-   Close;
+  unit_funcoes.prcValidarCamposObrigatorios( form_login );
+
+  if form_dados.Usuarios.fnc_valida_login( edt_userName.Text,edt_userSenha.text ) then
+     Close;
 end;
 
 procedure Tform_login.spb_fecharClick(Sender: TObject);

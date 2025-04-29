@@ -7,7 +7,8 @@ uses
   FireDAC.VCLUI.Wait, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, Data.DB,
-  FireDAC.Comp.Client, FireDAC.Comp.UI, classe.conexao,  unit_profissionais, classe.profissionais;
+  FireDAC.Comp.Client, FireDAC.Comp.UI, classe.conexao,  unit_profissionais,
+  classe.profissionais, classe.usuarios;
 
 type
   Tform_dados = class(TDataModule)
@@ -23,7 +24,9 @@ type
   public
     { Public declarations }
     Conexao : Tconexao;
+    Usuarios : TUsuarios;
     function GetProfissional(): TProfissionais;
+
   end;
 
 var
@@ -38,6 +41,7 @@ implementation
 procedure Tform_dados.DataModuleCreate(Sender: TObject);
 begin
   Conexao := Tconexao.Create ( FDConnection );
+  Usuarios := TUsuarios.Create ( form_dados.FDConnection );
  // GetProfissional();
 
 end;
@@ -45,6 +49,7 @@ end;
 procedure Tform_dados.DataModuleDestroy(Sender: TObject);
 begin
    Conexao.Destroy;
+   Usuarios.Destroy;
    if Assigned(FProfissional) then
    begin
      FProfissional.Destroy;
