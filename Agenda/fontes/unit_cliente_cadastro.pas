@@ -165,7 +165,7 @@ begin
         fnc_criar_menssagem('INSERIR DADOS',
                             'CADASTRAR/ALTERAR CLIENTE',
                             'CADASTRO REALIZADO COM SUCESSO!',
-                            ExtractFilePath(Application.ExeName ) + '\icones\HumanoAviso.png',
+                            ExtractFilePath(Application.ExeName ) + '\icones\HumanoConfirma.png',
                             'OK');
         Close;
      end else

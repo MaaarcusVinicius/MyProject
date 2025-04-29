@@ -11,7 +11,9 @@ object form_login: Tform_login
   Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
+  KeyPreview = True
   OnActivate = FormActivate
+  OnKeyDown = FormKeyDown
   TextHeight = 17
   object pnl_fundo: TPanel
     Left = 8
@@ -10093,7 +10095,7 @@ object form_login: Tform_login
       Color = clScrollBar
       ParentBackground = False
       TabOrder = 2
-      object lvl_userSenha: TLabel
+      object lbl__userSenha: TLabel
         Left = 0
         Top = 0
         Width = 278
@@ -10147,6 +10149,7 @@ object form_login: Tform_login
         ParentFont = False
         PasswordChar = '*'
         TabOrder = 1
+        OnKeyDown = edt_userSenhaKeyDown
       end
     end
     object pnl_botaoLogin: TPanel

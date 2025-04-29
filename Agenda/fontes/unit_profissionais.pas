@@ -83,7 +83,7 @@ begin
                             'CADASTRAR/ALTERAR PROFISSIONAL',
                             'Cadastro Realizado com Sucesso!'+
                             '',
-                            ExtractFilePath(Application.ExeName ) + '\icones\HumanoAviso.png',
+                            ExtractFilePath(Application.ExeName ) + '\icones\HumanoConfirma.png',
                             'OK')  ;
         Close;
 

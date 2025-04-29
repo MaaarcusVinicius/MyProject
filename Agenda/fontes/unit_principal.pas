@@ -29,7 +29,7 @@ type
     pnl_cabecario: TPanel;
     lbl_logoTipo: TLabel;
     img_logoSiacAgenda: TImage;
-    lbl_nomeSistema: TLabel;
+    lbl_nomeUser: TLabel;
     pnl_botoesForm: TPanel;
     btn_close: TSpeedButton;
     btn_minimizar: TSpeedButton;
@@ -39,6 +39,7 @@ type
     procedure btn_1Click(Sender: TObject);
     procedure btn_agendamentoClick(Sender: TObject);
     procedure btn_userClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
@@ -112,6 +113,11 @@ begin
   pnl_fundo.top  := Round (( form_Principal.Height - pnl_fundo.Height )  / 2 );
   pnl_fundo.left := Round (( form_Principal.Width - pnl_fundo.Width )  / 2 );
 
+end;
+
+procedure Tform_Principal.FormShow(Sender: TObject);
+begin
+  form_Principal.lbl_nomeUser.Caption := 'Usuário: ' + var_gbl_nome_usuario;
 end;
 
 end.

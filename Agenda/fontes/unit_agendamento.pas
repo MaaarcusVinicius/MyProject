@@ -95,7 +95,7 @@ begin
           fnc_criar_menssagem('GRAVANDO DADOS',
                               'AGENDAR HORÁRIO',
                               'AGENDAMENTO REALIZADO COM SUCESSO!',
-                               ExtractFilePath(Application.ExeName ) + '\icones\HumanoAviso.png',
+                               ExtractFilePath(Application.ExeName ) + '\icones\HumanoConfirma.png',
                               'OK')  ;
 
           form_Principal.pnl_lateralLefth.Enabled := True;
@@ -119,7 +119,7 @@ begin
        fnc_criar_menssagem('VALIDADAR DADOS',
                            'ERRO AO AGENDAR HORÁRIO',
                            'DIA OU HORA DO AGENDAMENTO JÁ UTILIZADO!',
-                           ExtractFilePath(Application.ExeName ) + '\icones\HumanoDelete.png',
+                           ExtractFilePath(Application.ExeName ) + '\icones\HumanoAviso.png',
                            'OK')  ;
        medt_horaAgendamento.SetFocus;
 
