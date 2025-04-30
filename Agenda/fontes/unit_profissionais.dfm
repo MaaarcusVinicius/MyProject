@@ -20,6 +20,8 @@ object form_profissionais: Tform_profissionais
     Height = 668
     Align = alClient
     BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
     ParentShowHint = False
     ShowCaption = False
     ShowHint = True
@@ -164,8 +166,8 @@ object form_profissionais: Tform_profissionais
       Text = '(   )     -    '
     end
     object pnl_botoes: TPanel
-      Left = 201
-      Top = 608
+      Left = 211
+      Top = 616
       Width = 275
       Height = 41
       BevelOuter = bvNone

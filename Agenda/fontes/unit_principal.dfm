@@ -455,7 +455,7 @@ object form_Principal: Tform_Principal
         Height = 90
         BevelOuter = bvNone
         TabOrder = 1
-        object btn_relatorio: TSpeedButton
+        object btn_relatorios: TSpeedButton
           Left = 0
           Top = 0
           Width = 102
@@ -856,6 +856,7 @@ object form_Principal: Tform_Principal
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           Layout = blGlyphTop
           ParentFont = False
+          OnClick = btn_relatoriosClick
           ExplicitTop = 1
           ExplicitWidth = 82
           ExplicitHeight = 88

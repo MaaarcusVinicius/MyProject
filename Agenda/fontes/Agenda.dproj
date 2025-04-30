@@ -189,6 +189,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="classe.usuarios.pas"/>
+        <DCCReference Include="unit_relatorios.pas">
+            <Form>form_relatorios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -19,7 +19,7 @@ type
     pnl_user: TPanel;
     btn_user: TSpeedButton;
     pnl_relatorio: TPanel;
-    btn_relatorio: TSpeedButton;
+    btn_relatorios: TSpeedButton;
     pnl_configuracao: TPanel;
     btn_1: TSpeedButton;
     pnl_agendamento: TPanel;
@@ -40,6 +40,7 @@ type
     procedure btn_agendamentoClick(Sender: TObject);
     procedure btn_userClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btn_relatoriosClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -54,7 +55,7 @@ implementation
 
 {$R *.dfm}
 
-uses unit_funcoes, unit_agendamento, unit_usuario_consulta;
+uses unit_funcoes, unit_agendamento, unit_usuario_consulta, unit_relatorios;
 
 
 
@@ -95,6 +96,16 @@ end;
 procedure Tform_Principal.btn_minimizarClick(Sender: TObject);
 begin
   Application.Minimize;
+end;
+
+procedure Tform_Principal.btn_relatoriosClick(Sender: TObject);
+begin
+  try
+    form_relatorios := Tform_relatorios.Create( Self );
+    form_relatorios.ShowModal;
+  finally
+    form_relatorios.Free;
+  end;
 end;
 
 procedure Tform_Principal.btn_userClick(Sender: TObject);
