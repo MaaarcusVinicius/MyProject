@@ -72,7 +72,7 @@ begin
                             'DATA FORA DO PADRÃO ESPERADO',
                             ExtractFilePath(Application.ExeName ) + '\icones\icon_erro.png',
                             'OK')  ;
-
+ // teste merge
 end;
 
 procedure Tform_relatorios.clndrpckr_dataFinalChange(Sender: TObject);

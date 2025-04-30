@@ -22,8 +22,6 @@ object form_relatorios: Tform_relatorios
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 640
-    ExplicitHeight = 480
     object lbl_logoTipo: TLabel
       Left = 40
       Top = 7
@@ -186,7 +184,6 @@ object form_relatorios: Tform_relatorios
         ParentBackground = False
         ParentFont = False
         TabOrder = 1
-        ExplicitLeft = 138
         object btn_cancelar: TSpeedButton
           Left = 0
           Top = 0
