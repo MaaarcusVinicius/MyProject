@@ -17,11 +17,6 @@ type
     lbl_aviso: TLabel;
     lbl_aviso2: TLabel;
     lbl_pesParte1: TLabel;
-    pnl_clientebotoes: TPanel;
-    pnl_seleciona: TPanel;
-    btn_seleciona: TSpeedButton;
-    pnl_cancelar: TPanel;
-    btn_cancelar: TSpeedButton;
     edt_consulta: TEdit;
     pnl_linhaTop: TPanel;
     dbgrd_consultaUsuario: TDBGrid;
@@ -33,6 +28,8 @@ type
     pnl_11: TPanel;
     btn_1: TSpeedButton;
     ds_consulta: TDataSource;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_1Click(Sender: TObject);
     procedure edt_consultaKeyDown(Sender: TObject; var Key: Word;
@@ -77,7 +74,35 @@ end;
 
 procedure Tform_usuario_consulta.dbgrd_consultaUsuarioDblClick(Sender: TObject);
 begin
- // Alterar
+  if not ( dbgrd_consultaUsuario.DataSource.DataSet.IsEmpty ) then
+    begin
+
+      form_usuario_consulta.Visible := False;
+
+      try
+        form_usuario_cadastro := Tform_usuario_cadastro.Create( Self );
+        form_usuario_cadastro.edt_nomeUsuario.Text   := dbgrd_consultaUsuario.DataSource.DataSet.FieldByName('ds_usuario').AsString;
+        form_usuario_cadastro.edt_nomeLogin.Text     := dbgrd_consultaUsuario.DataSource.DataSet.FieldByName('ds_login').AsString;
+        form_usuario_cadastro.edt_senha.Text         := dbgrd_consultaUsuario.DataSource.DataSet.FieldByName('ds_senha').AsString;
+        form_usuario_cadastro.edt_senhaConfirma.Text := dbgrd_consultaUsuario.DataSource.DataSet.FieldByName('ds_senha').AsString;
+
+        form_dados.Usuarios.id_usuarios := dbgrd_consultaUsuario.DataSource.DataSet.FieldByName('id_usuarios').AsInteger;
+
+        form_usuario_cadastro.senha_original := dbgrd_consultaUsuario.DataSource.DataSet.FieldByName('ds_senha').AsString;
+
+        form_usuario_cadastro.ShowModal;
+
+      finally
+
+        form_usuario_cadastro.Free;
+        form_usuario_consulta.Visible := True;
+
+      end;
+    end;
+
+
+
+
 end;
 
 procedure Tform_usuario_consulta.dbgrd_consultaUsuarioKeyDown(Sender: TObject;

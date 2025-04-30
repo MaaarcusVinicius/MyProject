@@ -86,7 +86,7 @@ begin
 
     end else
     if TipoOperacao = 'EXCLUIR' then
-      FConexao.ExecSQL('Delete from usuarios where id_usuario = :id_usuario', [StrToInt( parametro )] )
+      FConexao.ExecSQL('Delete from usuarios where id_usuarios = :id_usuario', [StrToInt( parametro )] )
     else
     begin
 
@@ -132,7 +132,7 @@ begin
         qryAuxiliar.ParamByName('cd_permissao').AsInteger := cd_permissao;
         qryAuxiliar.ParamByName('ds_usuario').AsString    := Fds_usuario;
         qryAuxiliar.ParamByName('ds_login').AsString      := Fds_login;
-        qryAuxiliar.ParamByName('ds_senha').AsString      := MD5( Fds_senha );
+        qryAuxiliar.ParamByName('ds_senha').AsString      := Fds_senha;
         qryAuxiliar.ExecSQL;
 
       finally
