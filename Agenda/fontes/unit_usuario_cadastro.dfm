@@ -275,7 +275,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
-      TabOrder = 1
+      TabOrder = 3
     end
     object pnl_linhaEsquerda: TPanel
       Left = -1
@@ -284,7 +284,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Height = 678
       Color = clGray
       ParentBackground = False
-      TabOrder = 2
+      TabOrder = 4
     end
     object pnl_linhaDireita: TPanel
       Left = 492
@@ -293,7 +293,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Height = 694
       Color = clGray
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 5
     end
     object pnl_linhaCima: TPanel
       Left = -4
@@ -302,7 +302,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Height = 3
       Color = clGray
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 6
     end
     object pnl_linhaBaixo: TPanel
       Left = -20
@@ -311,7 +311,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Height = 3
       Color = clGray
       ParentBackground = False
-      TabOrder = 5
+      TabOrder = 7
     end
     object edt_senha: TEdit
       Tag = 5
@@ -322,7 +322,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Hint = 'Insira o nome do Usu'#225'rio'
       CharCase = ecUpperCase
       PasswordChar = '*'
-      TabOrder = 6
+      TabOrder = 2
     end
     object edt_senhaConfirma: TEdit
       Tag = 5
@@ -333,7 +333,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Hint = 'Confirme sua senha'
       CharCase = ecUpperCase
       PasswordChar = '*'
-      TabOrder = 7
+      TabOrder = 8
     end
     object edt_nomeLogin: TEdit
       Tag = 5
@@ -343,7 +343,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Height = 23
       Hint = 'Insira o Login'
       CharCase = ecUpperCase
-      TabOrder = 8
+      TabOrder = 1
     end
     object dbl_cmb_grupoUsuario: TDBLookupComboBox
       Left = 63
@@ -352,33 +352,78 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Height = 23
       TabOrder = 9
     end
-    object pnl_fechar: TPanel
-      Left = 168
-      Top = 353
-      Width = 137
+    object pnl_botoes: TPanel
+      Left = 110
+      Top = 343
+      Width = 275
       Height = 41
       BevelOuter = bvNone
-      Color = clCrimson
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = 19
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
+      Color = clWhite
       ParentBackground = False
-      ParentFont = False
       TabOrder = 10
-      object btn_fechar: TSpeedButton
+      object pnl_confirma: TPanel
         Left = 0
         Top = 0
         Width = 137
         Height = 41
-        Align = alClient
-        Caption = 'Fechar'
-        Flat = True
-        Layout = blGlyphBottom
-        OnClick = btn_fecharClick
-        ExplicitLeft = 5
+        Align = alLeft
+        BevelOuter = bvNone
+        Color = clSkyBlue
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 19
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 0
+        object btn_confirma: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 137
+          Height = 41
+          Align = alLeft
+          Caption = 'Confirmar'
+          Flat = True
+          OnClick = btn_confirmaClick
+          ExplicitLeft = -5
+        end
+      end
+      object pnl_fechar: TPanel
+        Left = 138
+        Top = 0
+        Width = 137
+        Height = 41
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clCrimson
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 19
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 1
+        ExplicitTop = 3
+        object btn_fechar: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 137
+          Height = 41
+          Align = alRight
+          Caption = 'Fechar'
+          Flat = True
+          Layout = blGlyphBottom
+          OnClick = btn_fecharClick
+          ExplicitHeight = 40
+        end
       end
     end
+  end
+  object acbrntrtb_usuario: TACBrEnterTab
+    EnterAsTab = True
+    Left = 424
+    Top = 352
   end
 end

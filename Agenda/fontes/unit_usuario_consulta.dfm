@@ -95,9 +95,9 @@
     object lbl_aviso: TLabel
       Left = 24
       Top = 576
-      Width = 287
+      Width = 291
       Height = 15
-      Caption = '* Selecione o cliente e pressione DELETE para exclu'#237'-lo.'
+      Caption = '* Selecione o usu'#225'rio e pressione DELETE para exclu'#237'-lo.'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clGray
@@ -109,10 +109,10 @@
     end
     object lbl_aviso2: TLabel
       Left = 24
-      Top = 591
-      Width = 301
+      Top = 597
+      Width = 305
       Height = 15
-      Caption = '* Click duas vezes sobre o cliente para EDITAR o cadastro.'
+      Caption = '* Click duas vezes sobre o usu'#225'rio para EDITAR o cadastro.'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clGray
@@ -137,72 +137,6 @@
       ParentColor = False
       ParentFont = False
     end
-    object pnl_clientebotoes: TPanel
-      Left = 201
-      Top = 624
-      Width = 275
-      Height = 41
-      BevelOuter = bvNone
-      Color = clWhite
-      ParentBackground = False
-      TabOrder = 1
-      object pnl_seleciona: TPanel
-        Left = 0
-        Top = 0
-        Width = 137
-        Height = 41
-        Align = alLeft
-        BevelOuter = bvNone
-        Color = clSkyBlue
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = 19
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentBackground = False
-        ParentFont = False
-        TabOrder = 0
-        object btn_seleciona: TSpeedButton
-          Left = 0
-          Top = 0
-          Width = 137
-          Height = 41
-          Align = alClient
-          Caption = 'Selecionar'
-          Flat = True
-          ExplicitLeft = -5
-        end
-      end
-      object pnl_cancelar: TPanel
-        Left = 138
-        Top = 0
-        Width = 137
-        Height = 41
-        Align = alRight
-        BevelOuter = bvNone
-        Color = clCrimson
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = 19
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentBackground = False
-        ParentFont = False
-        TabOrder = 1
-        object btn_cancelar: TSpeedButton
-          Left = 0
-          Top = 0
-          Width = 137
-          Height = 41
-          Align = alClient
-          Caption = 'Cancelar'
-          Flat = True
-          Layout = blGlyphBottom
-          OnClick = btn_cancelarClick
-          ExplicitLeft = 5
-        end
-      end
-    end
     object edt_consulta: TEdit
       Tag = 5
       Left = 19
@@ -220,7 +154,7 @@
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
-      TabOrder = 2
+      TabOrder = 1
     end
     object dbgrd_consultaUsuario: TDBGrid
       Left = 19
@@ -237,7 +171,7 @@
       Options = [dgTitles, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentColor = True
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clHighlight
       TitleFont.Height = -12
@@ -301,7 +235,7 @@
       Height = 678
       Color = clGray
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 3
     end
     object pnl_linhaDireita: TPanel
       Left = 663
@@ -310,7 +244,7 @@
       Height = 676
       Color = clGray
       ParentBackground = False
-      TabOrder = 5
+      TabOrder = 4
     end
     object pnl_linhaCima: TPanel
       Left = -4
@@ -319,7 +253,7 @@
       Height = 3
       Color = clGray
       ParentBackground = False
-      TabOrder = 6
+      TabOrder = 5
     end
     object pnl_linhaBaixo: TPanel
       Left = -15
@@ -328,7 +262,7 @@
       Height = 3
       Color = clGray
       ParentBackground = False
-      TabOrder = 7
+      TabOrder = 6
     end
     object pnl_novoUsuário: TPanel
       Left = 521
@@ -344,7 +278,7 @@
       Font.Style = []
       ParentBackground = False
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 7
       object pnl_11: TPanel
         Left = 0
         Top = 0
@@ -379,6 +313,34 @@
           ExplicitLeft = -1
           ExplicitTop = -8
         end
+      end
+    end
+    object pnl_cancelar: TPanel
+      Left = 256
+      Top = 626
+      Width = 137
+      Height = 41
+      BevelOuter = bvNone
+      Color = clCrimson
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 19
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 8
+      object btn_cancelar: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 41
+        Align = alClient
+        Caption = 'Cancelar'
+        Flat = True
+        Layout = blGlyphBottom
+        OnClick = btn_cancelarClick
+        ExplicitTop = -8
       end
     end
   end
