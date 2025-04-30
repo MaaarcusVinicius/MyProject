@@ -438,8 +438,8 @@ object form_agendamento: Tform_agendamento
       ParentFont = False
     end
     object clndrpckr_agendamento: TCalendarPicker
-      Left = 173
-      Top = 155
+      Left = 178
+      Top = 156
       Width = 30
       Height = 26
       CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET

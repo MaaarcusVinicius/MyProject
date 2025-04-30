@@ -19,6 +19,8 @@ object form_cliente_cadastro: Tform_cliente_cadastro
     Height = 739
     Align = alClient
     BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
     ParentShowHint = False
     ShowCaption = False
     ShowHint = True
