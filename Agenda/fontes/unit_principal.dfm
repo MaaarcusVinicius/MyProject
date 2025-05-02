@@ -13610,10 +13610,10 @@ object form_Principal: Tform_Principal
       ExplicitHeight = 39
     end
     object lbl_nomeUser: TLabel
-      Left = 720
+      Left = 632
       Top = 0
-      Width = 217
-      Height = 21
+      Width = 297
+      Height = 28
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = 'Usu'#225'rio Logado: Administrador'

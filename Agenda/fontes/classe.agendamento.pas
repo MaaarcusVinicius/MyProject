@@ -217,7 +217,7 @@ begin
       QryInserir.ParamByName('id_Agendamento').AsInteger      := fnc_proximo_codigo('agendamento', 'id_Agendamento') ;
       QryInserir.ParamByName('cli_id_cliente').AsInteger      := Fcli_id_cliente;
       QryInserir.ParamByName('pro_id_profissional').AsInteger := Fpro_id_profissional;
-      QryInserir.ParamByName('usu_id_usuarios').AsInteger     := 1;
+      QryInserir.ParamByName('usu_id_usuarios').AsInteger     := var_gbl_id_usuario;
       QryInserir.ParamByName('dt_data').AsDate                := Fdt_data;
       QryInserir.ParamByName('hr_hora').AsString              := Fhr_hora;
       QryInserir.ParamByName('ds_obs').AsString               := Fds_obs;
@@ -249,7 +249,7 @@ begin
 
    Minutos := 0;
 
-   for Hora := 8 to 18 do
+   for Hora := 8 to 17 do
    begin
      for I := 0 to 3 do
      begin

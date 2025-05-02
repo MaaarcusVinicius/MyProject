@@ -196,6 +196,7 @@ begin
       // preenchendo o nome do usuario logado na variavel global.
 
       var_gbl_nome_usuario := Qry_Login.FieldByName('ds_usuario').AsString;
+      var_gbl_id_usuario := Qry_Login.FieldByName('id_usuarios').AsInteger;
       Result := True;
 
       end else

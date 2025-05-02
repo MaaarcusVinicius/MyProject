@@ -21,6 +21,7 @@ uses unit_mensagens, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mas
 
 var
   var_gbl_nome_usuario : string;
+  var_gbl_id_usuario : integer;
 
 implementation
 

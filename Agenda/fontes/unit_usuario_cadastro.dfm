@@ -19,6 +19,8 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     Height = 403
     Align = alClient
     BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
     ParentShowHint = False
     ShowCaption = False
     ShowHint = True
@@ -405,7 +407,6 @@ object form_usuario_cadastro: Tform_usuario_cadastro
         ParentBackground = False
         ParentFont = False
         TabOrder = 1
-        ExplicitTop = 3
         object btn_fechar: TSpeedButton
           Left = 0
           Top = 0
