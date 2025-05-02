@@ -193,6 +193,11 @@
             <Form>form_relatorios</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="unit_relatorio_agendamento_periodo.pas">
+            <Form>form_relatorio_agendamento_periodo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="classe.relatorios.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

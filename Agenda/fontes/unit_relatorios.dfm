@@ -11,6 +11,8 @@ object form_relatorios: Tform_relatorios
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poMainFormCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 15
   object pnl_fundo: TPanel
     Left = 0
