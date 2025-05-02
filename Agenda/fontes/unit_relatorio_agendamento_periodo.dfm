@@ -79,7 +79,7 @@ object form_relatorio_agendamento_periodo: Tform_relatorio_agendamento_periodo
       Left = 38
       Top = 95
       Width = 718
-      Height = 16
+      Height = 18
       BandType = btColumnHeader
       Borders.Sides = sdCustom
       Borders.DrawLeft = False
@@ -157,7 +157,7 @@ object form_relatorio_agendamento_periodo: Tform_relatorio_agendamento_periodo
     end
     object rlr_band_3: TRLBand
       Left = 38
-      Top = 111
+      Top = 113
       Width = 718
       Height = 26
       Borders.Sides = sdCustom
@@ -221,7 +221,7 @@ object form_relatorio_agendamento_periodo: Tform_relatorio_agendamento_periodo
     end
     object rlr_band_4: TRLBand
       Left = 38
-      Top = 137
+      Top = 139
       Width = 718
       Height = 16
       BandType = btFooter

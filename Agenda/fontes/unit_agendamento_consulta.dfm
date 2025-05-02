@@ -23,7 +23,6 @@ object form_agendamento_consulta: Tform_agendamento_consulta
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 704
     DesignSize = (
       700
       81)
@@ -69,7 +68,6 @@ object form_agendamento_consulta: Tform_agendamento_consulta
       Color = clGray
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 702
     end
     object dblkcbb_selecionePorfissional: TDBLookupComboBox
       Tag = 5
@@ -99,8 +97,6 @@ object form_agendamento_consulta: Tform_agendamento_consulta
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 704
-    ExplicitHeight = 399
     object lbl_horarioHora: TLabel
       Left = 16
       Top = 117
@@ -196,7 +192,7 @@ object form_agendamento_consulta: Tform_agendamento_consulta
         '15'
         '16'
         '17'
-        '18')
+        '')
     end
     object cbb_horarioMinutos: TComboBox
       Left = 184

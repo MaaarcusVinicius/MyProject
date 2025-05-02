@@ -33,7 +33,7 @@ object form_agenda: Tform_agenda
       861
       508)
     object btn_consultaCliente: TSpeedButton
-      Left = 474
+      Left = 498
       Top = 85
       Width = 39
       Height = 36
@@ -261,7 +261,7 @@ object form_agenda: Tform_agenda
     end
     object lbl_data: TLabel
       Left = 16
-      Top = 18
+      Top = 13
       Width = 35
       Height = 21
       Caption = 'Data:'
@@ -410,8 +410,8 @@ object form_agenda: Tform_agenda
         end>
     end
     object clndrpckr_calendario: TCalendarPicker
-      Left = 13
-      Top = 39
+      Left = 16
+      Top = 40
       Width = 261
       Height = 32
       CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
@@ -453,11 +453,12 @@ object form_agenda: Tform_agenda
       TabOrder = 2
     end
     object edt_consultaCliente: TEdit
-      Left = 13
-      Top = 92
-      Width = 457
-      Height = 23
+      Left = 16
+      Top = 94
+      Width = 481
+      Height = 27
       TabOrder = 3
+      OnKeyPress = edt_consultaClienteKeyPress
     end
     object pnl_novoAgendamento: TPanel
       Left = 632

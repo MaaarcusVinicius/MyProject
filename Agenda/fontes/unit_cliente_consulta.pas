@@ -60,6 +60,9 @@ var
 
 implementation
 
+uses
+  unit_relatorios;
+
 
 
 {$R *.dfm}
@@ -90,11 +93,19 @@ begin
 
     if ( not ( IsEmpty ) ) then
     begin
-
-      form_agenda.Agendamento.cli_id_cliente := FieldByName('id_cliente').AsInteger;
-      form_agendamento.edt_pesquisaCliente.Text   := FieldByName('ds_cliente').AsString;
-      form_agendamento.medt_telefone.Text         := FieldByName('nr_telefone').AsString;
-      form_agendamento.medt_celular.Text          := FieldByName('nr_telefone2').AsString;
+      if form_agendamento <> nil then
+        begin
+          form_agenda.Agendamento.cli_id_cliente := FieldByName('id_cliente').AsInteger;
+          form_agendamento.edt_pesquisaCliente.Text   := FieldByName('ds_cliente').AsString;
+          form_agendamento.medt_telefone.Text         := FieldByName('nr_telefone').AsString;
+          form_agendamento.medt_celular.Text          := FieldByName('nr_telefone2').AsString;
+        end
+      else
+      if form_relatorios <> nil then
+        begin
+          form_relatorios.cli_id_cliente := FieldByName('id_cliente').AsInteger;
+          form_relatorios.edt_pesquisaCliente.Text   := FieldByName('ds_cliente').AsString;
+        end;
 
       form_cliente_consulta.Close;
 
@@ -177,11 +188,6 @@ begin
         ShowMessage('Já esta preenchido.');
 
       end;
-
-     //dbgrd_consultaClientesDblClick()
-
-
-
 end;
 
 procedure Tform_cliente_consulta.dbgrd_consultaClientesKeyDown(Sender: TObject;

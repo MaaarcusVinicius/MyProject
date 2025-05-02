@@ -58,8 +58,6 @@ implementation
 uses unit_funcoes, unit_agendamento, unit_usuario_consulta, unit_relatorios;
 
 
-
-
 procedure Tform_Principal.btn_1Click(Sender: TObject);
 begin
   try

@@ -41,6 +41,7 @@ type
     procedure btn_consultaClienteClick(Sender: TObject);
     procedure dbgrd_consulta_agendaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure edt_consultaClienteKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -122,7 +123,7 @@ begin
      end;
 
    finally
-     //qryHorarios.Destroy;
+     qryHorarios.Destroy;
    end;
 
    cds_agenda.First;
@@ -147,11 +148,6 @@ begin
      ds_consulta_agenda.DataSet := Agendamento.fnc_consulta_por_cliente(edt_consultaCliente.text)   ;
 end;
 
-procedure Tform_agenda.btn_encerrarClick(Sender: TObject);
-begin
-  Close;
-end;
-
 procedure Tform_agenda.btn_novoAgendamentoClick(Sender: TObject);
 begin
   try
@@ -171,6 +167,22 @@ begin
     ds_consulta_agenda.DataSet := nil;
 end;
 
+procedure Tform_agenda.edt_consultaClienteKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+
+  if ( KEY = #13 ) then
+    if edt_consultaCliente.text = '' then
+      begin
+        edt_consultaCliente.text := '%';
+      end;
+
+    begin
+      ds_consulta_agenda.DataSet := Agendamento.fnc_consulta_por_cliente(edt_consultaCliente.text);
+    end;
+
+end;
+
 procedure Tform_agenda.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Agendamento.Destroy;
@@ -186,6 +198,11 @@ procedure Tform_agenda.FormShow(Sender: TObject);
 begin
   dataSource_profissionais.DataSet := form_dados.GetProfissional().fnc_consulta('');
   clndrpckr_calendario.Date := now;
+end;
+
+procedure Tform_agenda.btn_encerrarClick(Sender: TObject);
+begin
+  Close;
 end;
 
 end.

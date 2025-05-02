@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, unit_funcoes, ACBrBase, ACBrEnterTab,
-  Vcl.WinXCalendars, unit_relatorio_agendamento_periodo, classe.relatorios, unit_dados;
+  Vcl.WinXCalendars, unit_relatorio_agendamento_periodo, classe.relatorios, unit_dados,
+  Data.DB, Vcl.DBCtrls;
 
 type
   Tform_relatorios = class(TForm)
@@ -28,6 +29,12 @@ type
     Acbr_tabEnter: TACBrEnterTab;
     clndrpckr_dataInicial: TCalendarPicker;
     clndrpckr_dataFinal: TCalendarPicker;
+    ds_profissionais: TDataSource;
+    lbl_selecioneProfissional: TLabel;
+    lbl_selecioneCliente: TLabel;
+    edt_pesquisaCliente: TEdit;
+    btn_consultaCliente: TSpeedButton;
+    dbl_cmb_Profissional: TDBLookupComboBox;
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_confirmaClick(Sender: TObject);
     procedure dbe_data_inicioExit(Sender: TObject);
@@ -38,17 +45,24 @@ type
     procedure dbe_data_finalDblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btn_consultaClienteClick(Sender: TObject);
+    procedure cmb_tipo_relatorioCloseUp(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     Relatorios: TRelatorios;
+    cli_id_cliente : Integer;
   end;
 
 var
   form_relatorios: Tform_relatorios;
 
 implementation
+
+uses
+  unit_cliente_consulta;
 
 {$R *.dfm}
 
@@ -127,6 +141,18 @@ begin
 
 end;
 
+procedure Tform_relatorios.btn_consultaClienteClick(Sender: TObject);
+begin
+
+  try
+    form_cliente_consulta :=  Tform_cliente_consulta.Create(Self);
+    form_cliente_consulta.ShowModal;
+  finally
+    form_cliente_consulta.Destroy;
+  end;
+
+end;
+
 procedure Tform_relatorios.clndrpckr_dataFinalChange(Sender: TObject);
 begin
   dbe_data_final.Text := DateToStr(clndrpckr_datafinal.Date);
@@ -135,6 +161,44 @@ end;
 procedure Tform_relatorios.clndrpckr_dataInicialChange(Sender: TObject);
 begin
   dbe_data_inicio.Text := DateToStr(clndrpckr_dataInicial.Date);
+end;
+
+procedure Tform_relatorios.cmb_tipo_relatorioCloseUp(Sender: TObject);
+begin
+  if cmb_tipo_relatorio.ItemIndex = 0 then    //Agendamento por Período
+  begin
+
+    cli_id_cliente := 0;
+    edt_pesquisaCliente.Text := '';
+
+    btn_consultaCliente.Enabled := False;
+
+    dbl_cmb_Profissional.Enabled := False;
+    dbl_cmb_Profissional.KeyValue := Null;
+
+  end else
+  if cmb_tipo_relatorio.ItemIndex = 1 then    // Agendamentos por Clientes
+
+  begin
+
+    btn_consultaCliente.Enabled := True;
+
+    dbl_cmb_Profissional.Enabled := False;
+    dbl_cmb_Profissional.KeyValue := Null;
+
+  end else
+  if cmb_tipo_relatorio.ItemIndex = 2 then    // Agendamentos por Profissionais
+
+  begin
+
+    cli_id_cliente := 0;
+    edt_pesquisaCliente.Text := '';
+
+    btn_consultaCliente.Enabled := False;
+
+    dbl_cmb_Profissional.Enabled := True;
+
+  end;
 end;
 
 procedure Tform_relatorios.dbe_data_inicioDblClick(Sender: TObject);
@@ -181,6 +245,11 @@ end;
 procedure Tform_relatorios.FormDestroy(Sender: TObject);
 begin
   Relatorios.Destroy;
+end;
+
+procedure Tform_relatorios.FormShow(Sender: TObject);
+begin
+  ds_profissionais.DataSet := form_dados.GetProfissional().fnc_consulta('');
 end;
 
 procedure Tform_relatorios.dbe_data_finalExit(Sender: TObject);

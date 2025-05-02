@@ -144,10 +144,9 @@ begin
   begin
     if form_dados.Usuarios.fnc_operacoes_crud('CONSULTAR',edt_consulta.Text, sErro) then
       begin
-
         ds_consulta.DataSet := form_dados.Usuarios.qryConsulta;
-
-      end else
+      end
+    else
       begin
 
         fnc_criar_menssagem('CONSULTAR USUÁRIO',
