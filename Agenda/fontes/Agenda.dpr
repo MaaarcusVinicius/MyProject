@@ -25,7 +25,9 @@ uses
   classe.usuarios in 'classe.usuarios.pas',
   unit_relatorios in 'unit_relatorios.pas' {form_relatorios},
   unit_relatorio_agendamento_periodo in 'unit_relatorio_agendamento_periodo.pas' {form_relatorio_agendamento_periodo},
-  classe.relatorios in 'classe.relatorios.pas';
+  classe.relatorios in 'classe.relatorios.pas',
+  unit_relatorio_agendamento_cliente in 'unit_relatorio_agendamento_cliente.pas' {form_relatorio_agendamento_cliente},
+  unit_relatorio_agendamento_profissional in 'unit_relatorio_agendamento_profissional.pas' {form_relatorio_agendamento_profissional};
 
 {$R *.res}
 
@@ -34,6 +36,7 @@ begin
   Application.MainFormOnTaskbar := True;
 
   Application.CreateForm(Tform_dados, form_dados);
+
   if form_dados.Conexao.fnc_conectar_banco_dados then
      begin
        form_login := Tform_login.Create(nil);
