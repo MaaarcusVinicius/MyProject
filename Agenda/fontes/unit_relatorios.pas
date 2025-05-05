@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, unit_funcoes, ACBrBase, ACBrEnterTab,
   Vcl.WinXCalendars, unit_relatorio_agendamento_periodo, classe.relatorios, unit_dados,
-  Data.DB, Vcl.DBCtrls;
+  Data.DB, Vcl.DBCtrls, unit_cliente_consulta, unit_relatorio_agendamento_cliente, unit_relatorio_agendamento_profissional;
 
 type
   Tform_relatorios = class(TForm)
@@ -61,8 +61,6 @@ var
 
 implementation
 
-uses
-  unit_cliente_consulta;
 
 {$R *.dfm}
 
@@ -137,6 +135,55 @@ begin
 
 
      end;
+
+  1: begin
+       try
+         form_relatorio_agendamento_cliente := Tform_relatorio_agendamento_cliente.Create(Self);
+
+         form_relatorio_agendamento_cliente.Tlbl_periodo.Caption :=
+         'PERÍODO DE: ' + dbe_data_inicio.Text + ' ATÉ: ' + dbe_data_final.Text;
+
+         form_relatorio_agendamento_cliente.lbl_cliente.Caption :=
+         'CLIENTE: ' + edt_pesquisaCliente.Text ;
+
+         Relatorios.prc_agendamento_cliente(StrToDate(dbe_data_inicio.Text), StrToDate(dbe_data_final.Text), cli_id_cliente);
+
+         form_relatorio_agendamento_cliente.ds_padrao.DataSet := Relatorios.qry_agendamento_cliente;
+         form_relatorio_agendamento_cliente.Tlbl_total.Caption := IntToStr( Relatorios.qry_agendamento_cliente.RecordCount );
+
+         form_relatorio_agendamento_cliente.rlr_agendamentos_cliente.Preview;
+
+       finally
+         form_relatorio_agendamento_cliente.Destroy;
+       end;
+
+
+     end;
+
+  2: begin
+       try
+         form_relatorio_agendamento_profissional := Tform_relatorio_agendamento_profissional.Create(Self);
+
+         form_relatorio_agendamento_profissional.Tlbl_periodo.Caption :=
+         'PERÍODO DE: ' + dbe_data_inicio.Text + ' ATÉ: ' + dbe_data_final.Text;
+
+         form_relatorio_agendamento_profissional.lbl_profissional.Caption :=
+         'PROFISSIONAL: ' + dbl_cmb_Profissional.Text ;
+
+         Relatorios.prc_agendamento_proifissional(StrToDate(dbe_data_inicio.Text), StrToDate(dbe_data_final.Text), dbl_cmb_Profissional.KeyValue);
+
+         form_relatorio_agendamento_profissional.ds_padrao.DataSet := Relatorios.qry_agendamento_profissional;
+         form_relatorio_agendamento_profissional.Tlbl_total.Caption := IntToStr( Relatorios.qry_agendamento_profissional.RecordCount );
+
+         form_relatorio_agendamento_profissional.rlr_agendamentos_profissional.Preview;
+
+       finally
+         form_relatorio_agendamento_profissional.Destroy;
+       end;
+
+
+     end;
+
  end;
 
 end;
