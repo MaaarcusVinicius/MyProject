@@ -99,6 +99,7 @@ begin
           form_agendamento.edt_pesquisaCliente.Text   := FieldByName('ds_cliente').AsString;
           form_agendamento.medt_telefone.Text         := FieldByName('nr_telefone').AsString;
           form_agendamento.medt_celular.Text          := FieldByName('nr_telefone2').AsString;
+          form_agendamento.dblkcbb_selecionePorfissional.KeyValue := form_agendamento.dblkcbb_selecionePorfissional.KeyValue;
         end
       else
       if form_relatorios <> nil then
@@ -112,8 +113,6 @@ begin
     end;
   end;
 
-  form_agendamento.dblkcbb_selecionePorfissional.KeyValue := form_agendamento.dblkcbb_selecionePorfissional.KeyValue;
-
 end;
 
 procedure Tform_cliente_consulta.dbgrd_consultaClientesDblClick(
@@ -121,6 +120,7 @@ procedure Tform_cliente_consulta.dbgrd_consultaClientesDblClick(
 begin
 
  if ( not ( dbgrd_consultaClientes.DataSource.DataSet.IsEmpty ) ) then
+
    begin
 
      Clientes.id_cliente := dbgrd_consultaClientes.DataSource.DataSet.FieldByName('id_cliente').AsInteger;
@@ -165,29 +165,18 @@ end;
 
 procedure Tform_cliente_consulta.dbgrd_consultaClientesEnter(Sender: TObject);
 begin
-
-   if dbgrd_consultaClientes.DataSource.DataSet.IsEmpty then
-        exit;
-   {
-     Existe um erro ao acessar o dbgrid, neste momento ele ainda não existe
-     com isto há um erro de acessviolation, tem que corrigir.
-
-     Ex: Utilizar o --> Assigned <-- para verificar se no momento ele esta
-         Criado, caso esteja da um Exit, caso não esteja da um Create   na
-         consulta.
-   }
-   if  edt_nomeCliente.text = '' then
-     begin
-
-        ShowMessage('Será necessário preencher pelo menos uma letra.');
-         edt_nomeCliente.SetFocus;
-         exit;
-     end else
-      begin
-
-        ShowMessage('Já esta preenchido.');
-
-      end;
+ if dbgrd_consultaClientes.Enabled = False then
+ begin
+   abort;
+ end;
+  // Verifica se DataSource e DataSet estão atribuídos
+  if Assigned(dbgrd_consultaClientes.DataSource) and
+     Assigned(dbgrd_consultaClientes.DataSource.DataSet) and
+     dbgrd_consultaClientes.DataSource.DataSet.IsEmpty then
+  begin
+    ShowMessage('Não existem dados para serem selecionados!');
+    Abort;
+  end;
 end;
 
 procedure Tform_cliente_consulta.dbgrd_consultaClientesKeyDown(Sender: TObject;
@@ -211,6 +200,7 @@ begin
   if Key = VK_RETURN then
   begin
     ds_consultaClientes.DataSet := clientes.fnc_cosnulta( edt_nomeCliente.Text) ;
+    dbgrd_consultaClientes.Enabled := True;
   end;
 
 end;

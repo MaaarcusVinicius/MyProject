@@ -25,7 +25,6 @@ object form_relatorios: Tform_relatorios
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 8
     object lbl_logoTipo: TLabel
       Left = 40
       Top = 7
@@ -458,7 +457,6 @@ object form_relatorios: Tform_relatorios
       TodayColor = clBlack
     end
     object edt_pesquisaCliente: TEdit
-      Tag = 5
       Left = 106
       Top = 337
       Width = 405
@@ -475,12 +473,10 @@ object form_relatorios: Tform_relatorios
       TabOrder = 7
     end
     object dbl_cmb_Profissional: TDBLookupComboBox
-      Tag = 5
       Left = 67
       Top = 242
       Width = 444
       Height = 31
-      Hint = 'Falta informar o Profissional'
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

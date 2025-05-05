@@ -292,6 +292,7 @@ object form_cliente_consulta: Tform_cliente_consulta
       Width = 638
       Height = 401
       DataSource = ds_consultaClientes
+      Enabled = False
       FixedColor = clMenuHighlight
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clDodgerblue
