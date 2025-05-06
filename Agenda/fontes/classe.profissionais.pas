@@ -103,11 +103,11 @@ begin
       end else
       begin    // Update na Tabela
 
-        QryInserir.SQL.Add('UPADTE profissionais SET ');
+        QryInserir.SQL.Add('UPDATE profissionais SET ');
         QryInserir.SQL.Add(' ds_profissional  = :p_ds_profissional, ');
         QryInserir.SQL.Add(' ds_especialidade = :p_ds_especialidade, ');
         QryInserir.SQL.Add(' nr_contato       = :p_nr_contato ');
-        QryInserir.SQL.Add(' WHERE id_profissional = p_id_profissional ');
+        QryInserir.SQL.Add(' WHERE id_profissional = :p_id_profissional ');
 
         QryInserir.ParamByName('p_id_profissional').AsInteger := FId_Profissional;
 

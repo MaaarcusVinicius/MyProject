@@ -25,6 +25,8 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     ShowCaption = False
     ShowHint = True
     TabOrder = 0
+    ExplicitLeft = 8
+    ExplicitTop = 8
     object lbl_nomeUsuario: TLabel
       Left = 19
       Top = 74
@@ -228,6 +230,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Visible = False
     end
     object lbl_grupoUsuario: TLabel
       Left = 63
@@ -243,6 +246,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Font.Style = []
       ParentColor = False
       ParentFont = False
+      Visible = False
     end
     object lbl_nomeLogin: TLabel
       Left = 264
@@ -353,6 +357,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
       Width = 413
       Height = 23
       TabOrder = 9
+      Visible = False
     end
     object pnl_botoes: TPanel
       Left = 110
