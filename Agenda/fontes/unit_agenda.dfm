@@ -456,7 +456,7 @@ object form_agenda: Tform_agenda
       Left = 16
       Top = 94
       Width = 481
-      Height = 27
+      Height = 23
       TabOrder = 3
       OnKeyPress = edt_consultaClienteKeyPress
     end
