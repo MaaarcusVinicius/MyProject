@@ -636,6 +636,7 @@ object form_cliente_cadastro: Tform_cliente_cadastro
     end
   end
   object Acbrntrtb: TACBrEnterTab
+    EnterAsTab = True
     Left = 72
     Top = 184
   end

@@ -63,6 +63,8 @@ procedure Tform_agenda.btn_consultaProfissionaisClick(Sender: TObject);
 var
   qryHorarios : TFDQuery;
 begin
+    ds_consulta_agenda.Enabled := False;
+    ds_consulta_agenda.Enabled := True;
 
    if clndrpckr_calendario.IsEmpty then
      begin
@@ -88,8 +90,8 @@ begin
        Abort;
      end;
 
-    {ds_consulta_agenda.DataSet := Agendamento.fnc_consulta(dblkcbb_consultaPorfissional.KeyValue,
-                                                           clndrpckr_calendario.Date ); }
+    ds_consulta_agenda.DataSet := Agendamento.fnc_consulta(dblkcbb_consultaPorfissional.KeyValue,
+                                                           clndrpckr_calendario.Date );
 
    cds_agenda.EmptyDataSet;
 
@@ -123,12 +125,13 @@ begin
      end;
 
    finally
-     qryHorarios.Destroy;
+    // qryHorarios.Free;
    end;
 
    cds_agenda.First;
 
    ds_consulta_agenda.DataSet := cds_agenda;
+
 end;
 
 procedure Tform_agenda.btn_consultaClienteClick(Sender: TObject);
@@ -163,8 +166,11 @@ procedure Tform_agenda.dbgrd_consulta_agendaKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   if key = VK_DELETE then
+  begin
     Agendamento.prc_deleta_agendamento( dbgrd_consulta_agenda.DataSource.DataSet.FieldByName('id_Agendamento').AsInteger );
     ds_consulta_agenda.DataSet := nil;
+  end ;
+
 end;
 
 procedure Tform_agenda.edt_consultaClienteKeyPress(Sender: TObject;

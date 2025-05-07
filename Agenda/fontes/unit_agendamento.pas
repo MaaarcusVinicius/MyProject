@@ -127,7 +127,7 @@ begin
 
 
 
-
+    dataSource_profissionais.DataSet := form_dados.GetProfissional().fnc_consulta('');
 
 
 end;

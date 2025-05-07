@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.pngimage, Vcl.Buttons, unit_configurarServidor, unit_agenda;
+  Vcl.Imaging.pngimage, Vcl.Buttons, unit_configurarServidor, unit_agenda, unit_usuario_cadastro, unit_profissionais;
 
 type
   Tform_Principal = class(TForm)
@@ -17,7 +17,7 @@ type
     pnl_linhaBootom: TPanel;
     img_logoCentral: TImage;
     pnl_user: TPanel;
-    btn_user: TSpeedButton;
+    btn_usuarios: TSpeedButton;
     pnl_relatorio: TPanel;
     btn_relatorios: TSpeedButton;
     pnl_configuracao: TPanel;
@@ -33,14 +33,20 @@ type
     pnl_botoesForm: TPanel;
     btn_close: TSpeedButton;
     btn_minimizar: TSpeedButton;
+    pnl_cadastroCcliente: TPanel;
+    btn_consultaCliente: TSpeedButton;
+    pnl_cadastroProfissional: TPanel;
+    btn_cadastroProfissional: TSpeedButton;
     procedure FormResize(Sender: TObject);
     procedure btn_closeClick(Sender: TObject);
     procedure btn_minimizarClick(Sender: TObject);
     procedure btn_1Click(Sender: TObject);
     procedure btn_agendamentoClick(Sender: TObject);
-    procedure btn_userClick(Sender: TObject);
+    procedure btn_usuariosClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btn_relatoriosClick(Sender: TObject);
+    procedure btn_consultaClienteClick(Sender: TObject);
+    procedure btn_cadastroProfissionalClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -55,7 +61,7 @@ implementation
 
 {$R *.dfm}
 
-uses unit_funcoes, unit_agendamento, unit_usuario_consulta, unit_relatorios;
+uses unit_funcoes, unit_agendamento, unit_usuario_consulta, unit_relatorios, unit_cliente_cadastro, unit_cliente_consulta;
 
 
 procedure Tform_Principal.btn_1Click(Sender: TObject);
@@ -86,6 +92,26 @@ begin
   end;
 end;
 
+procedure Tform_Principal.btn_consultaClienteClick(Sender: TObject);
+begin
+  try
+    form_cliente_consulta := Tform_cliente_consulta.Create( Self );
+    form_cliente_consulta.ShowModal;
+  finally
+    form_cliente_consulta.Free;
+  end;
+end;
+
+procedure Tform_Principal.btn_cadastroProfissionalClick(Sender: TObject);
+begin
+  try
+    form_profissionais := Tform_profissionais.Create( Self );
+    form_profissionais.ShowModal;
+  finally
+    form_profissionais.Free;
+  end;
+end;
+
 procedure Tform_Principal.btn_closeClick(Sender: TObject);
 begin
   Application.Terminate;
@@ -106,7 +132,7 @@ begin
   end;
 end;
 
-procedure Tform_Principal.btn_userClick(Sender: TObject);
+procedure Tform_Principal.btn_usuariosClick(Sender: TObject);
 begin
   try
     form_usuario_consulta := Tform_usuario_consulta.Create( Self );

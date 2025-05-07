@@ -72,8 +72,12 @@ procedure Tform_login.spb_confirmaLoginClick(Sender: TObject);
 begin
   unit_funcoes.prcValidarCamposObrigatorios( form_login );
 
-  if ( edt_userName.Text = 'ADM' ) AND ( edt_userSenha.text = 'ADM' ) OR
-     ( form_dados.Usuarios.fnc_valida_login( edt_userName.Text, MD5( edt_userSenha.text ) ) )then
+  if ( edt_userName.Text = 'ADM' ) AND ( edt_userSenha.text = 'ADM' ) then
+  begin
+     var_gbl_nome_usuario := 'Administrador';
+     Close;
+  end else
+   if  ( form_dados.Usuarios.fnc_valida_login( edt_userName.Text, MD5( edt_userSenha.text ) ) )then
      Close;
 end;
 

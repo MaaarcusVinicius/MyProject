@@ -2,7 +2,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  ClientHeight = 403
+  ClientHeight = 358
   ClientWidth = 495
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -16,7 +16,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     Left = 0
     Top = 0
     Width = 495
-    Height = 403
+    Height = 358
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -25,8 +25,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     ShowCaption = False
     ShowHint = True
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 8
+    ExplicitHeight = 403
     object lbl_nomeUsuario: TLabel
       Left = 19
       Top = 74
@@ -98,7 +97,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     end
     object lbl_1: TLabel
       Left = 19
-      Top = 251
+      Top = 148
       Width = 54
       Height = 21
       Caption = 'Senha *'
@@ -113,7 +112,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     end
     object lbl_senha2: TLabel
       Left = 264
-      Top = 251
+      Top = 148
       Width = 123
       Height = 21
       Caption = 'Confirme Senha *'
@@ -128,7 +127,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     end
     object btn_consultaProfissionais: TSpeedButton
       Left = 17
-      Top = 172
+      Top = 242
       Width = 40
       Height = 35
       Glyph.Data = {
@@ -234,7 +233,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     end
     object lbl_grupoUsuario: TLabel
       Left = 63
-      Top = 160
+      Top = 230
       Width = 269
       Height = 21
       Caption = 'Grupo de Usu'#225'rio / N'#237'vel de Permiss'#227'o'
@@ -250,7 +249,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     end
     object lbl_nomeLogin: TLabel
       Left = 264
-      Top = 74
+      Top = 79
       Width = 50
       Height = 21
       Caption = 'Login *'
@@ -322,7 +321,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     object edt_senha: TEdit
       Tag = 5
       Left = 19
-      Top = 272
+      Top = 169
       Width = 214
       Height = 23
       Hint = 'Insira o nome do Usu'#225'rio'
@@ -333,7 +332,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     object edt_senhaConfirma: TEdit
       Tag = 5
       Left = 264
-      Top = 272
+      Top = 169
       Width = 212
       Height = 23
       Hint = 'Confirme sua senha'
@@ -344,7 +343,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     object edt_nomeLogin: TEdit
       Tag = 5
       Left = 264
-      Top = 96
+      Top = 101
       Width = 212
       Height = 23
       Hint = 'Insira o Login'
@@ -353,7 +352,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     end
     object dbl_cmb_grupoUsuario: TDBLookupComboBox
       Left = 63
-      Top = 184
+      Top = 254
       Width = 413
       Height = 23
       TabOrder = 9
@@ -361,7 +360,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
     end
     object pnl_botoes: TPanel
       Left = 110
-      Top = 343
+      Top = 295
       Width = 275
       Height = 41
       BevelOuter = bvNone
@@ -429,7 +428,7 @@ object form_usuario_cadastro: Tform_usuario_cadastro
   end
   object acbrntrtb_usuario: TACBrEnterTab
     EnterAsTab = True
-    Left = 424
-    Top = 352
+    Left = 416
+    Top = 304
   end
 end
