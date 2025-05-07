@@ -3,8 +3,8 @@ object DM: TDM
   Width = 640
   object conexao: TOraSession
     Options.Direct = True
-    Username = 'admin'
-    Server = '192.168.1.194'
+    Username = 'ADMIN'
+    Server = '192.168.0.206'
     Connected = True
     LoginPrompt = False
     Left = 24
@@ -28,7 +28,6 @@ object DM: TDM
       '       END_OBSERVACOES,'
       '       DT_CADASTRO'
       '  FROM CADASTROS_CLIENTES')
-    Active = True
     Left = 124
     Top = 400
     object Tqry_CadClientesATIVO: TStringField
