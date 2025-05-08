@@ -86,6 +86,7 @@ object form_agendamento_consulta: Tform_agendamento_consulta
       ListSource = form_agendamento.dataSource_profissionais
       ParentFont = False
       TabOrder = 1
+      OnClick = dblkcbb_selecionePorfissionalClick
     end
   end
   object pnl_central: TPanel

@@ -98,10 +98,9 @@ begin
                                ExtractFilePath(Application.ExeName ) + '\icones\HumanoConfirma.png',
                               'OK')  ;
 
-          form_Principal.pnl_lateralLefth.Enabled := True;
-
           form_agendamento.Close;
-       end else
+       end
+     else
        begin
        //Mostrar a mensagem para o usuario que ocorreu um erro ao gravar os dados no Banco Dados.
 
@@ -125,15 +124,24 @@ begin
 
     end;
 
-
-
     dataSource_profissionais.DataSet := form_dados.GetProfissional().fnc_consulta('');
-
 
 end;
 
 procedure Tform_agendamento.btn_diaHorarioClick(Sender: TObject);
 begin
+
+ if ( dblkcbb_selecionePorfissional.KeyValue = null ) then
+    begin
+       fnc_criar_menssagem('VALIDADOS DADOS',
+                     'Dados Obrigatórios não Preenchidos',
+                     'PRIMEIRAMENTE SELECIONE UM PROFISSIONAL!',
+                     ExtractFilePath(Application.ExeName ) + '\icones\HumanoAviso.png',
+                     'OK')  ;
+      dblkcbb_selecionePorfissional.SetFocus;
+      Abort;
+
+    end;
 
   try
 
@@ -191,10 +199,10 @@ procedure Tform_agendamento.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
 
-   form_Principal.pnl_lateralLefth.Enabled  := True;
+{   form_Principal.pnl_lateralLefth.Enabled  := True;
 
   // form_dados.GetProfissional().Destroy;
-   Action := caFree;
+   Action := caFree;  }
 
 end;
 
