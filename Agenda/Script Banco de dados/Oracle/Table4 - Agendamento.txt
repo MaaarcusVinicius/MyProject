@@ -1,0 +1,20 @@
+CREATE TABLE agendamento (
+  id_agendamento        NUMBER(11)      NOT NULL,
+  cli_id_cliente        NUMBER(11)      NOT NULL,
+  pro_id_profissional   NUMBER(11)      NOT NULL,
+  usu_id_usuarios       NUMBER(11)      NOT NULL,
+  dt_data               DATE,
+  hr_hora               CHAR(5),
+  ds_obs                VARCHAR2(255),
+  CONSTRAINT pk_agendamento PRIMARY KEY (id_agendamento),
+  CONSTRAINT fk_agendamento_clientes FOREIGN KEY (cli_id_cliente)
+    REFERENCES clientes(id_cliente),
+  CONSTRAINT fk_agendamento_profissionais FOREIGN KEY (pro_id_profissional)
+    REFERENCES profissionais(id_profissional),
+  CONSTRAINT fk_agendamento_usuarios FOREIGN KEY (usu_id_usuarios)
+    REFERENCES usuarios(id_usuarios)
+);
+
+CREATE INDEX idx_agendamento_cli ON agendamento(cli_id_cliente);
+CREATE INDEX idx_agendamento_pro ON agendamento(pro_id_profissional);
+CREATE INDEX idx_agendamento_usu ON agendamento(usu_id_usuarios);

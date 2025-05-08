@@ -1,0 +1,17 @@
+CREATE TABLE clientes (
+  id_cliente NUMBER(11) NOT NULL,
+  ds_cliente varchar2(100) DEFAULT NULL,
+  dt_nascimento date DEFAULT NULL,
+  nr_cpf varchar2(50) DEFAULT NULL,
+  nr_rg varchar2(45) DEFAULT NULL,
+  nr_cep varchar2(50) DEFAULT NULL,
+  ds_endereco varchar2(100) DEFAULT NULL,
+  nr_numero varchar2(10) DEFAULT NULL,
+  ds_complemento varchar2(45) DEFAULT NULL,
+  ds_bairro varchar2(60) DEFAULT NULL,
+  ds_cidade varchar2(70) DEFAULT NULL,
+  ds_uf char(2) DEFAULT NULL,
+  nr_telefone varchar2(20) DEFAULT NULL,
+  nr_telefone2 varchar2(50) DEFAULT NULL,
+  ds_obs varchar(255) DEFAULT NULL,
+  PRIMARY KEY (id_cliente)) 

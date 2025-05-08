@@ -30,6 +30,7 @@ type
     procedure clndrpckr_calendarioChange(Sender: TObject);
     procedure btn_confirmaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure dblkcbb_selecionePorfissionalClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -122,11 +123,36 @@ begin
 
        clndrpckr_calendario.IsEmpty := True;
 
-       dblkcbb_selecionePorfissional.SetFocus;
+      dblkcbb_selecionePorfissional.SetFocus;
+      Abort;
 
-       Abort;
+    end
+  else
+    begin
 
-    end else
+       ds_consulta.DataSet := form_agenda.Agendamento.fnc_consulta(
+       dblkcbb_selecionePorfissional.KeyValue, clndrpckr_calendario.Date);
+
+    end;
+end;
+
+procedure Tform_agendamento_consulta.dblkcbb_selecionePorfissionalClick(
+  Sender: TObject);
+begin
+
+
+  if ( dblkcbb_selecionePorfissional.KeyValue = null ) then
+    begin
+       fnc_criar_menssagem('VALIDADOS DADOS',
+                     'Dados Obrigatórios não Preenchidos',
+                     'PRIMEIRAMENTE SELECIONE UM PROFISSIONAL!',
+                     ExtractFilePath(Application.ExeName ) + '\icones\HumanoAviso.png',
+                     'OK')  ;
+      dblkcbb_selecionePorfissional.SetFocus;
+      Abort;
+
+    end
+  else
     begin
 
        ds_consulta.DataSet := form_agenda.Agendamento.fnc_consulta(

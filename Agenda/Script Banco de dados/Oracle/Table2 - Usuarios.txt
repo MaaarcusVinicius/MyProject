@@ -1,0 +1,8 @@
+CREATE TABLE usuarios (
+  id_usuarios NUMBER(11) NOT NULL,
+  ds_usuario varchar2(45) DEFAULT NULL,
+  ds_login varchar2(45) DEFAULT NULL,
+  ds_senha varchar2(255) DEFAULT NULL,
+  cd_permissao CHAR(4) DEFAULT NULL,
+  PRIMARY KEY (id_usuarios)
+) 

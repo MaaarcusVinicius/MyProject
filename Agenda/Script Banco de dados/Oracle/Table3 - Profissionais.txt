@@ -1,0 +1,7 @@
+CREATE TABLE profissionais (
+  id_profissional NUMBER(11) NOT NULL,
+  ds_profissional varchar2(100) DEFAULT NULL,
+  ds_especialidade varchar2(45) DEFAULT NULL,
+  nr_contato varchar2(12) DEFAULT NULL,
+  PRIMARY KEY (id_profissional)
+)

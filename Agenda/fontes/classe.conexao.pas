@@ -66,12 +66,12 @@ begin
     Exit;
   end;
 
-  FConexao.Params.Add('Server=' + FServidor);
+  FConexao.Params.Add('Server='    + FServidor);
   FConexao.Params.Add('user_name=' + FLogin);
-  FConexao.Params.Add('password=' + FSenha);
-  FConexao.Params.Add('porta=' + FPorta);
-  FConexao.Params.Add('Database=' + FBase);
-  FConexao.Params.Add('DriverID=' + 'MySQL');
+  FConexao.Params.Add('password='  + FSenha);
+  FConexao.Params.Add('porta='     + FPorta);
+  FConexao.Params.Add('Database='  + FBase);
+  FConexao.Params.Add('DriverID='  + 'MySQL');
 
   try
    // FConexao.ConnectionString := 'conection string do arquivo';
