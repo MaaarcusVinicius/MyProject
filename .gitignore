@@ -79,3 +79,32 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+desktop.ini
+conexao_banco/Project1.dpr
+conexao_banco/Project1.dproj
+conexao_banco/Project1.res
+conexao_banco/Unit1.dfm
+conexao_banco/Unit1.pas
+OracleConnectionTest/adrci.sym
+OracleConnectionTest/BASIC_LICENSE
+OracleConnectionTest/BASIC_README
+OracleConnectionTest/genezi.sym
+OracleConnectionTest/main.dfm
+OracleConnectionTest/main.pas
+OracleConnectionTest/oci.sym
+OracleConnectionTest/ocijdbc19.sym
+OracleConnectionTest/ociw32.sym
+OracleConnectionTest/ojdbc8.jar
+OracleConnectionTest/OracleConnectionTest.dpr
+OracleConnectionTest/OracleConnectionTest.dproj
+OracleConnectionTest/OracleConnectionTest.res
+OracleConnectionTest/oramysql19.sym
+OracleConnectionTest/orannzsbb19.sym
+OracleConnectionTest/oraocci19.sym
+OracleConnectionTest/oraocci19d.sym
+OracleConnectionTest/oraociei19.sym
+OracleConnectionTest/orasql19.sym
+OracleConnectionTest/tnsnames.ora
+OracleConnectionTest/ucp.jar
+OracleConnectionTest/uidrvci.sym
+OracleConnectionTest/xstreams.jar
