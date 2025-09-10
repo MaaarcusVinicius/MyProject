@@ -7,7 +7,9 @@ uses
   uDataModule in 'uDataModule.pas' {DmModule: TDataModule},
   VarGlobal in 'C:\Sistemas\Repositorio\VarGlobal.pas',
   unit_login in 'unit_login.pas' {form_login},
-  unit_principalDados in 'unit_principalDados.pas' {form_principalDados};
+  unit_principalDados in 'unit_principalDados.pas' {form_principalDados},
+  unit_funcoes in 'unit_funcoes.pas',
+  unit_mensagens in 'unit_mensagens.pas' {form_menssagens};
 
 {$R *.res}
 
@@ -23,7 +25,8 @@ begin
 
     end;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-     // Ativando o Tpanel com imagem opaca, significa que esta com o banco desconectado
+  Application.CreateForm(Tform_menssagens, form_menssagens);
+  // Ativando o Tpanel com imagem opaca, significa que esta com o banco desconectado
      Principal.frmPrincipal.pnl_fundo_opacidade.Visible := true;
      Principal.frmPrincipal.pnl_fundo_normal.Visible := false;
 

@@ -145,6 +145,11 @@
             <Form>form_principalDados</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="unit_funcoes.pas"/>
+        <DCCReference Include="unit_mensagens.pas">
+            <Form>form_menssagens</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

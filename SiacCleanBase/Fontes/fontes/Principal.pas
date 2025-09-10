@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
   Vcl.ComCtrls, Data.DB, DBAccess, Ora, Vcl.Grids, Vcl.DBGrids, MemDS,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, DAScript, OraScript;
 
 type
   TfrmPrincipal = class(TForm)
@@ -36,10 +36,17 @@ type
     pnl_fundo_normal: TPanel;
     img_fundo_opacidade: TImage;
     qryEmpresasQTD_ESTOQUE_EMPRESA: TFloatField;
+    OraScriptDeletandoEmpresa: TOraScript;
+    ds_deletandoEmpresa: TOraDataSource;
+    qry_deletandoEmpresas: TOraQuery;
+    dbGrid_QryEmpresas: TDBGrid;
+    field_deletandoEmpresasSCRIPT: TStringField;
     procedure BtConectarClick(Sender: TObject);
     procedure BtDesconectarClick(Sender: TObject);
     procedure CtrlBotoes(Modo : Boolean);
-    procedure FormCreate(Sender: TObject);
+    procedure dbEmpresasDblClick(Sender: TObject);
+    procedure dbEmpresasKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -62,9 +69,15 @@ begin
   begin
     CtrlBotoes(True);
     qryEmpresas.Open;
+    qry_deletandoEmpresas.Open;
 
     pnl_fundo_normal.Visible := true;
     pnl_fundo_opacidade.Visible:= false;
+
+
+
+    OraScriptDeletandoEmpresa.SQL.Text := qry_deletandoEmpresas.SQL.Text;
+//    OraScriptDeletandoEmpresa.Execute;
 
   end else
   begin
@@ -93,23 +106,55 @@ begin
   eServidor.Enabled := not(Modo);
 
   if Modo then
-    Shape1.Brush.Color := clTeal //$4040ff
+    Shape1.Brush.Color := clTeal
 
   else
-    Shape1.Brush.Color := clSilver;  //  $00A5927E
+    Shape1.Brush.Color := clSilver;
 
   if Modo then
-     Shape2.Brush.Color := clTeal //$4040ff
+     Shape2.Brush.Color := clTeal
   else
      Shape2.Brush.Color := clSilver;
 
 
 end;
 
-procedure TfrmPrincipal.FormCreate(Sender: TObject);
+procedure TfrmPrincipal.dbEmpresasDblClick(Sender: TObject);
+var
+  vEmpresa_id: String;
 begin
- // BorderStyle := bsSingle; // mantém a barra de título
- //  SetBounds(0, 0, Screen.Width, Screen.Height); // ocupa a tela inteira
+  vEmpresa_id := qryEmpresas.FieldByName('EMPRESA_ID').AsString;
+
+  // <-- IMPORTANTE: setar o parâmetro ANTES de abrir a query geradora
+  qry_deletandoEmpresas.Close;
+  qry_deletandoEmpresas.ParamByName('pEMPRESA_ID').AsString := '''' + vEmpresa_id + '''';
+  qry_deletandoEmpresas.Open;
+
+  OraScriptDeletandoEmpresa.SQL.Clear;
+  qry_deletandoEmpresas.First;
+  while not qry_deletandoEmpresas.Eof do
+  begin
+    OraScriptDeletandoEmpresa.SQL.Add(qry_deletandoEmpresas.FieldByName('SCRIPT').AsString);
+    qry_deletandoEmpresas.Next;
+  end;
+
+  // debug rápido: ver o que foi gerado
+  ShowMessage('Scripts gerados:' + sLineBreak + OraScriptDeletandoEmpresa.SQL.Text);
+
+  // executar
+  //OraScriptDeletandoEmpresa.Execute;
+end;
+
+
+
+procedure TfrmPrincipal.dbEmpresasKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if key = VK_DELETE then
+   OraScriptDeletandoEmpresa.Execute;
+
+   qryEmpresas.Close;
+   qryEmpresas.Open;
 end;
 
 end.

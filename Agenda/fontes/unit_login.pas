@@ -66,6 +66,9 @@ procedure Tform_login.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if key = Vk_Return then
     Perform(40,0,0);
+
+  if Key = VK_ESCAPE then
+  Application.Terminate;
 end;
 
 procedure Tform_login.spb_confirmaLoginClick(Sender: TObject);

@@ -5,7 +5,7 @@ object frmPrincipal: TfrmPrincipal
   Align = alCustom
   Caption = 'Siac Clean Base'
   ClientHeight = 801
-  ClientWidth = 1096
+  ClientWidth = 1216
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,12 +13,11 @@ object frmPrincipal: TfrmPrincipal
   Font.Name = 'Segoe UI'
   Font.Style = []
   WindowState = wsMaximized
-  OnCreate = FormCreate
   TextHeight = 15
   object Shape2: TShape
     Left = 0
     Top = 0
-    Width = 1096
+    Width = 1216
     Height = 50
     Align = alTop
     Brush.Color = clSilver
@@ -72,7 +71,7 @@ object frmPrincipal: TfrmPrincipal
   object Shape1: TShape
     Left = 0
     Top = 776
-    Width = 1096
+    Width = 1216
     Height = 25
     Align = alBottom
     Brush.Color = clSilver
@@ -134,12 +133,12 @@ object frmPrincipal: TfrmPrincipal
     AutoSize = False
     CharCase = ecUpperCase
     TabOrder = 4
-    Text = 'ADMIN'
+    Text = 'ADMIN_IND'
   end
   object pnl_logoFundo: TPanel
     Left = 0
     Top = 50
-    Width = 1096
+    Width = 1216
     Height = 726
     Align = alClient
     Anchors = []
@@ -147,19 +146,22 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 5
+    ExplicitWidth = 1096
     object pnl_fundo_opacidade: TPanel
       Left = 1
-      Top = 1
-      Width = 1094
+      Top = 152
+      Width = 1214
       Height = 573
       Align = alClient
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitTop = 1
+      ExplicitWidth = 1094
       object img_fundo_opacidade: TImage
         Left = 1
         Top = 1
-        Width = 1092
+        Width = 1212
         Height = 571
         Align = alClient
         Picture.Data = {
@@ -9083,17 +9085,19 @@ object frmPrincipal: TfrmPrincipal
     end
     object pnl_fundo_normal: TPanel
       Left = 1
-      Top = 1
-      Width = 1094
+      Top = 152
+      Width = 1214
       Height = 573
       Align = alClient
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 1
+      ExplicitWidth = 1094
       object img_fundo: TImage
         Left = 1
         Top = 1
-        Width = 1092
+        Width = 671
         Height = 571
         Align = alClient
         Anchors = [akLeft, akBottom]
@@ -23121,17 +23125,37 @@ object frmPrincipal: TfrmPrincipal
         ExplicitWidth = 2200
         ExplicitHeight = 2668
       end
+      object dbGrid_QryEmpresas: TDBGrid
+        Left = 672
+        Top = 1
+        Width = 541
+        Height = 571
+        Align = alRight
+        DataSource = ds_deletandoEmpresa
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'SCRIPT'
+            Visible = True
+          end>
+      end
     end
     object dbEmpresas: TDBGrid
       Left = 1
-      Top = 574
-      Width = 1094
+      Top = 1
+      Width = 1214
       Height = 151
       Margins.Left = 4
       Margins.Top = 10
       Margins.Right = 5
       Margins.Bottom = 8
-      Align = alBottom
+      Align = alTop
       BiDiMode = bdLeftToRight
       BorderStyle = bsNone
       Color = clWhite
@@ -23152,6 +23176,8 @@ object frmPrincipal: TfrmPrincipal
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = [fsBold]
+      OnDblClick = dbEmpresasDblClick
+      OnKeyDown = dbEmpresasKeyDown
       Columns = <
         item
           Expanded = False
@@ -23289,5 +23315,49 @@ object frmPrincipal: TfrmPrincipal
     DataSet = qryEmpresas
     Left = 696
     Top = 112
+  end
+  object OraScriptDeletandoEmpresa: TOraScript
+    SQL.Strings = (
+      '')
+    Left = 984
+    Top = 120
+  end
+  object ds_deletandoEmpresa: TOraDataSource
+    DataSet = qry_deletandoEmpresas
+    Left = 920
+    Top = 112
+  end
+  object qry_deletandoEmpresas: TOraQuery
+    Session = DmModule.orsConexao
+    SQL.Strings = (
+      
+        'SELECT '#39'DELETE FROM '#39' || C.TABLE_NAME || '#39' WHERE '#39' || C.COLUMN_N' +
+        'AME ||'#39' = '#39' || :pEMPRESA_ID || '#39';'#39' AS SCRIPT'
+      '  FROM COLS C, USER_TABLES T'
+      ' WHERE C.TABLE_NAME = T.TABLE_NAME'
+      '   AND (C.COLUMN_NAME IN ('#39'EMPRESA_ID'#39', '#39'SIAC_EMPRESA_ID'#39'))'
+      '   AND C.TABLE_NAME NOT IN ('#39'CADASTROS'#39', '#39'EMPRESAS'#39')'
+      ''
+      'UNION ALL'
+      ''
+      
+        'SELECT '#39'DELETE FROM '#39' || C.TABLE_NAME || '#39' WHERE '#39' || C.COLUMN_N' +
+        'AME || '#39' = '#39' || :pEMPRESA_ID || '#39';'#39' AS SCRIPT'
+      '  FROM COLS C, USER_TABLES T'
+      ' WHERE C.TABLE_NAME = T.TABLE_NAME'
+      '   AND (C.COLUMN_NAME IN ('#39'EMPRESA_ID'#39', '#39'SIAC_EMPRESA_ID'#39'))'
+      '   AND C.TABLE_NAME = '#39'EMPRESAS'#39)
+    Left = 952
+    Top = 80
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'pEMPRESA_ID'
+        Value = nil
+      end>
+    object field_deletandoEmpresasSCRIPT: TStringField
+      FieldName = 'SCRIPT'
+      Size = 310
+    end
   end
 end
