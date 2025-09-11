@@ -23330,16 +23330,30 @@ object frmPrincipal: TfrmPrincipal
   object qry_deletandoEmpresas: TOraQuery
     Session = DmModule.orsConexao
     SQL.Strings = (
+      '/*TODAS AS TABELAS */'
       
         'SELECT '#39'DELETE FROM '#39' || C.TABLE_NAME || '#39' WHERE '#39' || C.COLUMN_N' +
         'AME ||'#39' = '#39' || :pEMPRESA_ID || '#39';'#39' AS SCRIPT'
       '  FROM COLS C, USER_TABLES T'
       ' WHERE C.TABLE_NAME = T.TABLE_NAME'
-      '   AND (C.COLUMN_NAME IN ('#39'EMPRESA_ID'#39', '#39'SIAC_EMPRESA_ID'#39'))'
+      '   AND C.COLUMN_NAME IN ('#39'EMPRESA_ID'#39', '#39'SIAC_EMPRESA_ID'#39')'
       '   AND C.TABLE_NAME NOT IN ('#39'CADASTROS'#39', '#39'EMPRESAS'#39')'
+      '   AND C.TABLE_NAME NOT LIKE '#39'%PARAMETRO%'#39' '
       ''
       'UNION ALL'
+      
+        '/* TABELAS DE PAR'#194'METROS FICAM NA POSI'#199#195'O FINAL DO SCRIPT, ASSUM' +
+        'IR'#193' A ANTEPEN'#218'LTIMA POSI'#199#195'O */'
+      
+        'SELECT '#39'DELETE FROM '#39' || C.TABLE_NAME || '#39' WHERE '#39' || C.COLUMN_N' +
+        'AME || '#39' = '#39' || :pEMPRESA_ID || '#39';'#39' AS SCRIPT'
+      '  FROM COLS C, USER_TABLES T'
+      ' WHERE C.TABLE_NAME = T.TABLE_NAME'
+      '   AND C.COLUMN_NAME IN ('#39'EMPRESA_ID'#39', '#39'SIAC_EMPRESA_ID'#39')'
+      '   AND C.TABLE_NAME LIKE '#39'%PARAMETRO%'#39
       ''
+      'UNION ALL'
+      '/* JOGA A TABELA PRINCIPAL '#39'EMPRESAS'#39' PARA O FIM DA LISTA */'
       
         'SELECT '#39'DELETE FROM '#39' || C.TABLE_NAME || '#39' WHERE '#39' || C.COLUMN_N' +
         'AME || '#39' = '#39' || :pEMPRESA_ID || '#39';'#39' AS SCRIPT'

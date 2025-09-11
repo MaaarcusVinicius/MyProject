@@ -7,17 +7,11 @@ uses unit_mensagens, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mas
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, DAScript, OraScript;
 
   function Criptografia ( Senha, Chave: String ): string;
-
   function fnc_criar_menssagem ( TituloJanela, TituloMSG, MSG, Icone, Tipo : String ): boolean;
-
   procedure prcValidarCamposObrigatorios ( Form: TForm );
-
   function TrocaCaracterEspecial(aTexto : string; aLimExt : boolean = False) : string;
-
   function fnc_sonumeros (AString: string): string;
-
   function fnc_proximo_codigo(Tabela, Campo : string): Integer;
-
   function MD5(const Value:string):string;
 
 var
@@ -27,7 +21,6 @@ var
 implementation
 
 uses
-   //unit_dados,
    uDataModule;
 
      // Função de Criptografia de String
@@ -210,11 +203,12 @@ begin
 
    try
 
-     form_dados.FDConnection.Connected := False;
-     form_dados.FDConnection.Connected := True;
+     QryConsulta.Session := DmModule.orsConexao;
 
-     QryConsulta := TOraQuery.Create() ( nil );
-     QryConsulta.Connection := form_dados.FDConnection;
+    if not DmModule.orsConexao.Connected then
+      DmModule.ConectarBd('usuario', 'senha', 'servidor'); // <- ajuste com seus parâmetros
+
+     QryConsulta := TOraQuery.Create(nil);
 
      QryConsulta.Close;
      QryConsulta.SQL.Clear;
@@ -225,7 +219,7 @@ begin
         Result := QryConsulta.FieldByName('CODIGO').AsInteger + 1;
 
    finally
-//     QryConsulta.Destroy;
+     QryConsulta.Destroy;
    end;
 
 end;

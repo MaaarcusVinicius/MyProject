@@ -69,14 +69,12 @@ begin
   begin
     CtrlBotoes(True);
     qryEmpresas.Open;
-    qry_deletandoEmpresas.Open;
+    //qry_deletandoEmpresas.Open;
 
     pnl_fundo_normal.Visible := true;
     pnl_fundo_opacidade.Visible:= false;
 
-
-
-    OraScriptDeletandoEmpresa.SQL.Text := qry_deletandoEmpresas.SQL.Text;
+ //   OraScriptDeletandoEmpresa.SQL.Text := qry_deletandoEmpresas.SQL.Text;
 //    OraScriptDeletandoEmpresa.Execute;
 
   end else
@@ -139,9 +137,9 @@ begin
   end;
 
   // debug rápido: ver o que foi gerado
-  ShowMessage('Scripts gerados:' + sLineBreak + OraScriptDeletandoEmpresa.SQL.Text);
+  //ShowMessage('Scripts gerados:' + sLineBreak + OraScriptDeletandoEmpresa.SQL.Text);
 
-  // executar
+  // executar logo apos inserir os dados
   //OraScriptDeletandoEmpresa.Execute;
 end;
 

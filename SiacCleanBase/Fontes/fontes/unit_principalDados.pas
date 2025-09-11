@@ -5,13 +5,15 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DAScript, OraScript, Data.DB, DBAccess,
-  Ora, MemDS;
+  Ora, MemDS, Vcl.Grids, Vcl.DBGrids;
 
 type
   Tform_principalDados = class(TForm)
-    OraQuery1: TOraQuery;
-    OraDataSource1: TOraDataSource;
-    OraScript1: TOraScript;
+    ds_deletandoEmpresa: TOraDataSource;
+    qry_deletandoEmpresas: TOraQuery;
+    field_deletandoEmpresasSCRIPT: TStringField;
+    OraScriptDeletandoEmpresa: TOraScript;
+    dbGrid_QryEmpresas: TDBGrid;
   private
     { Private declarations }
   public
