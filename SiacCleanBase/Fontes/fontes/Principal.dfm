@@ -1,8 +1,8 @@
 object frmPrincipal: TfrmPrincipal
-  AlignWithMargins = True
   Left = 0
   Top = 0
-  Align = alCustom
+  BiDiMode = bdRightToLeftReadingOnly
+  BorderStyle = bsSingle
   Caption = 'Siac Clean Base'
   ClientHeight = 801
   ClientWidth = 1216
@@ -12,6 +12,7 @@ object frmPrincipal: TfrmPrincipal
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  ParentBiDiMode = False
   WindowState = wsMaximized
   TextHeight = 15
   object Shape2: TShape
@@ -146,7 +147,6 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 5
-    ExplicitWidth = 1096
     object pnl_fundo_opacidade: TPanel
       Left = 1
       Top = 152
@@ -156,8 +156,6 @@ object frmPrincipal: TfrmPrincipal
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitTop = 1
-      ExplicitWidth = 1094
       object img_fundo_opacidade: TImage
         Left = 1
         Top = 1
@@ -9092,8 +9090,6 @@ object frmPrincipal: TfrmPrincipal
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 1
-      ExplicitWidth = 1094
       object img_fundo: TImage
         Left = 1
         Top = 1
@@ -23259,6 +23255,39 @@ object frmPrincipal: TfrmPrincipal
           Font.Style = [fsBold]
           Visible = True
         end>
+    end
+  end
+  object pnl_editEmpresa: TPanel
+    Left = 752
+    Top = 3
+    Width = 185
+    Height = 41
+    Margins.Left = 7
+    Margins.Top = 7
+    Margins.Right = 7
+    Margins.Bottom = 7
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 6
+    object btn_frmEmpresas: TButton
+      Left = 1
+      Top = 1
+      Width = 183
+      Height = 39
+      Margins.Left = 7
+      Margins.Top = 7
+      Margins.Right = 7
+      Margins.Bottom = 7
+      Align = alClient
+      Caption = 'EDITAR EMPRESA'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btn_frmEmpresasClick
     end
   end
   object qryEmpresas: TOraQuery

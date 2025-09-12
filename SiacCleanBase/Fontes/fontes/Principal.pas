@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
   Vcl.ComCtrls, Data.DB, DBAccess, Ora, Vcl.Grids, Vcl.DBGrids, MemDS,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, DAScript, OraScript;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, DAScript, OraScript, unit_principalDados;
 
 type
   TfrmPrincipal = class(TForm)
@@ -41,12 +41,15 @@ type
     qry_deletandoEmpresas: TOraQuery;
     dbGrid_QryEmpresas: TDBGrid;
     field_deletandoEmpresasSCRIPT: TStringField;
+    pnl_editEmpresa: TPanel;
+    btn_frmEmpresas: TButton;
     procedure BtConectarClick(Sender: TObject);
     procedure BtDesconectarClick(Sender: TObject);
     procedure CtrlBotoes(Modo : Boolean);
     procedure dbEmpresasDblClick(Sender: TObject);
     procedure dbEmpresasKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btn_frmEmpresasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,7 +62,7 @@ var
 implementation
 
 uses
-  uDataModule,_Biblioteca, VarGlobal;
+  uDataModule,_Biblioteca, VarGlobal, unit_mensagens;
 
 {$R *.dfm}
 
@@ -69,6 +72,7 @@ begin
   begin
     CtrlBotoes(True);
     qryEmpresas.Open;
+
     //qry_deletandoEmpresas.Open;
 
     pnl_fundo_normal.Visible := true;
@@ -95,6 +99,28 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.btn_frmEmpresasClick(Sender: TObject);
+begin
+  try
+    form_principalDados := Tform_principalDados.Create(Self);
+
+    // Desabilitando o fundo do sistema principal
+    pnl_fundo_normal.Visible := False;
+
+    // Centralizar em relação ao painel pnl_fundo_normal
+    form_principalDados.Left := pnl_fundo_normal.Left +
+                                (pnl_fundo_normal.Width - form_principalDados.Width) div 2;
+
+    form_principalDados.Top := pnl_fundo_normal.Top +
+                               (pnl_fundo_normal.Height - form_principalDados.Height) div 2;
+
+    form_principalDados.ShowModal;
+
+  finally
+    form_principalDados.Free;
+    pnl_fundo_normal.Visible := True;
+  end;
+end;
 procedure TfrmPrincipal.CtrlBotoes(Modo: Boolean);
 begin
   BtConectar.Enabled := not(Modo);
@@ -103,6 +129,7 @@ begin
   eSenha.Enabled := not(Modo);
   eServidor.Enabled := not(Modo);
 
+  // Alterando a coloração do sistema quando esta conectado ao banco
   if Modo then
     Shape1.Brush.Color := clTeal
 
@@ -114,6 +141,11 @@ begin
   else
      Shape2.Brush.Color := clSilver;
 
+   // Ativando o Botão Editar Empresa
+  if Modo then
+   pnl_editEmpresa.Visible  := True
+  else
+  pnl_editEmpresa.Visible := False;
 
 end;
 

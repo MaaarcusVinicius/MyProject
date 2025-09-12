@@ -150,6 +150,10 @@
             <Form>form_menssagens</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="form_consultaEmpresas.pas">
+            <Form>Form1</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
