@@ -9090,6 +9090,7 @@ object frmPrincipal: TfrmPrincipal
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
+      Visible = False
       object img_fundo: TImage
         Left = 1
         Top = 1

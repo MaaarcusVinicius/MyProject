@@ -9,7 +9,8 @@ uses
   unit_login in 'unit_login.pas' {form_login},
   unit_empresasDados in 'unit_empresasDados.pas' {form_empresaDados},
   unit_mensagens in 'unit_mensagens.pas' {form_menssagens},
-  unit_funcoes in 'unit_funcoes.pas';
+  unit_funcoes in 'unit_funcoes.pas',
+  classe.uScriptGenerator in 'classe.uScriptGenerator.pas';
 
 {$R *.res}
 

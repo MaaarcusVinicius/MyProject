@@ -153,6 +153,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="unit_funcoes.pas"/>
+        <DCCReference Include="classe.uScriptGenerator.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
