@@ -104,6 +104,23 @@ begin
   try
     form_empresaDados := Tform_empresaDados.Create(Self);
 
+
+  // Criando estrutura para dropar trigger's e foreing key's
+  form_empresaDados.qry_DeleteTriggers.ParamByName('vUSER').AsString :=  eUsuario.Text ;
+  //':vUSER'
+
+      form_empresaDados.qry_DeleteTriggers.open;
+      form_empresaDados.OraScriptDeleteTriggers.SQL.Clear;
+      form_empresaDados.qry_DeleteTriggers.First;
+      while not form_empresaDados.qry_DeleteTriggers.Eof do
+      begin
+        form_empresaDados.OraScriptDeleteTriggers.SQL.Add(form_empresaDados.qry_DeleteTriggers.FieldByName('SCRIPT').AsString);
+        form_empresaDados.qry_DeleteTriggers.Next;
+      end;
+
+     ShowMessage('Scripts gerados:' + sLineBreak + form_empresaDados.OraScriptDeleteTriggers.SQL.Text);
+
+
    // Passa o SQL da empresa Selecionada para o form responsavel pela edição da empresa
     vEmpresaID := qryEmpresasEMPRESA_ID.AsString;
 

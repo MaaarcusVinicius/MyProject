@@ -26,7 +26,7 @@ object form_empresaDados: Tform_empresaDados
     object lbl_trocaEmpresa: TLabel
       Left = 200
       Top = 103
-      Width = 162
+      Width = 148
       Height = 23
       Caption = 'Insira o novo CNPJ'
       Font.Charset = DEFAULT_CHARSET
@@ -709,6 +709,7 @@ object form_empresaDados: Tform_empresaDados
       ' GROUP BY C.TABLE_NAME, C.COLUMN_NAME'
       ''
       'UNION ALL'
+      ''
       '/*DEIXANDO OS PARAMETROS DO SISTEMA POR ULTIMO*/'
       
         'SELECT '#39'UPDATE '#39' || C.TABLE_NAME ||'#39' SET '#39' || C.COLUMN_NAME ||'#39' ' +
@@ -724,6 +725,7 @@ object form_empresaDados: Tform_empresaDados
       ' GROUP BY C.TABLE_NAME, C.COLUMN_NAME'
       ''
       'UNION ALL'
+      ''
       '/* DEIXANDO A TABELA PRINCIPAL POR ULTIMO*/'
       
         'SELECT '#39'UPDATE '#39' || C.TABLE_NAME ||'#39' SET '#39' || C.COLUMN_NAME ||'#39' ' +
@@ -829,20 +831,7 @@ object form_empresaDados: Tform_empresaDados
   object qryEmpresas: TOraQuery
     Session = DmModule.orsConexao
     SQL.Strings = (
-      'SELECT EMPRESA_ID, RAZAO_SOCIAL, FANTASIA, E.ATIVO, '
-      '      (SELECT COUNT(*) FROM CADASTROS C) QTD_CADASTROS,'
-      
-        '      (SELECT COUNT (*) FROM FINANCEIRO F WHERE 1=1 AND F.EMPRES' +
-        'A_ID = E.EMPRESA_ID) QTD_FINANCEIRO_EMPRESA,'
-      
-        '      (SELECT COUNT (*) FROM PRODUTOS PR, PRODUTOS_EMPRESAS PE W' +
-        'HERE PR.PRODUTO_ID = PE.PRODUTO_ID AND PE.EMPRESA_ID = E.EMPRESA' +
-        '_ID) QTD_PRODUTOS_EMPRESA,'
-      
-        '      (SELECT NVL(TRUNC(SUM(ESTOQUE_ATUAL),4),0) FROM ESTOQUES E' +
-        'T WHERE 1=1 AND ET.EMPRESA_ID = E.EMPRESA_ID AND ET.ESTOQUE_ATUA' +
-        'L >0) QTD_ESTOQUE_EMPRESA      '
-      'FROM EMPRESAS E where')
+      '/* PREENCHIMENTO EM TEMPO DE EXECU'#199#195'O */')
     Left = 616
     Top = 184
     object qryEmpresasEMPRESA_ID: TStringField
@@ -880,5 +869,46 @@ object form_empresaDados: Tform_empresaDados
     DataSet = qryEmpresas
     Left = 544
     Top = 184
+  end
+  object qry_DeleteTriggers: TOraQuery
+    Session = DmModule.orsConexao
+    SQL.Strings = (
+      'SELECT '#39'ALTER TRIGGER '#39' || OBJECT_NAME || '#39' DISABLE ;'#39' as SCRIPT'
+      '  FROM USER_OBJECTS C  '
+      ' WHERE C.OBJECT_TYPE = '#39'TRIGGER'#39
+      '--   AND C.OBJECT_NAME = '#39'PARAMETROS1_AUD_JN'#39
+      ''
+      'UNION ALL'
+      ''
+      
+        'SELECT '#39'ALTER TABLE '#39'||OWNER ||'#39'.'#39' || CC.TABLE_NAME || '#39'  DISABL' +
+        'E CONSTRAINT '#39' || CONSTRAINT_NAME || '#39';'#39' AS SCRITP'
+      '  FROM DBA_CONSTRAINTS CC'
+      ' WHERE CC.OWNER = :vUSER'
+      '--   AND CC.TABLE_NAME = '#39'ESTOQUES'#39
+      '')
+    Left = 952
+    Top = 272
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'vUSER'
+        Value = nil
+      end>
+    object StringField2: TStringField
+      FieldName = 'SCRIPT'
+      Size = 310
+    end
+  end
+  object OraScriptDeleteTriggers: TOraScript
+    SQL.Strings = (
+      '')
+    Left = 952
+    Top = 232
+  end
+  object ds_DeleteTriggers: TOraDataSource
+    DataSet = qry_DeleteTriggers
+    Left = 952
+    Top = 192
   end
 end

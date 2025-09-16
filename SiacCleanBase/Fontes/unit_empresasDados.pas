@@ -37,6 +37,10 @@ type
     btn_trocandoEmpresas: TSpeedButton;
     medt_cpf_cnpj: TMaskEdit;
     lbl_trocaEmpresa: TLabel;
+    qry_DeleteTriggers: TOraQuery;
+    StringField2: TStringField;
+    OraScriptDeleteTriggers: TOraScript;
+    ds_DeleteTriggers: TOraDataSource;
     procedure btn_deletandoEmpresasClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -59,6 +63,7 @@ procedure Tform_empresaDados.btn_deletandoEmpresasClick(Sender: TObject);
 var
   vEmpresa_id: String;
   vRazaoSocial: string;
+  returnUsuario : Boolean;
   saveScriptOracle: TStringList;
 
 begin
@@ -85,7 +90,7 @@ begin
      if not( OraScriptDeletandoEmpresa.SQL.IsEmpty ) then
 
       begin
-        fnc_criar_menssagem('EXCLUSÃO DE EMPRESA',
+      returnUsuario := fnc_criar_menssagem('EXCLUSÃO DE EMPRESA',
                             'DESEJA REALMENTE EXCLUIR ESTA EMPRESA?' ,
                             'Você selecionou a empresa: ' + vEmpresa_id +' - ' + vRazaoSocial +
                             '. ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
@@ -96,27 +101,31 @@ begin
       exit;
 
   // Comando que executa o Script para deletar a empresa     @@@ TEMPORARIO SUSPESO @@@
-  try
-    OraScriptDeletandoEmpresa.Execute;
-  finally
-     begin
-       fnc_criar_menssagem('EXCLUSÃO DE EMPRESA',
-                           'A EXCLUSÃO DA EMPRESA FOI UM SUCESSO !!' ,
-                           'Você selecionou a empresa: ' + vEmpresa_id +' - ' + vRazaoSocial +
-                           '. AÇÃO É IRREVERSÍVEL!!!',
-                           ExtractFilePath(Application.ExeName ) + 'Arquivos\icones\HumanoConfirma.png',
-                           'OK')  ;
+      if returnUsuario then
+        try
+          OraScriptDeleteTriggers.Execute;
+          OraScriptDeletandoEmpresa.Execute;
+        finally
+         begin
+           fnc_criar_menssagem('EXCLUSÃO DE EMPRESA',
+                               'A EXCLUSÃO DA EMPRESA FOI UM SUCESSO !!!' ,
+                               'Você selecionou a empresa: ' + vEmpresa_id +' - ' + vRazaoSocial +
+                               '. AÇÃO É IRREVERSÍVEL!!!',
+                               ExtractFilePath(Application.ExeName ) + 'Arquivos\icones\HumanoConfirma.png',
+                               'OK')  ;
 
-     end;
-  end;
+               end;
+        end
+        else Abort;
+
 
   // CRIA O SCRIPT PARA SALVAR OS COMANDOS EXECUTADOS DO DELETE
-  try
+{  try
     saveScriptOracle.Text := OraScriptDeletandoEmpresa.SQL.Text;
     saveScriptOracle.SaveToFile('C:\sqlExport.txt', TEncoding.UTF8); // ou TEncoding.ANSI se preferir
   finally
     saveScriptOracle.Free;
-  end;
+  end;    }
 
 end;
 
@@ -176,6 +185,7 @@ begin
   // Comando que executa o Script para Alterar a empresa
       if returnUsuario then
         try
+          OraScriptDeleteTriggers.Execute;
           OraScriptTrocandoEmpresas.Execute;
         finally
            begin

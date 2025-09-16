@@ -106,6 +106,9 @@
         <DCC_HppOutput>C:\MyProjeto\SiacCleanBase\Fontes\dcu\</DCC_HppOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>SiacCleanBase_Icon.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>Win32\Debug\Arquivos\icones\Logo_sistema.320.px.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>Win32\Debug\Arquivos\icones\Logo_sistema.320.px.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -175,6 +178,13 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
+                <DeployFile LocalName="Win32\Debug\Arquivos\icones\Logo_sistema.320.px.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\SiacCleanBase.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SiacCleanBase.exe</RemoteName>
