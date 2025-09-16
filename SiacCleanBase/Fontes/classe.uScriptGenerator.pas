@@ -3,8 +3,12 @@ unit classe.uScriptGenerator;
 interface
 
 uses
-  System.SysUtils, System.Classes, Data.DB,
-  MemDS, DBAccess, Ora, OraSmart, OraScript;
+  System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DAScript,
+  OraScript, Data.DB, DBAccess, Ora, OraSmart, MemDS, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
+  Vcl.Buttons, unit_funcoes, Vcl.StdCtrls, Vcl.Mask;
+
+
 
 type
   TScriptGenerator = class
@@ -22,6 +26,9 @@ type
 
 implementation
 
+uses
+  Principal;
+
 { TScriptGenerator }
 
 constructor TScriptGenerator.Create(AConnection: TOraSession);
@@ -37,11 +44,15 @@ begin
     'SELECT ''ALTER TRIGGER '' || OBJECT_NAME || '' DISABLE ;'' AS SCRIPT ' +
     '  FROM USER_OBJECTS C ' +
     ' WHERE C.OBJECT_TYPE = ''TRIGGER'' ' +
+    //'   AND C.OBJECT_NAME = ''PARAMETROS1_AUD_JN'' ' +
     'UNION ALL ' +
     'SELECT ''ALTER TABLE '' || OWNER || ''.'' || CC.TABLE_NAME || ' +
     '       '' DISABLE CONSTRAINT '' || CONSTRAINT_NAME || '';'' AS SCRIPT ' +
     '  FROM DBA_CONSTRAINTS CC ' +
-    ' WHERE CC.OWNER = :vUSER';
+    //' WHERE CC.TABLE_NAME =  ''ESTOQUES'' ' +
+    ' WHERE 1 =  1' +
+    '   AND CC.OWNER = :vUSER';
+
 end;
 
 destructor TScriptGenerator.Destroy;
@@ -52,7 +63,10 @@ begin
 end;
 
 procedure TScriptGenerator.Gerar(const AUsuario: string);
+var
+  saveScriptOracle: TStringList;
 begin
+  saveScriptOracle := TStringList.Create;
   OraScriptDeleteTriggers.SQL.Clear;
 
   qry_DeleteTriggers.Close;
@@ -67,6 +81,15 @@ begin
     OraScriptDeleteTriggers.SQL.Add(qry_DeleteTriggers.FieldByName('SCRIPT').AsString);
     qry_DeleteTriggers.Next;
   end;
+
+  try
+      saveScriptOracle.Text := OraScriptDeleteTriggers.SQL.Text;
+      saveScriptOracle.SaveToFile('C:\sqlExportObjetos.txt', TEncoding.UTF8);
+  finally
+    saveScriptOracle.Free;
+  end;
+
+
 end;
 
 function TScriptGenerator.GetScripts: string;

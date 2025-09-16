@@ -47,11 +47,14 @@ type
     pnl_deleteTriggers: TPanel;
     Panel2: TPanel;
     btn_deleteTriggers: TSpeedButton;
-    chk_deleteTriggers: TCheckBox;
+    Panel1: TPanel;
+    img_teste: TImage;
+    btn_teste: TButton;
     procedure btn_deletandoEmpresasClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btn_trocandoEmpresasClick(Sender: TObject);
+    procedure btn_deleteTriggersClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -66,7 +69,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Principal, classe.uScriptGenerator;
+  Principal, classe.uScriptGenerator, uDataModule;
 
 procedure Tform_empresaDados.btn_deletandoEmpresasClick(Sender: TObject);
 var
@@ -107,7 +110,6 @@ begin
 
   if returnUsuario then
   try
-        //OraScriptDeleteTriggers.Execute; // EXECUTA O DELETE DA TRIGGER
     OraScriptDeletandoEmpresa.Execute;
   finally
     begin
@@ -135,6 +137,53 @@ begin
   end;
 
 end;
+
+procedure Tform_empresaDados.btn_deleteTriggersClick(Sender: TObject);
+var
+  ScriptGen: TScriptGenerator;
+  returnUsuario: Boolean;
+begin
+  ScriptGen := TScriptGenerator.Create(DmModule.orsConexao); // já vem com SQL configurado
+  try
+    ScriptGen.Gerar( Principal.frmPrincipal.eUsuario.Text);
+
+    // Se quiser rodar de fato:
+   // ScriptGen.Executar;
+  finally
+   // ScriptGen.Free;
+  end;
+
+   if ScriptGen.GetScripts <> '' then
+    begin
+      returnUsuario := fnc_criar_menssagem('ALTERAÇÃO DE OBJETOS DO BANCO DE DADOS',
+                                           'DESEJA REALMENTE DESATIVAR OS OBJETOS? ' ,
+                                           ' ESTE PROCEDIMENTO É REVERSÍVEL, RODAR O ATUA.tur',
+                                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                                           'ERRO');
+    end;
+
+    if returnUsuario then
+    try
+       // Se quiser rodar de fato:
+       ScriptGen.Executar;
+    finally
+      begin
+        fnc_criar_menssagem('ALTERAÇÃO DE OBJETOS DO BANCO DE DADOS',
+                            'OS OBJETOS DO BANCO DE DADOS FORAM DESATIVADOS !!',
+                            'TRIGGER''s E CONSTRAINTS FORAM DESATIVADAS',
+                            ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
+                            'OK');
+      end;
+      // LIBERANDO O ScriptGen DA MEMORIA
+      ScriptGen.Free;
+    end
+    else
+      Abort;
+
+
+
+end;
+
 
 procedure Tform_empresaDados.btn_trocandoEmpresasClick(Sender: TObject);
 var
