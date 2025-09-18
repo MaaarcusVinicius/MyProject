@@ -10,7 +10,9 @@ uses
   unit_empresasDados in 'unit_empresasDados.pas' {form_empresaDados},
   unit_mensagens in 'unit_mensagens.pas' {form_menssagens},
   unit_funcoes in 'unit_funcoes.pas',
-  classe.uScriptGenerator in 'classe.uScriptGenerator.pas';
+  classe.uScriptGenerator in 'classe.uScriptGenerator.pas',
+  unit_ProgressBar in 'unit_ProgressBar.pas' {frmProgressBar},
+  unit_ProgressHelper in 'unit_ProgressHelper.pas';
 
 {$R *.res}
 
@@ -27,6 +29,7 @@ begin
     end;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(Tform_menssagens, form_menssagens);
+  Application.CreateForm(TfrmProgressBar, frmProgressBar);
   // Ativando o Tpanel com imagem opaca, significa que esta com o banco desconectado
      Principal.frmPrincipal.pnl_fundo_opacidade.Visible := true;
      Principal.frmPrincipal.pnl_fundo_normal.Visible := false;

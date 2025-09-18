@@ -1,4 +1,4 @@
-unit unit_empresasDados;
+Ôªøunit unit_empresasDados;
 
 interface
 
@@ -69,7 +69,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Principal, classe.uScriptGenerator, uDataModule;
+  Principal, classe.uScriptGenerator, uDataModule, unit_ProgressBar, unit_ProgressHelper;
 
 procedure Tform_empresaDados.btn_deletandoEmpresasClick(Sender: TObject);
 var
@@ -77,112 +77,163 @@ var
   vRazaoSocial: string;
   returnUsuario: Boolean;
   saveScriptOracle: TStringList;
+  ProgressHelper: TProgressHelper;
 begin
   vEmpresa_id := qryEmpresas.FieldByName('EMPRESA_ID').AsString;
   vRazaoSocial := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
-  // <-- IMPORTANTE: setar o par‚metro ANTES de abrir a query geradora
+
   qry_deletandoEmpresas.Close;
   qry_deletandoEmpresas.ParamByName('pEMPRESA_ID').AsString := '''' + vEmpresa_id + '''';
   qry_deletandoEmpresas.Open;
 
   OraScriptDeletandoEmpresa.SQL.Clear;
   qry_deletandoEmpresas.First;
-  while not qry_deletandoEmpresas.Eof do
-  begin
-    OraScriptDeletandoEmpresa.SQL.Add(qry_deletandoEmpresas.FieldByName('SCRIPT').AsString);
-    qry_deletandoEmpresas.Next;
-  end;
 
-  // debug r·pido: ver o que foi gerado
- //ShowMessage('Scripts gerados:' + sLineBreak + OraScriptDeletandoEmpresa.SQL.Text);
-
-
-  if not (OraScriptDeletandoEmpresa.SQL.IsEmpty) then
-  begin
-    returnUsuario := fnc_criar_menssagem('EXCLUS√O DE EMPRESA',
-                                         vEmpresa_id + ' - ' + vRazaoSocial,
-                                         'DESEJA REALMENTE EXCLUIR ESTA EMPRESA? ' + sLineBreak + 'ESTA A«√O N√O PODER¡ SER REVERTIDA.',
-                                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
-                                         'ERRO');
-  end
-  else
-    exit;
-
-  if returnUsuario then
+  // Inicializa o ProgressBar
+  ProgressHelper := TProgressHelper.Create;
   try
-    OraScriptDeletandoEmpresa.Execute;
-  finally
+    ProgressHelper.Start(qry_deletandoEmpresas.RecordCount, 'Excluindo empresa...');
+
+    while not qry_deletandoEmpresas.Eof do
     begin
-      fnc_criar_menssagem('EXCLUS√O DE EMPRESA', 'A EXCLUS√O DA EMPRESA FOI UM SUCESSO !!!',
-                          'VocÍ selecionou a empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial + '. A«√O … IRREVERSÕVEL!!!',
+      OraScriptDeletandoEmpresa.SQL.Add(qry_deletandoEmpresas.FieldByName('SCRIPT').AsString);
+
+      // Avan√ßa progress bar
+      ProgressHelper.Step('Processando: ' + qry_deletandoEmpresas.FieldByName('SCRIPT').AsString);
+
+      qry_deletandoEmpresas.Next;
+    end;
+
+    if not (OraScriptDeletandoEmpresa.SQL.IsEmpty) then
+    begin
+      returnUsuario := fnc_criar_menssagem(
+                          'EXCLUS√ÉO DE EMPRESA',
+                          vEmpresa_id + ' - ' + vRazaoSocial,
+                          'DESEJA REALMENTE EXCLUIR ESTA EMPRESA? ' + sLineBreak +
+                          'ESTA A√á√ÉO N√ÉO PODER√Å SER REVERTIDA.',
+                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                          'ERRO');
+    end
+    else
+      Exit;
+
+    if returnUsuario then
+    try
+      OraScriptDeletandoEmpresa.Execute;
+    finally
+      fnc_criar_menssagem('EXCLUS√ÉO DE EMPRESA',
+                          'A EXCLUS√ÉO DA EMPRESA FOI UM SUCESSO !!!',
+                          'Voc√™ selecionou a empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
+                          '. A√á√ÉO √â IRREVERS√çVEL!!!',
                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
                           'OK');
+    end
+    else
+      Abort;
 
+    // üîπ Salvar script em arquivo, se marcado
+    try
+      if chk_saveScriptDeletando.Checked then
+      begin
+        saveScriptOracle := TStringList.Create;
+        saveScriptOracle.Text := OraScriptDeletandoEmpresa.SQL.Text;
+        saveScriptOracle.SaveToFile('C:\sqlExport.txt', TEncoding.UTF8);
+      end;
+    finally
+      saveScriptOracle.Free;
     end;
-  end
-  else
-    Abort;
 
-
-  // CRIA O SCRIPT PARA SALVAR OS COMANDOS EXECUTADOS DO DELETE
-  try
-    if chk_saveScriptDeletando.Checked then
-    begin
-      saveScriptOracle := TStringList.Create;
-      saveScriptOracle.Text := OraScriptDeletandoEmpresa.SQL.Text;
-      saveScriptOracle.SaveToFile('C:\sqlExport.txt', TEncoding.UTF8);
-    end;
   finally
-    saveScriptOracle.Free;
+    // Finaliza e esconde a barra
+    ProgressHelper.Finish;
+    ProgressHelper.Free;
   end;
-
 end;
+
 
 procedure Tform_empresaDados.btn_deleteTriggersClick(Sender: TObject);
 var
   ScriptGen: TScriptGenerator;
   returnUsuario: Boolean;
+  saveScriptOracle: TStringList;
+  Scripts: TStringList;
+  Progress: TProgressHelper;
+  i: Integer;
 begin
-  ScriptGen := TScriptGenerator.Create(DmModule.orsConexao); // j· vem com SQL configurado
+  ScriptGen := TScriptGenerator.Create(DmModule.orsConexao); // j√° vem com SQL configurado
+  Scripts := TStringList.Create;
+  Progress := TProgressHelper.Create;
   try
-    ScriptGen.Gerar( Principal.frmPrincipal.eUsuario.Text);
+    // 1 - Gera os scripts dinamicamente
+    // Passa para classe o nome do usuario logado
+    ScriptGen.Gerar(Principal.frmPrincipal.eUsuario.Text);
 
-    // Se quiser rodar de fato:
-   // ScriptGen.Executar;
-  finally
-   // ScriptGen.Free;
-  end;
+    // Copia os scripts para o TStringList tempor√°rio
+    Scripts.Text := ScriptGen.GetScripts;
 
-   if ScriptGen.GetScripts <> '' then
+    // 2 - Mostra progress bar durante a gera√ß√£o
+    Progress.Start(Scripts.Count, 'Gerando scripts...');
+    for i := 0 to Scripts.Count - 1 do
     begin
-      returnUsuario := fnc_criar_menssagem('ALTERA«√O DE OBJETOS DO BANCO DE DADOS',
-                                           'DESEJA REALMENTE DESATIVAR OS OBJETOS? ' ,
-                                           ' ESTE PROCEDIMENTO … REVERSÕVEL, RODAR O ATUA.tur',
-                                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
-                                           'ERRO');
+      Progress.Step('Gerando: ' + Scripts[i]);
+    end;
+    Progress.Finish;
+
+    // 3 - Confirma√ß√£o do usu√°rio antes de executar
+    if Scripts.Count = 0 then Exit;
+
+    returnUsuario := fnc_criar_menssagem('ALTERA√á√ÉO DE OBJETOS DO BANCO DE DADOS',
+                                         'DESEJA REALMENTE DESATIVAR OS OBJETOS?',
+                                         'ESTE PROCEDIMENTO √â REVERS√çVEL',
+                                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                                         'ERRO');
+
+    if not returnUsuario then Exit;
+
+    // 4 - Limpa o OraScript antes de executar
+    OraScriptDeleteTriggers.SQL.Clear;
+
+    // 5 - Inicializa o ProgressBar para execu√ß√£o real
+    Progress.Start(Scripts.Count, 'Executando scripts...');
+
+    // 6 - Executa cada script individualmente
+    for i := 0 to Scripts.Count - 1 do
+    begin
+      OraScriptDeleteTriggers.SQL.Text := Scripts[i];
+      OraScriptDeleteTriggers.Execute;
+
+      // Atualiza ProgressBar com a informa√ß√£o atual
+      Progress.Step('Executando: ' + Scripts[i]);
     end;
 
-    if returnUsuario then
-    try
-       // Se quiser rodar de fato:
-       ScriptGen.Executar;
-    finally
-      begin
-        fnc_criar_menssagem('ALTERA«√O DE OBJETOS DO BANCO DE DADOS',
-                            'OS OBJETOS DO BANCO DE DADOS FORAM DESATIVADOS !!',
-                            'TRIGGER''s E CONSTRAINTS FORAM DESATIVADAS',
-                            ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
-                            'OK');
+    Progress.Finish;
+
+    // 7 - Mensagem de sucesso
+    fnc_criar_menssagem('ALTERA√á√ÉO DE OBJETOS DO BANCO DE DADOS',
+                        'OS OBJETOS DO BANCO DE DADOS FORAM DESATIVADOS !!',
+                        'TRIGGER''s E CONSTRAINTS FORAM DESATIVADAS',
+                        ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
+                        'OK');
+
+    // 8 - Salva script em arquivo opcional
+    if chk_saveScriptDeletando.Checked then
+    begin
+      saveScriptOracle := TStringList.Create;
+      try
+        saveScriptOracle.Text := Scripts.Text;
+        saveScriptOracle.SaveToFile('C:\sqlExport_DeleteTriggers.txt', TEncoding.UTF8);
+      finally
+        saveScriptOracle.Free;
       end;
-      // LIBERANDO O ScriptGen DA MEMORIA
-      ScriptGen.Free;
-    end
-    else
-      Abort;
+    end;
 
-
-
+  finally
+    Scripts.Free;
+    ScriptGen.Free;
+    Progress.Free;
+  end;
 end;
+
 
 
 procedure Tform_empresaDados.btn_trocandoEmpresasClick(Sender: TObject);
@@ -203,7 +254,7 @@ begin
     vRazaoSocial := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
     newEmpresa_id := medt_cpf_cnpj.Text;
 
-      // <-- IMPORTANTE: setar o par‚metro ANTES de abrir a query geradora
+      // <-- IMPORTANTE: setar o par√¢metro ANTES de abrir a query geradora
     qry_trocandoEmpresas.Close;
     qry_trocandoEmpresas.ParamByName('pEMPRESA_ID').AsString := '''' + vEmpresa_id + '''';
     qry_trocandoEmpresas.ParamByName('vEMPRESA_ID').AsString := '''' + newEmpresa_id + '''';
@@ -217,13 +268,13 @@ begin
       qry_trocandoEmpresas.Next;
     end;
 
-      // debug r·pido: ver o que foi gerado
+      // debug r√°pido: ver o que foi gerado
      // ShowMessage('Scripts gerados:' + sLineBreak + OraScriptTrocandoEmpresas.SQL.Text);
 
     if not (OraScriptTrocandoEmpresas.SQL.IsEmpty) then
     begin
-      returnUsuario := fnc_criar_menssagem('ALTERA«√O DE EMPRESA', vEmpresa_id + ' - ' + vRazaoSocial,
-                                           'DESEJA REALMENTE ALTERAR O CNPJ DA EMPRESA? ' + sLineBreak + 'ESTA A«√O N√O PODER¡ SER REVERTIDA.',
+      returnUsuario := fnc_criar_menssagem('ALTERA√á√ÉO DE EMPRESA', vEmpresa_id + ' - ' + vRazaoSocial,
+                                           'DESEJA REALMENTE ALTERAR O CNPJ DA EMPRESA? ' + sLineBreak + 'ESTA A√á√ÉO N√ÉO PODER√Å SER REVERTIDA.',
                                            ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
                                            'ERRO');
     end;
@@ -235,8 +286,8 @@ begin
       OraScriptTrocandoEmpresas.Execute;
     finally
       begin
-        fnc_criar_menssagem('ALTERA«√O DE EMPRESA', 'A ALTERA«√O DA EMPRESA FOI UM SUCESSO !!',
-                            'VocÍ alterou o CNPJ da empresa: ' + sLineBreak + vEmpresa_id + ' - ' + vRazaoSocial + ', para o novo CNPJ: '+ newEmpresa_id,
+        fnc_criar_menssagem('ALTERA√á√ÉO DE EMPRESA', 'A ALTERA√á√ÉO DA EMPRESA FOI UM SUCESSO !!',
+                            'Voc√™ alterou o CNPJ da empresa: ' + sLineBreak + vEmpresa_id + ' - ' + vRazaoSocial + ', para o novo CNPJ: '+ newEmpresa_id,
                             ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
                             'OK');
       end;

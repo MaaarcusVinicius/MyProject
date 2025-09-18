@@ -1283,10 +1283,6 @@ object form_empresaDados: Tform_empresaDados
         Height = 83
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 22
-        ExplicitTop = 12
-        ExplicitWidth = 75
-        ExplicitHeight = 57
       end
     end
   end
