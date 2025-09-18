@@ -50,15 +50,15 @@ object form_menssagens: Tform_menssagens
     object img_icone: TImage
       Left = 8
       Top = 62
-      Width = 144
+      Width = 113
       Height = 147
       AutoSize = True
       Center = True
     end
     object lbl_titulo_menssagem: TLabel
-      Left = 176
-      Top = 62
-      Width = 45
+      Left = 127
+      Top = 65
+      Width = 530
       Height = 21
       Caption = 'T'#237'tulo'
       Font.Charset = DEFAULT_CHARSET
@@ -69,9 +69,9 @@ object form_menssagens: Tform_menssagens
       ParentFont = False
     end
     object lbl_msg: TLabel
-      Left = 176
+      Left = 127
       Top = 92
-      Width = 473
+      Width = 530
       Height = 70
       AutoSize = False
       Caption = 'Texto Mensagem'

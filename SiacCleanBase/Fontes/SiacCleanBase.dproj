@@ -153,12 +153,14 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="unit_funcoes.pas"/>
-        <DCCReference Include="classe.uScriptGenerator.pas"/>
+        <DCCReference Include="classe.uScriptGeneratorTriggers.pas"/>
         <DCCReference Include="unit_ProgressBar.pas">
             <Form>frmProgressBar</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="unit_ProgressHelper.pas"/>
+        <DCCReference Include="classe.uScriptGeneratorDeleteEmpresas.pas"/>
+        <DCCReference Include="classe.uScriptGeneratorTrocaEmpresas.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

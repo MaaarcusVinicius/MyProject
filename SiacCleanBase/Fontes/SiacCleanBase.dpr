@@ -10,9 +10,11 @@ uses
   unit_empresasDados in 'unit_empresasDados.pas' {form_empresaDados},
   unit_mensagens in 'unit_mensagens.pas' {form_menssagens},
   unit_funcoes in 'unit_funcoes.pas',
-  classe.uScriptGenerator in 'classe.uScriptGenerator.pas',
+  classe.uScriptGeneratorTriggers in 'classe.uScriptGeneratorTriggers.pas',
   unit_ProgressBar in 'unit_ProgressBar.pas' {frmProgressBar},
-  unit_ProgressHelper in 'unit_ProgressHelper.pas';
+  unit_ProgressHelper in 'unit_ProgressHelper.pas',
+  classe.uScriptGeneratorDeleteEmpresas in 'classe.uScriptGeneratorDeleteEmpresas.pas',
+  classe.uScriptGeneratorTrocaEmpresas in 'classe.uScriptGeneratorTrocaEmpresas.pas';
 
 {$R *.res}
 

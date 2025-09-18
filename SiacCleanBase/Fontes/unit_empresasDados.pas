@@ -48,8 +48,6 @@ type
     Panel2: TPanel;
     btn_deleteTriggers: TSpeedButton;
     Panel1: TPanel;
-    img_teste: TImage;
-    btn_teste: TButton;
     procedure btn_deletandoEmpresasClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -69,98 +67,108 @@ implementation
 {$R *.dfm}
 
 uses
-  Principal, classe.uScriptGenerator, uDataModule, unit_ProgressBar, unit_ProgressHelper;
+  Principal,
+  uDataModule,
+  unit_ProgressBar,
+  unit_ProgressHelper,
+  classe.uScriptGeneratorDeleteEmpresas,
+  classe.uScriptGeneratorTriggers,
+  classe.uScriptGeneratorTrocaEmpresas;
 
 procedure Tform_empresaDados.btn_deletandoEmpresasClick(Sender: TObject);
 var
-  vEmpresa_id: string;
-  vRazaoSocial: string;
+  ScriptGen: TScriptGeneratorDeleteEmpresas;
   returnUsuario: Boolean;
   saveScriptOracle: TStringList;
-  ProgressHelper: TProgressHelper;
+  Scripts: TStringList;
+  Progress: TProgressHelper;
+  i: Integer;
+  vEmpresa_id, vRazaoSocial: string;
 begin
-  vEmpresa_id := qryEmpresas.FieldByName('EMPRESA_ID').AsString;
+  vEmpresa_id :=  qryEmpresas.FieldByName('EMPRESA_ID').AsString ;
   vRazaoSocial := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
 
-  qry_deletandoEmpresas.Close;
-  qry_deletandoEmpresas.ParamByName('pEMPRESA_ID').AsString := '''' + vEmpresa_id + '''';
-  qry_deletandoEmpresas.Open;
-
-  OraScriptDeletandoEmpresa.SQL.Clear;
-  qry_deletandoEmpresas.First;
-
-  // Inicializa o ProgressBar
-  ProgressHelper := TProgressHelper.Create;
+  ScriptGen := TScriptGeneratorDeleteEmpresas.Create(DmModule.orsConexao);
+  Scripts := TStringList.Create;
+  Progress := TProgressHelper.Create;
   try
-    ProgressHelper.Start(qry_deletandoEmpresas.RecordCount, 'Excluindo empresa...');
+    // 1 - Gera os scripts dinamicamente
+    ScriptGen.Gerar('''' + vEmpresa_id+ '''');
 
-    while not qry_deletandoEmpresas.Eof do
+    // Copia os scripts para lista temporária
+    Scripts.Text := ScriptGen.GetScripts;
+
+    // 2 - Mostra progress bar durante a geração
+    Progress.Start(Scripts.Count, 'Gerando scripts para exclusão...');
+    for i := 0 to Scripts.Count - 1 do
     begin
-      OraScriptDeletandoEmpresa.SQL.Add(qry_deletandoEmpresas.FieldByName('SCRIPT').AsString);
-
-      // Avança progress bar
-      ProgressHelper.Step('Processando: ' + qry_deletandoEmpresas.FieldByName('SCRIPT').AsString);
-
-      qry_deletandoEmpresas.Next;
+      Progress.Step('Gerando: ' + Scripts[i]);
     end;
+    Progress.Finish;
 
-    if not (OraScriptDeletandoEmpresa.SQL.IsEmpty) then
+    // 3 - Confirmação do usuário
+    if Scripts.Count = 0 then Exit;
+
+    returnUsuario := fnc_criar_menssagem(
+                        'EXCLUSÃO DE EMPRESA',
+                        vEmpresa_id + ' - ' + vRazaoSocial,
+                        'DESEJA REALMENTE EXCLUIR ESTA EMPRESA? ' + sLineBreak +
+                        'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
+                        ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                        'ERRO');
+
+    if not returnUsuario then Exit;
+
+    // 4 - Executa os scripts individualmente
+    Progress.Start(Scripts.Count, 'Executando exclusão da empresa...');
+    for i := 0 to Scripts.Count - 1 do
     begin
-      returnUsuario := fnc_criar_menssagem(
-                          'EXCLUSÃO DE EMPRESA',
-                          vEmpresa_id + ' - ' + vRazaoSocial,
-                          'DESEJA REALMENTE EXCLUIR ESTA EMPRESA? ' + sLineBreak +
-                          'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
-                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
-                          'ERRO');
-    end
-    else
-      Exit;
-
-    if returnUsuario then
-    try
+      OraScriptDeletandoEmpresa.SQL.Text := Scripts[i];
       OraScriptDeletandoEmpresa.Execute;
-    finally
-      fnc_criar_menssagem('EXCLUSÃO DE EMPRESA',
-                          'A EXCLUSÃO DA EMPRESA FOI UM SUCESSO !!!',
-                          'Você selecionou a empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
-                          '. AÇÃO É IRREVERSÍVEL!!!',
-                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
-                          'OK');
-    end
-    else
-      Abort;
 
-    // 🔹 Salvar script em arquivo, se marcado
-    try
-      if chk_saveScriptDeletando.Checked then
-      begin
-        saveScriptOracle := TStringList.Create;
-        saveScriptOracle.Text := OraScriptDeletandoEmpresa.SQL.Text;
-        saveScriptOracle.SaveToFile('C:\sqlExport.txt', TEncoding.UTF8);
+      Progress.Step('Executando: ' + Scripts[i]);
+    end;
+    Progress.Finish;
+
+    // 5 - Mensagem final de sucesso
+    fnc_criar_menssagem('EXCLUSÃO DE EMPRESA',
+                        'A EXCLUSÃO DA EMPRESA FOI UM SUCESSO !!!',
+                        'Você selecionou a empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
+                        '. ESTA AÇÃO É IRREVERSÍVEL!!!',
+                        ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
+                        'OK');
+
+    // 6 - Salvar script se marcado
+    if chk_saveScriptDeletando.Checked then
+    begin
+      saveScriptOracle := TStringList.Create;
+      try
+        saveScriptOracle.Text := Scripts.Text;
+        saveScriptOracle.SaveToFile('C:\sqlExport_DeleteEmpresa.txt', TEncoding.UTF8);
+      finally
+        saveScriptOracle.Free;
       end;
-    finally
-      saveScriptOracle.Free;
     end;
 
   finally
-    // Finaliza e esconde a barra
-    ProgressHelper.Finish;
-    ProgressHelper.Free;
+    Scripts.Free;
+    ScriptGen.Free;
+    Progress.Free;
   end;
 end;
 
 
+
 procedure Tform_empresaDados.btn_deleteTriggersClick(Sender: TObject);
 var
-  ScriptGen: TScriptGenerator;
+  ScriptGen: TScriptGeneratorTriggers;
   returnUsuario: Boolean;
   saveScriptOracle: TStringList;
   Scripts: TStringList;
   Progress: TProgressHelper;
   i: Integer;
 begin
-  ScriptGen := TScriptGenerator.Create(DmModule.orsConexao); // já vem com SQL configurado
+  ScriptGen := TScriptGeneratorTriggers.Create(DmModule.orsConexao); // já vem com SQL configurado
   Scripts := TStringList.Create;
   Progress := TProgressHelper.Create;
   try
@@ -234,91 +242,104 @@ begin
   end;
 end;
 
-
-
 procedure Tform_empresaDados.btn_trocandoEmpresasClick(Sender: TObject);
 var
-  vEmpresa_id: string;
-  vRazaoSocial: string;
-  newEmpresa_id: string;
-  newCnpj: string;
+  ScriptGen: TScriptGeneratorTrocaEmpresa;
   returnUsuario: Boolean;
   saveScriptOracle: TStringList;
+  Scripts: TStringList;
+  Progress: TProgressHelper;
+  i: Integer;
+  vEmpresa_id, vRazaoSocial, newEmpresa_id, newCnpj: string;
 begin
   newCnpj := fnc_sonumeros(medt_cpf_cnpj.Text);
 
   if (newCnpj <> '') and (Length(newCnpj) = 14) then
   begin
-
-    vEmpresa_id := qryEmpresas.FieldByName('EMPRESA_ID').AsString;
-    vRazaoSocial := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
+    vEmpresa_id   := qryEmpresas.FieldByName('EMPRESA_ID').AsString;
+    vRazaoSocial  := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
     newEmpresa_id := medt_cpf_cnpj.Text;
 
-      // <-- IMPORTANTE: setar o parâmetro ANTES de abrir a query geradora
-    qry_trocandoEmpresas.Close;
-    qry_trocandoEmpresas.ParamByName('pEMPRESA_ID').AsString := '''' + vEmpresa_id + '''';
-    qry_trocandoEmpresas.ParamByName('vEMPRESA_ID').AsString := '''' + newEmpresa_id + '''';
-    qry_trocandoEmpresas.Open;
-
-    OraScriptDeletandoEmpresa.SQL.Clear;
-    qry_trocandoEmpresas.First;
-    while not qry_trocandoEmpresas.Eof do
-    begin
-      OraScriptTrocandoEmpresas.SQL.Add(qry_trocandoEmpresas.FieldByName('SCRIPT').AsString);
-      qry_trocandoEmpresas.Next;
-    end;
-
-      // debug rápido: ver o que foi gerado
-     // ShowMessage('Scripts gerados:' + sLineBreak + OraScriptTrocandoEmpresas.SQL.Text);
-
-    if not (OraScriptTrocandoEmpresas.SQL.IsEmpty) then
-    begin
-      returnUsuario := fnc_criar_menssagem('ALTERAÇÃO DE EMPRESA', vEmpresa_id + ' - ' + vRazaoSocial,
-                                           'DESEJA REALMENTE ALTERAR O CNPJ DA EMPRESA? ' + sLineBreak + 'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
-                                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
-                                           'ERRO');
-    end;
-
-    if returnUsuario then
+    ScriptGen := TScriptGeneratorTrocaEmpresa.Create(DmModule.orsConexao);
+    Scripts   := TStringList.Create;
+    Progress  := TProgressHelper.Create;
     try
+      // 1 - Gera os scripts dinamicamente
+      ScriptGen.Gerar('''' + vEmpresa_id + '''', '''' + newEmpresa_id + '''');
 
-      //OraScriptDeleteTriggers.Execute; // EXECUTA O DELETE DA TRIGGER
-      OraScriptTrocandoEmpresas.Execute;
-    finally
+      // Copia os scripts para lista temporária
+      Scripts.Text := ScriptGen.GetScripts;
+
+      // 2 - Mostra progress bar durante a geração
+      Progress.Start(Scripts.Count, 'Gerando scripts de troca...');
+      for i := 0 to Scripts.Count - 1 do
       begin
-        fnc_criar_menssagem('ALTERAÇÃO DE EMPRESA', 'A ALTERAÇÃO DA EMPRESA FOI UM SUCESSO !!',
-                            'Você alterou o CNPJ da empresa: ' + sLineBreak + vEmpresa_id + ' - ' + vRazaoSocial + ', para o novo CNPJ: '+ newEmpresa_id,
-                            ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
-                            'OK');
+        Progress.Step('Gerando: ' + Scripts[i]);
       end;
-    end
-    else
-      Abort;
+      Progress.Finish;
 
+      // 3 - Confirmação do usuário
+      if Scripts.Count = 0 then Exit;
+
+      returnUsuario := fnc_criar_menssagem(
+                          'ALTERAÇÃO DE EMPRESA',
+                          vEmpresa_id + ' - ' + vRazaoSocial,
+                          'DESEJA REALMENTE ALTERAR O CNPJ DA EMPRESA?' + sLineBreak +
+                          'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
+                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                          'ERRO');
+
+      if not returnUsuario then Exit;
+
+      // 4 - Executa os scripts individualmente
+      Progress.Start(Scripts.Count, 'Executando alteração da empresa...');
+      for i := 0 to Scripts.Count - 1 do
+      begin
+        OraScriptTrocandoEmpresas.SQL.Text := Scripts[i];
+        OraScriptTrocandoEmpresas.Execute;
+
+        Progress.Step('Executando: ' + Scripts[i]);
+      end;
+      Progress.Finish;
+
+      // 5 - Mensagem final de sucesso
+      fnc_criar_menssagem('ALTERAÇÃO DE EMPRESA',
+                          'A ALTERAÇÃO DA EMPRESA FOI UM SUCESSO !!!',
+                          'Você alterou o CNPJ da empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
+                          ', para o novo CNPJ: ' + newEmpresa_id,
+                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
+                          'OK');
+
+      // 6 - Salvar script se marcado
+      if chk_saveScritpTrocando.Checked then
+      begin
+        saveScriptOracle := TStringList.Create;
+        try
+          saveScriptOracle.Text := Scripts.Text;
+          saveScriptOracle.SaveToFile('C:\sqlExport_TrocaEmpresa.txt', TEncoding.UTF8);
+        finally
+          saveScriptOracle.Free;
+        end;
+      end;
+
+    finally
+      Scripts.Free;
+      ScriptGen.Free;
+      Progress.Free;
+    end;
   end
   else
   begin
-    fnc_criar_menssagem('TROCA EMPRESA', 'PARA EXECUTAR O PROCEDIMENTO, INFORME O NOVO CNPJ!',
-                        'O NOVO CNPJ ESTA VAZIO OU INCOMPLETO.',
+    fnc_criar_menssagem('TROCA EMPRESA',
+                        'PARA EXECUTAR O PROCEDIMENTO, INFORME O NOVO CNPJ!',
+                        'O NOVO CNPJ ESTÁ VAZIO OU INCOMPLETO.',
                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoAviso.png',
                         'OK');
-    medt_cpf_cnpj.setfocus;
-
+    medt_cpf_cnpj.SetFocus;
   end;
-
-      // CRIA O SCRIPT PARA SALVAR OS COMANDOS EXECUTADOS DO DELETE
-  try
-    if chk_saveScritpTrocando.Checked then
-    begin
-      saveScriptOracle := TStringList.Create;
-      saveScriptOracle.Text := OraScriptTrocandoEmpresas.SQL.Text;
-      saveScriptOracle.SaveToFile('C:\sqlExport.txt', TEncoding.UTF8);
-    end;
-  finally
-    saveScriptOracle.Free;
-  end;
-
 end;
+
+
 
 procedure Tform_empresaDados.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
