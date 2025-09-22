@@ -54,6 +54,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btn_trocandoEmpresasClick(Sender: TObject);
     procedure btn_deleteTriggersClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -348,6 +349,14 @@ begin
   // Quando destruir o formulario o DbGrid da tela principal vai ser atualizado  ( dbPrincipalEmpresas )
   Principal.frmPrincipal.qryEmpresas.Close;
   Principal.frmPrincipal.qryEmpresas.Open;
+end;
+
+procedure Tform_empresaDados.FormCreate(Sender: TObject);
+begin
+   MakeRounded(pnl_trocandoEmpresa);
+   MakeRounded(pnl_deleteTriggers);
+   MakeRounded(pnl_deletaEmpresa);
+
 end;
 
 procedure Tform_empresaDados.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

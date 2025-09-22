@@ -12,6 +12,7 @@ object form_empresaDados: Tform_empresaDados
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnClose = FormClose
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   TextHeight = 15
   object pnl_fundo: TPanel
