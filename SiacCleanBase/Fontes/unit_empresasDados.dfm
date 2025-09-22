@@ -160,7 +160,7 @@ object form_empresaDados: Tform_empresaDados
     object pnl_deletaEmpresa: TPanel
       Left = 279
       Top = 92
-      Width = 198
+      Width = 204
       Height = 104
       Color = clWhite
       ParentBackground = False
@@ -414,8 +414,8 @@ object form_empresaDados: Tform_empresaDados
         end
       end
       object chk_saveScriptDeletando: TCheckBox
-        Left = 105
-        Top = 8
+        Left = 111
+        Top = 64
         Width = 97
         Height = 33
         Hint = 'Arquivo gerado em C:\sqlExport.txt'
@@ -757,9 +757,9 @@ object form_empresaDados: Tform_empresaDados
       end
     end
     object pnl_deleteTriggers: TPanel
-      Left = 483
+      Left = 523
       Top = 92
-      Width = 166
+      Width = 214
       Height = 104
       Color = clWhite
       ParentBackground = False
@@ -1044,6 +1044,27 @@ object form_empresaDados: Tform_empresaDados
           ExplicitLeft = -1
           ExplicitWidth = 92
         end
+      end
+      object chk_desativarObjetos: TCheckBox
+        Left = 118
+        Top = 64
+        Width = 97
+        Height = 33
+        Hint = 'Arquivo gerado em C:\sqlExport.txt'
+        Caption = 'Salvar Script'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBackground
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        Font.Quality = fqClearTypeNatural
+        ParentColor = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        StyleName = 'Windows'
       end
     end
   end

@@ -161,6 +161,10 @@
         <DCCReference Include="unit_ProgressHelper.pas"/>
         <DCCReference Include="classe.uScriptGeneratorDeleteEmpresas.pas"/>
         <DCCReference Include="classe.uScriptGeneratorTrocaEmpresas.pas"/>
+        <DCCReference Include="unit_containerLogin.pas">
+            <Form>form_translucent</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

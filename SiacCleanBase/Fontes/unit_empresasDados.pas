@@ -48,6 +48,7 @@ type
     Panel2: TPanel;
     btn_deleteTriggers: TSpeedButton;
     Panel1: TPanel;
+    chk_desativarObjetos: TCheckBox;
     procedure btn_deletandoEmpresasClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -171,6 +172,7 @@ begin
   ScriptGen := TScriptGeneratorTriggers.Create(DmModule.orsConexao); // já vem com SQL configurado
   Scripts := TStringList.Create;
   Progress := TProgressHelper.Create;
+
   try
     // 1 - Gera os scripts dinamicamente
     // Passa para classe o nome do usuario logado
@@ -224,12 +226,12 @@ begin
                         'OK');
 
     // 8 - Salva script em arquivo opcional
-    if chk_saveScriptDeletando.Checked then
+    if chk_desativarObjetos.Checked then
     begin
       saveScriptOracle := TStringList.Create;
       try
         saveScriptOracle.Text := Scripts.Text;
-        saveScriptOracle.SaveToFile('C:\sqlExport_DeleteTriggers.txt', TEncoding.UTF8);
+        saveScriptOracle.SaveToFile('C:\sqlExport_DesativarTriggers.txt', TEncoding.UTF8);
       finally
         saveScriptOracle.Free;
       end;

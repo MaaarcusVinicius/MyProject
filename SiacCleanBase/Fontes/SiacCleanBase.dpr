@@ -14,7 +14,8 @@ uses
   unit_ProgressBar in 'unit_ProgressBar.pas' {frmProgressBar},
   unit_ProgressHelper in 'unit_ProgressHelper.pas',
   classe.uScriptGeneratorDeleteEmpresas in 'classe.uScriptGeneratorDeleteEmpresas.pas',
-  classe.uScriptGeneratorTrocaEmpresas in 'classe.uScriptGeneratorTrocaEmpresas.pas';
+  classe.uScriptGeneratorTrocaEmpresas in 'classe.uScriptGeneratorTrocaEmpresas.pas',
+  unit_containerLogin in 'unit_containerLogin.pas' {form_translucent};
 
 {$R *.res}
 
@@ -22,6 +23,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
     begin
+
      form_login := Tform_login.Create(nil);
      form_login.ShowModal;
 
@@ -32,6 +34,7 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(Tform_menssagens, form_menssagens);
   Application.CreateForm(TfrmProgressBar, frmProgressBar);
+  Application.CreateForm(Tform_translucent, form_translucent);
   // Ativando o Tpanel com imagem opaca, significa que esta com o banco desconectado
      Principal.frmPrincipal.pnl_fundo_opacidade.Visible := true;
      Principal.frmPrincipal.pnl_fundo_normal.Visible := false;

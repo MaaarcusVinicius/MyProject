@@ -23501,7 +23501,8 @@ object frmPrincipal: TfrmPrincipal
         '      (SELECT NVL(TRUNC(SUM(ESTOQUE_ATUAL),4),0) FROM ESTOQUES E' +
         'T WHERE 1=1 AND ET.EMPRESA_ID = E.EMPRESA_ID AND ET.ESTOQUE_ATUA' +
         'L >0) QTD_ESTOQUE_EMPRESA      '
-      'FROM EMPRESAS E')
+      'FROM EMPRESAS E'
+      'ORDER BY RAZAO_SOCIAL')
     Left = 768
     Top = 112
     object qryEmpresasEMPRESA_ID: TStringField
