@@ -42,6 +42,9 @@ var
 
 implementation
 
+uses
+  unit_Main;
+
 {$R *.dfm}
 
 procedure Tform_login.btn_confirmaLoginClick(Sender: TObject);
@@ -53,6 +56,8 @@ begin
   ShowMessage('Usuário ou Senha Inválido, por favor verifique!!');
 
 end;
+
+
 
 procedure Tform_login.btn_fecharClick(Sender: TObject);
 begin
@@ -91,6 +96,8 @@ var
 begin
  { // cria overlay translúcido que cobre toda a tela
   Overlay := TForm.Create(Self);
+    form_translucent := form_translucent.Create(Self);
+
   try
     Overlay.BorderStyle := bsNone;
     Overlay.Color := clBlack;
@@ -102,7 +109,7 @@ begin
     Overlay.Update;
 
     // cria e mostra form_translucent centralizado sobre o overlay
-    form_translucent := form_translucent.Create(nil);
+    //form_translucent := form_translucent.Create(nil);
     try
       form_translucent.Position := poDesigned;
       form_translucent.BorderStyle := bsDialog;
@@ -117,7 +124,7 @@ begin
 
   finally
     Overlay.Free;
-  end;  }
+  end;           }
 end;
 
 

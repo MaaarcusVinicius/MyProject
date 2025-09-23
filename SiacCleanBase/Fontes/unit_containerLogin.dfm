@@ -1,6 +1,7 @@
 object form_translucent: Tform_translucent
   Left = 0
   Top = 0
+  BorderIcons = []
   BorderStyle = bsNone
   ClientHeight = 480
   ClientWidth = 640

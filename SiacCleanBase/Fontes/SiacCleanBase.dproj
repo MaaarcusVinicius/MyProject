@@ -165,6 +165,10 @@
             <Form>form_translucent</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="unit_Main.pas">
+            <Form>frmMain</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

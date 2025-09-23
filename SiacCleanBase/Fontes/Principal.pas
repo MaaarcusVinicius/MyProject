@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Data.DB, DBAccess, Ora,
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
-  DAScript, OraScript, ACBrBase, ACBrEnterTab;
+  DAScript, OraScript, ACBrBase, ACBrEnterTab, unit_Main;
 
 type
   TfrmPrincipal = class(TForm)
@@ -47,6 +47,7 @@ type
     procedure dbPrincipalEmpresasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btn_editEmpresaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btn_criaMainClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -95,6 +96,15 @@ begin
     pnl_fundo_normal.Visible := false;
 
   end;
+end;
+
+procedure TfrmPrincipal.btn_criaMainClick(Sender: TObject);
+begin
+    try
+      frmMain := TfrmMain.Create(nil);
+    finally
+      frmMain.Destroy;
+    end;
 end;
 
 procedure TfrmPrincipal.btn_editEmpresaClick(Sender: TObject);

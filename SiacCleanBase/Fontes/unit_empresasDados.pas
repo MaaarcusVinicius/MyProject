@@ -353,6 +353,7 @@ end;
 
 procedure Tform_empresaDados.FormCreate(Sender: TObject);
 begin
+  // Arredondar o Tpanel da tela
    MakeRounded(pnl_trocandoEmpresa);
    MakeRounded(pnl_deleteTriggers);
    MakeRounded(pnl_deletaEmpresa);

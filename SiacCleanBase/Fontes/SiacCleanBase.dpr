@@ -15,13 +15,14 @@ uses
   unit_ProgressHelper in 'unit_ProgressHelper.pas',
   classe.uScriptGeneratorDeleteEmpresas in 'classe.uScriptGeneratorDeleteEmpresas.pas',
   classe.uScriptGeneratorTrocaEmpresas in 'classe.uScriptGeneratorTrocaEmpresas.pas',
-  unit_containerLogin in 'unit_containerLogin.pas' {form_translucent};
+  unit_containerLogin in 'unit_containerLogin.pas' {form_translucent},
+  unit_Main in 'unit_Main.pas' {frmMain};
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.MainFormOnTaskbar := True;
+{  Application.MainFormOnTaskbar := True;
     begin
 
      form_login := Tform_login.Create(nil);
@@ -30,7 +31,9 @@ begin
      form_login.Hide;
      form_login.Free;
 
-    end;
+    end;      }
+  Application.CreateForm(TfrmMain, frmMain);
+
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(Tform_menssagens, form_menssagens);
   Application.CreateForm(TfrmProgressBar, frmProgressBar);
