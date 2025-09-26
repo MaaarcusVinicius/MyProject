@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Data.DB, DBAccess, Ora,
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, DAScript, OraScript,
-  Vcl.Imaging.pngimage, Vcl.WinXCtrls, Vcl.CategoryButtons;
+  Vcl.Imaging.pngimage, Vcl.WinXCtrls, Vcl.CategoryButtons, System.Actions,
+  Vcl.ActnList, System.ImageList, Vcl.ImgList;
 
 type
   TfrmMain = class(TForm)
@@ -27,7 +28,7 @@ type
     lbl_nomeUsuario: TLabel;
     img_logoEmpresaAzul: TImage;
     tmr_trocaLogoEmpresa: TTimer;
-    SplitView1: TSplitView;
+    SplitViewMenu: TSplitView;
     CategoryButtonsGrupo: TCategoryButtons;
     pnl_close: TPanel;
     pnl_sairNome: TPanel;
@@ -35,6 +36,31 @@ type
     img_sairVermelho: TImage;
     img_sairBranco: TImage;
     lbl_close: TLabel;
+    actlst1: TActionList;
+    ImageList1: TImageList;
+    act_Empresas: TAction;
+    act_Movimentacao: TAction;
+    act_Configuracao: TAction;
+    SplitViewEmpresas: TSplitView;
+    pnl_subMenu: TPanel;
+    lbl_subMenuEmpresas: TLabel;
+    FlowPanelEmpresas: TFlowPanel;
+    btn_deletandoEmpresa: TSpeedButton;
+    btn_trocandoEmpresa: TSpeedButton;
+    btn_editandoEmpresa: TSpeedButton;
+    btn_vago: TSpeedButton;
+    btn_fecharMenuEmpresas: TSpeedButton;
+    ImageList2: TImageList;
+    actlst2: TActionList;
+    action_TrocandoEmpresa: TAction;
+    action_deletandoEmpresa: TAction;
+    action_editandoEmpresa: TAction;
+    action_vago: TAction;
+    action_fecharMenu: TAction;
+    SplitViewMovimento: TSplitView;
+    FlowPanelMovimento: TFlowPanel;
+    action_configBD: TAction;
+    btn_configBD: TSpeedButton;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -51,6 +77,17 @@ type
     procedure img_sairVermelhoMouseLeave(Sender: TObject);
     procedure lbl_closeMouseEnter(Sender: TObject);
     procedure lbl_closeMouseLeave(Sender: TObject);
+    procedure act_MovimentacaoExecute(Sender: TObject);
+    procedure act_EmpresasExecute(Sender: TObject);
+    procedure act_ConfiguracaoExecute(Sender: TObject);
+    procedure act_ConfiguracaoBDExecute(Sender: TObject);
+    procedure btn_testeClick(Sender: TObject);
+    procedure action_TrocandoEmpresaExecute(Sender: TObject);
+    procedure action_deletandoEmpresaExecute(Sender: TObject);
+    procedure action_editandoEmpresaExecute(Sender: TObject);
+    procedure action_vagoExecute(Sender: TObject);
+    procedure action_fecharMenuExecute(Sender: TObject);
+    procedure action_configBDExecute(Sender: TObject);
   private
     FMostrarBranco: Boolean;
     ActiveAlternaLogo: Boolean;
@@ -139,42 +176,97 @@ begin
   OutputDebugString(PChar(Format('tmr tick: Active=%s ShowBranco=%s', [BoolToStr(ActiveAlternaLogo, True), BoolToStr(FMostrarBranco, True)])));
 end;
 
+procedure TfrmMain.action_configBDExecute(Sender: TObject);
+begin
+ ShowMessage('Configuração Oracle');
+end;
+
+procedure TfrmMain.action_deletandoEmpresaExecute(Sender: TObject);
+begin
+ ShowMessage('Deletando Empresas');
+end;
+
+procedure TfrmMain.action_editandoEmpresaExecute(Sender: TObject);
+begin
+ ShowMessage('Editando Empresas');
+end;
+
+procedure TfrmMain.action_fecharMenuExecute(Sender: TObject);
+begin
+  SplitViewEmpresas.Close
+end;
+
+procedure TfrmMain.action_TrocandoEmpresaExecute(Sender: TObject);
+begin
+ ShowMessage('Trocando Empresas');
+end;
+
+procedure TfrmMain.action_vagoExecute(Sender: TObject);
+begin
+ ShowMessage('Opção Vaga');
+end;
+
+procedure TfrmMain.act_ConfiguracaoBDExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmMain.act_ConfiguracaoExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmMain.act_EmpresasExecute(Sender: TObject);
+begin
+ //SplitView2.Open;
+
+ if SplitViewEmpresas.Opened then
+   SplitViewEmpresas.close else SplitViewEmpresas.Open;
+end;
+
+procedure TfrmMain.act_MovimentacaoExecute(Sender: TObject);
+begin
+ if SplitViewMovimento.Opened then
+   SplitViewMovimento.close else SplitViewMovimento.Open;
+end;
+
 procedure TfrmMain.AlternarAtivo;
 begin
   ActiveAlternaLogo := not ActiveAlternaLogo;
   tmr_trocaLogoEmpresa.Enabled := ActiveAlternaLogo;
+end;
 
-  // debug
-  OutputDebugString(PChar('AlternarAtivo: ActiveAlternaLogo = ' + BoolToStr(ActiveAlternaLogo, True)));
+procedure TfrmMain.btn_testeClick(Sender: TObject);
+begin
+ ShowMessage('testes');
 end;
 
 procedure TfrmMain.img_logoEmpresaBrancoClick(Sender: TObject);
 begin
-  // quando usuário clicar na imagem branca pause/retome a alternância
+  // quando usuário clicar na imagem branca pause/retorna a alternância
   AlternarAtivo;
 end;
 
 procedure TfrmMain.img_logoEmpresaAzulClick(Sender: TObject);
 begin
-  // quando usuário clicar na imagem azul pause/retome a alternância
+  // quando usuário clicar na imagem branca pause/retorna a alternância
   AlternarAtivo;
 end;
 
 procedure TfrmMain.img_logoEnableClick(Sender: TObject);
 begin
-  if SplitView1.Opened then
-    SplitView1.Close
+  if SplitViewMenu.Opened then
+    SplitViewMenu.Close
   else
-    SplitView1.Open;
+    SplitViewMenu.Open;
 
 
-  if  SplitView1.Opened then
+  if  SplitViewMenu.Opened then
   lbl_close.Visible := false
   else  lbl_close.Visible := True;
 
-
-
-
+  // fecha SubMenu empresas
+   SplitViewEmpresas.close;
 
 end;
 
@@ -241,7 +333,7 @@ end;
 
 procedure TfrmMain.lbl_closeMouseLeave(Sender: TObject);
 begin
-    img_sairBranco.Visible :=True;
+  img_sairBranco.Visible :=True;
   img_sairVermelho.Visible :=False;
   lbl_close.Font.Color := clWhite;
 end;

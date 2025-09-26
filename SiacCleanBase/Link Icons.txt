@@ -1,0 +1,23 @@
+#Close
+https://pictogrammers.com/library/mdi/icon/close-box-multiple-outline/
+
+#User Loguout
+https://pictogrammers.com/library/mdi/icon/account-convert/
+
+#Menu Retrátil
+https://pictogrammers.com/library/mdi/icon/menu-close/
+
+#Estoques
+https://pictogrammers.com/library/mdi/icon/forklift/
+
+#Empresas
+https://pictogrammers.com/library/mdi/icon/window-shutter-cog/
+
+#Troca Empresa
+https://pictogrammers.com/library/mdi/icon/bank-transfer/
+
+#Configurações
+https://pictogrammers.com/library/mdi/icon/cogs/
+
+#Banco de dados Configurações
+https://pictogrammers.com/library/mdi/icon/database-cog-outline/

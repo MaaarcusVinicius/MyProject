@@ -22,7 +22,7 @@ uses
 
 begin
   Application.Initialize;
-{  Application.MainFormOnTaskbar := True;
+  {Application.MainFormOnTaskbar := True;
     begin
 
      form_login := Tform_login.Create(nil);
@@ -31,7 +31,7 @@ begin
      form_login.Hide;
      form_login.Free;
 
-    end;      }
+    end;}
   Application.CreateForm(TfrmMain, frmMain);
 
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
