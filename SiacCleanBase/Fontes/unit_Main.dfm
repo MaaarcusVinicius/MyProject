@@ -4,7 +4,7 @@ object frmMain: TfrmMain
   Top = 0
   Caption = 'Siac Clean Base'
   ClientHeight = 801
-  ClientWidth = 1037
+  ClientWidth = 1095
   Color = clSkyBlue
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,12 +12,13 @@ object frmMain: TfrmMain
   Font.Name = 'Segoe UI'
   Font.Style = []
   WindowState = wsMaximized
+  OnClose = FormClose
   OnShow = FormShow
   TextHeight = 15
   object pnl_topo: TPanel
     Left = 0
     Top = 0
-    Width = 1037
+    Width = 1095
     Height = 57
     Align = alTop
     BevelOuter = bvNone
@@ -69,6 +70,7 @@ object frmMain: TfrmMain
             841201A023007404808E00D011003AC1033E00E028B93163C91AF20000000049
             454E44AE426082}
           OnClick = img_logoEnableClick
+          OnMouseEnter = img_logoEnableMouseEnter
           OnMouseLeave = img_logoEnableMouseLeave
           ExplicitLeft = -16
           ExplicitTop = -16
@@ -100,10 +102,7 @@ object frmMain: TfrmMain
             A131EB72DABE0000000049454E44AE426082}
           Visible = False
           OnMouseEnter = img_logoDesableMouseEnter
-          ExplicitLeft = -16
-          ExplicitTop = -16
-          ExplicitWidth = 105
-          ExplicitHeight = 105
+          ExplicitLeft = -3
         end
       end
       object pnl_logoNome: TPanel
@@ -345,7 +344,7 @@ object frmMain: TfrmMain
       end
     end
     object pnl_User: TPanel
-      Left = 701
+      Left = 759
       Top = 0
       Width = 336
       Height = 57
@@ -729,7 +728,7 @@ object frmMain: TfrmMain
     end
   end
   object SplitViewEmpresas: TSplitView
-    Left = 500
+    Left = 200
     Top = 57
     Width = 0
     Height = 744
@@ -748,7 +747,6 @@ object frmMain: TfrmMain
       Color = 6645093
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 300
       object btn_deletandoEmpresa: TSpeedButton
         AlignWithMargins = True
         Left = 2
@@ -841,7 +839,7 @@ object frmMain: TfrmMain
         Cursor = crHandPoint
         Margins.Left = 2
         Margins.Right = 2
-        Action = action_fecharMenu
+        Action = action_fecharMenuEmpresas
         Caption = 'Sair Menu'
         Images = ImageList2
         Flat = True
@@ -860,17 +858,15 @@ object frmMain: TfrmMain
       Width = 0
       Height = 41
       Align = alTop
-      BevelOuter = bvNone
       Color = 5460819
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 300
       object lbl_subMenuEmpresas: TLabel
         AlignWithMargins = True
-        Left = 3
-        Top = 6
-        Width = -6
-        Height = 32
+        Left = 4
+        Top = 7
+        Width = 120
+        Height = 30
         Margins.Top = 6
         Align = alClient
         Alignment = taCenter
@@ -881,7 +877,6 @@ object frmMain: TfrmMain
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitWidth = 120
         ExplicitHeight = 21
       end
     end
@@ -889,39 +884,156 @@ object frmMain: TfrmMain
   object SplitViewMovimento: TSplitView
     Left = 200
     Top = 57
-    Width = 300
+    Width = 0
     Height = 744
     Color = 6645093
+    Opened = False
     OpenedWidth = 300
     Placement = svpLeft
     TabOrder = 3
     object FlowPanelMovimento: TFlowPanel
       Left = 0
       Top = 0
-      Width = 300
+      Width = 0
       Height = 744
-      Align = alClient
+      Align = alTop
       BevelOuter = bvNone
       Color = 6645093
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 72
-      ExplicitTop = 296
-      ExplicitWidth = 185
-      ExplicitHeight = 41
+      object pnl_Movimentacao: TPanel
+        Left = 0
+        Top = 0
+        Width = 297
+        Height = 41
+        Align = alTop
+        Color = 5460819
+        ParentBackground = False
+        TabOrder = 0
+        object lbl_menuMovimentacao: TLabel
+          AlignWithMargins = True
+          Left = 4
+          Top = 6
+          Width = 289
+          Height = 31
+          Margins.Top = 5
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'View Base Movimenta'#231#227'o'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 196
+          ExplicitHeight = 21
+        end
+      end
+      object btn_FecharMenuMovimento: TSpeedButton
+        AlignWithMargins = True
+        Left = 2
+        Top = 44
+        Width = 145
+        Height = 73
+        Cursor = crHandPoint
+        Margins.Left = 2
+        Margins.Right = 2
+        Action = action_fecharMenuMovimentacao
+        Images = ImageList2
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Layout = blGlyphTop
+        ParentFont = False
+      end
+    end
+  end
+  object SplitViewConfigBD: TSplitView
+    Left = 200
+    Top = 57
+    Width = 0
+    Height = 744
+    Color = 6645093
+    Opened = False
+    OpenedWidth = 300
+    Placement = svpLeft
+    TabOrder = 4
+    object FlowPanelConfigBD: TFlowPanel
+      Left = 0
+      Top = 0
+      Width = 0
+      Height = 744
+      Align = alTop
+      BevelOuter = bvNone
+      Color = 6645093
+      ParentBackground = False
+      TabOrder = 0
+      object pnl_menuConfig: TPanel
+        Left = 0
+        Top = 0
+        Width = 297
+        Height = 41
+        Align = alTop
+        Color = 5460819
+        ParentBackground = False
+        TabOrder = 0
+        object lbl_MenuConfig: TLabel
+          AlignWithMargins = True
+          Left = 4
+          Top = 6
+          Width = 289
+          Height = 31
+          Margins.Top = 5
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Configura'#231#245'es Banco de Dados'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 236
+          ExplicitHeight = 21
+        end
+      end
       object btn_configBD: TSpeedButton
         AlignWithMargins = True
         Left = 2
-        Top = 3
+        Top = 44
         Width = 145
         Height = 73
         Cursor = crHandPoint
         Margins.Left = 2
         Margins.Right = 2
         Action = action_configBD
-        Caption = 'Banco de Dados'
+        Caption = 'Configura'#231#227'o BD'
         Images = ImageList2
         HotImageIndex = 5
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Layout = blGlyphTop
+        ParentFont = False
+      end
+      object btn_FecharConfigMenu: TSpeedButton
+        AlignWithMargins = True
+        Left = 2
+        Top = 123
+        Width = 145
+        Height = 73
+        Cursor = crHandPoint
+        Margins.Left = 2
+        Margins.Right = 2
+        Action = action_fecharMenuConfig
+        Images = ImageList2
         Flat = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -934,13 +1046,13 @@ object frmMain: TfrmMain
     end
   end
   object tmr_trocaLogoEmpresa: TTimer
-    Left = 944
+    Left = 1008
     Top = 80
   end
   object actlst1: TActionList
     Images = ImageList1
-    Left = 608
-    Top = 136
+    Left = 776
+    Top = 72
     object act_Empresas: TAction
       Caption = 'Empresas'
       ImageIndex = 0
@@ -962,8 +1074,8 @@ object frmMain: TfrmMain
     DrawingStyle = dsTransparent
     Height = 32
     Width = 32
-    Left = 608
-    Top = 200
+    Left = 776
+    Top = 128
     Bitmap = {
       494C010104000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
@@ -2032,8 +2144,8 @@ object frmMain: TfrmMain
     DrawingStyle = dsTransparent
     Height = 32
     Width = 32
-    Left = 872
-    Top = 368
+    Left = 848
+    Top = 72
     Bitmap = {
       494C010105000800040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
@@ -3100,8 +3212,8 @@ object frmMain: TfrmMain
   end
   object actlst2: TActionList
     Images = ImageList2
-    Left = 872
-    Top = 440
+    Left = 848
+    Top = 128
     object action_TrocandoEmpresa: TAction
       Caption = 'Troca Empresa'
       ImageIndex = 3
@@ -3122,10 +3234,20 @@ object frmMain: TfrmMain
       ImageIndex = 3
       OnExecute = action_vagoExecute
     end
-    object action_fecharMenu: TAction
+    object action_fecharMenuMovimentacao: TAction
       Caption = 'Fechar Menu'
       ImageIndex = 2
-      OnExecute = action_fecharMenuExecute
+      OnExecute = action_fecharMenuMovimentacaoExecute
+    end
+    object action_fecharMenuConfig: TAction
+      Caption = 'Fechar Menu'
+      ImageIndex = 2
+      OnExecute = action_fecharMenuConfigBDExecute
+    end
+    object action_fecharMenuEmpresas: TAction
+      Caption = 'Fechar Menu'
+      ImageIndex = 2
+      OnExecute = action_fecharMenuEmpresasExecute
     end
     object action_configBD: TAction
       Caption = 'action_configBD'

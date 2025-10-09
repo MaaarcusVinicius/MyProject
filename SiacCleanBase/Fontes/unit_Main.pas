@@ -56,11 +56,21 @@ type
     action_deletandoEmpresa: TAction;
     action_editandoEmpresa: TAction;
     action_vago: TAction;
-    action_fecharMenu: TAction;
+    action_fecharMenuEmpresas: TAction;
     SplitViewMovimento: TSplitView;
     FlowPanelMovimento: TFlowPanel;
     action_configBD: TAction;
+    pnl_Movimentacao: TPanel;
+    lbl_menuMovimentacao: TLabel;
+    btn_FecharMenuMovimento: TSpeedButton;
+    SplitViewConfigBD: TSplitView;
+    FlowPanelConfigBD: TFlowPanel;
+    pnl_menuConfig: TPanel;
+    lbl_MenuConfig: TLabel;
     btn_configBD: TSpeedButton;
+    btn_FecharConfigMenu: TSpeedButton;
+    action_fecharMenuMovimentacao: TAction;
+    action_fecharMenuConfig: TAction;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -86,15 +96,23 @@ type
     procedure action_deletandoEmpresaExecute(Sender: TObject);
     procedure action_editandoEmpresaExecute(Sender: TObject);
     procedure action_vagoExecute(Sender: TObject);
-    procedure action_fecharMenuExecute(Sender: TObject);
+    procedure action_fecharMenuEmpresasExecute(Sender: TObject);
+    procedure action_fecharMenuConfigBDExecute(Sender: TObject);
+    procedure action_fecharMenuMovimentacaoExecute(Sender: TObject);
     procedure action_configBDExecute(Sender: TObject);
+    procedure AlternaSplitView(Target: TSplitView);
+    procedure img_logoEnableMouseEnter(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+
   private
     FMostrarBranco: Boolean;
     ActiveAlternaLogo: Boolean;
     procedure AlternarAtivo;
     procedure EnsureEventBindings;
+
   public
-    { Public declarations }
+    function fnc_FecharSistema: Boolean;
+
   end;
 
 var
@@ -118,6 +136,11 @@ begin
 
   if not Assigned(img_logoEmpresaAzul.OnClick) then
     img_logoEmpresaAzul.OnClick := img_logoEmpresaAzulClick;
+end;
+
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  fnc_FecharSistema()
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
@@ -148,7 +171,7 @@ begin
   img_logoEmpresaAzul.Update;
 
    // debug
-  OutputDebugString(PChar('FormShow: Timer enabled = ' + BoolToStr(tmr_trocaLogoEmpresa.Enabled, True)));
+  //OutputDebugString(PChar('FormShow: Timer enabled = ' + BoolToStr(tmr_trocaLogoEmpresa.Enabled, True)));
 end;
 
 procedure TfrmMain.tmr_trocaLogoEmpresaTimer(Sender: TObject);
@@ -191,10 +214,22 @@ begin
  ShowMessage('Editando Empresas');
 end;
 
-procedure TfrmMain.action_fecharMenuExecute(Sender: TObject);
+procedure TfrmMain.action_fecharMenuEmpresasExecute(Sender: TObject);
 begin
-  SplitViewEmpresas.Close
+  SplitViewEmpresas.Close;       // fecharMenuEmpresas
 end;
+
+procedure TfrmMain.action_fecharMenuConfigBDExecute(Sender: TObject);
+begin
+  SplitViewConfigBD.Close;       //
+end;
+
+
+procedure TfrmMain.action_fecharMenuMovimentacaoExecute(Sender: TObject);
+begin
+  SplitViewMovimento.Close;       //
+end;
+
 
 procedure TfrmMain.action_TrocandoEmpresaExecute(Sender: TObject);
 begin
@@ -213,7 +248,8 @@ end;
 
 procedure TfrmMain.act_ConfiguracaoExecute(Sender: TObject);
 begin
-//
+ if SplitViewConfigBD.Opened then
+   SplitViewConfigBD.close else SplitViewConfigBD.Open;
 end;
 
 procedure TfrmMain.act_EmpresasExecute(Sender: TObject);
@@ -255,19 +291,39 @@ end;
 
 procedure TfrmMain.img_logoEnableClick(Sender: TObject);
 begin
-  if SplitViewMenu.Opened then
+   AlternaSplitView(SplitViewMenu);
+
+  {if SplitViewMenu.Opened then
     SplitViewMenu.Close
   else
     SplitViewMenu.Open;
 
+  if SplitViewMovimento.Opened then
+    SplitViewMovimento.Close
+  else
+    SplitViewMovimento.Open;
+
+  if SplitViewConfigBD.Opened then
+    SplitViewConfigBD.Close
+  else
+    SplitViewConfigBD.Open;
+
 
   if  SplitViewMenu.Opened then
   lbl_close.Visible := false
-  else  lbl_close.Visible := True;
+  else  lbl_close.Visible := True; }
 
   // fecha SubMenu empresas
-   SplitViewEmpresas.close;
 
+  // SplitViewEmpresas.close;
+
+end;
+
+procedure TfrmMain.img_logoEnableMouseEnter(Sender: TObject);
+begin
+    if  SplitViewMenu.Opened then
+  lbl_close.Visible :=  True
+  else  lbl_close.Visible := false;
 end;
 
 procedure TfrmMain.img_logoEnableMouseLeave(Sender: TObject);
@@ -312,7 +368,7 @@ procedure TfrmMain.lbl_closeClick(Sender: TObject);
 var
   returnUsuario: Boolean;
 begin
-  returnUsuario := fnc_criar_menssagem('FECHAR SISTEMA',
+{  returnUsuario := fnc_criar_menssagem('FECHAR SISTEMA',
   'A FUNÇÃO PARA FECHAR O SISTEMA FOI ACIONADA',
   'DESEJA REALMENTE SAIR DO SISTEMA ?',
   ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
@@ -321,7 +377,9 @@ begin
   if not returnUsuario then
     Exit;
 
-  Application.Terminate;
+  Application.Terminate;   }
+
+   fnc_FecharSistema();
 end;
 
 procedure TfrmMain.lbl_closeMouseEnter(Sender: TObject);
@@ -342,7 +400,7 @@ procedure TfrmMain.img_closeClick(Sender: TObject);
 var
   returnUsuario: Boolean;
 begin
-  returnUsuario := fnc_criar_menssagem('FECHAR SISTEMA',
+ { returnUsuario := fnc_criar_menssagem('FECHAR SISTEMA',
   'A FUNÇÃO PARA FECHAR O SISTEMA FOI ACIONADA',
   'DESEJA REALMENTE SAIR DO SISTEMA ?',
   ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
@@ -351,14 +409,50 @@ begin
   if not returnUsuario then
     Exit;
 
-  Application.Terminate;
-
+  Application.Terminate; }
+  fnc_FecharSistema();
 end;
 
 procedure TfrmMain.img_logoDesableMouseEnter(Sender: TObject);
 begin
   img_logoEnable.Visible := True;
   img_logoDesable.Visible := False;
+end;
+
+procedure TfrmMain.AlternaSplitView(Target: TSplitView);
+var
+  i: Integer;
+begin
+  // Fecha todos os SplitViews do form
+  for i := 0 to Self.ComponentCount - 1 do
+    if Self.Components[i] is TSplitView then
+      TSplitView(Self.Components[i]).Close;
+
+  // Se o alvo não estava aberto, abre ele
+  if not Target.Opened then
+    Target.Open;
+
+  // Atualiza o label
+  //lbl_close.Visible := not Target.Opened;
+end;
+
+function TfrmMain.fnc_FecharSistema: Boolean;
+begin
+  Result := fnc_criar_menssagem(
+    'FECHAR SISTEMA',
+    'A FUNÇÃO PARA FECHAR O SISTEMA FOI ACIONADA',
+    'DESEJA REALMENTE SAIR DO SISTEMA ?',
+    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
+    'ERRO'
+  );
+
+  // Se o usuário clicou em "Não" ou "Cancelar", interrompe
+  if not Result then
+    Exit(False);
+
+  // Caso contrário, fecha o sistema
+  Application.Terminate;
+  Result := True;
 end;
 
 end.
