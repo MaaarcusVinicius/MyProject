@@ -1,4 +1,4 @@
-unit unit_ProgressBar;
+unit uViewProgressBar;
 
 interface
 

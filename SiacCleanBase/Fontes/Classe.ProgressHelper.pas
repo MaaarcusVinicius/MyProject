@@ -1,10 +1,10 @@
-unit unit_ProgressHelper;
+unit Classe.ProgressHelper;
 
 interface
 
 uses
   System.SysUtils, System.Classes, Vcl.Forms,
-  unit_ProgressBar; // usa o form já criado
+  uViewProgressBar; // usa o form já criado
 
 type
   TProgressHelper = class

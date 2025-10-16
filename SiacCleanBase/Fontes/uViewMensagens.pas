@@ -1,4 +1,4 @@
-unit unit_mensagens;
+unit uViewMensagens;
 
 interface
 
@@ -11,7 +11,7 @@ uses
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client;
 
 type
-  Tform_menssagens = class(TForm)
+  TViewMensagens = class(TForm)
     pnl_fundo: TPanel;
     shp_fundo: TShape;
     pnl_linhaCabecario: TPanel;
@@ -38,31 +38,31 @@ type
   end;
 
 var
-  form_menssagens: Tform_menssagens;
+  ViewMensagens: TViewMensagens;
 
 implementation
 
 {$R *.dfm}
 
-procedure Tform_menssagens.btn_naoClick(Sender: TObject);
+procedure TViewMensagens.btn_naoClick(Sender: TObject);
 begin
   bRespostaMSG := False;
   close;
   Exit;
 end;
 
-procedure Tform_menssagens.btn_simClick(Sender: TObject);
+procedure TViewMensagens.btn_simClick(Sender: TObject);
 begin
   bRespostaMSG := True;
   close;
 end;
 
-procedure Tform_menssagens.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TViewMensagens.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
 end;
 
-procedure Tform_menssagens.FormKeyDown(Sender: TObject; var Key: Word;
+procedure TViewMensagens.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 
@@ -74,7 +74,7 @@ begin
 
 end;
 
-procedure Tform_menssagens.FormShow(Sender: TObject);
+procedure TViewMensagens.FormShow(Sender: TObject);
 begin
   bRespostaMSG := False;
 

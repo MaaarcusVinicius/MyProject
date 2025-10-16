@@ -140,7 +140,7 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="C:\Sistemas\Repositorio\VarGlobal.pas"/>
-        <DCCReference Include="unit_login.pas">
+        <DCCReference Include="uViewlogin.pas">
             <Form>form_login</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -148,27 +148,22 @@
             <Form>form_empresaDados</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_mensagens.pas">
-            <Form>form_menssagens</Form>
+        <DCCReference Include="uViewMensagens.pas">
+            <Form>ViewMensagens</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_funcoes.pas"/>
+        <DCCReference Include="Classe.funcoes.pas"/>
         <DCCReference Include="classe.uScriptGeneratorTriggers.pas"/>
-        <DCCReference Include="unit_ProgressBar.pas">
+        <DCCReference Include="uViewProgressBar.pas">
             <Form>frmProgressBar</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_ProgressHelper.pas"/>
+        <DCCReference Include="Classe.ProgressHelper.pas"/>
         <DCCReference Include="classe.uScriptGeneratorDeleteEmpresas.pas"/>
         <DCCReference Include="classe.uScriptGeneratorTrocaEmpresas.pas"/>
-        <DCCReference Include="unit_containerLogin.pas">
-            <Form>form_translucent</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="uViewMain.pas">
+            <Form>ViewMain</Form>
         </DCCReference>
-        <DCCReference Include="unit_Main.pas">
-            <Form>frmMain</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
+        <DCCReference Include="classe.BancoDados.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

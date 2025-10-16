@@ -1,4 +1,4 @@
-unit unit_login;
+unit uViewlogin;
 
 interface
 
@@ -43,7 +43,7 @@ var
 implementation
 
 uses
-  unit_Main;
+  uViewMain;
 
 {$R *.dfm}
 

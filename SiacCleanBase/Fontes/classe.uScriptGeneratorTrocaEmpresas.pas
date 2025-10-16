@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DAScript,
   OraScript, Data.DB, DBAccess, Ora, OraSmart, MemDS, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.Buttons, unit_funcoes, Vcl.StdCtrls, Vcl.Mask;
+  Vcl.Buttons, Classe.funcoes, Vcl.StdCtrls, Vcl.Mask;
 
 
 

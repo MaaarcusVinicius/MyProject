@@ -1,4 +1,4 @@
-object form_menssagens: Tform_menssagens
+object ViewMensagens: TViewMensagens
   Left = 0
   Top = 0
   BorderStyle = bsNone
@@ -58,7 +58,7 @@ object form_menssagens: Tform_menssagens
     object lbl_titulo_menssagem: TLabel
       Left = 127
       Top = 65
-      Width = 530
+      Width = 45
       Height = 21
       Caption = 'T'#237'tulo'
       Font.Charset = DEFAULT_CHARSET

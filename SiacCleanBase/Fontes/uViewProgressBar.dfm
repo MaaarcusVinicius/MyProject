@@ -53,8 +53,8 @@ object frmProgressBar: TfrmProgressBar
       AlignWithMargins = True
       Left = 9
       Top = 9
-      Width = 513
-      Height = 40
+      Width = 189
+      Height = 28
       Alignment = taCenter
       Caption = 'Aguarde execu'#231#227'o...'
       Color = clRed

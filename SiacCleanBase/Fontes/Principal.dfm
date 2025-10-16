@@ -14,7 +14,7 @@ object frmPrincipal: TfrmPrincipal
   WindowState = wsMaximized
   OnShow = FormShow
   TextHeight = 15
-  object Shape2: TShape
+  object shape2: TShape
     Left = 0
     Top = 0
     Width = 1216

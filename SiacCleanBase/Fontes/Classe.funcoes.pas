@@ -1,33 +1,26 @@
-unit unit_funcoes;
+unit Classe.funcoes;
 
 interface
 
 uses
-  unit_mensagens, Windows, Messages, Classes, Graphics, Vcl.Controls, Vcl.Forms,
+  uViewmensagens, Windows, Messages, Classes, Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, System.SysUtils, FireDAC.Comp.Client,
   Vcl.DBCtrls, IdHashMessageDigest, Vcl.ComCtrls, Data.DB, DBAccess, Ora,
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
   DAScript, OraScript;
 
 function Criptografia(Senha, Chave: string): string;
-
 function fnc_criar_menssagem(TituloJanela, TituloMSG, MSG, Icone, Tipo: string): boolean;
-
 procedure prcValidarCamposObrigatorios(Form: TForm);
-
 function TrocaCaracterEspecial(aTexto: string; aLimExt: boolean = False): string;
-
 function fnc_sonumeros(AString: string): string;
-
 function fnc_proximo_codigo(Tabela, Campo: string): Integer;
-
 function MD5(const Value: string): string;
-
 procedure MakeRounded(Control: TWinControl);
 
 var
-  var_gbl_nome_usuario: string;
-  var_gbl_id_usuario: integer;
+  var_gbl_empresa_id: string;
+  var_gbl_razao_social: integer;
 
 implementation
 
@@ -58,17 +51,17 @@ begin
 
   Result := False;
 
-  form_menssagens := Tform_menssagens.Create(nil);
+  ViewMensagens := TViewMensagens.Create(nil);
 
-  form_menssagens.sTituloJanela := TituloJanela;
-  form_menssagens.sTituloMSG := TituloMSG;
-  form_menssagens.sMSG := MSG;
-  form_menssagens.sCaminhoIcone := Icone;
-  form_menssagens.sTipo := Tipo;
+  ViewMensagens.sTituloJanela := TituloJanela;
+  ViewMensagens.sTituloMSG := TituloMSG;
+  ViewMensagens.sMSG := MSG;
+  ViewMensagens.sCaminhoIcone := Icone;
+  ViewMensagens.sTipo := Tipo;
 
-  form_menssagens.ShowModal;
+  ViewMensagens.ShowModal;
 
-  Result := form_menssagens.bRespostaMSG;
+  Result := ViewMensagens.bRespostaMSG;
 
 end;
 

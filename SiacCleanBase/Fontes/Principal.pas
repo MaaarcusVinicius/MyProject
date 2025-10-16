@@ -7,11 +7,11 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Data.DB, DBAccess, Ora,
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
-  DAScript, OraScript, ACBrBase, ACBrEnterTab, unit_Main;
+  DAScript, OraScript, ACBrBase, ACBrEnterTab, uViewMain;
 
 type
   TfrmPrincipal = class(TForm)
-    Shape2: TShape;
+    shape2: TShape;
     BtDesconectar: TBitBtn;
     BtConectar: TBitBtn;
     eServidor: TEdit;
@@ -47,7 +47,7 @@ type
     procedure dbPrincipalEmpresasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btn_editEmpresaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btn_criaMainClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -98,15 +98,6 @@ begin
   end;
 end;
 
-procedure TfrmPrincipal.btn_criaMainClick(Sender: TObject);
-begin
-    try
-      frmMain := TfrmMain.Create(nil);
-    finally
-      frmMain.Destroy;
-    end;
-end;
-
 procedure TfrmPrincipal.btn_editEmpresaClick(Sender: TObject);
 var
   vEmpresaID: string;
@@ -145,9 +136,11 @@ begin
     form_empresaDados.qryEmpresas.Open;
 
      // Centralizar em relação ao painel pnl_fundo_normal
-    form_empresaDados.Left := pnl_fundo_normal.Left + (pnl_fundo_normal.Width - form_empresaDados.Width) div 2;
+    form_empresaDados.Left := pnl_fundo_normal.Left +
+    (pnl_fundo_normal.Width - form_empresaDados.Width) div 2;
 
-    form_empresaDados.Top := pnl_fundo_normal.Top + (pnl_fundo_normal.Height - form_empresaDados.Height) div 2;
+    form_empresaDados.Top := pnl_fundo_normal.Top +
+    (pnl_fundo_normal.Height - form_empresaDados.Height) div 2;
 
     form_empresaDados.ShowModal;
     //form_empresaDados.Show;
