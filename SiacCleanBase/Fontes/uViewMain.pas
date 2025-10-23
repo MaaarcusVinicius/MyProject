@@ -75,7 +75,6 @@ type
     PageControl: TPageControl;
     PageInicial: TTabSheet;
     PageTrocaEmpresa: TTabSheet;
-    img_fundo_opacidade: TImage;
     qryEmpresas: TOraQuery;
     qryEmpresasEMPRESA_ID: TStringField;
     qryEmpresasRAZAO_SOCIAL: TStringField;
@@ -98,7 +97,6 @@ type
     LbSenha: TLabel;
     LbServidor: TLabel;
     shape1: TShape;
-    img_fundo: TImage;
     pnl_fundoTrocaEmpresa: TPanel;
     TrocaEmpresa: TGroupBox;
     grpAcoes: TGroupBox;
@@ -120,6 +118,30 @@ type
     chk_saveScriptDeletando: TCheckBox;
     pnl_carregaEmpresa: TPanel;
     pnl_configBancoDados: TPanel;
+    act_Home: TAction;
+    pnl_fundoPrincipal1: TPanel;
+    pnl_fundoPrincipalAlBottom: TPanel;
+    pnl_fundoAbrigaImagem: TPanel;
+    img_fundo: TImage;
+    img_fundo_opacidade: TImage;
+    pnl_btnInfoOracle: TPanel;
+    grp_InfoGerais: TGroupBox;
+    grp_Session: TGroupBox;
+    DBGrid_CarregarSession: TDBGrid;
+    grp_TableSpace: TGroupBox;
+    DBGrid_CarregarTablespaceDiretorio: TDBGrid;
+    DBGrid_CarregarUsuarios: TDBGrid;
+    btn_detalhesBD: TSpeedButton;
+    lbl_versaoOracle: TLabel;
+    DBGrid_CarregarTablespace: TDBGrid;
+    pnl_deleteTriggers: TPanel;
+    Panel2: TPanel;
+    btn_deleteTriggers: TSpeedButton;
+    chk_desativarObjetos: TCheckBox;
+    OraScriptDeleteTriggers: TOraScript;
+    mmo_infoDesativaBD: TMemo;
+    OraScriptDeletandoEmpresa: TOraScript;
+    OraScriptTrocandoEmpresas: TOraScript;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -155,12 +177,24 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure img_logoDesableClick(Sender: TObject);
     procedure img_logoEnableDblClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure BtConectarClick(Sender: TObject);
     procedure BtDesconectarClick(Sender: TObject);
     procedure CtrlBotoes(Modo: Boolean);
-    procedure img_fundo_opacidadeDblClick(Sender: TObject);
     procedure dbPrincipalEmpresasDblClick(Sender: TObject);
+    procedure pnl_carregaEmpresaClick(Sender: TObject);
+    procedure pnl_carregaEmpresaDblClick(Sender: TObject);
+    procedure act_HomeExecute(Sender: TObject);
+    procedure btn_detalhesBDClick(Sender: TObject);
+    procedure btn_deleteTriggersClick(Sender: TObject);
+    procedure DBGrid_CarregarUsuariosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+    procedure DBGrid_CarregarUsuariosCellClick(Column: TColumn);
+    procedure ExecutarOpcaoDeletarUser();
+    procedure DBGrid_CarregarSessionDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGrid_CarregarSessionCellClick(Column: TColumn);
+    procedure ExecutarKillSession();
 
   private
     FMostrarBranco: Boolean;
@@ -179,7 +213,7 @@ var
 implementation
 
 uses
-  Classe.funcoes, VarGlobal, _Biblioteca, uDataModule;
+  Classe.funcoes, VarGlobal, _Biblioteca, uDataModule, Classe.ConsultaBD, classe.uScriptGeneratorDeleteEmpresas, classe.uScriptGeneratorTriggers, classe.uScriptGeneratorTrocaEmpresas, Classe.ProgressHelper, uViewMensagens, uViewProgressBar;
 
 {$R *.dfm}
 
@@ -201,13 +235,21 @@ begin
   fnc_FecharSistema()
 end;
 
-procedure TViewMain.FormCreate(Sender: TObject);
-begin
-  PageControl.ActivePageIndex := 0;
-end;
-
 procedure TViewMain.FormShow(Sender: TObject);
+var
+  iPages: Integer;
 begin
+  // Remover o nome das abas do PageControl
+  begin
+    for iPages := 0 to PageControl.PageCount - 1 do
+    begin
+      PageControl.Pages[iPages].TabVisible := False;
+    end;
+  end;
+
+  // Abre o sistema com a tela Inicial do Programa
+  PageControl.ActivePageIndex := 0;
+
   img_logoDesable.Visible := True;
   img_logoEnable.Visible := False;
 
@@ -232,6 +274,9 @@ begin
    // opcional: força redraw inicial
   img_logoEmpresaBranco.Update;
   img_logoEmpresaAzul.Update;
+
+  //  Deixa invisivel o pnl que carrega as informações do banco de dados
+  pnl_configBancoDados.Visible:= False;
 
   // debug
   //OutputDebugString(PChar('FormShow: Timer enabled = ' + BoolToStr(tmr_trocaLogoEmpresa.Enabled, True)));
@@ -266,18 +311,21 @@ procedure TViewMain.action_TrocandoEmpresaExecute(Sender: TObject);
 begin
   // Acessa o menu Inicial
   PageControl.ActivePageIndex := 1;
+  AlternaSplitViewClose(SplitViewMenu);
 end;
 
 procedure TViewMain.action_configBDExecute(Sender: TObject);
 begin
   // Troca Empresa
   PageControl.ActivePageIndex := 2;
+  AlternaSplitViewClose(SplitViewMenu);
 end;
 
 procedure TViewMain.action_deletandoEmpresaExecute(Sender: TObject);
 begin
   // Deleta Empresa
   PageControl.ActivePageIndex := 3;
+  AlternaSplitViewClose(SplitViewMenu);
 end;
 
 procedure TViewMain.action_editandoEmpresaExecute(Sender: TObject);
@@ -328,6 +376,12 @@ begin
     SplitViewEmpresas.Open;
 end;
 
+procedure TViewMain.act_HomeExecute(Sender: TObject);
+begin
+  PageControl.ActivePageIndex := 0 ;
+  AlternaSplitViewClose(SplitViewMenu);
+end;
+
 procedure TViewMain.act_MovimentacaoExecute(Sender: TObject);
 begin
   if SplitViewMovimento.Opened then
@@ -341,6 +395,128 @@ begin
   ActiveAlternaLogo := not ActiveAlternaLogo;
   tmr_trocaLogoEmpresa.Enabled := ActiveAlternaLogo;
 end;
+
+procedure TViewMain.btn_deleteTriggersClick(Sender: TObject);
+var
+  ScriptGen: TScriptGeneratorTriggers;
+  returnUsuario: Boolean;
+  saveScriptOracle: TStringList;
+  Scripts: TStringList;
+  Progress: TProgressHelper;
+  i: Integer;
+begin
+  ScriptGen := TScriptGeneratorTriggers.Create(DmModule.orsConexao); // já vem com SQL configurado
+  Scripts := TStringList.Create;
+  Progress := TProgressHelper.Create;
+
+  try
+    // 1 - Gera os scripts dinamicamente
+    // Passa para classe o nome do usuario logado
+    ScriptGen.Gerar(Self.eUsuario.Text);
+
+    // Copia os scripts para o TStringList temporário
+    Scripts.Text := ScriptGen.GetScripts;
+
+    // 2 - Mostra progress bar durante a geração
+    Progress.Start(Scripts.Count, 'Gerando scripts...');
+    for i := 0 to Scripts.Count - 1 do
+    begin
+      Progress.Step('Gerando: ' + Scripts[i]);
+    end;
+    Progress.Finish;
+
+    // 3 - Confirmação do usuário antes de executar
+    if Scripts.Count = 0 then Exit;
+
+    returnUsuario := fnc_criar_menssagem('ALTERAÇÃO DE OBJETOS DO BANCO DE DADOS',
+                                         'DESEJA REALMENTE DESATIVAR OS OBJETOS?',
+                                         'ESTE PROCEDIMENTO É REVERSÍVEL',
+                                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                                         'ERRO');
+
+    if not returnUsuario then Exit;
+
+    // 4 - Limpa o OraScript antes de executar
+    OraScriptDeleteTriggers.SQL.Clear;
+
+    // 5 - Inicializa o ProgressBar para execução real
+    Progress.Start(Scripts.Count, 'Executando scripts...');
+
+    // 6 - Executa cada script individualmente
+    for i := 0 to Scripts.Count - 1 do
+    begin
+      OraScriptDeleteTriggers.SQL.Text := Scripts[i];
+      OraScriptDeleteTriggers.Execute;
+
+      // Atualiza ProgressBar com a informação atual
+      Progress.Step('Executando: ' + Scripts[i]);
+    end;
+
+    Progress.Finish;
+
+    // 7 - Mensagem de sucesso
+    fnc_criar_menssagem('ALTERAÇÃO DE OBJETOS DO BANCO DE DADOS',
+                        'OS OBJETOS DO BANCO DE DADOS FORAM DESATIVADOS !!',
+                        'TRIGGER''s E CONSTRAINTS FORAM DESATIVADAS',
+                        ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
+                        'OK');
+
+    // 8 - Salva script em arquivo opcional
+    if chk_desativarObjetos.Checked then
+    begin
+      saveScriptOracle := TStringList.Create;
+      try
+        saveScriptOracle.Text := Scripts.Text;
+        saveScriptOracle.SaveToFile('C:\sqlExport_DesativarTriggers.txt', TEncoding.UTF8);
+      finally
+        saveScriptOracle.Free;
+      end;
+    end;
+
+  finally
+    Scripts.Free;
+    ScriptGen.Free;
+    Progress.Free;
+  end;
+end;
+
+procedure TViewMain.btn_detalhesBDClick(Sender: TObject);
+var
+  FConsultaBD: TClasseConsultaBD;
+begin
+  FConsultaBD := TClasseConsultaBD.Create;
+  try
+    // Exemplo 0: carregar versão do Oracle
+    FConsultaBD.CarregarVersaoOracle(lbl_versaoOracle);
+
+    // Exemplo 1: carregar sessões Ativas
+    FConsultaBD.CarregarSessoesAtivas(DBGrid_CarregarSession);
+
+    // Exemplo 2: carregar tablespace
+     FConsultaBD.CarregarTablespace(DBGrid_CarregarTablespace);
+
+    // Exemplo 3: carregar usuários
+     FConsultaBD.CarregarUsuarios(DBGrid_CarregarUsuarios);
+
+    // Exemplo 3: carregar TableSpace Diretorios
+     FConsultaBD.CarregarBancoTablespaceDiretorio(DBGrid_CarregarTablespaceDiretorio);
+
+    // Exemplo 4: atualizar status
+    // FConsultaBD.AtualizarEmpresaStatus(1, 'ATIVO');
+
+  finally
+   // FConsultaBD.Free;
+  end;
+
+  //  Deixa Visivel o pnl que carrega as informações do banco de dados
+  pnl_configBancoDados.Visible:= True;
+      // Habilitando pnl_deleteTriggers para o usuário
+     Self.pnl_deleteTriggers.Visible := True;
+
+    // Habilitando pnl_configBancoDados para o usuário
+     pnl_configBancoDados.Visible := True;
+end;
+
 
 procedure TViewMain.btn_testeClick(Sender: TObject);
 begin
@@ -435,15 +611,21 @@ begin
   lbl_close.Font.Color := clWhite;
 end;
 
+procedure TViewMain.pnl_carregaEmpresaClick(Sender: TObject);
+begin
+  PageControl.ActivePageIndex := 0;
+  AlternaSplitViewClose(SplitViewMenu);
+end;
+
+procedure TViewMain.pnl_carregaEmpresaDblClick(Sender: TObject);
+begin
+ PageControl.ActivePageIndex := 0;
+ AlternaSplitViewClose(SplitViewMenu);
+end;
+
 procedure TViewMain.img_closeClick(Sender: TObject);
 begin
   fnc_FecharSistema();
-end;
-
-procedure TViewMain.img_fundo_opacidadeDblClick(Sender: TObject);
-begin
-   // if  dbPrincipalEmpresas. then
-
 end;
 
 procedure TViewMain.img_logoDesableClick(Sender: TObject);
@@ -499,18 +681,19 @@ begin
                'Conexão com o banco de dados estabelecida com sucesso!',
                 ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_connection.png', 'OK');
 
-    // Volta o foco do usuário para a tela incial, seleção da empresa.
-    PageControl.ActivePageIndex := 0;
+    {// Volta o foco do usuário para a tela incial, seleção da empresa.
+     PageControl.ActivePageIndex := 0;
+     AlternaSplitViewClose(SplitViewMenu);
 
-    // Seta o cursor do mouse para o DbGridEmpresas
-    dbPrincipalEmpresas.SetFocus;
+    //Seta o cursor do mouse para o DbGridEmpresas
+     dbPrincipalEmpresas.SetFocus;   }
 
     // Troca a imagem da tela Main/Tela princial
     img_fundo.Visible := True;
     img_fundo_opacidade.Visible := False;
 
-    // testando
-     pnl_configBancoDados.Color := clBlack;
+    // Habilitando o pnl_btnInfoOracle
+    pnl_btnInfoOracle.Visible := True;
 
   end
   else
@@ -519,7 +702,8 @@ begin
    fnc_criar_menssagem('CONFIGURAÇÃO AO BANCO DE DADOS ORACLE',
                    'Falha na configuração de banco de dados!',
                    'Verifique as configurações de conexão.',
-                    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png', 'OK');
+                    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png',
+                   'OK');
   end;
 
 end;
@@ -533,16 +717,37 @@ begin
     // Troca a imagem da tela Main/Tela princial
     img_fundo_opacidade.Visible := True;
     img_fundo.Visible := False;
+
+    // Desabilitando o pnl_btnInfoOracle
+    pnl_btnInfoOracle.Visible := False;
+    pnl_btnInfoOracle.Visible := False;
+
+    // Desabilitando pnl_deleteTriggers para o usuário
+     Self.pnl_deleteTriggers.Visible := False;
+
+    // Desabilitando pnl_configBancoDados para o usuário
+     pnl_configBancoDados.Visible := False;
+
+     begin
+      // Passa o SQL da empresa Selecionada para o form responsavel pela edição da empresa
+       pnl_carregaEmpresa.Caption := 'Empresa Selecionada: ';
+     end;
+
   end;
 end;
 
 function TViewMain.fnc_FecharSistema: Boolean;
 begin
-  Result := fnc_criar_menssagem('FECHAR SISTEMA', 'A FUNÇÃO PARA FECHAR O SISTEMA FOI ACIONADA', 'DESEJA REALMENTE SAIR DO SISTEMA ?', ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png', 'ERRO');
+  Result := fnc_criar_menssagem('FECHAR SISTEMA',
+                                'A FUNÇÃO PARA FECHAR O SISTEMA FOI ACIONADA',
+                                'DESEJA REALMENTE SAIR DO SISTEMA ?',
+                                ExtractFilePath(Application.ExeName) +
+                                'Arquivos\icones\icon_aviso.png', 'ERRO');
 
   // Se o usuário clicou em "Não" ou "Cancelar", interrompe
   if not Result then
-    Exit(False);
+   // Exit(False);
+   Abort;
 
   // Caso contrário, fecha o sistema
   Application.Terminate;
@@ -569,6 +774,128 @@ begin
 
 end;
 
+procedure TViewMain.DBGrid_CarregarUsuariosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  BtnRect: TRect;
+  TextoBotao: string;
+  Grid: TDBGrid;
+begin
+  Grid := Sender as TDBGrid;
+
+  // Verifica se é a coluna que representa o "botão"
+  if Column.Title.Caption = 'DROP USER' then
+  begin
+    BtnRect := Rect;
+    InflateRect(BtnRect, -6, -1); // pequenas margens internas
+
+    // --- Fundo branco ---
+    Grid.Canvas.Brush.Color := clWhite;
+    Grid.Canvas.FillRect(Rect);
+
+    // --- Moldura cinza do botão ---
+    DrawEdge(Grid.Canvas.Handle, BtnRect, EDGE_RAISED, BF_RECT);
+
+    // --- Texto vermelho ---
+    Grid.Canvas.Font.Color := clRed;
+    Grid.Canvas.Brush.Style := bsClear; // para não sobrepor o texto com cor de fundo
+
+    TextoBotao := 'Remover';
+    DrawText(Grid.Canvas.Handle, PChar(TextoBotao), Length(TextoBotao),
+      BtnRect, DT_CENTER or DT_VCENTER or DT_SINGLELINE);
+
+    // Restaura o brush padrão
+    Grid.Canvas.Brush.Style := bsSolid;
+  end
+  else
+    // Desenho padrão das outras colunas
+    Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TViewMain.ExecutarOpcaoDeletarUser;
+var
+  LConsultaBD: TClasseConsultaBD;
+begin
+  LConsultaBD := TClasseConsultaBD.Create;
+    try
+      LConsultaBD.ExecutarDropUser(DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString);
+    finally
+      LConsultaBD.Destroy
+    end;
+end;
+
+procedure TViewMain.ExecutarKillSession;
+var
+  LConsultaBD: TClasseConsultaBD;
+begin
+  LConsultaBD := TClasseConsultaBD.Create;
+    try
+      LConsultaBD.ExecutarKillSession(DBGrid_CarregarSession.DataSource.DataSet.FieldByName('SID').AsString,
+                                   DBGrid_CarregarSession.DataSource.DataSet.FieldByName('SERIAL').AsString);
+    finally
+      LConsultaBD.Destroy
+    end;
+end;
+
+procedure TViewMain.DBGrid_CarregarSessionCellClick(Column: TColumn);
+begin
+  if Column.Title.Caption = 'KILL' then
+  begin
+   ShowMessage(DBGrid_CarregarSession.DataSource.DataSet.FieldByName('SID').AsString );
+   ExecutarKillSession();
+
+  end;
+end;
+
+procedure TViewMain.DBGrid_CarregarSessionDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  BtnRect: TRect;
+  TextoBotao: string;
+  Grid: TDBGrid;
+begin
+  Grid := Sender as TDBGrid;
+
+  // Verifica se é a coluna que representa o "botão"
+  if Column.Title.Caption = 'KILL' then
+  begin
+    BtnRect := Rect;
+    InflateRect(BtnRect, -6, -1); // pequenas margens internas
+
+    // --- Fundo branco ---
+    Grid.Canvas.Brush.Color := clWhite;
+    Grid.Canvas.FillRect(Rect);
+
+    // --- Moldura cinza do botão ---
+    DrawEdge(Grid.Canvas.Handle, BtnRect, EDGE_RAISED, BF_RECT);
+
+    // --- Texto vermelho ---
+    Grid.Canvas.Font.Color := clRed;
+    Grid.Canvas.Brush.Style := bsClear; // para não sobrepor o texto com cor de fundo
+
+    TextoBotao := 'Remover';
+    DrawText(Grid.Canvas.Handle, PChar(TextoBotao), Length(TextoBotao),
+      BtnRect, DT_CENTER or DT_VCENTER or DT_SINGLELINE);
+
+    // Restaura o brush padrão
+    Grid.Canvas.Brush.Style := bsSolid;
+  end
+  else
+    // Desenho padrão das outras colunas
+    Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+procedure TViewMain.DBGrid_CarregarUsuariosCellClick(Column: TColumn);
+begin
+  if Column.Title.Caption = 'DROP USER' then
+  begin
+
+   ShowMessage(DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString );
+   ExecutarOpcaoDeletarUser();
+
+  end;
+end;
+
+
 procedure TViewMain.dbPrincipalEmpresasDblClick(Sender: TObject);
 begin
   if ( dbPrincipalEmpresas.DataSource.DataSet.IsEmpty ) then
@@ -580,6 +907,7 @@ begin
 
        // REDIRECIONAMENTO PARA A TELA DE CONFIGURAÇÃO
         PageControl.ActivePageIndex := 2;
+        AlternaSplitViewClose(SplitViewMenu);
      end else
 
      begin
@@ -589,8 +917,6 @@ begin
                                       ' / ' +
                                       qryEmpresasRAZAO_SOCIAL.AsString;
      end;
-
-
 end;
 
 end.

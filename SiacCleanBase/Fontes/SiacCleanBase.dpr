@@ -4,8 +4,8 @@ uses
   Vcl.Forms,
   Principal in 'Principal.pas' {frmPrincipal},
   _Biblioteca in 'C:\Sistemas\Repositorio\_Biblioteca.pas',
-  uDataModule in 'uDataModule.pas' {DmModule: TDataModule},
   VarGlobal in 'C:\Sistemas\Repositorio\VarGlobal.pas',
+  uDataModule in 'uDataModule.pas' {DmModule: TDataModule},
   uViewlogin in 'uViewlogin.pas' {form_login},
   unit_empresasDados in 'unit_empresasDados.pas' {form_empresaDados},
   uViewMensagens in 'uViewMensagens.pas' {ViewMensagens},
@@ -16,7 +16,8 @@ uses
   classe.uScriptGeneratorDeleteEmpresas in 'classe.uScriptGeneratorDeleteEmpresas.pas',
   classe.uScriptGeneratorTrocaEmpresas in 'classe.uScriptGeneratorTrocaEmpresas.pas',
   uViewMain in 'uViewMain.pas' {ViewMain},
-  classe.BancoDados in 'classe.BancoDados.pas';
+  classe.BancoDados in 'classe.BancoDados.pas',
+  Classe.ConsultaBD in 'Classe.ConsultaBD.pas';
 
 {$R *.res}
 

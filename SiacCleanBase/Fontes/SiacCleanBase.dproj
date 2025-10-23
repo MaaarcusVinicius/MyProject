@@ -134,12 +134,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="C:\Sistemas\Repositorio\_Biblioteca.pas"/>
+        <DCCReference Include="C:\Sistemas\Repositorio\VarGlobal.pas"/>
         <DCCReference Include="uDataModule.pas">
             <Form>DmModule</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="C:\Sistemas\Repositorio\VarGlobal.pas"/>
         <DCCReference Include="uViewlogin.pas">
             <Form>form_login</Form>
             <FormType>dfm</FormType>
@@ -164,6 +163,7 @@
             <Form>ViewMain</Form>
         </DCCReference>
         <DCCReference Include="classe.BancoDados.pas"/>
+        <DCCReference Include="Classe.ConsultaBD.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
