@@ -155,12 +155,13 @@ end;
 procedure TClasseConsultaBD.CarregarBancoTablespaceDiretorio(ADBEdit: TDBGrid);
 begin
   FBancoTablespaceDiretorio.SetSQL(
-    ' SELECT TABLESPACE_NAME AS "TableSpace_Name",                   '+
+    ' SELECT TABLESPACE_NAME AS "TableSpace_Name",                 '+
     '        C.FILE_NAME AS "Diretório Físico",                    '+
     '        ROUND(BYTES / 1024 / 1024 / 1024, 2) AS "Tamanho GB", '+
     '        C.ONLINE_STATUS AS "OnlineStatus",                    '+
     '        C.AUTOEXTENSIBLE  AS "AutoExtensible"                 '+
-    '   FROM DBA_DATA_FILES C                                      ');
+    '   FROM DBA_DATA_FILES C                                      '+
+    '  ORDER BY TABLESPACE_NAME                                    ');
   FBancoTablespaceDiretorio.ExecutarConsulta;
   ADBEdit.DataSource := FBancoTablespaceDiretorio.GetDataSource;
 end;

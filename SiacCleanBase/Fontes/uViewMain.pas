@@ -213,7 +213,17 @@ var
 implementation
 
 uses
-  Classe.funcoes, VarGlobal, _Biblioteca, uDataModule, Classe.ConsultaBD, classe.uScriptGeneratorDeleteEmpresas, classe.uScriptGeneratorTriggers, classe.uScriptGeneratorTrocaEmpresas, Classe.ProgressHelper, uViewMensagens, uViewProgressBar;
+  Classe.funcoes,
+  VarGlobal,
+  _Biblioteca,
+  uDataModule,
+  Classe.ConsultaBD,
+  classe.uScriptGeneratorDeleteEmpresas,
+  classe.uScriptGeneratorTriggers,
+  classe.uScriptGeneratorTrocaEmpresas,
+  Classe.ProgressHelper,
+  uViewMensagens,
+  uViewProgressBar;
 
 {$R *.dfm}
 

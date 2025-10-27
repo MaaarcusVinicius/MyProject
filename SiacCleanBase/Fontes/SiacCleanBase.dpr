@@ -2,20 +2,20 @@ program SiacCleanBase;
 
 uses
   Vcl.Forms,
+  uViewMain in 'uViewMain.pas' {ViewMain},
   Principal in 'Principal.pas' {frmPrincipal},
-  _Biblioteca in 'C:\Sistemas\Repositorio\_Biblioteca.pas',
-  VarGlobal in 'C:\Sistemas\Repositorio\VarGlobal.pas',
+//  _Biblioteca in 'C:\Sistemas\Repositorio\_Biblioteca.pas',
+//  VarGlobal in 'C:\Sistemas\Repositorio\VarGlobal.pas',
   uDataModule in 'uDataModule.pas' {DmModule: TDataModule},
   uViewlogin in 'uViewlogin.pas' {form_login},
   unit_empresasDados in 'unit_empresasDados.pas' {form_empresaDados},
   uViewMensagens in 'uViewMensagens.pas' {ViewMensagens},
   Classe.funcoes in 'Classe.funcoes.pas',
-  classe.uScriptGeneratorTriggers in 'classe.uScriptGeneratorTriggers.pas',
   uViewProgressBar in 'uViewProgressBar.pas' {frmProgressBar},
   Classe.ProgressHelper in 'Classe.ProgressHelper.pas',
+  classe.uScriptGeneratorTriggers in 'classe.uScriptGeneratorTriggers.pas',
   classe.uScriptGeneratorDeleteEmpresas in 'classe.uScriptGeneratorDeleteEmpresas.pas',
   classe.uScriptGeneratorTrocaEmpresas in 'classe.uScriptGeneratorTrocaEmpresas.pas',
-  uViewMain in 'uViewMain.pas' {ViewMain},
   classe.BancoDados in 'classe.BancoDados.pas',
   Classe.ConsultaBD in 'Classe.ConsultaBD.pas';
 

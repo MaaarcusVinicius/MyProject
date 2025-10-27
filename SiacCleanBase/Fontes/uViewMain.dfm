@@ -25,7 +25,6 @@ object ViewMain: TViewMain
     Color = 3355443
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1486
     object pnl_logoMarca: TPanel
       Left = 0
       Top = 0
@@ -356,7 +355,6 @@ object ViewMain: TViewMain
       Color = 3355443
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 1173
       object pnl_userLogin: TPanel
         Left = 249
         Top = 0
@@ -562,7 +560,6 @@ object ViewMain: TViewMain
       TabOrder = 2
       OnClick = pnl_carregaEmpresaClick
       OnDblClick = pnl_carregaEmpresaDblClick
-      ExplicitWidth = 973
     end
   end
   object SplitViewMenu: TSplitView
@@ -1084,7 +1081,6 @@ object ViewMain: TViewMain
     Color = clWhite
     ParentBackground = False
     TabOrder = 5
-    ExplicitWidth = 1286
     object PageControl: TPageControl
       Left = 0
       Top = 0
@@ -1094,7 +1090,6 @@ object ViewMain: TViewMain
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
-      ExplicitWidth = 1286
       object PageInicial: TTabSheet
         Caption = 'PageInicial'
         object TPanel
@@ -1107,7 +1102,6 @@ object ViewMain: TViewMain
           ParentBackground = False
           TabOrder = 0
           StyleName = 'Windows'
-          ExplicitWidth = 1278
           object dbPrincipalEmpresas: TDBGrid
             Left = 1
             Top = 1
@@ -1238,7 +1232,6 @@ object ViewMain: TViewMain
             Color = clWhite
             ParentBackground = False
             TabOrder = 1
-            ExplicitWidth = 1276
           end
           object pnl_fundoPrincipalAlBottom: TPanel
             Left = 1
@@ -1250,7 +1243,6 @@ object ViewMain: TViewMain
             Color = clWhite
             ParentBackground = False
             TabOrder = 2
-            ExplicitWidth = 1276
             object pnl_fundoAbrigaImagem: TPanel
               Left = 590
               Top = 0
@@ -1260,7 +1252,6 @@ object ViewMain: TViewMain
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitLeft = 475
               object img_fundo: TImage
                 Left = 1
                 Top = 1
@@ -4657,7 +4648,6 @@ object ViewMain: TViewMain
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1268
           object TrocaEmpresa: TGroupBox
             AlignWithMargins = True
             Left = 4
@@ -4674,7 +4664,6 @@ object ViewMain: TViewMain
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 0
-            ExplicitWidth = 1260
           end
           object grpAcoes: TGroupBox
             AlignWithMargins = True
@@ -4692,7 +4681,6 @@ object ViewMain: TViewMain
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 1
-            ExplicitWidth = 1260
             object pnl_trocandoEmpresa: TPanel
               AlignWithMargins = True
               Left = 5
@@ -5033,7 +5021,6 @@ object ViewMain: TViewMain
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 2
-            ExplicitWidth = 1260
           end
         end
       end
@@ -5187,7 +5174,6 @@ object ViewMain: TViewMain
           ParentBackground = False
           TabOrder = 5
           Visible = False
-          ExplicitWidth = 1278
           object grp_InfoGerais: TGroupBox
             Left = 1
             Top = 1
@@ -5196,7 +5182,6 @@ object ViewMain: TViewMain
             Align = alClient
             Caption = '    - Informa'#231#245'es Gerais Oracle -    '
             TabOrder = 0
-            ExplicitWidth = 1276
             object grp_Session: TGroupBox
               Left = 2
               Top = 17
@@ -5205,7 +5190,6 @@ object ViewMain: TViewMain
               Align = alTop
               Caption = 'Usu'#225'rios '#233' Sess'#245'es'
               TabOrder = 0
-              ExplicitWidth = 1272
               object DBGrid_CarregarSession: TDBGrid
                 Left = 593
                 Top = 17
@@ -5355,12 +5339,10 @@ object ViewMain: TViewMain
               Align = alBottom
               Caption = 'Informa'#231#245'es Table Space'
               TabOrder = 1
-              ExplicitLeft = 82
-              ExplicitTop = 389
               object DBGrid_CarregarTablespaceDiretorio: TDBGrid
                 Left = 593
                 Top = 17
-                Width = 551
+                Width = 543
                 Height = 201
                 Align = alClient
                 Color = clMenuHighlight
@@ -5458,9 +5440,9 @@ object ViewMain: TViewMain
                   end>
               end
               object pnl_deleteTriggers: TPanel
-                Left = 1144
+                Left = 1136
                 Top = 17
-                Width = 241
+                Width = 249
                 Height = 201
                 Align = alRight
                 Color = clWhite
@@ -5470,17 +5452,15 @@ object ViewMain: TViewMain
                 object Panel2: TPanel
                   Left = 1
                   Top = 127
-                  Width = 239
+                  Width = 247
                   Height = 73
                   Align = alBottom
                   Color = clWhite
                   ParentBackground = False
                   TabOrder = 0
-                  ExplicitLeft = 5
-                  ExplicitTop = 121
-                  ExplicitWidth = 108
+                  ExplicitWidth = 239
                   object btn_deleteTriggers: TSpeedButton
-                    Left = 102
+                    Left = 110
                     Top = 1
                     Width = 136
                     Height = 71
@@ -5748,6 +5728,7 @@ object ViewMain: TViewMain
                     ParentFont = False
                     StyleName = 'Windows'
                     OnClick = btn_deleteTriggersClick
+                    ExplicitLeft = 102
                   end
                 end
                 object chk_desativarObjetos: TCheckBox
@@ -5772,24 +5753,26 @@ object ViewMain: TViewMain
                   StyleName = 'Windows'
                 end
                 object mmo_infoDesativaBD: TMemo
-                  Left = 1
-                  Top = 1
-                  Width = 239
-                  Height = 126
+                  AlignWithMargins = True
+                  Left = 4
+                  Top = 4
+                  Width = 241
+                  Height = 120
+                  Cursor = crNo
                   Align = alClient
+                  Alignment = taCenter
+                  DragCursor = crNo
                   Lines.Strings = (
-                    'Este bot'#227'o tem a fun'#231#227'o de desativar os '
-                    'objetos do banco de dados, como Triggers, '
-                    'Indexes, Constraints e Foreign Keys.'
-                    ''
-                    #10'A execu'#231#227'o desta a'#231#227'o '#233' obrigat'#243'ria, pois '
+                    #10'  Este bot'#227'o tem a fun'#231#227'o de desativar os '
+                    'objetos do banco de dados, como '
+                    'Triggers, Indexes, Constraints e Foreign '
+                    'Keys.'
+                    #10'  A execu'#231#227'o desta a'#231#227'o '#233' obrigat'#243'ria, pois '
                     'garante que as rotinas do sistema possam '
                     'ser processadas corretamente.')
+                  ReadOnly = True
                   TabOrder = 2
-                  ExplicitLeft = 6
-                  ExplicitTop = 8
-                  ExplicitWidth = 235
-                  ExplicitHeight = 103
+                  StyleName = 'Windows'
                 end
               end
             end
@@ -5849,7 +5832,6 @@ object ViewMain: TViewMain
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1268
           object GroupBox1: TGroupBox
             AlignWithMargins = True
             Left = 4
@@ -5866,7 +5848,6 @@ object ViewMain: TViewMain
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 0
-            ExplicitWidth = 1260
           end
           object GroupBox2: TGroupBox
             AlignWithMargins = True
@@ -5884,7 +5865,6 @@ object ViewMain: TViewMain
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 1
-            ExplicitWidth = 1260
             object pnl_deletaEmpresa: TPanel
               Left = 2
               Top = 17

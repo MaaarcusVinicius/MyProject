@@ -129,12 +129,13 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="uViewMain.pas">
+            <Form>ViewMain</Form>
+        </DCCReference>
         <DCCReference Include="Principal.pas">
             <Form>frmPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="C:\Sistemas\Repositorio\_Biblioteca.pas"/>
-        <DCCReference Include="C:\Sistemas\Repositorio\VarGlobal.pas"/>
         <DCCReference Include="uDataModule.pas">
             <Form>DmModule</Form>
             <DesignClass>TDataModule</DesignClass>
@@ -152,16 +153,13 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Classe.funcoes.pas"/>
-        <DCCReference Include="classe.uScriptGeneratorTriggers.pas"/>
         <DCCReference Include="uViewProgressBar.pas">
             <Form>frmProgressBar</Form>
         </DCCReference>
         <DCCReference Include="Classe.ProgressHelper.pas"/>
+        <DCCReference Include="classe.uScriptGeneratorTriggers.pas"/>
         <DCCReference Include="classe.uScriptGeneratorDeleteEmpresas.pas"/>
         <DCCReference Include="classe.uScriptGeneratorTrocaEmpresas.pas"/>
-        <DCCReference Include="uViewMain.pas">
-            <Form>ViewMain</Form>
-        </DCCReference>
         <DCCReference Include="classe.BancoDados.pas"/>
         <DCCReference Include="Classe.ConsultaBD.pas"/>
         <BuildConfiguration Include="Base">
