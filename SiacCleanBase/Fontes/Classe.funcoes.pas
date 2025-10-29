@@ -7,7 +7,7 @@ uses
   Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, System.SysUtils, FireDAC.Comp.Client,
   Vcl.DBCtrls, IdHashMessageDigest, Vcl.ComCtrls, Data.DB, DBAccess, Ora,
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
-  DAScript, OraScript;
+  DAScript, OraScript,System.RegularExpressions;
 
 function Criptografia(Senha, Chave: string): string;
 function fnc_criar_menssagem(TituloJanela, TituloMSG, MSG, Icone, Tipo: string): boolean;
@@ -17,6 +17,7 @@ function fnc_sonumeros(AString: string): string;
 function fnc_proximo_codigo(Tabela, Campo: string): Integer;
 function MD5(const Value: string): string;
 procedure MakeRounded(Control: TWinControl);
+function ValidarCaracterString(const S: string): Boolean;
 
 var
   var_gbl_empresa_id: string;
@@ -230,5 +231,10 @@ begin
   end;
 end;
 
+function ValidarCaracterString(const S: string): Boolean;
+begin
+  // Ajuste a regex conforme suas regras. Aqui permitimos A-Z, 0-9, _ $ # e primeiro caractere letra.
+  Result := TRegEx.IsMatch(S, '^[A-Za-z][A-Za-z0-9_$#]*$');
+end;
 end.
 

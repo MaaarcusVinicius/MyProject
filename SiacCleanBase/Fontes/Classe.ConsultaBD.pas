@@ -95,8 +95,6 @@ begin
   vSQL := 'DROP USER ' + UpperCase(AUser) + ' CASCADE';
   FExecutarDropUser.SetSQL(vSQL);
   FExecutarDropUser.ExecutarComando;
-
-  ShowMessage('Usuário deletado com sucesso!');
 end;
 
 
@@ -113,8 +111,6 @@ begin
   FExecutarDropUser.SetSQL(vSQLDisconnect);
   FExecutarDropUser.SetSQL(vSQLKill);
   FExecutarDropUser.ExecutarComando;
-
-  ShowMessage('Sessão finalziada com Sucesso!');
 end;
 
 procedure TClasseConsultaBD.CarregarVersaoOracle(ALabel: TLabel);
@@ -146,7 +142,7 @@ begin
                                 '        LOGON_TIME          '+
                                 '   FROM V$SESSION c         '+
                                 '  WHERE USERNAME IS NOT NULL'+
-                                '  ORDER BY USERNAME         ');
+                                '  ORDER BY SID,USERNAME     ');
   FCarregarSessoesAtivas.ExecutarConsulta;
   ADBGrid.DataSource := FCarregarSessoesAtivas.GetDataSource;
 

@@ -8,7 +8,8 @@ uses
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Data.DB, DBAccess, Ora,
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, DAScript, OraScript,
   Vcl.Imaging.pngimage, Vcl.WinXCtrls, Vcl.CategoryButtons, System.Actions,
-  Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Mask;
+  Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Mask,  Classe.ConsultaBD,
+  TelaAguarde, System.RegularExpressions;
 
 type
   TViewMain = class(TForm)
@@ -131,7 +132,6 @@ type
     grp_TableSpace: TGroupBox;
     DBGrid_CarregarTablespaceDiretorio: TDBGrid;
     DBGrid_CarregarUsuarios: TDBGrid;
-    btn_detalhesBD: TSpeedButton;
     lbl_versaoOracle: TLabel;
     DBGrid_CarregarTablespace: TDBGrid;
     pnl_deleteTriggers: TPanel;
@@ -142,6 +142,17 @@ type
     mmo_infoDesativaBD: TMemo;
     OraScriptDeletandoEmpresa: TOraScript;
     OraScriptTrocandoEmpresas: TOraScript;
+    ImageListMensagem: TImageList;
+    lbl_carregaEmpresa: TLabel;
+    btn_detalhesBD: TSpeedButton;
+    OraScriptCriarUsuario: TOraScript;
+    pnl_criarUsuario: TPanel;
+    ImageAllSystem: TImageList;
+    pnl_abrigaCriarUsuario: TPanel;
+    btn_criarUsuario: TSpeedButton;
+    edt_novoUsuario: TEdit;
+    lbl_novoUsuario: TLabel;
+    OraScriptCriarUsuarioOriginal: TOraScript;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -184,7 +195,6 @@ type
     procedure pnl_carregaEmpresaClick(Sender: TObject);
     procedure pnl_carregaEmpresaDblClick(Sender: TObject);
     procedure act_HomeExecute(Sender: TObject);
-    procedure btn_detalhesBDClick(Sender: TObject);
     procedure btn_deleteTriggersClick(Sender: TObject);
     procedure DBGrid_CarregarUsuariosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
@@ -195,6 +205,16 @@ type
       State: TGridDrawState);
     procedure DBGrid_CarregarSessionCellClick(Column: TColumn);
     procedure ExecutarKillSession();
+    procedure btn_deletandoEmpresasClick(Sender: TObject);
+    procedure btn_trocandoEmpresasClick(Sender: TObject);
+    function  ValidaAtivacaoProcedimentos: Boolean;
+    procedure AtualizarTelaEmpresas;
+    procedure FormCreate(Sender: TObject);
+    procedure btn_detalhesBDClick(Sender: TObject);
+    procedure btn_criarUsuarioClick(Sender: TObject);
+    procedure ExecutarScriptCriarUsuario;
+    procedure SplitViewMenuMouseEnter(Sender: TObject);
+    procedure SplitViewMenuMouseLeave(Sender: TObject);
 
   private
     FMostrarBranco: Boolean;
@@ -209,6 +229,9 @@ type
 
 var
   ViewMain: TViewMain;
+    vGbl_Empresa_id : string;
+    vGbl_RazaoSocial : string;
+    FConsultaBD : TClasseConsultaBD;
 
 implementation
 
@@ -217,13 +240,12 @@ uses
   VarGlobal,
   _Biblioteca,
   uDataModule,
-  Classe.ConsultaBD,
   classe.uScriptGeneratorDeleteEmpresas,
   classe.uScriptGeneratorTriggers,
   classe.uScriptGeneratorTrocaEmpresas,
   Classe.ProgressHelper,
   uViewMensagens,
-  uViewProgressBar;
+  uViewProgressBar, Classe.AtualizaComponentesTela, classe.BancoDados;
 
 {$R *.dfm}
 
@@ -243,6 +265,11 @@ end;
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   fnc_FecharSistema()
+end;
+
+procedure TViewMain.FormCreate(Sender: TObject);
+begin
+//  FConsultaBD := TClasseConsultaBD.Create;
 end;
 
 procedure TViewMain.FormShow(Sender: TObject);
@@ -315,6 +342,26 @@ begin
 
   // debug - ver no DebugView ou no log do Delphi
   // OutputDebugString(PChar(Format('tmr tick: Active=%s ShowBranco=%s', [BoolToStr(ActiveAlternaLogo, True), BoolToStr(FMostrarBranco, True)])));
+end;
+
+function TViewMain.ValidaAtivacaoProcedimentos: Boolean;
+begin
+  Result := True; // por padrão, deixa continuar
+
+  if ( dbPrincipalEmpresas.DataSource.DataSet.IsEmpty ) then
+  begin
+    fnc_criar_menssagem(
+      'ATENÇÃO',
+      '  Uma conexão com banco de dados não foi estabelecida!',
+      '    Você precisa conectar ao banco de dados para ativar este recurso. ' + sLineBreak +
+      '    Você será direcionada para tela de configuração.',
+      ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png', 'OK');
+
+
+    PageControl.ActivePageIndex := 2; // direciona o usuário
+    Result := False; // bloqueia execução
+    Exit;
+  end;
 end;
 
 procedure TViewMain.action_TrocandoEmpresaExecute(Sender: TObject);
@@ -406,6 +453,123 @@ begin
   tmr_trocaLogoEmpresa.Enabled := ActiveAlternaLogo;
 end;
 
+procedure TViewMain.btn_criarUsuarioClick(Sender: TObject);
+begin
+  if ( edt_novoUsuario.Text = '' ) then
+
+  begin
+        fnc_criar_menssagem('Administração Banco de Dados',
+                   'Atenção!',
+                   'Para criar um novo usuário é obrigatório informar o nome!',
+                    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png', 'OK');
+
+    edt_novoUsuario.SetFocus;
+
+  end
+  else
+  begin
+    InicioTelaAguarde();
+
+ // Executa a criação do usuário no banco.
+    ExecutarScriptCriarUsuario();
+
+    FimTelaAguarde();
+
+    // Limpa o nome digitado
+    edt_novoUsuario.Clear;
+
+    // Carregar/Atualizar GRID de usuários
+    FConsultaBD.CarregarUsuarios(DBGrid_CarregarUsuarios);
+  end;
+end;
+
+procedure TViewMain.btn_deletandoEmpresasClick(Sender: TObject);
+var
+  ScriptGen: TScriptGeneratorDeleteEmpresas;
+  returnUsuario: Boolean;
+  saveScriptOracle: TStringList;
+  Scripts: TStringList;
+  Progress: TProgressHelper;
+  i: Integer;
+  vEmpresa_id, vRazaoSocial: string;
+
+begin
+  if not ValidaAtivacaoProcedimentos then
+    Exit; // interrompe tudo, pois a conexão ainda está ativa
+  vEmpresa_id :=  qryEmpresas.FieldByName('EMPRESA_ID').AsString ;
+  vRazaoSocial := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
+
+  ScriptGen := TScriptGeneratorDeleteEmpresas.Create(DmModule.orsConexao);
+  Scripts := TStringList.Create;
+  Progress := TProgressHelper.Create;
+  try
+    // 1 - Gera os scripts dinamicamente
+    ScriptGen.Gerar('''' + vEmpresa_id+ '''');
+
+    // Copia os scripts para lista temporária
+    Scripts.Text := ScriptGen.GetScripts;
+
+    // 2 - Mostra progress bar durante a geração
+    Progress.Start(Scripts.Count, 'Gerando scripts para exclusão...');
+    for i := 0 to Scripts.Count - 1 do
+    begin
+      Progress.Step('Gerando: ' + Scripts[i]);
+    end;
+    Progress.Finish;
+
+    // 3 - Confirmação do usuário
+    if Scripts.Count = 0 then Exit;
+
+    returnUsuario := fnc_criar_menssagem(
+                        'EXCLUSÃO DE EMPRESA',
+                        vEmpresa_id + ' - ' + vRazaoSocial,
+                        'DESEJA REALMENTE EXCLUIR ESTA EMPRESA? ' + sLineBreak +
+                        'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
+                        ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                        'ERRO');
+
+    if not returnUsuario then Exit;
+
+    // 4 - Executa os scripts individualmente
+    Progress.Start(Scripts.Count, 'Executando exclusão da empresa...');
+    for i := 0 to Scripts.Count - 1 do
+    begin
+      OraScriptDeletandoEmpresa.SQL.Text := Scripts[i];
+      OraScriptDeletandoEmpresa.Execute;
+
+      Progress.Step('Executando: ' + Scripts[i]);
+    end;
+    Progress.Finish;
+
+    // 5 - Mensagem final de sucesso
+    fnc_criar_menssagem('EXCLUSÃO DE EMPRESA',
+                        'A EXCLUSÃO DA EMPRESA FOI UM SUCESSO !!!',
+                        'Você selecionou a empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
+                        '. ESTA AÇÃO É IRREVERSÍVEL!!!',
+                        ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
+                        'OK');
+
+    // 6 - Salvar script se marcado
+    if chk_saveScriptDeletando.Checked then
+    begin
+      saveScriptOracle := TStringList.Create;
+      try
+        saveScriptOracle.Text := Scripts.Text;
+        saveScriptOracle.SaveToFile('C:\CleanBaseLogs\sqlExport_DeleteEmpresa.txt', TEncoding.UTF8);
+      finally
+        saveScriptOracle.Free;
+      end;
+    end;
+
+    // Atualiza Variaveis de ambiente e nome da empresa
+       AtualizarTelaEmpresas();
+  finally
+    Scripts.Free;
+    ScriptGen.Free;
+    Progress.Free;
+  end;
+end;
+
 procedure TViewMain.btn_deleteTriggersClick(Sender: TObject);
 var
   ScriptGen: TScriptGeneratorTriggers;
@@ -477,7 +641,7 @@ begin
       saveScriptOracle := TStringList.Create;
       try
         saveScriptOracle.Text := Scripts.Text;
-        saveScriptOracle.SaveToFile('C:\sqlExport_DesativarTriggers.txt', TEncoding.UTF8);
+        saveScriptOracle.SaveToFile('C:\CleanBaseLogs\sqlExport_DesativarTriggers.txt', TEncoding.UTF8);
       finally
         saveScriptOracle.Free;
       end;
@@ -491,8 +655,6 @@ begin
 end;
 
 procedure TViewMain.btn_detalhesBDClick(Sender: TObject);
-var
-  FConsultaBD: TClasseConsultaBD;
 begin
   FConsultaBD := TClasseConsultaBD.Create;
   try
@@ -508,10 +670,10 @@ begin
     // Exemplo 3: carregar usuários
      FConsultaBD.CarregarUsuarios(DBGrid_CarregarUsuarios);
 
-    // Exemplo 3: carregar TableSpace Diretorios
+    // Exemplo 4: carregar TableSpace Diretorios
      FConsultaBD.CarregarBancoTablespaceDiretorio(DBGrid_CarregarTablespaceDiretorio);
 
-    // Exemplo 4: atualizar status
+    // Exemplo 5: atualizar status
     // FConsultaBD.AtualizarEmpresaStatus(1, 'ATIVO');
 
   finally
@@ -532,6 +694,107 @@ procedure TViewMain.btn_testeClick(Sender: TObject);
 begin
   ShowMessage('testes');
 end;
+
+procedure TViewMain.btn_trocandoEmpresasClick(Sender: TObject);
+var
+  ScriptGen: TScriptGeneratorTrocaEmpresa;
+  returnUsuario: Boolean;
+  saveScriptOracle: TStringList;
+  Scripts: TStringList;
+  Progress: TProgressHelper;
+  i: Integer;
+  vEmpresa_id, vRazaoSocial, newEmpresa_id, newCnpj: string;
+begin
+  newCnpj := fnc_sonumeros(medt_cpf_cnpj.Text);
+
+  if (newCnpj <> '') and (Length(newCnpj) = 14) then
+  begin
+    vEmpresa_id   := qryEmpresas.FieldByName('EMPRESA_ID').AsString;
+    vRazaoSocial  := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
+    newEmpresa_id := medt_cpf_cnpj.Text;
+
+    ScriptGen := TScriptGeneratorTrocaEmpresa.Create(DmModule.orsConexao);
+    Scripts   := TStringList.Create;
+    Progress  := TProgressHelper.Create;
+    try
+      // 1 - Gera os scripts dinamicamente
+      ScriptGen.Gerar('''' + vEmpresa_id + '''', '''' + newEmpresa_id + '''');
+
+      // Copia os scripts para lista temporária
+      Scripts.Text := ScriptGen.GetScripts;
+
+      // 2 - Mostra progress bar durante a geração
+      Progress.Start(Scripts.Count, 'Gerando scripts de troca...');
+      for i := 0 to Scripts.Count - 1 do
+      begin
+        Progress.Step('Gerando: ' + Scripts[i]);
+      end;
+      Progress.Finish;
+
+      // 3 - Confirmação do usuário
+      if Scripts.Count = 0 then Exit;
+
+      returnUsuario := fnc_criar_menssagem(
+                          'ALTERAÇÃO DE EMPRESA',
+                          vEmpresa_id + ' - ' + vRazaoSocial,
+                          'DESEJA REALMENTE ALTERAR O CNPJ DA EMPRESA?' + sLineBreak +
+                          'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
+                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                          'ERRO');
+
+      if not returnUsuario then Exit;
+
+      // 4 - Executa os scripts individualmente
+      Progress.Start(Scripts.Count, 'Executando alteração da empresa...');
+      for i := 0 to Scripts.Count - 1 do
+      begin
+        OraScriptTrocandoEmpresas.SQL.Text := Scripts[i];
+        OraScriptTrocandoEmpresas.Execute;
+
+        Progress.Step('Executando: ' + Scripts[i]);
+      end;
+      Progress.Finish;
+
+      // 5 - Mensagem final de sucesso
+      fnc_criar_menssagem('ALTERAÇÃO DE EMPRESA',
+                          'A ALTERAÇÃO DA EMPRESA FOI UM SUCESSO !!!',
+                          'Você alterou o CNPJ da empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
+                          ', para o novo CNPJ: ' + newEmpresa_id,
+                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
+                          'OK');
+
+      // 6 - Salvar script se marcado
+      if chk_saveScritpTrocando.Checked then
+      begin
+        saveScriptOracle := TStringList.Create;
+        try
+          saveScriptOracle.Text := Scripts.Text;
+          saveScriptOracle.SaveToFile('C:\CleanBaseLogs\sqlExport_TrocaEmpresa.txt', TEncoding.UTF8);
+        finally
+          saveScriptOracle.Free;
+        end;
+      end;
+
+     // Atualizar Dados da Tela
+     AtualizarTelaEmpresas();
+
+    finally
+      Scripts.Free;
+      ScriptGen.Free;
+      Progress.Free;
+    end;
+  end
+  else
+  begin
+    fnc_criar_menssagem('TROCA EMPRESA',
+                        'PARA EXECUTAR O PROCEDIMENTO, INFORME O NOVO CNPJ!',
+                        'O NOVO CNPJ ESTÁ VAZIO OU INCOMPLETO.',
+                        ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoAviso.png',
+                        'OK');
+    medt_cpf_cnpj.SetFocus;
+  end;
+end;
+
 
 procedure TViewMain.img_logoEmpresaBrancoClick(Sender: TObject);
 begin
@@ -633,6 +896,16 @@ begin
  AlternaSplitViewClose(SplitViewMenu);
 end;
 
+procedure TViewMain.SplitViewMenuMouseEnter(Sender: TObject);
+begin
+ //SplitViewMenu.Opened := not SplitViewMenu.Opened;
+end;
+
+procedure TViewMain.SplitViewMenuMouseLeave(Sender: TObject);
+begin
+ //SplitViewMenu.Opened;
+end;
+
 procedure TViewMain.img_closeClick(Sender: TObject);
 begin
   fnc_FecharSistema();
@@ -691,12 +964,6 @@ begin
                'Conexão com o banco de dados estabelecida com sucesso!',
                 ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_connection.png', 'OK');
 
-    {// Volta o foco do usuário para a tela incial, seleção da empresa.
-     PageControl.ActivePageIndex := 0;
-     AlternaSplitViewClose(SplitViewMenu);
-
-    //Seta o cursor do mouse para o DbGridEmpresas
-     dbPrincipalEmpresas.SetFocus;   }
 
     // Troca a imagem da tela Main/Tela princial
     img_fundo.Visible := True;
@@ -740,7 +1007,11 @@ begin
 
      begin
       // Passa o SQL da empresa Selecionada para o form responsavel pela edição da empresa
-       pnl_carregaEmpresa.Caption := 'Empresa Selecionada: ';
+       lbl_carregaEmpresa.Caption := 'Empresa Selecionada: ?';
+
+      // Limpar VarGlobal
+        vGbl_Empresa_id :=  qryEmpresas.FieldByName('EMPRESA_ID').AsString ;
+        vGbl_RazaoSocial := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
      end;
 
   end;
@@ -851,8 +1122,20 @@ procedure TViewMain.DBGrid_CarregarSessionCellClick(Column: TColumn);
 begin
   if Column.Title.Caption = 'KILL' then
   begin
-   ShowMessage(DBGrid_CarregarSession.DataSource.DataSet.FieldByName('SID').AsString );
+   // Pegando o SID de um DbGrid
+   //ShowMessage(DBGrid_CarregarSession.DataSource.DataSet.FieldByName('SID').AsString );
+   InicioTelaAguarde();
    ExecutarKillSession();
+   FimTelaAguarde();
+
+    fnc_criar_menssagem('Administração Banco de Dados',
+                   'Uma sessão do usuário: '  + DBGrid_CarregarSession.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi encerrada.',
+                   'Detalhes de sessão: ' + #13#10 +
+                   '   Programa: '+ DBGrid_CarregarSession.DataSource.DataSet.FieldByName('PROGRAM').AsString + #13#10 +
+                   '   Terminal: '+ DBGrid_CarregarSession.DataSource.DataSet.FieldByName('TERMINAL').AsString,
+                    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png', 'OK');
+
+   FConsultaBD.CarregarSessoesAtivas(DBGrid_CarregarSession);
 
   end;
 end;
@@ -864,6 +1147,7 @@ var
   TextoBotao: string;
   Grid: TDBGrid;
 begin
+
   Grid := Sender as TDBGrid;
 
   // Verifica se é a coluna que representa o "botão"
@@ -895,18 +1179,47 @@ begin
     Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 procedure TViewMain.DBGrid_CarregarUsuariosCellClick(Column: TColumn);
+var
+  returnUsuario: Boolean;
+
 begin
   if Column.Title.Caption = 'DROP USER' then
   begin
+   // Pega o nome do usuario do Banco de dados a ser deletado.
+   //ShowMessage(DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString );
 
-   ShowMessage(DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString );
+     returnUsuario := fnc_criar_menssagem(
+                      'Administração Banco de Dados',
+                     'O usuário ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi selecionado para ser Excluído.',
+                      'DESEJA REALMENTE DELETAR ESTE USUÁRIO?' + sLineBreak +
+                      'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
+                      ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
+                      'ERRO');
+
+      if not returnUsuario then Exit;
+
+
+   InicioTelaAguarde();
    ExecutarOpcaoDeletarUser();
+   FimTelaAguarde();
+
+    fnc_criar_menssagem('Administração Banco de Dados',
+                   'O usuário ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi excluído com sucesso!',
+                   '',
+                    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png', 'OK');
+
+    // Exemplo 2: carregar tablespace
+     FConsultaBD.CarregarTablespace(DBGrid_CarregarTablespace);
+
+    // Exemplo 3: carregar usuários
+     FConsultaBD.CarregarUsuarios(DBGrid_CarregarUsuarios);
 
   end;
 end;
 
 
 procedure TViewMain.dbPrincipalEmpresasDblClick(Sender: TObject);
+
 begin
   if ( dbPrincipalEmpresas.DataSource.DataSet.IsEmpty ) then
      begin
@@ -920,14 +1233,70 @@ begin
         AlternaSplitViewClose(SplitViewMenu);
      end else
 
-     begin
+    begin
       // Passa o SQL da empresa Selecionada para o form responsavel pela edição da empresa
-       pnl_carregaEmpresa.Caption := 'Empresa Selecionada: ' +
-                                      qryEmpresasEMPRESA_ID.AsString +
-                                      ' / ' +
-                                      qryEmpresasRAZAO_SOCIAL.AsString;
+       TClasseAtualizaComponentesTela.AtualizarVariaveisGlobais(ViewMain.lbl_carregaEmpresa,
+                                                                ViewMain.qryEmpresas);
      end;
+
 end;
+
+procedure TViewMain.AtualizarTelaEmpresas;
+begin
+  // Atualiza variáveis globais
+  TClasseAtualizaComponentesTela.AtualizarVariaveisGlobais(ViewMain.lbl_carregaEmpresa, ViewMain.qryEmpresas);
+
+  // Atualiza o DBGrid (qryEmpresas é o dataset)
+  TClasseAtualizaComponentesTela.AtualizarDBGrid(ViewMain.qryEmpresas);
+end;
+
+procedure TViewMain.ExecutarScriptCriarUsuario;
+var
+  ScriptTxt: string;
+  UserName: string;
+  TmpLines: TStringList;
+begin
+  // Pega o nome informado pelo usuário
+  UserName := Trim(edt_novoUsuario.Text);
+
+  // Valida o nome antes de tudo
+  if not ValidarCaracterString(UserName) then
+  begin
+    ShowMessage('Nome de usuário inválido. Use apenas letras, números e _ $ #, começando com letra.');
+    Exit;
+  end;
+
+  // Padroniza (opcional)
+  UserName := UpperCase(UserName);
+
+  TmpLines := TStringList.Create;
+  try
+    try
+      // Copia o script original do componente para uma string temporária
+      TmpLines.Text := OraScriptCriarUsuario.SQL.Text;
+
+      // Substitui todas as ocorrências de :vUsuario
+      ScriptTxt := StringReplace(TmpLines.Text, ':vUsuario', UserName, [rfReplaceAll, rfIgnoreCase]);
+
+      // Se seu script usa outras variáveis, substitua aqui também:
+      // ScriptTxt := StringReplace(ScriptTxt, ':vTablespace', 'DADOS', [rfReplaceAll, rfIgnoreCase]);
+
+      // Atribui de volta ao TOraScript e executa
+      OraScriptCriarUsuario.SQL.Text := ScriptTxt;
+      OraScriptCriarUsuario.Execute;
+    except
+      on E: Exception do
+        ShowMessage('Erro ao executar script: ' + E.Message);
+    end;
+  finally
+    TmpLines.Free;
+  end;
+  // Volta o texto original do Scritp para criar o usuario.
+  OraScriptCriarUsuario.SQL.Text := OraScriptCriarUsuarioOriginal.SQL.Text;
+
+end;
+
+
 
 end.
 

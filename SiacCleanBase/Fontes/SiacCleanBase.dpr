@@ -4,8 +4,6 @@ uses
   Vcl.Forms,
   uViewMain in 'uViewMain.pas' {ViewMain},
   Principal in 'Principal.pas' {frmPrincipal},
-//  _Biblioteca in 'C:\Sistemas\Repositorio\_Biblioteca.pas',
-//  VarGlobal in 'C:\Sistemas\Repositorio\VarGlobal.pas',
   uDataModule in 'uDataModule.pas' {DmModule: TDataModule},
   uViewlogin in 'uViewlogin.pas' {form_login},
   unit_empresasDados in 'unit_empresasDados.pas' {form_empresaDados},
@@ -17,7 +15,9 @@ uses
   classe.uScriptGeneratorDeleteEmpresas in 'classe.uScriptGeneratorDeleteEmpresas.pas',
   classe.uScriptGeneratorTrocaEmpresas in 'classe.uScriptGeneratorTrocaEmpresas.pas',
   classe.BancoDados in 'classe.BancoDados.pas',
-  Classe.ConsultaBD in 'Classe.ConsultaBD.pas';
+  Classe.ConsultaBD in 'Classe.ConsultaBD.pas',
+  Classe.AtualizaComponentesTela in 'Classe.AtualizaComponentesTela.pas',
+  TelaAguarde in 'C:\sistemas\Repositorio\TelaAguarde.pas' {FormTelaAguarde};
 
 {$R *.res}
 
@@ -37,6 +37,7 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TViewMensagens, ViewMensagens);
   Application.CreateForm(TfrmProgressBar, frmProgressBar);
+  Application.CreateForm(TFormTelaAguarde, FormTelaAguarde);
   // Ativando o Tpanel com imagem opaca, significa que esta com o banco desconectado
      Principal.frmPrincipal.pnl_fundo_opacidade.Visible := true;
      Principal.frmPrincipal.pnl_fundo_normal.Visible := false;

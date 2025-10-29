@@ -69,9 +69,9 @@ object ViewMensagens: TViewMensagens
       ParentFont = False
     end
     object lbl_msg: TLabel
-      Left = 127
+      Left = 135
       Top = 92
-      Width = 530
+      Width = 522
       Height = 70
       AutoSize = False
       Caption = 'Texto Mensagem'
