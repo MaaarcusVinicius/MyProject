@@ -5195,8 +5195,6 @@ object ViewMain: TViewMain
             Align = alClient
             Caption = '    - Informa'#231#245'es Gerais Oracle -    '
             TabOrder = 0
-            ExplicitTop = 1
-            ExplicitHeight = 614
             object grp_Session: TGroupBox
               Left = 2
               Top = 17
@@ -5205,7 +5203,6 @@ object ViewMain: TViewMain
               Align = alClient
               Caption = 'Usu'#225'rios '#233' Sess'#245'es'
               TabOrder = 0
-              ExplicitHeight = 384
               object DBGrid_CarregarSession: TDBGrid
                 Left = 593
                 Top = 17
@@ -5221,7 +5218,6 @@ object ViewMain: TViewMain
                 Font.Height = -12
                 Font.Name = 'Segoe UI'
                 Font.Style = []
-                Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
                 ParentColor = True
                 ParentFont = False
                 ReadOnly = True
@@ -5522,7 +5518,6 @@ object ViewMain: TViewMain
                 ParentBackground = False
                 TabOrder = 2
                 Visible = False
-                ExplicitHeight = 201
                 object Panel2: TPanel
                   Left = 1
                   Top = 121
@@ -5532,7 +5527,6 @@ object ViewMain: TViewMain
                   Color = clWhite
                   ParentBackground = False
                   TabOrder = 0
-                  ExplicitTop = 127
                   object btn_deleteTriggers: TSpeedButton
                     Left = 110
                     Top = 1
@@ -5847,8 +5841,6 @@ object ViewMain: TViewMain
                   ReadOnly = True
                   TabOrder = 2
                   StyleName = 'Windows'
-                  ExplicitTop = 0
-                  ExplicitHeight = 124
                 end
               end
             end
@@ -5896,7 +5888,7 @@ object ViewMain: TViewMain
               object lbl_novoUsuario: TLabel
                 Left = 111
                 Top = 16
-                Width = 146
+                Width = 117
                 Height = 20
                 Caption = 'Nome do Usu'#225'rio'
                 Font.Charset = DEFAULT_CHARSET
@@ -10455,7 +10447,7 @@ object ViewMain: TViewMain
     Left = 511
     Top = 681
     Bitmap = {
-      494C01014E008400040020002000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01014E008400040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008002000001002000000000000000
       050000000000000000000000000000000000000000FF000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FFEBE0
@@ -21019,7 +21011,8 @@ object ViewMain: TViewMain
       E001FFFF018F0FFFF0070FFFFF8F0FFFE001FFFF898E1FFFF80E1FFFFF8E1FFF
       E001FFFF8F8C3FFFFFFC3FFFFF8C3FFFF001FFFF8F803FFFFF803FFFFF803FFF
       F003FFFF87C07FFFFFC07FFFFFC07FFFF807FFFFC7C0FFFFFFC0FFFFFFC0FFFF
-      FC0FFFFFC7C1FFFFFFC1FFFFFFC1FFFF}
+      FC0FFFFFC7C1FFFFFFC1FFFFFFC1FFFF00000000000000000000000000000000
+      000000000000}
   end
   object OraScriptCriarUsuarioOriginal: TOraScript
     SQL.Strings = (
