@@ -16,6 +16,7 @@ type
     { Public declarations }
     function ConectarBd(vUser,vPassword,vServer : string) : Boolean;
     function DesconectarBd : Boolean;
+    function StatusConectado: Boolean;
   end;
 
 var
@@ -54,6 +55,7 @@ begin
     end;
   end;
 end;
+
 function TDmModule.DesconectarBd: Boolean;
 begin
   try
@@ -65,6 +67,11 @@ begin
       Result := False;
     end;
   end;
+end;
+
+function TDmModule.StatusConectado: Boolean;
+begin
+  Result := orsConexao.Connected;
 end;
 
 end.

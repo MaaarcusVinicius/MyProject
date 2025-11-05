@@ -1,4 +1,4 @@
-unit uViewMain;
+Ôªøunit uViewMain;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, DAScript, OraScript,
   Vcl.Imaging.pngimage, Vcl.WinXCtrls, Vcl.CategoryButtons, System.Actions,
   Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Mask,  Classe.ConsultaBD,
-  TelaAguarde, System.RegularExpressions;
+  TelaAguarde, System.RegularExpressions, EditNumber, ACBrBase, ACBrEnterTab;
 
 type
   TViewMain = class(TForm)
@@ -100,14 +100,6 @@ type
     shape1: TShape;
     pnl_fundoTrocaEmpresa: TPanel;
     TrocaEmpresa: TGroupBox;
-    grpAcoes: TGroupBox;
-    pnl_trocandoEmpresa: TPanel;
-    lbl_trocaEmpresa: TLabel;
-    pnl_trocandoEmpresas: TPanel;
-    Panel1: TPanel;
-    btn_trocandoEmpresas: TSpeedButton;
-    medt_cpf_cnpj: TMaskEdit;
-    chk_saveScritpTrocando: TCheckBox;
     grpEmpresaDestino: TGroupBox;
     PageDeletaEmpresa: TTabSheet;
     pnl_fundoDeletaEmpresa: TPanel;
@@ -148,11 +140,67 @@ type
     OraScriptCriarUsuario: TOraScript;
     pnl_criarUsuario: TPanel;
     ImageAllSystem: TImageList;
+    pnl_bindsOracle: TPanel;
+    btn_bindsOracle: TSpeedButton;
+    OraScriptCriarUsuarioOriginal: TOraScript;
+    pnl_expBackup: TPanel;
+    btn_expBkp: TSpeedButton;
+    pnl_importarBackup: TPanel;
+    btn_importBkp: TSpeedButton;
     pnl_abrigaCriarUsuario: TPanel;
     btn_criarUsuario: TSpeedButton;
+    lbl_criarNomeUsuario: TLabel;
     edt_novoUsuario: TEdit;
-    lbl_novoUsuario: TLabel;
-    OraScriptCriarUsuarioOriginal: TOraScript;
+    pnl_versaoSistema: TPanel;
+    btn_versaoSistema: TSpeedButton;
+    pnl_dadosEmpresa: TPanel;
+    pnl_dadosEndereco: TPanel;
+    edt_RAZAO_SOCIAL_NFE: TEdit;
+    edt_FANTASIA: TEdit;
+    edt_RAZAO_SOCIAL: TEdit;
+    edt_EMPRESA_ID: TMaskEdit;
+    edt_INSC_MUNICIPAL: TEdit;
+    edt_INSC_ESTADUAL: TEdit;
+    lbl_razaoSocialNFe: TLabel;
+    lbl_nomeFantasia: TLabel;
+    lbl_razaoSocial: TLabel;
+    lbl_cnpj: TLabel;
+    Label17: TLabel;
+    lbl_inscricaoEstadual: TLabel;
+    edt_CEP: TMaskEdit;
+    edt_ENDERECO: TEdit;
+    edt_BAIRRO: TEdit;
+    edt_NOME_CIDADE: TEdit;
+    edt_ESTADO_ID: TEdit;
+    Label9: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    edt_DDD: TMaskEdit;
+    edt_FONE_VOZ: TMaskEdit;
+    edt_FONE_FAX: TMaskEdit;
+    edt_FONE_DADOS: TMaskEdit;
+    edt_E_MAIL: TEdit;
+    edt_FONE_WHATSAPP: TMaskEdit;
+    Label81: TLabel;
+    Label14: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    pnl_novosDadosEmpresa: TPanel;
+    grpAcoes: TGroupBox;
+    pnl_trocandoEmpresa: TPanel;
+    lbl_trocaEmpresa: TLabel;
+    pnl_trocandoEmpresas: TPanel;
+    Panel1: TPanel;
+    btn_trocandoEmpresas: TSpeedButton;
+    medt_cpf_cnpj: TMaskEdit;
+    chk_saveScritpTrocando: TCheckBox;
+    mmo_infTrocaEmpresa: TMemo;
+    lbl_cidadeNome: TLabel;
+    edt_CIDADE_ID: TEdit;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -209,12 +257,13 @@ type
     procedure btn_trocandoEmpresasClick(Sender: TObject);
     function  ValidaAtivacaoProcedimentos: Boolean;
     procedure AtualizarTelaEmpresas;
-    procedure FormCreate(Sender: TObject);
     procedure btn_detalhesBDClick(Sender: TObject);
     procedure btn_criarUsuarioClick(Sender: TObject);
     procedure ExecutarScriptCriarUsuario;
-    procedure SplitViewMenuMouseEnter(Sender: TObject);
-    procedure SplitViewMenuMouseLeave(Sender: TObject);
+    procedure btn_importBkpClick(Sender: TObject);
+    procedure btn_expBkpClick(Sender: TObject);
+    procedure btn_bindsOracleClick(Sender: TObject);
+    procedure btn_versaoSistemaClick(Sender: TObject);
 
   private
     FMostrarBranco: Boolean;
@@ -229,9 +278,9 @@ type
 
 var
   ViewMain: TViewMain;
+    FConsultaBD : TClasseConsultaBD;
     vGbl_Empresa_id : string;
     vGbl_RazaoSocial : string;
-    FConsultaBD : TClasseConsultaBD;
 
 implementation
 
@@ -245,13 +294,16 @@ uses
   classe.uScriptGeneratorTrocaEmpresas,
   Classe.ProgressHelper,
   uViewMensagens,
-  uViewProgressBar, Classe.AtualizaComponentesTela, classe.BancoDados;
+  uViewProgressBar,
+  Classe.AtualizaComponentesTela,
+  classe.BancoDados,
+  Classe.ConsultaTrocaEmpresa;
 
 {$R *.dfm}
 
 procedure TViewMain.EnsureEventBindings;
 begin
-  // garante que os eventos estejam ligados mesmo que o DFM esteja sem referÍncia
+  // garante que os eventos estejam ligados mesmo que o DFM esteja sem refer√™ncia
   if not Assigned(tmr_trocaLogoEmpresa.OnTimer) then
     tmr_trocaLogoEmpresa.OnTimer := tmr_trocaLogoEmpresaTimer;
 
@@ -265,11 +317,6 @@ end;
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   fnc_FecharSistema()
-end;
-
-procedure TViewMain.FormCreate(Sender: TObject);
-begin
-//  FConsultaBD := TClasseConsultaBD.Create;
 end;
 
 procedure TViewMain.FormShow(Sender: TObject);
@@ -293,7 +340,7 @@ begin
   img_UserLogout.Visible := False;
   img_UserLogin.Visible := True;
 
-   // inicia o controle de troca autom·tica
+   // inicia o controle de troca autom√°tica
   FMostrarBranco := True;
   ActiveAlternaLogo := True;
 
@@ -308,11 +355,11 @@ begin
   EnsureEventBindings;
   tmr_trocaLogoEmpresa.Enabled := ActiveAlternaLogo;
 
-   // opcional: forÁa redraw inicial
+   // opcional: for√ßa redraw inicial
   img_logoEmpresaBranco.Update;
   img_logoEmpresaAzul.Update;
 
-  //  Deixa invisivel o pnl que carrega as informaÁıes do banco de dados
+  //  Deixa invisivel o pnl que carrega as informa√ß√µes do banco de dados
   pnl_configBancoDados.Visible:= False;
 
   // debug
@@ -321,7 +368,7 @@ end;
 
 procedure TViewMain.tmr_trocaLogoEmpresaTimer(Sender: TObject);
 begin
-  // se est· desativado, garante que o timer n„o faÁa nada (defensivo)
+  // se est√° desativado, garante que o timer n√£o fa√ßa nada (defensivo)
   if not ActiveAlternaLogo then
   begin
     if tmr_trocaLogoEmpresa.Enabled then
@@ -345,31 +392,92 @@ begin
 end;
 
 function TViewMain.ValidaAtivacaoProcedimentos: Boolean;
+//var
+//  validaConexao : Boolean;
+//  valida_vGbl_Empresa_id: Boolean;
 begin
-  Result := True; // por padr„o, deixa continuar
-
-  if ( dbPrincipalEmpresas.DataSource.DataSet.IsEmpty ) then
+//  validaConexao := True; // por padr√£o, deixa continuar
+//  valida_vGbl_Empresa_id := True; // por padr√£o, deixa continua
+    result := True; // Ativa execu√ß√£o
+  // Valida se foi Selecionado a empresa para o procedimento
+  if ( vGbl_Empresa_id = '' ) then
   begin
     fnc_criar_menssagem(
-      'ATEN«√O',
-      '  Uma conex„o com banco de dados n„o foi estabelecida!',
-      '    VocÍ precisa conectar ao banco de dados para ativar este recurso. ' + sLineBreak +
-      '    VocÍ ser· direcionada para tela de configuraÁ„o.',
+      'ATEN√á√ÉO',
+      '  Nenhuma empresa foi selecionada para o procedimento!',
+      '    Voc√™ precisa selecionar uma empresa para ativar este recurso. ' + sLineBreak +
+      '    Voc√™ ser√° direcionado para tela Inicial.',
+      ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png', 'OK');
+
+
+    PageControl.ActivePageIndex := 0; // direciona o usu√°rio
+    result := False; // bloqueia execu√ß√£o
+    Exit;
+  end;
+
+
+  if not( DmModule.StatusConectado ) then
+  begin
+    fnc_criar_menssagem(
+      'ATEN√á√ÉO',
+      '  Uma conex√£o com banco de dados n√£o foi estabelecida!',
+      '    Voc√™ precisa conectar ao banco de dados para ativar este recurso. ' + sLineBreak +
+      '    Voc√™ ser√° direcionado para tela de configura√ß√£o.',
       ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png', 'OK');
 
 
-    PageControl.ActivePageIndex := 2; // direciona o usu·rio
-    Result := False; // bloqueia execuÁ„o
+    PageControl.ActivePageIndex := 2; // direciona o usu√°rio
+    result := False; // bloqueia execu√ß√£o
     Exit;
   end;
+
 end;
 
 procedure TViewMain.action_TrocandoEmpresaExecute(Sender: TObject);
+var
+  Consulta: TConsultaTrocaEmpresa;
 begin
+  Consulta := TConsultaTrocaEmpresa.Create;
+
   // Acessa o menu Inicial
   PageControl.ActivePageIndex := 1;
   AlternaSplitViewClose(SplitViewMenu);
+
+
+  if ( ValidaAtivacaoProcedimentos() ) then
+    begin
+      try
+        Consulta.CarregarTrocaEmpresa(
+          vGbl_Empresa_id,  // Par√¢metro recebido da vari√°vel global
+          edt_EMPRESA_ID,
+          edt_INSC_MUNICIPAL,
+          edt_INSC_ESTADUAL,
+          edt_RAZAO_SOCIAL,
+          edt_FANTASIA,
+          edt_RAZAO_SOCIAL_NFE,
+          edt_CEP,
+          edt_ENDERECO,
+          edt_BAIRRO,
+          edt_CIDADE_ID,
+          edt_NOME_CIDADE,
+          edt_ESTADO_ID,
+          edt_DDD,
+          edt_FONE_VOZ,
+          edt_FONE_FAX,
+          edt_FONE_DADOS,
+          edt_E_MAIL,
+          edt_FONE_WHATSAPP );
+      finally
+        Consulta.Free;
+      end;
+    end else
+    begin
+      Exit;
+    end;
+
+
 end;
+
 
 procedure TViewMain.action_configBDExecute(Sender: TObject);
 begin
@@ -397,17 +505,17 @@ end;
 
 procedure TViewMain.action_fecharMenuConfigBDExecute(Sender: TObject);
 begin
-  SplitViewConfigBD.Close;       // fecharMenuConfiguraÁ„o
+  SplitViewConfigBD.Close;       // fecharMenuConfigura√ß√£o
 end;
 
 procedure TViewMain.action_fecharMenuMovimentacaoExecute(Sender: TObject);
 begin
-  SplitViewMovimento.Close;      // fecharMenuMovimentaÁ„o
+  SplitViewMovimento.Close;      // fecharMenuMovimenta√ß√£o
 end;
 
 procedure TViewMain.action_vagoExecute(Sender: TObject);
 begin
-  ShowMessage('OpÁ„o Vaga');
+  ShowMessage('Op√ß√£o Vaga');
 end;
 
 procedure TViewMain.act_ConfiguracaoBDExecute(Sender: TObject);
@@ -458,9 +566,9 @@ begin
   if ( edt_novoUsuario.Text = '' ) then
 
   begin
-        fnc_criar_menssagem('AdministraÁ„o Banco de Dados',
-                   'AtenÁ„o!',
-                   'Para criar um novo usu·rio È obrigatÛrio informar o nome!',
+        fnc_criar_menssagem('Administra√ß√£o Banco de Dados',
+                   'Aten√ß√£o!',
+                   'Para criar um novo usu√°rio √© obrigat√≥rio informar o nome!',
                     ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png', 'OK');
 
     edt_novoUsuario.SetFocus;
@@ -470,7 +578,7 @@ begin
   begin
     InicioTelaAguarde();
 
- // Executa a criaÁ„o do usu·rio no banco.
+ // Executa a cria√ß√£o do usu√°rio no banco.
     ExecutarScriptCriarUsuario();
 
     FimTelaAguarde();
@@ -478,7 +586,7 @@ begin
     // Limpa o nome digitado
     edt_novoUsuario.Clear;
 
-    // Carregar/Atualizar GRID de usu·rios
+    // Carregar/Atualizar GRID de usu√°rios
     FConsultaBD.CarregarUsuarios(DBGrid_CarregarUsuarios);
   end;
 end;
@@ -495,7 +603,7 @@ var
 
 begin
   if not ValidaAtivacaoProcedimentos then
-    Exit; // interrompe tudo, pois a conex„o ainda est· ativa
+    Exit; // interrompe tudo, pois a conex√£o ainda est√° ativa
   vEmpresa_id :=  qryEmpresas.FieldByName('EMPRESA_ID').AsString ;
   vRazaoSocial := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
 
@@ -506,32 +614,32 @@ begin
     // 1 - Gera os scripts dinamicamente
     ScriptGen.Gerar('''' + vEmpresa_id+ '''');
 
-    // Copia os scripts para lista tempor·ria
+    // Copia os scripts para lista tempor√°ria
     Scripts.Text := ScriptGen.GetScripts;
 
-    // 2 - Mostra progress bar durante a geraÁ„o
-    Progress.Start(Scripts.Count, 'Gerando scripts para exclus„o...');
+    // 2 - Mostra progress bar durante a gera√ß√£o
+    Progress.Start(Scripts.Count, 'Gerando scripts para exclus√£o...');
     for i := 0 to Scripts.Count - 1 do
     begin
       Progress.Step('Gerando: ' + Scripts[i]);
     end;
     Progress.Finish;
 
-    // 3 - ConfirmaÁ„o do usu·rio
+    // 3 - Confirma√ß√£o do usu√°rio
     if Scripts.Count = 0 then Exit;
 
     returnUsuario := fnc_criar_menssagem(
-                        'EXCLUS√O DE EMPRESA',
+                        'EXCLUS√ÉO DE EMPRESA',
                         vEmpresa_id + ' - ' + vRazaoSocial,
                         'DESEJA REALMENTE EXCLUIR ESTA EMPRESA? ' + sLineBreak +
-                        'ESTA A«√O N√O PODER¡ SER REVERTIDA.',
+                        'ESTA A√á√ÉO N√ÉO PODER√Å SER REVERTIDA.',
                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
                         'ERRO');
 
     if not returnUsuario then Exit;
 
     // 4 - Executa os scripts individualmente
-    Progress.Start(Scripts.Count, 'Executando exclus„o da empresa...');
+    Progress.Start(Scripts.Count, 'Executando exclus√£o da empresa...');
     for i := 0 to Scripts.Count - 1 do
     begin
       OraScriptDeletandoEmpresa.SQL.Text := Scripts[i];
@@ -542,10 +650,10 @@ begin
     Progress.Finish;
 
     // 5 - Mensagem final de sucesso
-    fnc_criar_menssagem('EXCLUS√O DE EMPRESA',
-                        'A EXCLUS√O DA EMPRESA FOI UM SUCESSO !!!',
-                        'VocÍ selecionou a empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
-                        '. ESTA A«√O … IRREVERSÕVEL!!!',
+    fnc_criar_menssagem('EXCLUS√ÉO DE EMPRESA',
+                        'A EXCLUS√ÉO DA EMPRESA FOI UM SUCESSO !!!',
+                        'Voc√™ selecionou a empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
+                        '. ESTA A√á√ÉO √â IRREVERS√çVEL!!!',
                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
                         'OK');
 
@@ -579,7 +687,7 @@ var
   Progress: TProgressHelper;
   i: Integer;
 begin
-  ScriptGen := TScriptGeneratorTriggers.Create(DmModule.orsConexao); // j· vem com SQL configurado
+  ScriptGen := TScriptGeneratorTriggers.Create(DmModule.orsConexao); // j√° vem com SQL configurado
   Scripts := TStringList.Create;
   Progress := TProgressHelper.Create;
 
@@ -588,10 +696,10 @@ begin
     // Passa para classe o nome do usuario logado
     ScriptGen.Gerar(Self.eUsuario.Text);
 
-    // Copia os scripts para o TStringList tempor·rio
+    // Copia os scripts para o TStringList tempor√°rio
     Scripts.Text := ScriptGen.GetScripts;
 
-    // 2 - Mostra progress bar durante a geraÁ„o
+    // 2 - Mostra progress bar durante a gera√ß√£o
     Progress.Start(Scripts.Count, 'Gerando scripts...');
     for i := 0 to Scripts.Count - 1 do
     begin
@@ -599,12 +707,12 @@ begin
     end;
     Progress.Finish;
 
-    // 3 - ConfirmaÁ„o do usu·rio antes de executar
+    // 3 - Confirma√ß√£o do usu√°rio antes de executar
     if Scripts.Count = 0 then Exit;
 
-    returnUsuario := fnc_criar_menssagem('ALTERA«√O DE OBJETOS DO BANCO DE DADOS',
+    returnUsuario := fnc_criar_menssagem('ALTERA√á√ÉO DE OBJETOS DO BANCO DE DADOS',
                                          'DESEJA REALMENTE DESATIVAR OS OBJETOS?',
-                                         'ESTE PROCEDIMENTO … REVERSÕVEL',
+                                         'ESTE PROCEDIMENTO √â REVERS√çVEL',
                                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
                                          'ERRO');
 
@@ -613,7 +721,7 @@ begin
     // 4 - Limpa o OraScript antes de executar
     OraScriptDeleteTriggers.SQL.Clear;
 
-    // 5 - Inicializa o ProgressBar para execuÁ„o real
+    // 5 - Inicializa o ProgressBar para execu√ß√£o real
     Progress.Start(Scripts.Count, 'Executando scripts...');
 
     // 6 - Executa cada script individualmente
@@ -622,14 +730,14 @@ begin
       OraScriptDeleteTriggers.SQL.Text := Scripts[i];
       OraScriptDeleteTriggers.Execute;
 
-      // Atualiza ProgressBar com a informaÁ„o atual
+      // Atualiza ProgressBar com a informa√ß√£o atual
       Progress.Step('Executando: ' + Scripts[i]);
     end;
 
     Progress.Finish;
 
     // 7 - Mensagem de sucesso
-    fnc_criar_menssagem('ALTERA«√O DE OBJETOS DO BANCO DE DADOS',
+    fnc_criar_menssagem('ALTERA√á√ÉO DE OBJETOS DO BANCO DE DADOS',
                         'OS OBJETOS DO BANCO DE DADOS FORAM DESATIVADOS !!',
                         'TRIGGER''s E CONSTRAINTS FORAM DESATIVADAS',
                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
@@ -658,16 +766,16 @@ procedure TViewMain.btn_detalhesBDClick(Sender: TObject);
 begin
   FConsultaBD := TClasseConsultaBD.Create;
   try
-    // Exemplo 0: carregar vers„o do Oracle
+    // Exemplo 0: carregar vers√£o do Oracle
     FConsultaBD.CarregarVersaoOracle(lbl_versaoOracle);
 
-    // Exemplo 1: carregar sessıes Ativas
+    // Exemplo 1: carregar sess√µes Ativas
     FConsultaBD.CarregarSessoesAtivas(DBGrid_CarregarSession);
 
     // Exemplo 2: carregar tablespace
      FConsultaBD.CarregarTablespace(DBGrid_CarregarTablespace);
 
-    // Exemplo 3: carregar usu·rios
+    // Exemplo 3: carregar usu√°rios
      FConsultaBD.CarregarUsuarios(DBGrid_CarregarUsuarios);
 
     // Exemplo 4: carregar TableSpace Diretorios
@@ -680,15 +788,25 @@ begin
    // FConsultaBD.Free;
   end;
 
-  //  Deixa Visivel o pnl que carrega as informaÁıes do banco de dados
+  //  Deixa Visivel o pnl que carrega as informa√ß√µes do banco de dados
   pnl_configBancoDados.Visible:= True;
-      // Habilitando pnl_deleteTriggers para o usu·rio
+      // Habilitando pnl_deleteTriggers para o usu√°rio
      Self.pnl_deleteTriggers.Visible := True;
 
-    // Habilitando pnl_configBancoDados para o usu·rio
+    // Habilitando pnl_configBancoDados para o usu√°rio
      pnl_configBancoDados.Visible := True;
 end;
 
+
+procedure TViewMain.btn_expBkpClick(Sender: TObject);
+begin
+  ShowMessage('Em constru√ß√£o ...');
+end;
+
+procedure TViewMain.btn_importBkpClick(Sender: TObject);
+begin
+  ShowMessage('Em constru√ß√£o ...');
+end;
 
 procedure TViewMain.btn_testeClick(Sender: TObject);
 begin
@@ -720,10 +838,10 @@ begin
       // 1 - Gera os scripts dinamicamente
       ScriptGen.Gerar('''' + vEmpresa_id + '''', '''' + newEmpresa_id + '''');
 
-      // Copia os scripts para lista tempor·ria
+      // Copia os scripts para lista tempor√°ria
       Scripts.Text := ScriptGen.GetScripts;
 
-      // 2 - Mostra progress bar durante a geraÁ„o
+      // 2 - Mostra progress bar durante a gera√ß√£o
       Progress.Start(Scripts.Count, 'Gerando scripts de troca...');
       for i := 0 to Scripts.Count - 1 do
       begin
@@ -731,21 +849,21 @@ begin
       end;
       Progress.Finish;
 
-      // 3 - ConfirmaÁ„o do usu·rio
+      // 3 - Confirma√ß√£o do usu√°rio
       if Scripts.Count = 0 then Exit;
 
       returnUsuario := fnc_criar_menssagem(
-                          'ALTERA«√O DE EMPRESA',
+                          'ALTERA√á√ÉO DE EMPRESA',
                           vEmpresa_id + ' - ' + vRazaoSocial,
                           'DESEJA REALMENTE ALTERAR O CNPJ DA EMPRESA?' + sLineBreak +
-                          'ESTA A«√O N√O PODER¡ SER REVERTIDA.',
+                          'ESTA A√á√ÉO N√ÉO PODER√Å SER REVERTIDA.',
                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
                           'ERRO');
 
       if not returnUsuario then Exit;
 
       // 4 - Executa os scripts individualmente
-      Progress.Start(Scripts.Count, 'Executando alteraÁ„o da empresa...');
+      Progress.Start(Scripts.Count, 'Executando altera√ß√£o da empresa...');
       for i := 0 to Scripts.Count - 1 do
       begin
         OraScriptTrocandoEmpresas.SQL.Text := Scripts[i];
@@ -756,9 +874,9 @@ begin
       Progress.Finish;
 
       // 5 - Mensagem final de sucesso
-      fnc_criar_menssagem('ALTERA«√O DE EMPRESA',
-                          'A ALTERA«√O DA EMPRESA FOI UM SUCESSO !!!',
-                          'VocÍ alterou o CNPJ da empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
+      fnc_criar_menssagem('ALTERA√á√ÉO DE EMPRESA',
+                          'A ALTERA√á√ÉO DA EMPRESA FOI UM SUCESSO !!!',
+                          'Voc√™ alterou o CNPJ da empresa: ' + vEmpresa_id + ' - ' + vRazaoSocial +
                           ', para o novo CNPJ: ' + newEmpresa_id,
                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
                           'OK');
@@ -788,7 +906,7 @@ begin
   begin
     fnc_criar_menssagem('TROCA EMPRESA',
                         'PARA EXECUTAR O PROCEDIMENTO, INFORME O NOVO CNPJ!',
-                        'O NOVO CNPJ EST¡ VAZIO OU INCOMPLETO.',
+                        'O NOVO CNPJ EST√Å VAZIO OU INCOMPLETO.',
                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoAviso.png',
                         'OK');
     medt_cpf_cnpj.SetFocus;
@@ -796,15 +914,35 @@ begin
 end;
 
 
+procedure TViewMain.btn_versaoSistemaClick(Sender: TObject);
+begin
+  // Mostra a Vers√£o do sistema, somente pra preencher a tela com bot√µes.
+  fnc_criar_menssagem('SIAC CLEAN BASE',
+                      'Vers√£o do Sistema  -  1.1.5.3 - R07  -  @2025',
+                      'Todos direitos reservados √†: www.siacsistemas.com.br',
+                      ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
+                      'OK');
+end;
+
+procedure TViewMain.btn_bindsOracleClick(Sender: TObject);
+begin
+  try
+    FConsultaBD.ExecutarBindsOracle(nil, 'Par√¢metros de Configura√ß√£o do Oracle');
+  except
+    on E: Exception do
+      ShowMessage('Erro ao executar consulta de par√¢metros Oracle: ' + E.Message);
+  end;
+end;
+
 procedure TViewMain.img_logoEmpresaBrancoClick(Sender: TObject);
 begin
-  // quando usu·rio clicar na imagem branca pause/retorna a altern‚ncia
+  // quando usu√°rio clicar na imagem branca pause/retorna a altern√¢ncia
   AlternarAtivo;
 end;
 
 procedure TViewMain.img_logoEmpresaAzulClick(Sender: TObject);
 begin
-  // quando usu·rio clicar na imagem branca pause/retorna a altern‚ncia
+  // quando usu√°rio clicar na imagem branca pause/retorna a altern√¢ncia
   AlternarAtivo;
 end;
 
@@ -896,16 +1034,6 @@ begin
  AlternaSplitViewClose(SplitViewMenu);
 end;
 
-procedure TViewMain.SplitViewMenuMouseEnter(Sender: TObject);
-begin
- //SplitViewMenu.Opened := not SplitViewMenu.Opened;
-end;
-
-procedure TViewMain.SplitViewMenuMouseLeave(Sender: TObject);
-begin
- //SplitViewMenu.Opened;
-end;
-
 procedure TViewMain.img_closeClick(Sender: TObject);
 begin
   fnc_FecharSistema();
@@ -931,7 +1059,7 @@ begin
     if Self.Components[i] is TSplitView then
       TSplitView(Self.Components[i]).Close;
 
-  // Se o alvo n„o estava aberto, abre ele
+  // Se o alvo n√£o estava aberto, abre ele
   if not Target.Opened then
     Target.Open;
 
@@ -946,7 +1074,7 @@ begin
     if Self.Components[i] is TSplitView then
       TSplitView(Self.Components[i]).Open;
 
-  // Se o alvo n„o estava aberto, abre ele
+  // Se o alvo n√£o estava aberto, abre ele
   if Target.Opened then
     Target.Close;
 
@@ -957,11 +1085,13 @@ begin
   if uDataModule.DmModule.ConectarBd(eUsuario.Text, eSenha.Text, eServidor.Text) then
   begin
     CtrlBotoes(True);
-    qryEmpresas.Open;
 
-   fnc_criar_menssagem('CONFIGURA«√O AO BANCO DE DADOS ORACLE',
-               'ConfiguraÁ„o de banco de dados',
-               'Conex„o com o banco de dados estabelecida com sucesso!',
+    //Ativando a qry do DBGridEmpresas
+     qryEmpresas.Open;
+
+    fnc_criar_menssagem('CONFIGURA√á√ÉO AO BANCO DE DADOS ORACLE',
+               'Configura√ß√£o de banco de dados',
+               'Conex√£o com o banco de dados estabelecida com sucesso!',
                 ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_connection.png', 'OK');
 
 
@@ -971,14 +1101,13 @@ begin
 
     // Habilitando o pnl_btnInfoOracle
     pnl_btnInfoOracle.Visible := True;
-
   end
   else
   begin
     CtrlBotoes(False);
-   fnc_criar_menssagem('CONFIGURA«√O AO BANCO DE DADOS ORACLE',
-                   'Falha na configuraÁ„o de banco de dados!',
-                   'Verifique as configuraÁıes de conex„o.',
+   fnc_criar_menssagem('CONFIGURA√á√ÉO AO BANCO DE DADOS ORACLE',
+                   'Falha na configura√ß√£o de banco de dados!',
+                   'Verifique as configura√ß√µes de conex√£o.',
                     ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png',
                    'OK');
   end;
@@ -999,20 +1128,18 @@ begin
     pnl_btnInfoOracle.Visible := False;
     pnl_btnInfoOracle.Visible := False;
 
-    // Desabilitando pnl_deleteTriggers para o usu·rio
+    // Desabilitando pnl_deleteTriggers para o usu√°rio
      Self.pnl_deleteTriggers.Visible := False;
 
-    // Desabilitando pnl_configBancoDados para o usu·rio
+    // Desabilitando pnl_configBancoDados para o usu√°rio
      pnl_configBancoDados.Visible := False;
 
-     begin
-      // Passa o SQL da empresa Selecionada para o form responsavel pela ediÁ„o da empresa
-       lbl_carregaEmpresa.Caption := 'Empresa Selecionada: ?';
-
-      // Limpar VarGlobal
-        vGbl_Empresa_id :=  qryEmpresas.FieldByName('EMPRESA_ID').AsString ;
-        vGbl_RazaoSocial := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
+    begin
+      // Passa o SQL da empresa Selecionada para o form responsavel pela edi√ß√£o da empresa
+       TClasseAtualizaComponentesTela.AtualizarVariaveisGlobais(ViewMain.lbl_carregaEmpresa,
+                                                                ViewMain.qryEmpresas       );
      end;
+
 
   end;
 end;
@@ -1020,17 +1147,17 @@ end;
 function TViewMain.fnc_FecharSistema: Boolean;
 begin
   Result := fnc_criar_menssagem('FECHAR SISTEMA',
-                                'A FUN«√O PARA FECHAR O SISTEMA FOI ACIONADA',
+                                'A FUN√á√ÉO PARA FECHAR O SISTEMA FOI ACIONADA',
                                 'DESEJA REALMENTE SAIR DO SISTEMA ?',
                                 ExtractFilePath(Application.ExeName) +
                                 'Arquivos\icones\icon_aviso.png', 'ERRO');
 
-  // Se o usu·rio clicou em "N„o" ou "Cancelar", interrompe
+  // Se o usu√°rio clicou em "N√£o" ou "Cancelar", interrompe
   if not Result then
    // Exit(False);
    Abort;
 
-  // Caso contr·rio, fecha o sistema
+  // Caso contr√°rio, fecha o sistema
   Application.Terminate;
   Result := True;
 end;
@@ -1064,7 +1191,7 @@ var
 begin
   Grid := Sender as TDBGrid;
 
-  // Verifica se È a coluna que representa o "bot„o"
+  // Verifica se √© a coluna que representa o "bot√£o"
   if Column.Title.Caption = 'DROP USER' then
   begin
     BtnRect := Rect;
@@ -1074,22 +1201,22 @@ begin
     Grid.Canvas.Brush.Color := clWhite;
     Grid.Canvas.FillRect(Rect);
 
-    // --- Moldura cinza do bot„o ---
+    // --- Moldura cinza do bot√£o ---
     DrawEdge(Grid.Canvas.Handle, BtnRect, EDGE_RAISED, BF_RECT);
 
     // --- Texto vermelho ---
     Grid.Canvas.Font.Color := clRed;
-    Grid.Canvas.Brush.Style := bsClear; // para n„o sobrepor o texto com cor de fundo
+    Grid.Canvas.Brush.Style := bsClear; // para n√£o sobrepor o texto com cor de fundo
 
     TextoBotao := 'Remover';
     DrawText(Grid.Canvas.Handle, PChar(TextoBotao), Length(TextoBotao),
       BtnRect, DT_CENTER or DT_VCENTER or DT_SINGLELINE);
 
-    // Restaura o brush padr„o
+    // Restaura o brush padr√£o
     Grid.Canvas.Brush.Style := bsSolid;
   end
   else
-    // Desenho padr„o das outras colunas
+    // Desenho padr√£o das outras colunas
     Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
@@ -1128,9 +1255,9 @@ begin
    ExecutarKillSession();
    FimTelaAguarde();
 
-    fnc_criar_menssagem('AdministraÁ„o Banco de Dados',
-                   'Uma sess„o do usu·rio: '  + DBGrid_CarregarSession.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi encerrada.',
-                   'Detalhes de sess„o: ' + #13#10 +
+    fnc_criar_menssagem('Administra√ß√£o Banco de Dados',
+                   'Uma sess√£o do usu√°rio: '  + DBGrid_CarregarSession.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi encerrada.',
+                   'Detalhes de sess√£o: ' + #13#10 +
                    '   Programa: '+ DBGrid_CarregarSession.DataSource.DataSet.FieldByName('PROGRAM').AsString + #13#10 +
                    '   Terminal: '+ DBGrid_CarregarSession.DataSource.DataSet.FieldByName('TERMINAL').AsString,
                     ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png', 'OK');
@@ -1150,7 +1277,7 @@ begin
 
   Grid := Sender as TDBGrid;
 
-  // Verifica se È a coluna que representa o "bot„o"
+  // Verifica se √© a coluna que representa o "bot√£o"
   if Column.Title.Caption = 'KILL' then
   begin
     BtnRect := Rect;
@@ -1160,22 +1287,22 @@ begin
     Grid.Canvas.Brush.Color := clWhite;
     Grid.Canvas.FillRect(Rect);
 
-    // --- Moldura cinza do bot„o ---
+    // --- Moldura cinza do bot√£o ---
     DrawEdge(Grid.Canvas.Handle, BtnRect, EDGE_RAISED, BF_RECT);
 
     // --- Texto vermelho ---
     Grid.Canvas.Font.Color := clRed;
-    Grid.Canvas.Brush.Style := bsClear; // para n„o sobrepor o texto com cor de fundo
+    Grid.Canvas.Brush.Style := bsClear; // para n√£o sobrepor o texto com cor de fundo
 
     TextoBotao := 'Remover';
     DrawText(Grid.Canvas.Handle, PChar(TextoBotao), Length(TextoBotao),
       BtnRect, DT_CENTER or DT_VCENTER or DT_SINGLELINE);
 
-    // Restaura o brush padr„o
+    // Restaura o brush padr√£o
     Grid.Canvas.Brush.Style := bsSolid;
   end
   else
-    // Desenho padr„o das outras colunas
+    // Desenho padr√£o das outras colunas
     Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 procedure TViewMain.DBGrid_CarregarUsuariosCellClick(Column: TColumn);
@@ -1189,29 +1316,56 @@ begin
    //ShowMessage(DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString );
 
      returnUsuario := fnc_criar_menssagem(
-                      'AdministraÁ„o Banco de Dados',
-                     'O usu·rio ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi selecionado para ser ExcluÌdo.',
-                      'DESEJA REALMENTE DELETAR ESTE USU¡RIO?' + sLineBreak +
-                      'ESTA A«√O N√O PODER¡ SER REVERTIDA.',
+                      'Administra√ß√£o Banco de Dados',
+                     'O usu√°rio ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi selecionado para ser Exclu√≠do.',
+                      'DESEJA REALMENTE DELETAR ESTE USU√ÅRIO?' + sLineBreak +
+                      'ESTA A√á√ÉO N√ÉO PODER√Å SER REVERTIDA.',
                       ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
                       'ERRO');
 
       if not returnUsuario then Exit;
 
+    try
+      InicioTelaAguarde;
+      try
+        ExecutarOpcaoDeletarUser;
 
-   InicioTelaAguarde();
-   ExecutarOpcaoDeletarUser();
-   FimTelaAguarde();
+        // Se chegou aqui, n√£o houve erro ‚Üí mostra mensagem de sucesso
+        fnc_criar_menssagem('Administra√ß√£o Banco de Dados',
+                            'O usu√°rio ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi exclu√≠do com sucesso!',
+                            '',
+                            ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png', 'OK');
+      except
+        on E: Exception do
+        begin
+          fnc_criar_menssagem('Administra√ß√£o Banco de Dados',
+                              'O usu√°rio ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' n√£o foi exclu√≠do!',
+                              'N√£o foi poss√≠vel excluir o usu√°rio selecionado, existem sess√µes ativas.',
+                              ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_erro.png', 'OK');
 
-    fnc_criar_menssagem('AdministraÁ„o Banco de Dados',
-                   'O usu·rio ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi excluÌdo com sucesso!',
-                   '',
-                    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png', 'OK');
+          // Aqui voc√™ pode registrar o erro se quiser:
+          // LogErro(E.Message);
+
+          Exit; // Sai do procedimento para n√£o seguir o fluxo
+        end;
+      end;
+    finally
+      FimTelaAguarde;
+    end;
+
+//   InicioTelaAguarde();
+//   ExecutarOpcaoDeletarUser();
+//   FimTelaAguarde();
+
+//    fnc_criar_menssagem('Administra√ß√£o Banco de Dados',
+//                   'O usu√°rio ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi exclu√≠do com sucesso!',
+//                   '',
+//                    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png', 'OK');
 
     // Exemplo 2: carregar tablespace
      FConsultaBD.CarregarTablespace(DBGrid_CarregarTablespace);
 
-    // Exemplo 3: carregar usu·rios
+    // Exemplo 3: carregar usu√°rios
      FConsultaBD.CarregarUsuarios(DBGrid_CarregarUsuarios);
 
   end;
@@ -1223,18 +1377,18 @@ procedure TViewMain.dbPrincipalEmpresasDblClick(Sender: TObject);
 begin
   if ( dbPrincipalEmpresas.DataSource.DataSet.IsEmpty ) then
      begin
-       fnc_criar_menssagem('CONFIGURA«√O AO BANCO DE DADOS ORACLE',
-                           'Nenhuma configuraÁ„o de banco de dados encontrada!',
-                           'Verifique as configuraÁıes de conex„o.',
+       fnc_criar_menssagem('CONFIGURA√á√ÉO AO BANCO DE DADOS ORACLE',
+                           'Nenhuma configura√ß√£o de banco de dados encontrada!',
+                           'Verifique as configura√ß√µes de conex√£o.',
                             ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png', 'OK');
 
-       // REDIRECIONAMENTO PARA A TELA DE CONFIGURA«√O
+       // REDIRECIONAMENTO PARA A TELA DE CONFIGURA√á√ÉO
         PageControl.ActivePageIndex := 2;
         AlternaSplitViewClose(SplitViewMenu);
      end else
 
     begin
-      // Passa o SQL da empresa Selecionada para o form responsavel pela ediÁ„o da empresa
+      // Passa o SQL da empresa Selecionada para o form responsavel pela edi√ß√£o da empresa
        TClasseAtualizaComponentesTela.AtualizarVariaveisGlobais(ViewMain.lbl_carregaEmpresa,
                                                                 ViewMain.qryEmpresas);
      end;
@@ -1243,11 +1397,11 @@ end;
 
 procedure TViewMain.AtualizarTelaEmpresas;
 begin
-  // Atualiza vari·veis globais
-  TClasseAtualizaComponentesTela.AtualizarVariaveisGlobais(ViewMain.lbl_carregaEmpresa, ViewMain.qryEmpresas);
-
-  // Atualiza o DBGrid (qryEmpresas È o dataset)
+  // Atualiza o DBGrid (qryEmpresas √© o dataset)
   TClasseAtualizaComponentesTela.AtualizarDBGrid(ViewMain.qryEmpresas);
+
+  // Atualiza vari√°veis globais
+  TClasseAtualizaComponentesTela.AtualizarVariaveisGlobais(ViewMain.lbl_carregaEmpresa, ViewMain.qryEmpresas);
 end;
 
 procedure TViewMain.ExecutarScriptCriarUsuario;
@@ -1256,13 +1410,13 @@ var
   UserName: string;
   TmpLines: TStringList;
 begin
-  // Pega o nome informado pelo usu·rio
+  // Pega o nome informado pelo usu√°rio
   UserName := Trim(edt_novoUsuario.Text);
 
   // Valida o nome antes de tudo
   if not ValidarCaracterString(UserName) then
   begin
-    ShowMessage('Nome de usu·rio inv·lido. Use apenas letras, n˙meros e _ $ #, comeÁando com letra.');
+    ShowMessage('Nome de usu√°rio inv√°lido. Use apenas letras, n√∫meros e _ $ #, come√ßando com letra.');
     Exit;
   end;
 
@@ -1272,13 +1426,13 @@ begin
   TmpLines := TStringList.Create;
   try
     try
-      // Copia o script original do componente para uma string tempor·ria
+      // Copia o script original do componente para uma string tempor√°ria
       TmpLines.Text := OraScriptCriarUsuario.SQL.Text;
 
-      // Substitui todas as ocorrÍncias de :vUsuario
+      // Substitui todas as ocorr√™ncias de :vUsuario
       ScriptTxt := StringReplace(TmpLines.Text, ':vUsuario', UserName, [rfReplaceAll, rfIgnoreCase]);
 
-      // Se seu script usa outras vari·veis, substitua aqui tambÈm:
+      // Se seu script usa outras vari√°veis, substitua aqui tamb√©m:
       // ScriptTxt := StringReplace(ScriptTxt, ':vTablespace', 'DADOS', [rfReplaceAll, rfIgnoreCase]);
 
       // Atribui de volta ao TOraScript e executa

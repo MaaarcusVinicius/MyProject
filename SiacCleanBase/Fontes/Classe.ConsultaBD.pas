@@ -3,7 +3,7 @@ unit Classe.ConsultaBD;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,System.StrUtils,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Data.DB, DBAccess, Ora,
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, DAScript, OraScript,
@@ -13,14 +13,19 @@ uses
 type
   TClasseConsultaBD = class
   private
-    FVersaoOracle:             TClasseBancoDados;
-    FCarregarSessoesAtivas :   TClasseBancoDados;
-    FBancoTablespace:          TClasseBancoDados;
-    FBancoTablespaceDiretorio: TClasseBancoDados;
-    FBancoUsuarios:            TClasseBancoDados;
-    FBancoUpdate:              TClasseBancoDados;
-    FExecutarDropUser:         TClasseBancoDados;
-    FExecutarKillSession:      TClasseBancoDados;
+    FVersaoOracle             : TClasseBancoDados;
+    FCarregarSessoesAtivas    : TClasseBancoDados;
+    FBancoTablespace          : TClasseBancoDados;
+    FBancoTablespaceDiretorio : TClasseBancoDados;
+    FBancoUsuarios            : TClasseBancoDados;
+    FBancoUpdate              : TClasseBancoDados;
+    FExecutarDropUser         : TClasseBancoDados;
+    FExecutarKillSession      : TClasseBancoDados;
+    FExecutarBindsOracle      : TClasseBancoDados;
+
+    procedure ListViewCustomDrawItem(Sender: TCustomListView; Item: TListItem;
+      State: TCustomDrawState; var DefaultDraw: Boolean);
+
   public
     constructor Create;
     destructor Destroy; override;
@@ -33,6 +38,7 @@ type
     procedure AtualizarEmpresaStatus(const AEmpresaID: Integer; const AStatus: string);
     procedure ExecutarDropUser(const AUser: string);
     procedure ExecutarKillSession(const ASid , ASerial : string);
+    procedure ExecutarBindsOracle(AQuery: TDataSet; const ATitulo: string);
   end;
 
 implementation
@@ -62,16 +68,17 @@ begin
   //FBancoUpdate              := TClasseBancoDados.Create(DmModule.orsConexao);
   FExecutarDropUser         := TClasseBancoDados.Create(DmModule.orsConexao);
   FExecutarKillSession      := TClasseBancoDados.Create(DmModule.orsConexao);
+  FExecutarBindsOracle      := TClasseBancoDados.Create(DmModule.orsConexao);
 
-  // Habilita o log em todos os objetos
+ // Habilita o log em todos os objetos
   //  FVersaoOracle.EnableLog(vLogPath);
   //  FCarregarSessoesAtivas.EnableLog(vLogPath);
   //  FBancoTablespace.EnableLog(vLogPath);
   //  FBancoTablespaceDiretorio.EnableLog(vLogPath);
   //  FBancoUsuarios.EnableLog(vLogPath);
   //  FBancoUpdate.EnableLog(vLogPath);
-    FExecutarDropUser.EnableLog(vLogPath);
-    FExecutarKillSession.EnableLog(vLogPath);
+  //  FExecutarDropUser.EnableLog(vLogPath);
+  //  FExecutarKillSession.EnableLog(vLogPath);
 end;
 
 
@@ -88,6 +95,219 @@ begin
   inherited;
 end;
 
+procedure TClasseConsultaBD.ListViewCustomDrawItem(Sender: TCustomListView;
+  Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
+begin
+  // Estilo "zebra" nas linhas
+  if Odd(Item.Index) then
+    Sender.Canvas.Brush.Color := $00F0F0F0 // cinza claro
+  else
+    Sender.Canvas.Brush.Color := clWhite;
+end;
+
+procedure TClasseConsultaBD.ExecutarBindsOracle(AQuery: TDataSet; const ATitulo: string);
+var
+  ListViewForm: TForm;
+  ListView: TListView;
+  Item: TListItem;
+  LQuery: TDataSet;
+
+  function ListCompare(Item1, Item2: TListItem; ParamSort: Integer): Integer; stdcall;
+  var
+    S1, S2: string;
+  begin
+    if ParamSort = 0 then
+    begin
+      S1 := Item1.Caption;
+      S2 := Item2.Caption;
+    end
+    else
+    begin
+      S1 := Item1.SubItems[ParamSort - 1];
+      S2 := Item2.SubItems[ParamSort - 1];
+    end;
+    Result := CompareText(S1, S2);
+  end;
+
+begin
+  // Define SQL padrão se o dataset não foi passado
+ FExecutarBindsOracle.SetSQL(
+                  ' select upper(parameter) as parameter, value         '+
+                 '   from (SELECT ''open_cursors'' AS parameter, value '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''open_cursors''              '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''processes'', value                 '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''processes''                 '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''sessions'', value                  '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''sessions''                  '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''db_block_size'', value             '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''db_block_size''             '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''shared_pool_size'', value          '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''shared_pool_size''          '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''cursor_sharing'', value            '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''cursor_sharing''            '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''optimizer_mode'', value            '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''optimizer_mode''            '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''workarea_size_policy'', value      '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''workarea_size_policy''      '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''db_cache_size'', value             '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''db_cache_size''             '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''undo_tablespace'', value           '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''undo_tablespace''           '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''undo_management'', value           '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''undo_management''           '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''nls_date_format'', value           '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''nls_date_format''           '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''compatible'', value                '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''compatible''                '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''control_files'', value             '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''control_files''             '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''db_files'', value                  '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''db_files''                  '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''db_name'', value                   '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''db_name''                   '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''instance_name'', value             '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''instance_name''             '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''service_names'', value             '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''service_names''             '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''log_buffer'', value                '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''log_buffer''                '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''archive_lag_target'', value        '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''archive_lag_target''        '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''audit_trail'', value               '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''audit_trail''               '+
+                 '         UNION ALL                                   '+
+                 '         SELECT ''remote_login_passwordfile'', value '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''remote_login_passwordfile'' '+
+                 '         UNION ALL                                   '+
+                 '         select ''log_mode'', log_mode               '+
+                 '           from gv$database                          '+
+                 '         UNION ALL                                   '+
+                 '         select ''pasta DpDump'', DIRECTORY_PATH as value      '+
+                 '           from dba_directories                                '+
+                 '          WHERE ((DIRECTORY_NAME = ''DATA_PUMP_DIR'') OR       '+
+                 '                (DIRECTORY_NAME LIKE ''%PUMP%''))              '+
+                 '         UNION ALL                                             '+
+                 '         select t.PARAMETER, t.VALUE                           '+
+                 '           from nls_database_parameters t                      '+
+                 '         UNION ALL                                             '+
+                 '         select name as parameter,                             '+
+                 '                value / 1024 / 1024 / 1024 || '' GB'' VALUE_MB '+
+                 '           from v$parameter                                    '+
+                 '          where name in (''memory_max_target'',                '+
+                 '                         ''memory_target'',                    '+
+                 '                         ''sga_max_size'',                     '+
+                 '                         ''sga_target'',                       '+
+                 '                         ''pga_aggregate_limit'',              '+
+                 '                         ''pga_aggregate_target'')             '+
+                 '          order by 1)                                          '+
+                 '  order by PARAMETER                                           ');
+
+  FExecutarBindsOracle.ExecutarConsulta;
+
+  if Assigned(AQuery) then
+    LQuery := AQuery
+  else
+    LQuery := FExecutarBindsOracle.GetQuery;
+
+  if not Assigned(LQuery) then
+    Exit;
+
+  // Cria form temporário
+  ListViewForm := TForm.Create(nil);
+  try
+    ListViewForm.Caption := IfThen(ATitulo <> '', ATitulo, 'Parâmetros Oracle');
+    ListViewForm.BorderStyle := bsSizeToolWin;
+    ListViewForm.Position := poScreenCenter;
+    ListViewForm.Width := 700;
+    ListViewForm.Height := 500;
+    ListViewForm.Color := clWhite;
+    ListViewForm.Font.Name := 'Segoe UI';
+    ListViewForm.Font.Size := 10;
+
+    // Cria ListView
+    ListView := TListView.Create(ListViewForm);
+    ListView.Parent := ListViewForm;
+    ListView.Align := alClient;
+    ListView.ViewStyle := vsReport;
+    ListView.RowSelect := True;
+    ListView.ReadOnly := True;
+    ListView.GridLines := True;
+    ListView.MultiSelect := False;
+
+    // Define colunas
+    ListView.Columns.Add.Caption := 'Parâmetro';
+    ListView.Columns.Add.Caption := 'Valor';
+    ListView.Columns[0].Width := 300;
+    ListView.Columns[1].Width := 350;
+
+    // Popula com os dados
+    LQuery.First;
+    while not LQuery.Eof do
+    begin
+      Item := ListView.Items.Add;
+      Item.Caption := LQuery.FieldByName('PARAMETER').AsString;
+      Item.SubItems.Add(LQuery.FieldByName('VALUE').AsString);
+      LQuery.Next;
+    end;
+
+    // Aplica evento custom draw (zebra)
+    ListView.OnCustomDrawItem := ListViewCustomDrawItem;
+
+    // Ordena por parâmetro (coluna 0)
+    if ListView.Items.Count > 1 then
+      ListView.CustomSort(@ListCompare, 0);
+
+    // Exibe o formulário modal
+    ListViewForm.ShowModal;
+  finally
+    ListViewForm.Free;
+  end;
+end;
+
+
+
 procedure TClasseConsultaBD.ExecutarDropUser(const AUser: string);
 var
   vSQL: string;
@@ -99,7 +319,6 @@ end;
 
 
 procedure TClasseConsultaBD.ExecutarKillSession(const ASid , ASerial : string);
-
       //ALTER SYSTEM KILL SESSION '<sid>,<serial#>' IMMEDIATE;
       //ALTER SYSTEM DISCONNECT SESSION '<sid>,<serial#>' IMMEDIATE;
 var

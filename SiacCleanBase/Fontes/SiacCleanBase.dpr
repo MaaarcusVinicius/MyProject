@@ -17,7 +17,8 @@ uses
   classe.BancoDados in 'classe.BancoDados.pas',
   Classe.ConsultaBD in 'Classe.ConsultaBD.pas',
   Classe.AtualizaComponentesTela in 'Classe.AtualizaComponentesTela.pas',
-  TelaAguarde in 'C:\sistemas\Repositorio\TelaAguarde.pas' {FormTelaAguarde};
+  TelaAguarde in 'C:\sistemas\Repositorio\TelaAguarde.pas' {FormTelaAguarde},
+  Classe.ConsultaTrocaEmpresa in 'Classe.ConsultaTrocaEmpresa.pas';
 
 {$R *.res}
 

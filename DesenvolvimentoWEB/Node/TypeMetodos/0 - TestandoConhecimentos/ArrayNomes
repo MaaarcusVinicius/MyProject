@@ -1,0 +1,20 @@
+function testeAureo (nome, sobrenome){
+  return `Testando nome ${nome}`
+}
+
+function testeAureo1 (nome, sobrenome='Marcus'){
+  return `Testando nome ${nome} sobrenome ${sobrenome} `
+}
+
+
+const nomeGeral = testeAureo('Aureo', 'Lindo')
+
+console.log("o nome é: ", nomeGeral)
+
+console.log("o nome é: ", testeAureo1('Aureo'))
+
+
+var a = "aprendendo a linguagem {0}"
+
+String.format(a, "java")
+String.format(a, "C#") + ""

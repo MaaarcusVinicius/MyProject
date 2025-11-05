@@ -167,6 +167,7 @@
             <Form>FormTelaAguarde</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Classe.ConsultaTrocaEmpresa.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
