@@ -9,7 +9,8 @@ uses
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, DAScript, OraScript,
   Vcl.Imaging.pngimage, Vcl.WinXCtrls, Vcl.CategoryButtons, System.Actions,
   Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Mask,  Classe.ConsultaBD,
-  TelaAguarde, System.RegularExpressions, EditNumber, ACBrBase, ACBrEnterTab;
+  TelaAguarde, System.RegularExpressions, EditNumber, ACBrBase, ACBrEnterTab,
+  Vcl.CheckLst;
 
 type
   TViewMain = class(TForm)
@@ -48,22 +49,18 @@ type
     FlowPanelEmpresas: TFlowPanel;
     btn_deletandoEmpresa: TSpeedButton;
     btn_trocandoEmpresa: TSpeedButton;
-    btn_editandoEmpresa: TSpeedButton;
-    btn_vago: TSpeedButton;
     btn_fecharMenuEmpresas: TSpeedButton;
     ImageList2: TImageList;
     actlst2: TActionList;
     action_TrocandoEmpresa: TAction;
     action_deletandoEmpresa: TAction;
-    action_editandoEmpresa: TAction;
-    action_vago: TAction;
     action_fecharMenuEmpresas: TAction;
     SplitViewMovimento: TSplitView;
     FlowPanelMovimento: TFlowPanel;
     action_configBD: TAction;
     pnl_Movimentacao: TPanel;
     lbl_menuMovimentacao: TLabel;
-    btn_FecharMenuMovimento: TSpeedButton;
+    btn_movimentacaoSiac: TSpeedButton;
     SplitViewConfigBD: TSplitView;
     FlowPanelConfigBD: TFlowPanel;
     pnl_menuConfig: TPanel;
@@ -99,16 +96,11 @@ type
     LbServidor: TLabel;
     shape1: TShape;
     pnl_fundoTrocaEmpresa: TPanel;
-    TrocaEmpresa: TGroupBox;
-    grpEmpresaDestino: TGroupBox;
+    grp_TrocaEmpresa: TGroupBox;
+    grp_EmpresaDestino: TGroupBox;
     PageDeletaEmpresa: TTabSheet;
     pnl_fundoDeletaEmpresa: TPanel;
-    GroupBox1: TGroupBox;
-    GroupBox2: TGroupBox;
-    pnl_deletaEmpresa: TPanel;
-    pnl_deletandoEmpresas: TPanel;
-    btn_deletandoEmpresas: TSpeedButton;
-    chk_saveScriptDeletando: TCheckBox;
+    grp_AcoesDeletaEmpresa: TGroupBox;
     pnl_carregaEmpresa: TPanel;
     pnl_configBancoDados: TPanel;
     act_Home: TAction;
@@ -181,26 +173,143 @@ type
     edt_FONE_VOZ: TMaskEdit;
     edt_FONE_FAX: TMaskEdit;
     edt_FONE_DADOS: TMaskEdit;
-    edt_E_MAIL: TEdit;
     edt_FONE_WHATSAPP: TMaskEdit;
     Label81: TLabel;
-    Label14: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     pnl_novosDadosEmpresa: TPanel;
-    grpAcoes: TGroupBox;
-    pnl_trocandoEmpresa: TPanel;
-    lbl_trocaEmpresa: TLabel;
-    pnl_trocandoEmpresas: TPanel;
-    Panel1: TPanel;
-    btn_trocandoEmpresas: TSpeedButton;
-    medt_cpf_cnpj: TMaskEdit;
-    chk_saveScritpTrocando: TCheckBox;
-    mmo_infTrocaEmpresa: TMemo;
     lbl_cidadeNome: TLabel;
     edt_CIDADE_ID: TEdit;
+    shpTrocaEmpresaBottom: TShape;
+    edt_E_MAIL: TEdit;
+    Label14: TLabel;
+    mmo_infTrocaEmpresa: TMemo;
+    Panel1: TPanel;
+    pnl_trocandoEmpresas: TPanel;
+    btn_trocandoEmpresas: TSpeedButton;
+    chk_saveScritpTrocando: TCheckBox;
+    medt_cpf_cnpj: TMaskEdit;
+    lbl_trocaEmpresa: TLabel;
+    shpDeletaEmpresaBottom: TShape;
+    GroupBox1: TGroupBox;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label18: TLabel;
+    edt_RAZAO_SOCIAL_NFE_d: TEdit;
+    edt_FANTASIA_d: TEdit;
+    edt_RAZAO_SOCIAL_d: TEdit;
+    edt_EMPRESA_ID_d: TMaskEdit;
+    edt_INSC_MUNICIPAL_d: TEdit;
+    edt_INSC_ESTADUAL_d: TEdit;
+    edt_E_MAIL_d: TEdit;
+    Panel4: TPanel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
+    edt_CEP_d: TMaskEdit;
+    edt_ENDERECO_d: TEdit;
+    edt_BAIRRO_d: TEdit;
+    edt_NOME_CIDADE_d: TEdit;
+    edt_ESTADO_ID_d: TEdit;
+    edt_DDD_d: TMaskEdit;
+    edt_FONE_VOZ_d: TMaskEdit;
+    edt_FONE_FAX_d: TMaskEdit;
+    edt_FONE_DADOS_d: TMaskEdit;
+    edt_FONE_WHATSAPP_d: TMaskEdit;
+    edt_CIDADE_ID_d: TEdit;
+    Panel5: TPanel;
+    Memo1: TMemo;
+    Panel6: TPanel;
+    pnl_deletandoEmpresas: TPanel;
+    btn_deletandoEmpresas: TSpeedButton;
+    chk_saveScriptDeletando: TCheckBox;
+    pnl_TelaTrocaEmpresa: TPanel;
+    lbl_1: TLabel;
+    pnl_TelaDeletaEmpresa: TPanel;
+    Label30: TLabel;
+    pnl_telaInicial: TPanel;
+    lbl_telaInicial: TLabel;
+    PageDeletaMovimento: TTabSheet;
+    action_DeletaMovimento: TAction;
+    pnl_fundoDeleaMovimento: TPanel;
+    Panel7: TPanel;
+    Label31: TLabel;
+    shpDeletaMovimento: TShape;
+    btn_movimentacaoFinanceiro: TSpeedButton;
+    btn_fecharMenuMovimento: TSpeedButton;
+    action_MovimentoFinanceiro: TAction;
+    pnl_sistemas: TPanel;
+    pnl_modulos: TPanel;
+    grp_SelecaoModulos: TGroupBox;
+    grp_ConfiguracaoBase: TGroupBox;
+    edtDataInicial: TMaskEdit;
+    edtDataFinal: TMaskEdit;
+    lblPeriodo: TLabel;
+    rg_tipoExclusão: TRadioGroup;
+    rg_modo: TRadioGroup;
+    lblA: TLabel;
+    CheckListSiacModulos: TCheckListBox;
+    PageTratarFinanceiro: TTabSheet;
+    pnl_tratarFinanceiro: TPanel;
+    Shape3: TShape;
+    Panel9: TPanel;
+    Label32: TLabel;
+    Panel11: TPanel;
+    grp_tratarDocumentoFinanceira: TGroupBox;
+    Panel8: TPanel;
+    grp_tratarMovimentacaoFinanceira2: TGroupBox;
+    rg_modoExclusaoFinanceiro: TRadioGroup;
+    rg_selecionarStatusExcluir: TRadioGroup;
+    rg_filtroPeriodoFinanceiro: TRadioGroup;
+    grp_periodoExclusao: TGroupBox;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label37: TLabel;
+    Label38: TLabel;
+    Label39: TLabel;
+    Label40: TLabel;
+    chk_dtCadastramento: TCheckBox;
+    chk_dtEmissao: TCheckBox;
+    chk_dtVencimento: TCheckBox;
+    chk_dtBaixa: TCheckBox;
+    medt_InicialCadastramento: TMaskEdit;
+    medt_FinalCadastramento: TMaskEdit;
+    medt_FinalEmissao: TMaskEdit;
+    medt_InicialEmissao: TMaskEdit;
+    medt_FinalVencimento: TMaskEdit;
+    medt_InicialVencimento: TMaskEdit;
+    medt_FinalBaixa: TMaskEdit;
+    medt_InicialBaixa: TMaskEdit;
+    rg_tipoCrCp: TRadioGroup;
+    chk_limparPedidoTitulos: TCheckBox;
+    chk_limparNossoNumero: TCheckBox;
+    chk_alterarDocumentoID: TCheckBox;
+    RadioGroup1: TRadioGroup;
+    medt_13: TMaskEdit;
+    medt_12: TMaskEdit;
+    lbl_13: TLabel;
+    lbl_14: TLabel;
+    medt_11: TMaskEdit;
+    lbl_12: TLabel;
+    lbl_11: TLabel;
+    medt_1: TMaskEdit;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -220,12 +329,9 @@ type
     procedure act_MovimentacaoExecute(Sender: TObject);
     procedure act_EmpresasExecute(Sender: TObject);
     procedure act_ConfiguracaoExecute(Sender: TObject);
-    procedure act_ConfiguracaoBDExecute(Sender: TObject);
     procedure btn_testeClick(Sender: TObject);
     procedure action_TrocandoEmpresaExecute(Sender: TObject);
     procedure action_deletandoEmpresaExecute(Sender: TObject);
-    procedure action_editandoEmpresaExecute(Sender: TObject);
-    procedure action_vagoExecute(Sender: TObject);
     procedure action_fecharMenuEmpresasExecute(Sender: TObject);
     procedure action_fecharMenuConfigBDExecute(Sender: TObject);
     procedure action_fecharMenuMovimentacaoExecute(Sender: TObject);
@@ -264,6 +370,12 @@ type
     procedure btn_expBkpClick(Sender: TObject);
     procedure btn_bindsOracleClick(Sender: TObject);
     procedure btn_versaoSistemaClick(Sender: TObject);
+    procedure action_DeletaMovimentoExecute(Sender: TObject);
+    procedure btn_FecharMenuMovimento2Click(Sender: TObject);
+    procedure btn_movimentacaoSiacClick(Sender: TObject);
+    procedure action_MovimentoFinanceiroExecute(Sender: TObject);
+    procedure rg_modoExclusaoFinanceiroClick(Sender: TObject);
+    procedure rg_filtroPeriodoFinanceiroClick(Sender: TObject);
 
   private
     FMostrarBranco: Boolean;
@@ -297,7 +409,7 @@ uses
   uViewProgressBar,
   Classe.AtualizaComponentesTela,
   classe.BancoDados,
-  Classe.ConsultaTrocaEmpresa;
+  Classe.ConsultaEmpresa, Classe.MovimentoFinanceiro;
 
 {$R *.dfm}
 
@@ -362,8 +474,20 @@ begin
   //  Deixa invisivel o pnl que carrega as informações do banco de dados
   pnl_configBancoDados.Visible:= False;
 
-  // debug
-  //OutputDebugString(PChar('FormShow: Timer enabled = ' + BoolToStr(tmr_trocaLogoEmpresa.Enabled, True)));
+
+  TClasseMovimentoFinanceiro.InicializarComportamentos(
+    rg_modoExclusaoFinanceiro,       // TRadioGroup modo
+    rg_selecionarStatusExcluir,      // TRadioGroup status
+    [ chk_dtCadastramento,
+      chk_dtEmissao,
+      chk_dtVencimento,
+      chk_dtBaixa ],                 // 4 checkboxes (nesta ordem)
+    [ medt_InicialCadastramento, medt_FinalCadastramento,
+      medt_InicialEmissao,   medt_FinalEmissao,
+      medt_InicialVencimento,medt_FinalVencimento,
+      medt_InicialBaixa,     medt_FinalBaixa ] // 8 mask edits (2 por check)
+  );
+
 end;
 
 procedure TViewMain.tmr_trocaLogoEmpresaTimer(Sender: TObject);
@@ -435,9 +559,9 @@ end;
 
 procedure TViewMain.action_TrocandoEmpresaExecute(Sender: TObject);
 var
-  Consulta: TConsultaTrocaEmpresa;
+  Consulta: TConsultaEmpresa;
 begin
-  Consulta := TConsultaTrocaEmpresa.Create;
+  Consulta := TConsultaEmpresa.Create;
 
   // Acessa o menu Inicial
   PageControl.ActivePageIndex := 1;
@@ -447,7 +571,7 @@ begin
   if ( ValidaAtivacaoProcedimentos() ) then
     begin
       try
-        Consulta.CarregarTrocaEmpresa(
+        Consulta.CarregarConsultaEmpresa(
           vGbl_Empresa_id,  // Parâmetro recebido da variável global
           edt_EMPRESA_ID,
           edt_INSC_MUNICIPAL,
@@ -486,16 +610,54 @@ begin
   AlternaSplitViewClose(SplitViewMenu);
 end;
 
-procedure TViewMain.action_deletandoEmpresaExecute(Sender: TObject);
+procedure TViewMain.action_DeletaMovimentoExecute(Sender: TObject);
 begin
-  // Deleta Empresa
-  PageControl.ActivePageIndex := 3;
+  // Deleta Movimento
+  PageControl.ActivePageIndex := 4;
   AlternaSplitViewClose(SplitViewMenu);
 end;
 
-procedure TViewMain.action_editandoEmpresaExecute(Sender: TObject);
+procedure TViewMain.action_deletandoEmpresaExecute(Sender: TObject);
+var
+  ConsultaDel: TConsultaEmpresa;
 begin
-  ShowMessage('Editando Empresas');
+  ConsultaDel := TConsultaEmpresa.Create;
+
+   // Deleta Empresa
+  PageControl.ActivePageIndex := 3;
+  AlternaSplitViewClose(SplitViewMenu);
+
+    if ( ValidaAtivacaoProcedimentos() ) then
+    begin
+      try
+        ConsultaDel.CarregarConsultaEmpresa(
+          vGbl_Empresa_id,  // Parâmetro recebido da variável global
+          edt_EMPRESA_ID_d,
+          edt_INSC_MUNICIPAL_d,
+          edt_INSC_ESTADUAL_d,
+          edt_RAZAO_SOCIAL_d,
+          edt_FANTASIA_d,
+          edt_RAZAO_SOCIAL_NFE_d,
+          edt_CEP_d,
+          edt_ENDERECO_d,
+          edt_BAIRRO_d,
+          edt_CIDADE_ID_d,
+          edt_NOME_CIDADE_d,
+          edt_ESTADO_ID_d,
+          edt_DDD_d,
+          edt_FONE_VOZ_d,
+          edt_FONE_FAX_d,
+          edt_FONE_DADOS_d,
+          edt_E_MAIL_d,
+          edt_FONE_WHATSAPP_d );
+      finally
+        ConsultaDel.Free;
+      end;
+    end else
+    begin
+      Exit;
+    end;
+
 end;
 
 procedure TViewMain.action_fecharMenuEmpresasExecute(Sender: TObject);
@@ -513,14 +675,11 @@ begin
   SplitViewMovimento.Close;      // fecharMenuMovimentação
 end;
 
-procedure TViewMain.action_vagoExecute(Sender: TObject);
+procedure TViewMain.action_MovimentoFinanceiroExecute(Sender: TObject);
 begin
-  ShowMessage('Opção Vaga');
-end;
-
-procedure TViewMain.act_ConfiguracaoBDExecute(Sender: TObject);
-begin
-//     perdido
+  // Deleta Movimento Financeiro   - PageTratarFinanceiro
+  PageControl.ActivePageIndex := 5;
+  AlternaSplitViewClose(SplitViewMenu);
 end;
 
 procedure TViewMain.act_ConfiguracaoExecute(Sender: TObject);
@@ -533,8 +692,6 @@ end;
 
 procedure TViewMain.act_EmpresasExecute(Sender: TObject);
 begin
- //SplitView2.Open;
-
   if SplitViewEmpresas.Opened then
     SplitViewEmpresas.close
   else
@@ -669,8 +826,18 @@ begin
       end;
     end;
 
-    // Atualiza Variaveis de ambiente e nome da empresa
+    // Atualiza/Limpa Variaveis de ambiente/globais e nome da empresa
        AtualizarTelaEmpresas();
+
+    // Atualiza/Limpa variáveis globais
+       TClasseAtualizaComponentesTela.LimparVariaveisGlobais(ViewMain.lbl_carregaEmpresa);
+
+    // Limpando os campos da tela, como a empresa não existe mais, temos que limpar esse dados lixo.
+       prcLimparCamposEditaveis(PageDeletaEmpresa);
+
+    // Leva o usuario para a tela inicial do sistema.
+       PageControl.ActivePageIndex := 0 ;
+
   finally
     Scripts.Free;
     ScriptGen.Free;
@@ -803,9 +970,19 @@ begin
   ShowMessage('Em construção ...');
 end;
 
+procedure TViewMain.btn_FecharMenuMovimento2Click(Sender: TObject);
+begin
+ ShowMessage('Deleta movimentação');
+end;
+
 procedure TViewMain.btn_importBkpClick(Sender: TObject);
 begin
   ShowMessage('Em construção ...');
+end;
+
+procedure TViewMain.btn_movimentacaoSiacClick(Sender: TObject);
+begin
+  ShowMessage('Delete Movimento - Financeiro');
 end;
 
 procedure TViewMain.btn_testeClick(Sender: TObject);
@@ -1034,6 +1211,24 @@ begin
  AlternaSplitViewClose(SplitViewMenu);
 end;
 
+procedure TViewMain.rg_filtroPeriodoFinanceiroClick(Sender: TObject);
+begin
+ // Controla as opções de datas para o usuario
+  if rg_filtroPeriodoFinanceiro.ItemIndex = 1 then
+     grp_periodoExclusao.Enabled := True
+  else
+     grp_periodoExclusao.Enabled := False;
+end;
+
+procedure TViewMain.rg_modoExclusaoFinanceiroClick(Sender: TObject);
+begin
+ // Controla o modo de exclusão para o usuario
+  if rg_modoExclusaoFinanceiro.ItemIndex = 1 then
+    rg_selecionarStatusExcluir.Enabled := True
+  else
+    rg_selecionarStatusExcluir.Enabled := False;
+end;
+
 procedure TViewMain.img_closeClick(Sender: TObject);
 begin
   fnc_FecharSistema();
@@ -1088,6 +1283,7 @@ begin
 
     //Ativando a qry do DBGridEmpresas
      qryEmpresas.Open;
+     dbPrincipalEmpresas.Visible:=True;
 
     fnc_criar_menssagem('CONFIGURAÇÃO AO BANCO DE DADOS ORACLE',
                'Configuração de banco de dados',
@@ -1140,7 +1336,7 @@ begin
                                                                 ViewMain.qryEmpresas       );
      end;
 
-
+   dbPrincipalEmpresas.Visible:=False;
   end;
 end;
 
@@ -1154,7 +1350,6 @@ begin
 
   // Se o usuário clicou em "Não" ou "Cancelar", interrompe
   if not Result then
-   // Exit(False);
    Abort;
 
   // Caso contrário, fecha o sistema
@@ -1353,15 +1548,6 @@ begin
       FimTelaAguarde;
     end;
 
-//   InicioTelaAguarde();
-//   ExecutarOpcaoDeletarUser();
-//   FimTelaAguarde();
-
-//    fnc_criar_menssagem('Administração Banco de Dados',
-//                   'O usuário ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi excluído com sucesso!',
-//                   '',
-//                    ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png', 'OK');
-
     // Exemplo 2: carregar tablespace
      FConsultaBD.CarregarTablespace(DBGrid_CarregarTablespace);
 
@@ -1445,12 +1631,11 @@ begin
   finally
     TmpLines.Free;
   end;
+
   // Volta o texto original do Scritp para criar o usuario.
   OraScriptCriarUsuario.SQL.Text := OraScriptCriarUsuarioOriginal.SQL.Text;
 
 end;
-
-
 
 end.
 

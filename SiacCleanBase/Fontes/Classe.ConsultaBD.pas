@@ -231,7 +231,12 @@ begin
                  '         UNION ALL                                             '+
                  '         select t.PARAMETER, t.VALUE                           '+
                  '           from nls_database_parameters t                      '+
+
                  '         UNION ALL                                             '+
+                 '         select DIRECTORY_NAME as PARAMETER, DIRECTORY_PATH    '+
+                 '           from all_directories                                '+
+                 '         UNION ALL                                             '+
+
                  '         select name as parameter,                             '+
                  '                value / 1024 / 1024 / 1024 || '' GB'' VALUE_MB '+
                  '           from v$parameter                                    '+

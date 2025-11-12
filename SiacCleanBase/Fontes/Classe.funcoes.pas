@@ -1,4 +1,4 @@
-unit Classe.funcoes;
+Ôªøunit Classe.funcoes;
 
 interface
 
@@ -9,30 +9,23 @@ uses
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
   DAScript, OraScript, System.RegularExpressions;
 
-function Criptografia(Senha, Chave: string): string;
-
-function fnc_criar_menssagem(TituloJanela, TituloMSG, MSG, Icone, Tipo: string): boolean;
-
-procedure prcValidarCamposObrigatorios(Form: TForm);
-
-function TrocaCaracterEspecial(aTexto: string; aLimExt: boolean = False): string;
-
-function fnc_sonumeros(AString: string): string;
-
-function fnc_proximo_codigo(Tabela, Campo: string): Integer;
-
-function MD5(const Value: string): string;
-
-procedure MakeRounded(Control: TWinControl);
-
-function ValidarCaracterString(const S: string): Boolean;
+  function Criptografia(Senha, Chave: string): string;
+  function fnc_criar_menssagem(TituloJanela, TituloMSG, MSG, Icone, Tipo: string): boolean;
+  procedure prcValidarCamposObrigatorios(Form: TForm);
+  function TrocaCaracterEspecial(aTexto: string; aLimExt: boolean = False): string;
+  function fnc_sonumeros(AString: string): string;
+  function fnc_proximo_codigo(Tabela, Campo: string): Integer;
+  function MD5(const Value: string): string;
+  procedure MakeRounded(Control: TWinControl);
+  function ValidarCaracterString(const S: string): Boolean;
+  procedure prcLimparCamposEditaveis(AOwner: TWinControl);
 
 implementation
 
 uses
   uDataModule;
 
-     // FunÁ„o de Criptografia de String
+     // Fun√ß√£o de Criptografia de String
 function Criptografia(Senha, Chave: string): string;
 var
   x, y: Integer;
@@ -119,7 +112,7 @@ begin
       end;
 
 
-        // TmaskEdit
+        // LookupComboBox
 
       if Form.Components[i] is TDBLookupComboBox then
       begin
@@ -141,11 +134,11 @@ end;
 function TrocaCaracterEspecial(aTexto: string; aLimExt: boolean = False): string;
 const
   //Lista de caracteres especiais
-  xCarEsp: array[1..38] of string = ('·', '‡', '„', '‚', '‰', '¡', '¿', '√', '¬', 'ƒ', 'È', 'Ë', '…', '»', 'Ì', 'Ï', 'Õ', 'Ã', 'Û', 'Ú', 'ˆ', 'ı', 'Ù', '”', '“', '÷', '’', '‘', '˙', '˘', '¸', '⁄', 'Ÿ', '‹', 'Á', '«', 'Ò', '—');
+  xCarEsp: array[1..38] of string = ('√°', '√†', '√£', '√¢', '√§', '√Å', '√Ä', '√É', '√Ç', '√Ñ', '√©', '√®', '√â', '√à', '√≠', '√¨', '√ç', '√å', '√≥', '√≤', '√∂', '√µ', '√¥', '√ì', '√í', '√ñ', '√ï', '√î', '√∫', '√π', '√º', '√ö', '√ô', '√ú', '√ß', '√á', '√±', '√ë');
   //Lista de caracteres para troca
   xCarTro: array[1..38] of string = ('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A', 'A', 'e', 'e', 'E', 'E', 'i', 'i', 'I', 'I', 'o', 'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O', 'O', 'u', 'u', 'u', 'u', 'u', 'u', 'c', 'C', 'n', 'N');
   //Lista de Caracteres Extras
-  xCarExt: array[1..48] of string = ('<', '>', '!', '@', '#', '$', '%', '®', '&', '*', '(', ')', '_', '+', '=', '{', '}', '[', ']', '?', ';', ':', ',', '|', '*', '"', '~', '^', '¥', '`', '®', 'Ê', '∆', '¯', '£', 'ÿ', 'É', '™', '∫', 'ø', 'Æ', 'Ω', 'º', 'ﬂ', 'µ', '˛', '˝', '›');
+  xCarExt: array[1..48] of string = ('<', '>', '!', '@', '#', '$', '%', '¬®', '&', '*', '(', ')', '_', '+', '=', '{', '}', '[', ']', '?', ';', ':', ',', '|', '*', '"', '~', '^', '¬¥', '`', '¬®', '√¶', '√Ü', '√∏', '¬£', '√ò', '∆í', '¬™', '¬∫', '¬ø', '¬Æ', '¬Ω', '¬º', '√ü', '¬µ', '√æ', '√Ω', '√ù');
 var
   xTexto: string;
   i: Integer;
@@ -153,7 +146,7 @@ begin
   xTexto := aTexto;
   for i := 1 to 38 do
     xTexto := StringReplace(xTexto, xCarEsp[i], xCarTro[i], [rfreplaceall]);
-   //De acordo com o par‚metro aLimExt, elimina caracteres extras.
+   //De acordo com o par√¢metro aLimExt, elimina caracteres extras.
   if (aLimExt) then
     for i := 1 to 48 do
       xTexto := StringReplace(xTexto, xCarExt[i], '', [rfreplaceall]);
@@ -188,7 +181,7 @@ begin
     QryConsulta.Session := DmModule.orsConexao;
 
     if not DmModule.orsConexao.Connected then
-      DmModule.ConectarBd('usuario', 'senha', 'servidor'); // <- ajuste com seus par‚metros
+      DmModule.ConectarBd('usuario', 'senha', 'servidor'); // <- ajuste com seus par√¢metros
 
     QryConsulta := TOraQuery.Create(nil);
 
@@ -240,6 +233,28 @@ begin
   // Ajuste a regex conforme suas regras. Aqui permitimos A-Z, 0-9, _ $ # e primeiro caractere letra.
   Result := TRegEx.IsMatch(S, '^[A-Za-z][A-Za-z0-9_$#]*$');
 end;
+
+procedure prcLimparCamposEditaveis(AOwner: TWinControl);
+var
+  I: Integer;
+begin
+  for I := 0 to AOwner.ControlCount - 1 do
+  begin
+    // Limpa TEdit
+    if AOwner.Controls[I] is TEdit then
+      (AOwner.Controls[I] as TEdit).Clear
+
+    // Limpa TMaskEdit
+    else if AOwner.Controls[I] is TMaskEdit then
+      (AOwner.Controls[I] as TMaskEdit).Clear
+
+    // Se for um container (Panel, GroupBox, Frame etc), chama recursivamente
+    else if AOwner.Controls[I] is TWinControl then
+      prcLimparCamposEditaveis(AOwner.Controls[I] as TWinControl);
+  end;
+end;
+
+
 
 end.
 

@@ -18,14 +18,15 @@ uses
   Classe.ConsultaBD in 'Classe.ConsultaBD.pas',
   Classe.AtualizaComponentesTela in 'Classe.AtualizaComponentesTela.pas',
   TelaAguarde in 'C:\sistemas\Repositorio\TelaAguarde.pas' {FormTelaAguarde},
-  Classe.ConsultaTrocaEmpresa in 'Classe.ConsultaTrocaEmpresa.pas';
+  Classe.ConsultaEmpresa in 'Classe.ConsultaEmpresa.pas',
+  Classe.MovimentoFinanceiro in 'Classe.MovimentoFinanceiro.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  {Application.MainFormOnTaskbar := True;
-    begin
+  Application.MainFormOnTaskbar := True;
+ {   begin
 
      form_login := Tform_login.Create(nil);
      form_login.ShowModal;
@@ -33,11 +34,11 @@ begin
      form_login.Hide;
      form_login.Free;
 
-    end;    }
+    end;      }
   Application.CreateForm(TViewMain, ViewMain);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TViewMensagens, ViewMensagens);
-  Application.CreateForm(TfrmProgressBar, frmProgressBar);
+  // Application.CreateForm(TfrmProgressBar, frmProgressBar);
   Application.CreateForm(TFormTelaAguarde, FormTelaAguarde);
   // Ativando o Tpanel com imagem opaca, significa que esta com o banco desconectado
      Principal.frmPrincipal.pnl_fundo_opacidade.Visible := true;

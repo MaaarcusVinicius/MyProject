@@ -13,6 +13,10 @@ type
 
     // Atualiza Label e variáveis globais
     class procedure AtualizarVariaveisGlobais(const ALabel: TLabel; const AQry: TDataSet);
+
+    // Limpa as variáveis globais do sistema, garantir ações do usuário.
+    class procedure LimparVariaveisGlobais(const ALabel: TLabel) ;
+
   end;
 
 implementation
@@ -67,6 +71,24 @@ begin
   // define cores para estado com empresa selecionada
   ALabel.Font.Color := clWebGreenYellow;
   ALabel.Color := clBtnFace;
+end;
+
+class procedure TClasseAtualizaComponentesTela.LimparVariaveisGlobais(const ALabel: TLabel);
+begin
+  if not ( vGbl_Empresa_id = '' ) then
+  begin
+    // limpa variáveis globais
+    vGbl_Empresa_id  := '';
+    vGbl_RazaoSocial := '';
+
+    // atualiza label
+    ALabel.Caption := 'Nenhuma empresa selecionada!';
+
+    // define cores para estado vazio
+    ALabel.Font.Color := clWhite;
+    ALabel.Color := clBtnFace;
+    Exit;
+  end;
 end;
 
 end.

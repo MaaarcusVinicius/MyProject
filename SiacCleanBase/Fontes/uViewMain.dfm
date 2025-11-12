@@ -1,4 +1,4 @@
-object ViewMain: TViewMain
+﻿object ViewMain: TViewMain
   AlignWithMargins = True
   Left = 0
   Top = 0
@@ -25,7 +25,6 @@ object ViewMain: TViewMain
     Color = 3355443
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1165
     object pnl_logoMarca: TPanel
       Left = 0
       Top = 0
@@ -356,7 +355,6 @@ object ViewMain: TViewMain
       Color = 3355443
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 852
       object pnl_userLogin: TPanel
         Left = 249
         Top = 0
@@ -561,7 +559,6 @@ object ViewMain: TViewMain
       TabOrder = 2
       OnClick = pnl_carregaEmpresaClick
       OnDblClick = pnl_carregaEmpresaDblClick
-      ExplicitWidth = 652
       object lbl_carregaEmpresa: TLabel
         Left = 0
         Top = 0
@@ -827,182 +824,10 @@ object ViewMain: TViewMain
         Layout = blGlyphTop
         ParentFont = False
       end
-      object btn_editandoEmpresa: TSpeedButton
-        AlignWithMargins = True
-        Left = 2
-        Top = 161
-        Width = 145
-        Height = 73
-        Cursor = crHandPoint
-        Margins.Left = 2
-        Margins.Right = 2
-        Action = action_editandoEmpresa
-        Images = ImageList2
-        Flat = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        Glyph.Data = {
-          36100000424D3610000000000000360000002800000020000000200000000100
-          2000000000000010000000000000000000000000000000000000FF00FF00D1F0
-          FD004BCBFC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE004BCBFC00D1F0FD00FF00FF00D1F0FD001EBE
-          FC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE001EBEFC00D1F0FD004BCBFC0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE004BCBFC0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE001EBEFC0079D7FC0087DBFC0079D7
-          FC002DC2FC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE003CC7FC00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF006AD3FC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE001EBEFC00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF0087DBFC0087DBFC0087DBFC0087DBFC0087DBFC0087DB
-          FC0087DBFC0079D7FC001EBEFC0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0079D7FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00D1F0FD0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0087DBFC00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF004BCBFC0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0079D7FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00D1F0FD0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE002DC2FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF0087DBFC0087DBFC0087DBFC0087DBFC0087DBFC0087DB
-          FC0087DBFC0087DBFC001EBEFC0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE006AD3FC00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF006AD3FC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE002DC2FC0087DBFC00C2ECFD0087DB
-          FC002DC2FC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE002DC2FC0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE002DC2FC00B3E8FD0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE00B3E8FD00FF00FF00A4E4
-          FD001EBEFC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE001EBEFC00A4E4FD00FF00FF00FF00FF00FF00
-          FF00FF00FF00C2ECFD00C2ECFD003CC7FC0011BCFE0011BCFE0011BCFE003CC7
-          FC00C2ECFD00C2ECFD00C2ECFD00C2ECFD00C2ECFD00C2ECFD00C2ECFD00C2EC
-          FD00C2ECFD00C2ECFD00C2ECFD00C2ECFD00C2ECFD00C2ECFD00C2ECFD00C2EC
-          FD00C2ECFD00C2ECFD00C2ECFD00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF004BCBFC0011BCFE0011BCFE0011BCFE004BCB
-          FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF004BCBFC0011BCFE0011BCFE0011BCFE004BCB
-          FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF004BCBFC0011BCFE0011BCFE0011BCFE004BCB
-          FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF004BCBFC0011BCFE0011BCFE0011BCFE004BCB
-          FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF0079D7FC004BCBFC004BCBFC004BCB
-          FC0079D7FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF004BCBFC0011BCFE0011BCFE0011BCFE002DC2
-          FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF002DC2FC0011BCFE0011BCFE0011BC
-          FE004BCBFC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF0079D7FC0011BCFE0011BCFE0011BCFE0011BC
-          FE00B3E8FD00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00B3E8FD0011BCFE0011BCFE0011BCFE0011BC
-          FE0079D7FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00B3E8FD0011BCFE0011BCFE0011BCFE0011BC
-          FE001EBEFC00D1F0FD00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00D1F0FD001EBEFC0011BCFE0011BCFE0011BCFE0011BC
-          FE00B3E8FD00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF002DC2FC0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE006AD3FC0087DBFC0087DBFC0087DBFC0087DBFC0087DB
-          FC0087DBFC006AD3FC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE002DC2
-          FC00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00C2ECFD0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE00C2EC
-          FD00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00A4E4FD0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE00A4E4FD00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00B3E8FD001EBE
-          FC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE0011BCFE0011BCFE001EBEFC00B3E8FD00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-          FF0087DBFC003CC7FC0011BCFE0011BCFE0011BCFE0011BCFE0011BCFE0011BC
-          FE0011BCFE0011BCFE003CC7FC0087DBFC00FF00FF00FF00FF00FF00FF00FF00
-          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
-        Layout = blGlyphTop
-        ParentFont = False
-      end
-      object btn_vago: TSpeedButton
-        AlignWithMargins = True
-        Left = 2
-        Top = 240
-        Width = 145
-        Height = 73
-        Cursor = crHandPoint
-        Margins.Left = 2
-        Margins.Right = 2
-        Action = action_vago
-        Caption = 'Bot'#227'o Empresa'
-        Images = ImageList2
-        Flat = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        Layout = blGlyphTop
-        ParentFont = False
-      end
       object btn_fecharMenuEmpresas: TSpeedButton
         AlignWithMargins = True
         Left = 2
-        Top = 319
+        Top = 161
         Width = 145
         Height = 73
         Cursor = crHandPoint
@@ -1099,10 +924,51 @@ object ViewMain: TViewMain
           ExplicitHeight = 21
         end
       end
-      object btn_FecharMenuMovimento: TSpeedButton
+      object btn_movimentacaoSiac: TSpeedButton
         AlignWithMargins = True
         Left = 2
         Top = 44
+        Width = 145
+        Height = 73
+        Cursor = crHandPoint
+        Margins.Left = 2
+        Margins.Right = 2
+        Action = action_DeletaMovimento
+        Caption = 'Siac Movimento'
+        Images = ImageList2
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Layout = blGlyphTop
+        ParentFont = False
+      end
+      object btn_movimentacaoFinanceiro: TSpeedButton
+        AlignWithMargins = True
+        Left = 2
+        Top = 123
+        Width = 145
+        Height = 73
+        Cursor = crHandPoint
+        Margins.Left = 2
+        Margins.Right = 2
+        Action = action_MovimentoFinanceiro
+        Images = ImageList2
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Layout = blGlyphTop
+        ParentFont = False
+      end
+      object btn_fecharMenuMovimento: TSpeedButton
+        AlignWithMargins = True
+        Left = 2
+        Top = 202
         Width = 145
         Height = 73
         Cursor = crHandPoint
@@ -1224,17 +1090,15 @@ object ViewMain: TViewMain
     Color = clWhite
     ParentBackground = False
     TabOrder = 5
-    ExplicitWidth = 965
     object PageControl: TPageControl
       Left = 0
       Top = 0
       Width = 1224
       Height = 746
-      ActivePage = PageDeletaEmpresa
+      ActivePage = PageTratarFinanceiro
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
-      ExplicitWidth = 965
       object PageInicial: TTabSheet
         Caption = 'PageInicial'
         object TPanel
@@ -1247,138 +1111,170 @@ object ViewMain: TViewMain
           ParentBackground = False
           TabOrder = 0
           StyleName = 'Windows'
-          ExplicitWidth = 957
-          object dbPrincipalEmpresas: TDBGrid
+          object pnl_fundoPrincipal1: TPanel
             Left = 1
             Top = 1
             Width = 1214
-            Height = 288
-            Margins.Left = 4
-            Margins.Top = 10
-            Margins.Right = 5
-            Margins.Bottom = 8
-            Align = alTop
-            BiDiMode = bdLeftToRight
-            BorderStyle = bsNone
-            Color = clWhite
-            DataSource = OraData
-            DrawingStyle = gdsGradient
-            GradientEndColor = clSilver
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlue
-            Font.Height = -12
-            Font.Name = 'Segoe UI'
-            Font.Style = [fsBold, fsStrikeOut]
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-            ParentBiDiMode = False
-            ParentFont = False
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clDarkblue
-            TitleFont.Height = -12
-            TitleFont.Name = 'Segoe UI'
-            TitleFont.Style = [fsBold]
-            OnDblClick = dbPrincipalEmpresasDblClick
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'EMPRESA_ID'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ATIVO'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'RAZAO_SOCIAL'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Title.Caption = 'RAZ'#195'O SOCIAL'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'FANTASIA'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'QTD_CADASTROS'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Title.Caption = 'QTD. CADASTROS'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'QTD_FINANCEIRO_EMPRESA'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Title.Caption = 'QTD. FINANCEIRO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'QTD_PRODUTOS_EMPRESA'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Title.Caption = 'QTD. PRODUTOS'
-                Width = 112
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'QTD_ESTOQUE_EMPRESA'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Title.Caption = 'QTD. ESTOQUE'
-                Width = 111
-                Visible = True
-              end>
-          end
-          object pnl_fundoPrincipal1: TPanel
-            Left = 1
-            Top = 289
-            Width = 1214
-            Height = 151
+            Height = 439
             Align = alClient
             BevelOuter = bvNone
             Color = clWhite
             ParentBackground = False
-            TabOrder = 1
-            ExplicitWidth = 955
+            TabOrder = 0
+            object dbPrincipalEmpresas: TDBGrid
+              Left = 0
+              Top = 11
+              Width = 1214
+              Height = 288
+              Margins.Left = 4
+              Margins.Top = 10
+              Margins.Right = 5
+              Margins.Bottom = 8
+              Align = alTop
+              BiDiMode = bdLeftToRight
+              BorderStyle = bsNone
+              Color = clWhite
+              DataSource = OraData
+              DrawingStyle = gdsGradient
+              GradientEndColor = clMedGray
+              GradientStartColor = clTeal
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ImeMode = imOpen
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+              ParentBiDiMode = False
+              ParentFont = False
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWhite
+              TitleFont.Height = -12
+              TitleFont.Name = 'Segoe UI'
+              TitleFont.Style = [fsBold]
+              Visible = False
+              OnDblClick = dbPrincipalEmpresasDblClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'EMPRESA_ID'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'ATIVO'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'RAZAO_SOCIAL'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Title.Caption = 'RAZ'#195'O SOCIAL'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'FANTASIA'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'QTD_CADASTROS'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Title.Caption = 'QTD. CADASTROS'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'QTD_FINANCEIRO_EMPRESA'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Title.Caption = 'QTD. FINANCEIRO'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'QTD_PRODUTOS_EMPRESA'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Title.Caption = 'QTD. PRODUTOS'
+                  Width = 112
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'QTD_ESTOQUE_EMPRESA'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Title.Caption = 'QTD. ESTOQUE'
+                  Width = 111
+                  Visible = True
+                end>
+            end
+            object pnl_telaInicial: TPanel
+              Left = 0
+              Top = 0
+              Width = 1214
+              Height = 11
+              Align = alTop
+              Color = clTeal
+              ParentBackground = False
+              TabOrder = 1
+              object lbl_telaInicial: TLabel
+                AlignWithMargins = True
+                Left = 4
+                Top = 4
+                Width = 1206
+                Height = 3
+                Align = alClient
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Sistema Clean Base'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWhite
+                Font.Height = -20
+                Font.Name = 'Segoe UI'
+                Font.Style = [fsBold]
+                ParentFont = False
+                ExplicitLeft = 5
+                ExplicitTop = 13
+                ExplicitWidth = 1204
+                ExplicitHeight = 28
+              end
+            end
           end
           object pnl_fundoPrincipalAlBottom: TPanel
             Left = 1
@@ -1389,8 +1285,7 @@ object ViewMain: TViewMain
             BevelOuter = bvNone
             Color = clWhite
             ParentBackground = False
-            TabOrder = 2
-            ExplicitWidth = 955
+            TabOrder = 1
             object pnl_fundoAbrigaImagem: TPanel
               Left = 413
               Top = 0
@@ -1400,7 +1295,6 @@ object ViewMain: TViewMain
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitLeft = 154
               object img_fundo: TImage
                 Left = 1
                 Top = 1
@@ -4793,19 +4687,177 @@ object ViewMain: TViewMain
           Margins.Right = 5
           Margins.Bottom = 5
           Align = alClient
-          BevelOuter = bvLowered
+          BevelOuter = bvNone
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 947
-          object TrocaEmpresa: TGroupBox
+          object shpTrocaEmpresaBottom: TShape
+            Left = 0
+            Top = 656
+            Width = 1206
+            Height = 47
+            Align = alBottom
+            Brush.Color = clTeal
+            ExplicitTop = 663
+            ExplicitWidth = 1009
+          end
+          object grp_EmpresaDestino: TGroupBox
             AlignWithMargins = True
-            Left = 4
-            Top = 4
-            Width = 1198
+            Left = 3
+            Top = 319
+            Width = 1200
+            Height = 274
+            Align = alTop
+            Caption = '    -- Dados do Novo CNPJ --           '
+            Color = clWhite
+            DefaultHeaderFont = False
+            HeaderFont.Charset = DEFAULT_CHARSET
+            HeaderFont.Color = clInfoText
+            HeaderFont.Height = -16
+            HeaderFont.Name = 'Segoe UI'
+            HeaderFont.Style = []
+            HeaderFont.Quality = fqProof
+            ParentBackground = False
+            ParentColor = False
+            TabOrder = 1
+            object pnl_novosDadosEmpresa: TPanel
+              Left = 2
+              Top = 17
+              Width = 311
+              Height = 255
+              Align = alLeft
+              BevelOuter = bvNone
+              Color = clTeal
+              ParentBackground = False
+              TabOrder = 0
+              object mmo_infTrocaEmpresa: TMemo
+                Left = 0
+                Top = 119
+                Width = 311
+                Height = 136
+                Align = alBottom
+                Alignment = taCenter
+                Lines.Strings = (
+                  'Esta op'#231#227'o altera o CNPJ da empresa selecionada.'
+                  'Antes de executar o procedimento, '#233' obrigat'#243'rio '
+                  'realizar o backup completo da base de dados, '
+                  'garantindo a integridade das informa'#231#245'es.'
+                  'Aten'#231#227'o: este procedimento ir'#225' alterar todos os '
+                  'dados da base de dados.'
+                  'Ser'#225' alterados os campos: EMPRESA_ID, '
+                  'SIAC_EMPRESA_ID, EMPRESA_ALTERACAO.')
+                TabOrder = 0
+              end
+              object Panel1: TPanel
+                Left = 0
+                Top = 0
+                Width = 311
+                Height = 119
+                Align = alClient
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 1
+                object lbl_trocaEmpresa: TLabel
+                  Left = 129
+                  Top = 11
+                  Width = 131
+                  Height = 20
+                  Caption = 'Insira o novo CNPJ'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -15
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object pnl_trocandoEmpresas: TPanel
+                  Left = 6
+                  Top = 11
+                  Width = 99
+                  Height = 86
+                  BevelKind = bkSoft
+                  BevelOuter = bvNone
+                  Color = clTeal
+                  ParentBackground = False
+                  TabOrder = 0
+                  object btn_trocandoEmpresas: TSpeedButton
+                    Left = 0
+                    Top = 0
+                    Width = 95
+                    Height = 82
+                    Align = alClient
+                    Caption = 'Troca Empresa'
+                    ImageIndex = 59
+                    Images = ImageAllSystem
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -12
+                    Font.Name = 'Segoe UI'
+                    Font.Style = [fsBold]
+                    Layout = blGlyphTop
+                    ParentFont = False
+                    OnClick = btn_trocandoEmpresasClick
+                    ExplicitLeft = 1
+                    ExplicitTop = 9
+                    ExplicitWidth = 91
+                    ExplicitHeight = 71
+                  end
+                end
+                object chk_saveScritpTrocando: TCheckBox
+                  Left = 129
+                  Top = 73
+                  Width = 152
+                  Height = 19
+                  Hint = 'Arquivo gerado em C:\sqlExport.txt'
+                  Caption = 'Salvar Script'
+                  Color = clWhite
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBackground
+                  Font.Height = -12
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Font.Quality = fqClearTypeNatural
+                  ParentColor = False
+                  ParentFont = False
+                  ParentShowHint = False
+                  ShowHint = True
+                  TabOrder = 1
+                  StyleName = 'Windows'
+                end
+                object medt_cpf_cnpj: TMaskEdit
+                  Tag = 5
+                  Left = 129
+                  Top = 33
+                  Width = 160
+                  Height = 22
+                  Hint = #201' necess'#225'rio informar o novo CNPJ.'
+                  HelpContext = 100022
+                  AutoSize = False
+                  CharCase = ecUpperCase
+                  EditMask = '!99.999.999/9999-99;1;_'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -16
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  MaxLength = 18
+                  ParentFont = False
+                  ParentShowHint = False
+                  ShowHint = True
+                  TabOrder = 2
+                  Text = '  .   .   /    -  '
+                end
+              end
+            end
+          end
+          object grp_TrocaEmpresa: TGroupBox
+            AlignWithMargins = True
+            Left = 3
+            Top = 44
+            Width = 1200
             Height = 269
             Align = alTop
-            Caption = '      Dados da Empresa Atual            '
+            Caption = '     -- Dados da Empresa Atual --           '
             DefaultHeaderFont = False
             HeaderFont.Charset = DEFAULT_CHARSET
             HeaderFont.Color = clInfoText
@@ -4864,6 +4916,13 @@ object ViewMain: TViewMain
                 Height = 15
                 Caption = 'Inscri'#231#227'o estadual'
               end
+              object Label14: TLabel
+                Left = 7
+                Top = 197
+                Width = 34
+                Height = 15
+                Caption = 'E-mail'
+              end
               object edt_RAZAO_SOCIAL_NFE: TEdit
                 Left = 7
                 Top = 165
@@ -4872,7 +4931,9 @@ object ViewMain: TViewMain
                 HelpContext = 100007
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 60
+                ReadOnly = True
                 TabOrder = 0
               end
               object edt_FANTASIA: TEdit
@@ -4911,8 +4972,10 @@ object ViewMain: TViewMain
                 Hint = 'CNPJ da empresa usu'#225'ria e/ou filial'
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 EditMask = '!aa.aaa.aaa/aaaa-99;1;_'
                 MaxLength = 18
+                ReadOnly = True
                 TabOrder = 3
                 Text = '  .   .   /    -  '
               end
@@ -4924,8 +4987,10 @@ object ViewMain: TViewMain
                 Hint = 'Inscri'#231#227'o municipal da empresa e/ou filial'
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 18
                 ParentShowHint = False
+                ReadOnly = True
                 ShowHint = True
                 TabOrder = 4
               end
@@ -4937,10 +5002,32 @@ object ViewMain: TViewMain
                 Hint = 'Inscri'#231#227'o estadual da empresa usu'#225'ria e/ou filial'
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 18
                 ParentShowHint = False
+                ReadOnly = True
                 ShowHint = True
                 TabOrder = 5
+              end
+              object edt_E_MAIL: TEdit
+                Left = 7
+                Top = 214
+                Width = 406
+                Height = 22
+                Hint = 'Endere'#231'o na internet'
+                HelpContext = 100010
+                AutoSize = False
+                CharCase = ecLowerCase
+                Color = clBtnFace
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clBlue
+                Font.Height = -11
+                Font.Name = 'Arial'
+                Font.Style = [fsBold]
+                MaxLength = 80
+                ParentFont = False
+                ReadOnly = True
+                TabOrder = 6
               end
             end
             object pnl_dadosEndereco: TPanel
@@ -4951,8 +5038,6 @@ object ViewMain: TViewMain
               Align = alLeft
               BevelOuter = bvNone
               TabOrder = 1
-              ExplicitLeft = 169
-              ExplicitHeight = 354
               object Label9: TLabel
                 Left = 15
                 Top = 14
@@ -4994,13 +5079,6 @@ object ViewMain: TViewMain
                 Width = 103
                 Height = 15
                 Caption = 'Telefone WhatsApp'
-              end
-              object Label14: TLabel
-                Left = 15
-                Top = 189
-                Width = 34
-                Height = 15
-                Caption = 'e-mail'
               end
               object Label10: TLabel
                 Left = 15
@@ -5046,8 +5124,10 @@ object ViewMain: TViewMain
                 HelpContext = 100004
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 EditMask = '!99999-999;1;_'
                 MaxLength = 9
+                ReadOnly = True
                 TabOrder = 0
                 Text = '     -   '
               end
@@ -5073,7 +5153,9 @@ object ViewMain: TViewMain
                 HelpContext = 100001
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 30
+                ReadOnly = True
                 TabOrder = 2
               end
               object edt_NOME_CIDADE: TEdit
@@ -5085,6 +5167,7 @@ object ViewMain: TViewMain
                 TabStop = False
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 40
                 ReadOnly = True
                 TabOrder = 3
@@ -5096,7 +5179,9 @@ object ViewMain: TViewMain
                 Height = 22
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 2
+                ReadOnly = True
                 TabOrder = 4
               end
               object edt_DDD: TMaskEdit
@@ -5110,7 +5195,9 @@ object ViewMain: TViewMain
                 HelpContext = 100005
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 4
+                ReadOnly = True
                 TabOrder = 5
                 Text = ''
               end
@@ -5123,7 +5210,9 @@ object ViewMain: TViewMain
                 HelpContext = 100011
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 10
+                ReadOnly = True
                 TabOrder = 6
                 Text = ''
               end
@@ -5136,7 +5225,9 @@ object ViewMain: TViewMain
                 HelpContext = 100012
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 10
+                ReadOnly = True
                 TabOrder = 7
                 Text = ''
               end
@@ -5149,27 +5240,11 @@ object ViewMain: TViewMain
                 HelpContext = 100012
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 10
+                ReadOnly = True
                 TabOrder = 8
                 Text = ''
-              end
-              object edt_E_MAIL: TEdit
-                Left = 15
-                Top = 206
-                Width = 314
-                Height = 22
-                Hint = 'Endere'#231'o na internet'
-                HelpContext = 100010
-                AutoSize = False
-                CharCase = ecLowerCase
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clBlue
-                Font.Height = -11
-                Font.Name = 'Arial'
-                Font.Style = [fsBold]
-                MaxLength = 80
-                ParentFont = False
-                TabOrder = 9
               end
               object edt_FONE_WHATSAPP: TMaskEdit
                 Left = 343
@@ -5182,9 +5257,11 @@ object ViewMain: TViewMain
                 HelpContext = 100012
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 EditMask = '(99) 99999-9999;1;_'
                 MaxLength = 15
-                TabOrder = 10
+                ReadOnly = True
+                TabOrder = 9
                 Text = '(  )      -    '
               end
               object edt_CIDADE_ID: TEdit
@@ -5196,187 +5273,42 @@ object ViewMain: TViewMain
                 HelpContext = 100001
                 AutoSize = False
                 CharCase = ecUpperCase
+                Color = clBtnFace
                 MaxLength = 30
-                TabOrder = 11
+                ReadOnly = True
+                TabOrder = 10
               end
             end
           end
-          object grpEmpresaDestino: TGroupBox
-            AlignWithMargins = True
-            Left = 4
-            Top = 279
-            Width = 1198
-            Height = 274
+          object pnl_TelaTrocaEmpresa: TPanel
+            Left = 0
+            Top = 0
+            Width = 1206
+            Height = 41
             Align = alTop
-            Caption = '    Dados do Novo CNPJ   '
-            Color = clWhite
-            DefaultHeaderFont = False
-            HeaderFont.Charset = DEFAULT_CHARSET
-            HeaderFont.Color = clInfoText
-            HeaderFont.Height = -16
-            HeaderFont.Name = 'Segoe UI'
-            HeaderFont.Style = []
-            HeaderFont.Quality = fqProof
+            Color = clTeal
             ParentBackground = False
-            ParentColor = False
-            TabOrder = 1
-            ExplicitTop = 295
-            ExplicitWidth = 1098
-            object pnl_novosDadosEmpresa: TPanel
-              Left = 2
-              Top = 17
-              Width = 425
-              Height = 255
-              Align = alLeft
-              BevelOuter = bvNone
-              TabOrder = 0
-              object grpAcoes: TGroupBox
-                AlignWithMargins = True
-                Left = 3
-                Top = 3
-                Width = 382
-                Height = 249
-                Align = alLeft
-                Caption = 'A'#231#245'es'
-                DefaultHeaderFont = False
-                HeaderFont.Charset = DEFAULT_CHARSET
-                HeaderFont.Color = clInfoText
-                HeaderFont.Height = -16
-                HeaderFont.Name = 'Segoe UI'
-                HeaderFont.Style = []
-                HeaderFont.Quality = fqProof
-                TabOrder = 0
-                object pnl_trocandoEmpresa: TPanel
-                  AlignWithMargins = True
-                  Left = 5
-                  Top = 20
-                  Width = 364
-                  Height = 224
-                  Align = alLeft
-                  BevelOuter = bvNone
-                  Color = clWhite
-                  ParentBackground = False
-                  TabOrder = 0
-                  object lbl_trocaEmpresa: TLabel
-                    Left = 104
-                    Top = 3
-                    Width = 131
-                    Height = 20
-                    Caption = 'Insira o novo CNPJ'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -15
-                    Font.Name = 'Segoe UI'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                  end
-                  object pnl_trocandoEmpresas: TPanel
-                    Left = 2
-                    Top = 6
-                    Width = 93
-                    Height = 73
-                    Color = clWhite
-                    ParentBackground = False
-                    TabOrder = 0
-                    object Panel1: TPanel
-                      Left = 1
-                      Top = 1
-                      Width = 91
-                      Height = 71
-                      Align = alClient
-                      Color = clWhite
-                      ParentBackground = False
-                      TabOrder = 0
-                      object btn_trocandoEmpresas: TSpeedButton
-                        Left = 1
-                        Top = 1
-                        Width = 93
-                        Height = 70
-                        Align = alClient
-                        Caption = 'Troca Empresa'
-                        ImageIndex = 59
-                        Images = ImageAllSystem
-                        Font.Charset = DEFAULT_CHARSET
-                        Font.Color = clWindowText
-                        Font.Height = -12
-                        Font.Name = 'Segoe UI'
-                        Font.Style = [fsBold]
-                        Layout = blGlyphTop
-                        ParentFont = False
-                        OnClick = btn_trocandoEmpresasClick
-                        ExplicitLeft = 2
-                        ExplicitTop = -5
-                        ExplicitWidth = 89
-                        ExplicitHeight = 69
-                      end
-                    end
-                  end
-                  object medt_cpf_cnpj: TMaskEdit
-                    Tag = 5
-                    Left = 104
-                    Top = 29
-                    Width = 150
-                    Height = 22
-                    Hint = #201' necess'#225'rio informar o novo CNPJ.'
-                    HelpContext = 100022
-                    AutoSize = False
-                    CharCase = ecUpperCase
-                    EditMask = '!99.999.999/9999-99;1;_'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -16
-                    Font.Name = 'Segoe UI'
-                    Font.Style = []
-                    MaxLength = 18
-                    ParentFont = False
-                    ParentShowHint = False
-                    ShowHint = True
-                    TabOrder = 1
-                    Text = '  .   .   /    -  '
-                  end
-                  object chk_saveScritpTrocando: TCheckBox
-                    Left = 104
-                    Top = 54
-                    Width = 97
-                    Height = 33
-                    Hint = 'Arquivo gerado em C:\sqlExport.txt'
-                    Caption = 'Salvar Script'
-                    Color = clWhite
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clBackground
-                    Font.Height = -12
-                    Font.Name = 'Segoe UI'
-                    Font.Style = [fsBold]
-                    Font.Quality = fqClearTypeNatural
-                    ParentColor = False
-                    ParentFont = False
-                    ParentShowHint = False
-                    ShowHint = True
-                    TabOrder = 2
-                    StyleName = 'Windows'
-                  end
-                  object mmo_infTrocaEmpresa: TMemo
-                    Left = 0
-                    Top = 95
-                    Width = 364
-                    Height = 129
-                    Align = alBottom
-                    Alignment = taCenter
-                    Lines.Strings = (
-                      'Esta op'#231#227'o altera o CNPJ da empresa selecionada.'
-                      'Antes de executar o procedimento, '#233' obrigat'#243'rio '
-                      'realizar o backup completo da base de dados, '
-                      'garantindo a integridade das informa'#231#245'es.'
-                      'Aten'#231#227'o: este procedimento ir'#225' alterar todos os '
-                      'dados da base de dados.'
-                      'Ser'#225' alterados os campos: EMPRESA_ID, '
-                      'SIAC_EMPRESA_ID, EMPRESA_ALTERACAO.')
-                    TabOrder = 3
-                    ExplicitTop = 93
-                    ExplicitWidth = 275
-                  end
-                end
-              end
+            TabOrder = 2
+            object lbl_1: TLabel
+              AlignWithMargins = True
+              Left = 4
+              Top = 4
+              Width = 1198
+              Height = 33
+              Align = alClient
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Troca Empresa'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -20
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+              ExplicitLeft = 5
+              ExplicitTop = 13
+              ExplicitWidth = 1204
+              ExplicitHeight = 28
             end
           end
         end
@@ -5532,7 +5464,6 @@ object ViewMain: TViewMain
           ParentBackground = False
           TabOrder = 5
           Visible = False
-          ExplicitWidth = 957
           object grp_InfoGerais: TGroupBox
             Left = 1
             Top = 86
@@ -5541,7 +5472,6 @@ object ViewMain: TViewMain
             Align = alClient
             Caption = '    - Informa'#231#245'es Gerais Oracle -    '
             TabOrder = 0
-            ExplicitWidth = 955
             object grp_Session: TGroupBox
               Left = 2
               Top = 17
@@ -5550,7 +5480,6 @@ object ViewMain: TViewMain
               Align = alClient
               Caption = 'Usu'#225'rios '#233' Sess'#245'es'
               TabOrder = 0
-              ExplicitWidth = 951
               object DBGrid_CarregarSession: TDBGrid
                 Left = 593
                 Top = 17
@@ -5736,7 +5665,6 @@ object ViewMain: TViewMain
               Align = alBottom
               Caption = 'Informa'#231#245'es Table Space'
               TabOrder = 1
-              ExplicitWidth = 951
               object DBGrid_CarregarTablespaceDiretorio: TDBGrid
                 Left = 593
                 Top = 17
@@ -5867,7 +5795,6 @@ object ViewMain: TViewMain
                 ParentBackground = False
                 TabOrder = 2
                 Visible = False
-                ExplicitLeft = 700
                 object Panel2: TPanel
                   Left = 1
                   Top = 121
@@ -6204,7 +6131,6 @@ object ViewMain: TViewMain
             Color = clWhite
             ParentBackground = False
             TabOrder = 1
-            ExplicitWidth = 955
             object pnl_bindsOracle: TPanel
               AlignWithMargins = True
               Left = 527
@@ -6394,7 +6320,6 @@ object ViewMain: TViewMain
               Color = clWhite
               ParentBackground = False
               TabOrder = 4
-              ExplicitLeft = 831
               object btn_versaoSistema: TSpeedButton
                 AlignWithMargins = True
                 Left = 3
@@ -6481,31 +6406,23 @@ object ViewMain: TViewMain
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 947
-          object GroupBox1: TGroupBox
-            AlignWithMargins = True
-            Left = 4
-            Top = 4
-            Width = 1198
-            Height = 158
-            Align = alTop
-            Caption = 'Dados da Empresa Atual'
-            DefaultHeaderFont = False
-            HeaderFont.Charset = DEFAULT_CHARSET
-            HeaderFont.Color = clInfoText
-            HeaderFont.Height = -16
-            HeaderFont.Name = 'Segoe UI'
-            HeaderFont.Style = []
-            HeaderFont.Quality = fqProof
-            TabOrder = 0
-            ExplicitWidth = 939
+          object shpDeletaEmpresaBottom: TShape
+            Left = 1
+            Top = 655
+            Width = 1204
+            Height = 47
+            Align = alBottom
+            Brush.Color = clTeal
+            ExplicitLeft = 0
+            ExplicitTop = 663
+            ExplicitWidth = 1009
           end
-          object GroupBox2: TGroupBox
+          object grp_AcoesDeletaEmpresa: TGroupBox
             AlignWithMargins = True
             Left = 4
-            Top = 168
+            Top = 320
             Width = 1198
-            Height = 137
+            Height = 251
             Align = alTop
             Caption = 'A'#231#245'es'
             DefaultHeaderFont = False
@@ -6515,287 +6432,1494 @@ object ViewMain: TViewMain
             HeaderFont.Name = 'Segoe UI'
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
-            TabOrder = 1
-            ExplicitWidth = 939
-            object pnl_deletaEmpresa: TPanel
+            TabOrder = 0
+            object Panel5: TPanel
               Left = 2
               Top = 17
-              Width = 204
-              Height = 118
+              Width = 311
+              Height = 232
               Align = alLeft
-              Color = clWhite
+              BevelOuter = bvNone
+              Color = clTeal
               ParentBackground = False
               TabOrder = 0
-              object pnl_deletandoEmpresas: TPanel
-                Left = 5
-                Top = 18
-                Width = 100
-                Height = 73
-                Color = clRed
-                ParentBackground = False
+              object Memo1: TMemo
+                Left = 0
+                Top = 96
+                Width = 311
+                Height = 136
+                Align = alBottom
+                Alignment = taCenter
+                Lines.Strings = (
+                  'Este procedimento remover'#225' permanentemente a '
+                  'empresa selecionada da base de dados.'#10'A a'#231#227'o n'#227'o '
+                  'poder'#225' ser desfeita.'#10#10#201' fortemente recomendado realizar '
+                  'um backup completo da base de dados antes de '
+                  'prosseguir, a fim de garantir a integridade e a seguran'#231'a '
+                  'das informa'#231#245'es.')
                 TabOrder = 0
-                object btn_deletandoEmpresas: TSpeedButton
-                  Left = 1
-                  Top = 1
-                  Width = 98
-                  Height = 71
-                  Align = alClient
-                  Caption = 'Deleta Empresa'
-                  ImageName = 'Excluir Empresa'
+              end
+              object Panel6: TPanel
+                Left = 0
+                Top = 0
+                Width = 311
+                Height = 96
+                Align = alClient
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 1
+                object pnl_deletandoEmpresas: TPanel
+                  Left = 5
+                  Top = 0
+                  Width = 100
+                  Height = 86
+                  Color = clTeal
+                  ParentBackground = False
+                  TabOrder = 0
+                  object btn_deletandoEmpresas: TSpeedButton
+                    Left = 1
+                    Top = 1
+                    Width = 98
+                    Height = 84
+                    Align = alClient
+                    Caption = 'Deleta Empresa'
+                    ImageName = 'Excluir Empresa'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -12
+                    Font.Name = 'Segoe UI'
+                    Font.Style = [fsBold]
+                    Glyph.Data = {
+                      361B0000424D361B000000000000360000002800000030000000300000000100
+                      180000000000001B0000120B0000120B00000000000000000000FFFFFFFFFFFF
+                      FFFFFFAED8FB5FB2F82998F52998F52998F52998F52998F52998F52998F52998
+                      F52998F52998F52998F52998F52998F52998F52998F52998F52998F5369EF6F2
+                      F9FEC8C7FA3F3BEF241FED322DEE918FF6FFFFFF87C5F92998F52998F52998F5
+                      2998F52998F52998F52998F52998F52998F551ABF7F2F9FEC8C7FA3F3BEF241F
+                      ED322DEE8481F5FFFFFFFFFFFFF2F9FE5FB2F82998F52998F52998F52998F529
+                      98F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F5
+                      2998F52998F52998F52998F5A1D2FBE4E3FD241FED241FED241FED241FED241F
+                      ED7673F4FFFFFF7ABFF92998F52998F52998F52998F52998F52998F52998F551
+                      ABF7F2F9FEADABF8241FED241FED241FED241FED241FED8481F5FFFFFF5FB2F8
+                      2998F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998
+                      F52998F52998F52998F52998F52998F52998F52998F52998F52998F5E4F2FE91
+                      8FF6241FED241FED241FED241FED241FED241FED7673F4FFFFFF7ABFF92998F5
+                      2998F52998F52998F52998F551ABF7F2F9FEADABF8241FED241FED241FED241F
+                      ED241FED241FED322DEEAED8FB2998F52998F52998F52998F57ABFF994CBFA94
+                      CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA
+                      94CBFA94CBFA94CBFA94CBFAFFFFFF918FF6241FED241FED241FED241FED241F
+                      ED241FED241FED7673F4FFFFFFA1D2FB94CBFA94CBFA94CBFA94CBFAF2F9FEAD
+                      ABF8241FED241FED241FED241FED241FED241FED241FED241FED5FB2F82998F5
+                      2998F52998F5D7ECFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F
+                      9DF7241FED241FED241FED241FED241FED241FED241FED241FED7673F4FFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFADABF8241FED241FED241FED241FED241FED241F
+                      ED241FED241FED3F3BEF2998F52998F52998F57ABFF9FFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D49F0241FED241FED241FED241F
+                      ED241FED241FED241FED241FED7673F4FFFFFFFFFFFFFFFFFFADABF8241FED24
+                      1FED241FED241FED241FED241FED241FED241FED241FEDC8C7FA2998F52998F5
+                      2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFF1F1FE4D49F0241FED241FED241FED241FED241FED241FED241FED241FED
+                      7673F4FFFFFFADABF8241FED241FED241FED241FED241FED241FED241FED241F
+                      ED241FEDADABF8F2F9FE2998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241F
+                      ED241FED241FED241FED241FED241FED241FED5B57F2241FED241FED241FED24
+                      1FED241FED241FED241FED241FED241FEDADABF8F2F9FE51ABF72998F52998F5
+                      2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241FED241FED241FED241FED241FED
+                      241FED241FED241FED241FED241FED241FED241FED241FED241FED241FEDADAB
+                      F8F2F9FE51ABF72998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49
+                      F0241FED241FED241FED241FED241FED241FED241FED241FED241FED241FED24
+                      1FED241FED241FED241FEDADABF8F2F9FE51ABF72998F52998F52998F52998F5
+                      2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241FED241FED241FED
+                      241FED241FED241FED241FED241FED241FED241FED241FEDADABF8FFFFFF94CB
+                      FA2998F52998F52998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFF1F1FE4D49F0241FED241FED241FED241FED241FED241FED241FED241FED24
+                      1FED241FEDADABF8FFFFFFFFFFFF94CBFA2998F52998F52998F52998F52998F5
+                      2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9DF7241FED241FED241FED
+                      241FED241FED241FED241FED241FED241FED5B57F2FFFFFFFFFFFFFFFFFF94CB
+                      FA2998F52998F52998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFADABF8241FED241FED241FED241FED241FED241FED241FED241FED241FED24
+                      1FED241FED7673F4FFFFFFFFFFFF94CBFA2998F52998F52998F52998F52998F5
+                      2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFADABF8241FED241FED241FED241FED241FED
+                      241FED241FED241FED241FED241FED241FED241FED241FED7673F4FFFFFFA1D2
+                      FB2998F52998F52998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFADABF8241F
+                      ED241FED241FED241FED241FED241FED241FED241FED241FED241FED241FED24
+                      1FED241FED241FED241FED7673F4FFFFFF7ABFF92998F52998F52998F52998F5
+                      2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFADABF8241FED241FED241FED241FED241FED241FED241FED
+                      241FED241FED241FED241FED241FED241FED241FED241FED241FED241FED7673
+                      F4FFFFFF7ABFF92998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFADABF8241FED241FED241F
+                      ED241FED241FED241FED241FED241FED241FED9F9DF74D49F0241FED241FED24
+                      1FED241FED241FED241FED241FED241FED7673F4FFFFFF87C5F92998F52998F5
+                      2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFADABF8241FED241FED241FED241FED241FED241FED241FED241FED241FED
+                      ADABF8FFFFFFF1F1FE4D49F0241FED241FED241FED241FED241FED241FED241F
+                      ED241FED7673F4FFFFFF2998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E3FD322DEE241FED241FED241FED241F
+                      ED241FED241FED241FED241FEDADABF8FFFFFFFFFFFFFFFFFFF1F1FE4D49F024
+                      1FED241FED241FED241FED241FED241FED241FED241FED918FF6369EF62998F5
+                      2998F55FB2F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91
+                      8FF6241FED241FED241FED241FED241FED241FED241FED241FEDADABF8FFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241FED241FED241FED241F
+                      ED241FED241FED322DEE7ABFF92998F52998F52998F587C5F9FFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF918FF6241FED241FED241FED241FED241F
+                      ED241FED241FEDADABF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1
+                      F1FE4D49F0241FED241FED241FED241FED241FED241FED241FEDC9E5FC2998F5
+                      2998F52998F52998F544A5F65FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2
+                      F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F8D7ECFD9F
+                      9DF7241FED241FED241FED241FED241FED241FEDADABF8FFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241FED241F
+                      ED241FED241FED3F3BEFFFFFFF94CBFA2998F52998F52998F52998F52998F529
+                      98F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F5
+                      2998F52998F52998F52998F594CBFAF1F1FE4D49F0241FED241FED241FED322D
+                      EEADABF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFF1F1FE4D49F0241FED241FED241FED241FEDC8C7FAFFFFFFFFFFFF
+                      AED8FB369EF62998F52998F52998F52998F52998F52998F52998F52998F52998
+                      F52998F52998F52998F52998F52998F52998F52998F52998F52998F594CBFAFF
+                      FFFFF1F1FE9F9DF7918FF6918FF6E4E3FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9DF7918F
+                      F6918FF6E4E3FDE4F2FEFFFFFFFFFFFFFFFFFFF2F9FEA1D2FB6CB8F85FB2F85F
+                      B2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F8
+                      5FB2F82998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4F2FEA1D2FB369EF6FFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF51ABF72998F52998F56CB8F8FF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7ABF
+                      F92998F52998F52998F5FFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C4
+                      8242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFF7ABFF92998F52998F52998F5BCDFFCFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFD7ECFD2998F52998F52998F551ABF7FFFFFFFFFFFF
+                      FFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9E5FC2998F52998F52998F529
+                      98F57ABFF9BCDFFCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FC
+                      C9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FC87C5F9369EF62998
+                      F52998F52998F5AED8FBFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C4
+                      8242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFF6CB8F82998F52998F52998F52998F52998F52998F52998F52998
+                      F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F529
+                      98F52998F52998F52998F52998F52998F52998F551ABF7FFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F9FE6CB8F82998F529
+                      98F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F5
+                      2998F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998
+                      F551ABF7F2F9FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C4
+                      8242E5C8ACF0E0D0F0E0D0F0E0D0F0E0D0F0E0D0F0E0D0F0E0D0F0E0D0F0E0D0
+                      FFFFFFFFFFFFFFFFFFFFFFFFAED8FB51ABF72998F52998F52998F52998F52998
+                      F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F529
+                      98F52998F52998F52998F551ABF7AED8FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFF0E0D0C48242C48242C48242C48242C48242C48242C48242C482
+                      42C48242C48242C48242C48242C48242C88A4EE5C8ACFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4E7DBC48242C48242C4
+                      8242C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242
+                      C48242C48242E9D0B8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
+                      EFE7E1C0A0E1C0A0DAB189F4E7DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFDEB995C48242C48242C48242C48242C48242C48242C482
+                      42C48242C48242C48242C48242C48242C48242C48242CF9A66FFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C4
+                      8242C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242
+                      C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
+                      E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C482
+                      42C48242C48242C48242C48242C48242C48242C48242C48242FFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFDAB189C48242C48242C48242C48242C48242C48242C48242C48242C48242
+                      C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
+                      E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C482
+                      42C48242C48242C48242C48242C48242C48242C48242C48242FFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C48242C48242C48242
+                      C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
+                      E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C482
+                      42C48242C48242C48242C48242C48242C48242C48242C48242FFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C48242
+                      C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
+                      E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFDAB189C48242C48242C48242C48242C48242C48242C48242FFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9D0B8C48242C48242C48242F0E0D0FFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C48242
+                      C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBF7F3CB
+                      925AC48242C48242C88A4EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C48242E1C0A0E1C0A0E1
+                      C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0
+                      E1C0A0E1C0A0E1C0A0DEB995C88A4EC48242C48242C48242DAB189FFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242
+                      C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242C482
+                      42C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242C4
+                      8242C48242CB925AFBF7F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C48242C4
+                      8242C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242
+                      C48242C48242C48242C48242C48242C48242CB925AF4E7DBFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                      E1C0A0C48242C48242C48242C48242C48242C48242C48242C48242C48242C482
+                      42C48242C48242C48242C48242C48242C48242C48242C48242C48242CF9A66E5
+                      C8ACFBF7F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+                    Layout = blGlyphTop
+                    ParentFont = False
+                    StyleName = 'Windows'
+                    OnClick = btn_deletandoEmpresasClick
+                    ExplicitWidth = 80
+                    ExplicitHeight = 64
+                  end
+                end
+                object chk_saveScriptDeletando: TCheckBox
+                  Left = 111
+                  Top = 7
+                  Width = 97
+                  Height = 33
+                  Hint = 'Arquivo gerado em C:\sqlExport.txt'
+                  Caption = 'Salvar Script'
+                  Color = clWhite
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWindowText
+                  Font.Color = clBackground
                   Font.Height = -12
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
-                  Glyph.Data = {
-                    361B0000424D361B000000000000360000002800000030000000300000000100
-                    180000000000001B0000120B0000120B00000000000000000000FFFFFFFFFFFF
-                    FFFFFFAED8FB5FB2F82998F52998F52998F52998F52998F52998F52998F52998
-                    F52998F52998F52998F52998F52998F52998F52998F52998F52998F5369EF6F2
-                    F9FEC8C7FA3F3BEF241FED322DEE918FF6FFFFFF87C5F92998F52998F52998F5
-                    2998F52998F52998F52998F52998F52998F551ABF7F2F9FEC8C7FA3F3BEF241F
-                    ED322DEE8481F5FFFFFFFFFFFFF2F9FE5FB2F82998F52998F52998F52998F529
-                    98F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F5
-                    2998F52998F52998F52998F5A1D2FBE4E3FD241FED241FED241FED241FED241F
-                    ED7673F4FFFFFF7ABFF92998F52998F52998F52998F52998F52998F52998F551
-                    ABF7F2F9FEADABF8241FED241FED241FED241FED241FED8481F5FFFFFF5FB2F8
-                    2998F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998
-                    F52998F52998F52998F52998F52998F52998F52998F52998F52998F5E4F2FE91
-                    8FF6241FED241FED241FED241FED241FED241FED7673F4FFFFFF7ABFF92998F5
-                    2998F52998F52998F52998F551ABF7F2F9FEADABF8241FED241FED241FED241F
-                    ED241FED241FED322DEEAED8FB2998F52998F52998F52998F57ABFF994CBFA94
-                    CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA94CBFA
-                    94CBFA94CBFA94CBFA94CBFAFFFFFF918FF6241FED241FED241FED241FED241F
-                    ED241FED241FED7673F4FFFFFFA1D2FB94CBFA94CBFA94CBFA94CBFAF2F9FEAD
-                    ABF8241FED241FED241FED241FED241FED241FED241FED241FED5FB2F82998F5
-                    2998F52998F5D7ECFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F
-                    9DF7241FED241FED241FED241FED241FED241FED241FED241FED7673F4FFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFADABF8241FED241FED241FED241FED241FED241F
-                    ED241FED241FED3F3BEF2998F52998F52998F57ABFF9FFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D49F0241FED241FED241FED241F
-                    ED241FED241FED241FED241FED7673F4FFFFFFFFFFFFFFFFFFADABF8241FED24
-                    1FED241FED241FED241FED241FED241FED241FED241FEDC8C7FA2998F52998F5
-                    2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFF1F1FE4D49F0241FED241FED241FED241FED241FED241FED241FED241FED
-                    7673F4FFFFFFADABF8241FED241FED241FED241FED241FED241FED241FED241F
-                    ED241FEDADABF8F2F9FE2998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241F
-                    ED241FED241FED241FED241FED241FED241FED5B57F2241FED241FED241FED24
-                    1FED241FED241FED241FED241FED241FEDADABF8F2F9FE51ABF72998F52998F5
-                    2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241FED241FED241FED241FED241FED
-                    241FED241FED241FED241FED241FED241FED241FED241FED241FED241FEDADAB
-                    F8F2F9FE51ABF72998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49
-                    F0241FED241FED241FED241FED241FED241FED241FED241FED241FED241FED24
-                    1FED241FED241FED241FEDADABF8F2F9FE51ABF72998F52998F52998F52998F5
-                    2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241FED241FED241FED
-                    241FED241FED241FED241FED241FED241FED241FED241FEDADABF8FFFFFF94CB
-                    FA2998F52998F52998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFF1F1FE4D49F0241FED241FED241FED241FED241FED241FED241FED241FED24
-                    1FED241FEDADABF8FFFFFFFFFFFF94CBFA2998F52998F52998F52998F52998F5
-                    2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9DF7241FED241FED241FED
-                    241FED241FED241FED241FED241FED241FED5B57F2FFFFFFFFFFFFFFFFFF94CB
-                    FA2998F52998F52998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFADABF8241FED241FED241FED241FED241FED241FED241FED241FED241FED24
-                    1FED241FED7673F4FFFFFFFFFFFF94CBFA2998F52998F52998F52998F52998F5
-                    2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFADABF8241FED241FED241FED241FED241FED
-                    241FED241FED241FED241FED241FED241FED241FED241FED7673F4FFFFFFA1D2
-                    FB2998F52998F52998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFADABF8241F
-                    ED241FED241FED241FED241FED241FED241FED241FED241FED241FED241FED24
-                    1FED241FED241FED241FED7673F4FFFFFF7ABFF92998F52998F52998F52998F5
-                    2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFADABF8241FED241FED241FED241FED241FED241FED241FED
-                    241FED241FED241FED241FED241FED241FED241FED241FED241FED241FED7673
-                    F4FFFFFF7ABFF92998F52998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFADABF8241FED241FED241F
-                    ED241FED241FED241FED241FED241FED241FED9F9DF74D49F0241FED241FED24
-                    1FED241FED241FED241FED241FED241FED7673F4FFFFFF87C5F92998F52998F5
-                    2998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFADABF8241FED241FED241FED241FED241FED241FED241FED241FED241FED
-                    ADABF8FFFFFFF1F1FE4D49F0241FED241FED241FED241FED241FED241FED241F
-                    ED241FED7673F4FFFFFF2998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E3FD322DEE241FED241FED241FED241F
-                    ED241FED241FED241FED241FEDADABF8FFFFFFFFFFFFFFFFFFF1F1FE4D49F024
-                    1FED241FED241FED241FED241FED241FED241FED241FED918FF6369EF62998F5
-                    2998F55FB2F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91
-                    8FF6241FED241FED241FED241FED241FED241FED241FED241FEDADABF8FFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241FED241FED241FED241F
-                    ED241FED241FED322DEE7ABFF92998F52998F52998F587C5F9FFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF918FF6241FED241FED241FED241FED241F
-                    ED241FED241FEDADABF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1
-                    F1FE4D49F0241FED241FED241FED241FED241FED241FED241FEDC9E5FC2998F5
-                    2998F52998F52998F544A5F65FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2
-                    F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F8D7ECFD9F
-                    9DF7241FED241FED241FED241FED241FED241FEDADABF8FFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1FE4D49F0241FED241FED241F
-                    ED241FED241FED3F3BEFFFFFFF94CBFA2998F52998F52998F52998F52998F529
-                    98F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F5
-                    2998F52998F52998F52998F594CBFAF1F1FE4D49F0241FED241FED241FED322D
-                    EEADABF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFF1F1FE4D49F0241FED241FED241FED241FEDC8C7FAFFFFFFFFFFFF
-                    AED8FB369EF62998F52998F52998F52998F52998F52998F52998F52998F52998
-                    F52998F52998F52998F52998F52998F52998F52998F52998F52998F594CBFAFF
-                    FFFFF1F1FE9F9DF7918FF6918FF6E4E3FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9DF7918F
-                    F6918FF6E4E3FDE4F2FEFFFFFFFFFFFFFFFFFFF2F9FEA1D2FB6CB8F85FB2F85F
-                    B2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F85FB2F8
-                    5FB2F82998F52998F52998F594CBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4F2FEA1D2FB369EF6FFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF51ABF72998F52998F56CB8F8FF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7ABF
-                    F92998F52998F52998F5FFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C4
-                    8242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFF7ABFF92998F52998F52998F5BCDFFCFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFD7ECFD2998F52998F52998F551ABF7FFFFFFFFFFFF
-                    FFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9E5FC2998F52998F52998F529
-                    98F57ABFF9BCDFFCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FC
-                    C9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FCC9E5FC87C5F9369EF62998
-                    F52998F52998F5AED8FBFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C4
-                    8242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFF6CB8F82998F52998F52998F52998F52998F52998F52998F52998
-                    F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F529
-                    98F52998F52998F52998F52998F52998F52998F551ABF7FFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F9FE6CB8F82998F529
-                    98F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F5
-                    2998F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998
-                    F551ABF7F2F9FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C4
-                    8242E5C8ACF0E0D0F0E0D0F0E0D0F0E0D0F0E0D0F0E0D0F0E0D0F0E0D0F0E0D0
-                    FFFFFFFFFFFFFFFFFFFFFFFFAED8FB51ABF72998F52998F52998F52998F52998
-                    F52998F52998F52998F52998F52998F52998F52998F52998F52998F52998F529
-                    98F52998F52998F52998F551ABF7AED8FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFF0E0D0C48242C48242C48242C48242C48242C48242C48242C482
-                    42C48242C48242C48242C48242C48242C88A4EE5C8ACFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4E7DBC48242C48242C4
-                    8242C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242
-                    C48242C48242E9D0B8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
-                    EFE7E1C0A0E1C0A0DAB189F4E7DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFDEB995C48242C48242C48242C48242C48242C48242C482
-                    42C48242C48242C48242C48242C48242C48242C48242CF9A66FFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C4
-                    8242C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242
-                    C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
-                    E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C482
-                    42C48242C48242C48242C48242C48242C48242C48242C48242FFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFDAB189C48242C48242C48242C48242C48242C48242C48242C48242C48242
-                    C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
-                    E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C482
-                    42C48242C48242C48242C48242C48242C48242C48242C48242FFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C48242C48242C48242
-                    C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
-                    E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C482
-                    42C48242C48242C48242C48242C48242C48242C48242C48242FFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0E0D0C48242C48242C48242F0E0D0FFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C48242
-                    C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
-                    E0D0C48242C48242C48242F0E0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFDAB189C48242C48242C48242C48242C48242C48242C48242FFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9D0B8C48242C48242C48242F0E0D0FFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C48242
-                    C48242C48242C48242FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBF7F3CB
-                    925AC48242C48242C88A4EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C48242E1C0A0E1C0A0E1
-                    C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0E1C0A0
-                    E1C0A0E1C0A0E1C0A0DEB995C88A4EC48242C48242C48242DAB189FFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242
-                    C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242C482
-                    42C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242C4
-                    8242C48242CB925AFBF7F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFDAB189C48242C48242C48242C48242C48242C4
-                    8242C48242C48242C48242C48242C48242C48242C48242C48242C48242C48242
-                    C48242C48242C48242C48242C48242C48242CB925AF4E7DBFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                    E1C0A0C48242C48242C48242C48242C48242C48242C48242C48242C48242C482
-                    42C48242C48242C48242C48242C48242C48242C48242C48242C48242CF9A66E5
-                    C8ACFBF7F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-                  Layout = blGlyphTop
+                  Font.Quality = fqClearTypeNatural
+                  ParentColor = False
                   ParentFont = False
+                  ParentShowHint = False
+                  ShowHint = True
+                  TabOrder = 1
                   StyleName = 'Windows'
-                  OnClick = btn_deletandoEmpresasClick
-                  ExplicitWidth = 80
-                  ExplicitHeight = 64
                 end
               end
-              object chk_saveScriptDeletando: TCheckBox
-                Left = 111
-                Top = 64
-                Width = 97
-                Height = 33
-                Hint = 'Arquivo gerado em C:\sqlExport.txt'
-                Caption = 'Salvar Script'
-                Color = clWhite
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clBackground
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                Font.Quality = fqClearTypeNatural
-                ParentColor = False
-                ParentFont = False
-                ParentShowHint = False
-                ShowHint = True
+            end
+          end
+          object GroupBox1: TGroupBox
+            AlignWithMargins = True
+            Left = 4
+            Top = 45
+            Width = 1198
+            Height = 269
+            Align = alTop
+            Caption = '     -- Dados da Empresa Atual --           '
+            DefaultHeaderFont = False
+            HeaderFont.Charset = DEFAULT_CHARSET
+            HeaderFont.Color = clInfoText
+            HeaderFont.Height = -16
+            HeaderFont.Name = 'Segoe UI'
+            HeaderFont.Style = []
+            HeaderFont.Quality = fqProof
+            TabOrder = 1
+            object Panel3: TPanel
+              Left = 2
+              Top = 17
+              Width = 425
+              Height = 250
+              Align = alLeft
+              BevelOuter = bvNone
+              TabOrder = 0
+              object Label1: TLabel
+                Left = 7
+                Top = 144
+                Width = 115
+                Height = 15
+                Caption = 'Raz'#227'o Social para NFe'
+              end
+              object Label2: TLabel
+                Left = 7
+                Top = 100
+                Width = 77
+                Height = 15
+                Caption = 'Nome fantasia'
+              end
+              object Label3: TLabel
+                Left = 8
+                Top = 53
+                Width = 64
+                Height = 15
+                Caption = 'Raz'#227'o social'
+              end
+              object Label5: TLabel
+                Left = 7
+                Top = 12
+                Width = 27
+                Height = 15
+                Caption = 'CNPJ'
+              end
+              object Label15: TLabel
+                Left = 144
+                Top = 12
+                Width = 103
+                Height = 15
+                Caption = 'Inscri'#231#227'o municipal'
+              end
+              object Label16: TLabel
+                Left = 281
+                Top = 12
+                Width = 94
+                Height = 15
+                Caption = 'Inscri'#231#227'o estadual'
+              end
+              object Label18: TLabel
+                Left = 7
+                Top = 197
+                Width = 34
+                Height = 15
+                Caption = 'E-mail'
+              end
+              object edt_RAZAO_SOCIAL_NFE_d: TEdit
+                Left = 7
+                Top = 165
+                Width = 405
+                Height = 22
+                HelpContext = 100007
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 60
+                ReadOnly = True
+                TabOrder = 0
+              end
+              object edt_FANTASIA_d: TEdit
+                Left = 7
+                Top = 117
+                Width = 405
+                Height = 22
+                Hint = 'Nome fantasia da empresa usu'#225'ria e/ou filial'
+                HelpContext = 12105
+                AutoSize = False
+                CharCase = ecUpperCase
+                MaxLength = 40
+                ParentColor = True
+                ReadOnly = True
                 TabOrder = 1
-                StyleName = 'Windows'
+              end
+              object edt_RAZAO_SOCIAL_d: TEdit
+                Left = 8
+                Top = 70
+                Width = 405
+                Height = 22
+                Hint = 'Raz'#227'o social da empresa usu'#225'ria e/ou filial'
+                HelpContext = 100006
+                AutoSize = False
+                CharCase = ecUpperCase
+                MaxLength = 40
+                ParentColor = True
+                ReadOnly = True
+                TabOrder = 2
+              end
+              object edt_EMPRESA_ID_d: TMaskEdit
+                Left = 7
+                Top = 29
+                Width = 131
+                Height = 22
+                Hint = 'CNPJ da empresa usu'#225'ria e/ou filial'
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                EditMask = '!aa.aaa.aaa/aaaa-99;1;_'
+                MaxLength = 18
+                ReadOnly = True
+                TabOrder = 3
+                Text = '  .   .   /    -  '
+              end
+              object edt_INSC_MUNICIPAL_d: TEdit
+                Left = 144
+                Top = 29
+                Width = 131
+                Height = 22
+                Hint = 'Inscri'#231#227'o municipal da empresa e/ou filial'
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 18
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = True
+                TabOrder = 4
+              end
+              object edt_INSC_ESTADUAL_d: TEdit
+                Left = 281
+                Top = 29
+                Width = 131
+                Height = 22
+                Hint = 'Inscri'#231#227'o estadual da empresa usu'#225'ria e/ou filial'
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 18
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = True
+                TabOrder = 5
+              end
+              object edt_E_MAIL_d: TEdit
+                Left = 7
+                Top = 214
+                Width = 406
+                Height = 22
+                Hint = 'Endere'#231'o na internet'
+                HelpContext = 100010
+                AutoSize = False
+                CharCase = ecLowerCase
+                Color = clBtnFace
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clBlue
+                Font.Height = -11
+                Font.Name = 'Arial'
+                Font.Style = [fsBold]
+                MaxLength = 80
+                ParentFont = False
+                ReadOnly = True
+                TabOrder = 6
               end
             end
+            object Panel4: TPanel
+              Left = 427
+              Top = 17
+              Width = 560
+              Height = 250
+              Align = alLeft
+              BevelOuter = bvNone
+              TabOrder = 1
+              object Label19: TLabel
+                Left = 15
+                Top = 14
+                Width = 21
+                Height = 15
+                Caption = 'CEP'
+              end
+              object Label20: TLabel
+                Left = 97
+                Top = 14
+                Width = 49
+                Height = 15
+                Caption = 'Endere'#231'o'
+              end
+              object Label21: TLabel
+                Left = 15
+                Top = 54
+                Width = 31
+                Height = 15
+                Caption = 'Bairro'
+              end
+              object Label22: TLabel
+                Left = 15
+                Top = 98
+                Width = 37
+                Height = 15
+                Caption = 'Cidade'
+              end
+              object Label23: TLabel
+                Left = 410
+                Top = 98
+                Width = 14
+                Height = 15
+                Caption = 'UF'
+              end
+              object Label24: TLabel
+                Left = 352
+                Top = 189
+                Width = 103
+                Height = 15
+                Caption = 'Telefone WhatsApp'
+              end
+              object Label25: TLabel
+                Left = 15
+                Top = 147
+                Width = 24
+                Height = 15
+                Caption = 'DDD'
+              end
+              object Label26: TLabel
+                Left = 79
+                Top = 147
+                Width = 66
+                Height = 15
+                Caption = 'Telefone voz'
+              end
+              object Label27: TLabel
+                Left = 216
+                Top = 147
+                Width = 63
+                Height = 15
+                Caption = 'Telefone fax'
+              end
+              object Label28: TLabel
+                Left = 345
+                Top = 147
+                Width = 80
+                Height = 15
+                Caption = 'Telefone dados'
+              end
+              object Label29: TLabel
+                Left = 141
+                Top = 98
+                Width = 73
+                Height = 15
+                Caption = 'Nome Cidade'
+              end
+              object edt_CEP_d: TMaskEdit
+                Left = 15
+                Top = 29
+                Width = 76
+                Height = 22
+                Hint = 'CEP do endere'#231'o da empresa'
+                HelpContext = 100004
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                EditMask = '!99999-999;1;_'
+                MaxLength = 9
+                ReadOnly = True
+                TabOrder = 0
+                Text = '     -   '
+              end
+              object edt_ENDERECO_d: TEdit
+                Left = 97
+                Top = 29
+                Width = 360
+                Height = 22
+                Hint = 'Endere'#231'o da empresa usu'#225'ria e/ou filial'
+                HelpContext = 100000
+                AutoSize = False
+                CharCase = ecUpperCase
+                MaxLength = 40
+                ParentColor = True
+                TabOrder = 1
+              end
+              object edt_BAIRRO_d: TEdit
+                Left = 15
+                Top = 70
+                Width = 442
+                Height = 22
+                Hint = 'Nome do bairro onde se localiza a empresa '
+                HelpContext = 100001
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 30
+                ReadOnly = True
+                TabOrder = 2
+              end
+              object edt_NOME_CIDADE_d: TEdit
+                Left = 141
+                Top = 117
+                Width = 260
+                Height = 22
+                Hint = 'Nome da cidade onde se localiza a empresa'
+                TabStop = False
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 40
+                ReadOnly = True
+                TabOrder = 3
+              end
+              object edt_ESTADO_ID_d: TEdit
+                Left = 407
+                Top = 118
+                Width = 50
+                Height = 22
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 2
+                ReadOnly = True
+                TabOrder = 4
+              end
+              object edt_DDD_d: TMaskEdit
+                Left = 15
+                Top = 164
+                Width = 58
+                Height = 22
+                Hint = 
+                  'C'#243'digo de discagem direta da regi'#227'o onde se localiza a empresa u' +
+                  'su'#225'ria'
+                HelpContext = 100005
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 4
+                ReadOnly = True
+                TabOrder = 5
+                Text = ''
+              end
+              object edt_FONE_VOZ_d: TMaskEdit
+                Left = 79
+                Top = 164
+                Width = 114
+                Height = 22
+                Hint = 'N'#250'mero do telefone para contato voz'
+                HelpContext = 100011
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 10
+                ReadOnly = True
+                TabOrder = 6
+                Text = ''
+              end
+              object edt_FONE_FAX_d: TMaskEdit
+                Left = 216
+                Top = 164
+                Width = 114
+                Height = 22
+                Hint = 'N'#250'mero do telefone para contatos via fax'
+                HelpContext = 100012
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 10
+                ReadOnly = True
+                TabOrder = 7
+                Text = ''
+              end
+              object edt_FONE_DADOS_d: TMaskEdit
+                Left = 343
+                Top = 162
+                Width = 114
+                Height = 22
+                Hint = 'N'#250'mero do telefone para conex'#227'o de dados'
+                HelpContext = 100012
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 10
+                ReadOnly = True
+                TabOrder = 8
+                Text = ''
+              end
+              object edt_FONE_WHATSAPP_d: TMaskEdit
+                Left = 343
+                Top = 206
+                Width = 114
+                Height = 22
+                Hint = 
+                  'N'#250'mero de telefone para envio de mensagens por WhatsApp (necessi' +
+                  'ta configura'#231#227'o)'
+                HelpContext = 100012
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                EditMask = '(99) 99999-9999;1;_'
+                MaxLength = 15
+                ReadOnly = True
+                TabOrder = 9
+                Text = '(  )      -    '
+              end
+              object edt_CIDADE_ID_d: TEdit
+                Left = 15
+                Top = 117
+                Width = 120
+                Height = 22
+                Hint = 'Nome do bairro onde se localiza a empresa '
+                HelpContext = 100001
+                AutoSize = False
+                CharCase = ecUpperCase
+                Color = clBtnFace
+                MaxLength = 30
+                ReadOnly = True
+                TabOrder = 10
+              end
+            end
+          end
+          object pnl_TelaDeletaEmpresa: TPanel
+            Left = 1
+            Top = 1
+            Width = 1204
+            Height = 41
+            Align = alTop
+            Color = clTeal
+            ParentBackground = False
+            TabOrder = 2
+            object Label30: TLabel
+              AlignWithMargins = True
+              Left = 4
+              Top = 4
+              Width = 1196
+              Height = 33
+              Align = alClient
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Deleta Empresa'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -20
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+              ExplicitLeft = 5
+              ExplicitTop = 13
+              ExplicitWidth = 1204
+              ExplicitHeight = 28
+            end
+          end
+        end
+      end
+      object PageDeletaMovimento: TTabSheet
+        Caption = 'PageDeletaMovimento'
+        ImageIndex = 4
+        object pnl_fundoDeleaMovimento: TPanel
+          Left = 0
+          Top = 0
+          Width = 1216
+          Height = 713
+          Align = alClient
+          Color = clWhite
+          ParentBackground = False
+          TabOrder = 0
+          object shpDeletaMovimento: TShape
+            Left = 1
+            Top = 665
+            Width = 1214
+            Height = 47
+            Align = alBottom
+            Brush.Color = clTeal
+            ExplicitLeft = 0
+            ExplicitTop = 663
+            ExplicitWidth = 1009
+          end
+          object Panel7: TPanel
+            Left = 1
+            Top = 1
+            Width = 1214
+            Height = 41
+            Align = alTop
+            Color = clTeal
+            ParentBackground = False
+            TabOrder = 0
+            object Label31: TLabel
+              AlignWithMargins = True
+              Left = 4
+              Top = 4
+              Width = 1206
+              Height = 33
+              Align = alClient
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Limpar Movimento Siac'#13#10
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -20
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+              ExplicitLeft = 5
+              ExplicitTop = 13
+              ExplicitWidth = 1204
+              ExplicitHeight = 28
+            end
+          end
+          object pnl_sistemas: TPanel
+            Left = 1
+            Top = 273
+            Width = 1214
+            Height = 240
+            Align = alTop
+            Caption = 'pnl_modulos'
+            TabOrder = 1
+          end
+          object pnl_modulos: TPanel
+            Left = 1
+            Top = 42
+            Width = 1214
+            Height = 231
+            Align = alTop
+            TabOrder = 2
+            object grp_SelecaoModulos: TGroupBox
+              Left = 241
+              Top = 1
+              Width = 408
+              Height = 229
+              Align = alLeft
+              Caption = '    Selecionar Mod'#250'los Exclus'#227'o    '
+              TabOrder = 0
+              object CheckListSiacModulos: TCheckListBox
+                Left = 5
+                Top = 24
+                Width = 380
+                Height = 161
+                BevelInner = bvNone
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                BorderStyle = bsNone
+                Color = clWhite
+                Columns = 3
+                DoubleBuffered = False
+                Flat = False
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -15
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                HeaderColor = clBlue
+                HeaderBackgroundColor = clTeal
+                ItemHeight = 20
+                Items.Strings = (
+                  'Checkout'
+                  'Consigna'#231#227'o'
+                  'Cont'#225'bil'
+                  'Fluxo'
+                  'Licita'#231#227'o'
+                  'Livros'
+                  'MDF-e'
+                  'Os'
+                  'Siac'
+                  'Siac Complaint'
+                  'Siai'
+                  '')
+                ParentBiDiMode = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                StyleName = 'Windows'
+                TabOrder = 0
+              end
+            end
+            object grp_ConfiguracaoBase: TGroupBox
+              Left = 1
+              Top = 1
+              Width = 240
+              Height = 229
+              Align = alLeft
+              Caption = '    Configura'#231#227'o Base    '
+              TabOrder = 1
+              object lblPeriodo: TLabel
+                Left = 5
+                Top = 170
+                Width = 116
+                Height = 15
+                Caption = 'Per'#237'odo Base Exclus'#227'o'
+              end
+              object lblA: TLabel
+                Left = 103
+                Top = 190
+                Width = 6
+                Height = 15
+                Caption = 'a'
+              end
+              object edtDataInicial: TMaskEdit
+                Left = 3
+                Top = 185
+                Width = 90
+                Height = 23
+                EditMask = '99/99/9999;1;_'
+                MaxLength = 10
+                TabOrder = 0
+                Text = '  /  /    '
+              end
+              object edtDataFinal: TMaskEdit
+                Left = 127
+                Top = 185
+                Width = 90
+                Height = 23
+                EditMask = '99/99/9999;1;_'
+                MaxLength = 10
+                TabOrder = 1
+                Text = '  /  /    '
+              end
+              object rg_tipoExclusão: TRadioGroup
+                Left = 3
+                Top = 95
+                Width = 214
+                Height = 74
+                Caption = '  Tipo de Exclus'#227'o  '
+                Color = clHighlightText
+                Items.Strings = (
+                  'Movimenta'#231#227'o Geral'
+                  'Movimenta'#231#227'o por Per'#237'odo')
+                ParentBackground = False
+                ParentColor = False
+                TabOrder = 2
+              end
+              object rg_modo: TRadioGroup
+                Left = 3
+                Top = 15
+                Width = 214
+                Height = 74
+                Caption = '  Modo de Exclus'#227'o  '
+                Color = clHighlightText
+                Items.Strings = (
+                  'Mod'#250'los Todos '
+                  'Mod'#250'los Selecionados')
+                ParentBackground = False
+                ParentColor = False
+                TabOrder = 3
+              end
+            end
+          end
+        end
+      end
+      object PageTratarFinanceiro: TTabSheet
+        Caption = 'PageTratarFinanceiro'
+        ImageIndex = 5
+        object pnl_tratarFinanceiro: TPanel
+          Left = 0
+          Top = 0
+          Width = 1216
+          Height = 713
+          Align = alClient
+          Color = clWhite
+          ParentBackground = False
+          TabOrder = 0
+          object Shape3: TShape
+            Left = 1
+            Top = 665
+            Width = 1214
+            Height = 47
+            Align = alBottom
+            Brush.Color = clTeal
+            ExplicitLeft = 0
+            ExplicitTop = 663
+            ExplicitWidth = 1009
+          end
+          object Panel9: TPanel
+            Left = 1
+            Top = 1
+            Width = 1214
+            Height = 41
+            Align = alTop
+            Color = clTeal
+            ParentBackground = False
+            TabOrder = 0
+            object Label32: TLabel
+              AlignWithMargins = True
+              Left = 4
+              Top = 4
+              Width = 1206
+              Height = 33
+              Align = alClient
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Financeiro Siac'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -20
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+              ExplicitLeft = 5
+              ExplicitTop = 13
+              ExplicitWidth = 1204
+              ExplicitHeight = 28
+            end
+          end
+          object Panel11: TPanel
+            Left = 1
+            Top = 42
+            Width = 1214
+            Height = 375
+            Align = alTop
+            Color = clWhite
+            ParentBackground = False
+            TabOrder = 1
+            object grp_tratarDocumentoFinanceira: TGroupBox
+              AlignWithMargins = True
+              Left = 639
+              Top = 4
+              Width = 629
+              Height = 367
+              Align = alLeft
+              Caption = '    -  Altera'#231#245'es T'#237'tulos  -     '
+              DefaultHeaderFont = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              HeaderFont.Charset = DEFAULT_CHARSET
+              HeaderFont.Color = clBlue
+              HeaderFont.Height = -15
+              HeaderFont.Name = 'Segoe UI'
+              HeaderFont.Style = []
+              ParentFont = False
+              TabOrder = 0
+              object lbl_13: TLabel
+                Left = 102
+                Top = 274
+                Width = 50
+                Height = 15
+                Caption = 'Data final'
+              end
+              object lbl_14: TLabel
+                Left = 31
+                Top = 274
+                Width = 58
+                Height = 15
+                Caption = 'Data inicial'
+              end
+              object lbl_12: TLabel
+                Left = 177
+                Top = 274
+                Width = 58
+                Height = 15
+                Caption = 'Data inicial'
+              end
+              object lbl_11: TLabel
+                Left = 248
+                Top = 274
+                Width = 50
+                Height = 15
+                Caption = 'Data final'
+              end
+              object chk_limparPedidoTitulos: TCheckBox
+                Left = 16
+                Top = 25
+                Width = 201
+                Height = 17
+                Caption = 'Remover Pedido_Id dos T'#237'tulos'
+                TabOrder = 0
+              end
+              object chk_limparNossoNumero: TCheckBox
+                Left = 16
+                Top = 48
+                Width = 209
+                Height = 17
+                Caption = 'Remover Nosso N'#250'mero'
+                TabOrder = 1
+              end
+              object chk_alterarDocumentoID: TCheckBox
+                Left = 16
+                Top = 71
+                Width = 145
+                Height = 17
+                Caption = 'Alterar Documento_ID'
+                TabOrder = 2
+              end
+              object RadioGroup1: TRadioGroup
+                AlignWithMargins = True
+                Left = -3
+                Top = 72
+                Width = 615
+                Height = 185
+                Margins.Left = 5
+                Margins.Top = 6
+                Margins.Right = 5
+                Margins.Bottom = 5
+                BiDiMode = bdLeftToRight
+                Caption = '  Tipo Movimento - T'#237'tulos  '
+                Color = clWhite
+                Columns = 3
+                ItemIndex = 0
+                Items.Strings = (
+                  'Todos T'#237'tulos'
+                  'Contas '#224' Receber'
+                  'Contas '#224' Pagar')
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentColor = False
+                TabOrder = 3
+              end
+              object medt_13: TMaskEdit
+                Left = 31
+                Top = 290
+                Width = 62
+                Height = 22
+                AutoSize = False
+                Enabled = False
+                EditMask = '!99/99/9999;1;_'
+                MaxLength = 10
+                TabOrder = 4
+                Text = '  /  /    '
+              end
+              object medt_12: TMaskEdit
+                Left = 102
+                Top = 290
+                Width = 62
+                Height = 22
+                AutoSize = False
+                Enabled = False
+                EditMask = '!99/99/9999;1;_'
+                MaxLength = 10
+                TabOrder = 5
+                Text = '  /  /    '
+              end
+              object medt_11: TMaskEdit
+                Left = 177
+                Top = 290
+                Width = 62
+                Height = 22
+                AutoSize = False
+                Enabled = False
+                EditMask = '!99/99/9999;1;_'
+                MaxLength = 10
+                TabOrder = 6
+                Text = '  /  /    '
+              end
+              object medt_1: TMaskEdit
+                Left = 248
+                Top = 290
+                Width = 62
+                Height = 22
+                AutoSize = False
+                Enabled = False
+                EditMask = '!99/99/9999;1;_'
+                MaxLength = 10
+                TabOrder = 7
+                Text = '  /  /    '
+              end
+            end
+            object grp_tratarMovimentacaoFinanceira2: TGroupBox
+              AlignWithMargins = True
+              Left = 4
+              Top = 4
+              Width = 629
+              Height = 367
+              Align = alLeft
+              Caption = '    - Configura'#231#227'o Base para Exclus'#227'o dos T'#237'tulos  -     '
+              DefaultHeaderFont = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              HeaderFont.Charset = DEFAULT_CHARSET
+              HeaderFont.Color = clRed
+              HeaderFont.Height = -15
+              HeaderFont.Name = 'Segoe UI'
+              HeaderFont.Style = []
+              ParentFont = False
+              TabOrder = 1
+              object rg_modoExclusaoFinanceiro: TRadioGroup
+                AlignWithMargins = True
+                Left = 7
+                Top = 86
+                Width = 206
+                Height = 82
+                Margins.Left = 5
+                Margins.Top = 0
+                Margins.Right = 5
+                Margins.Bottom = 0
+                Caption = '  Modo de Exclus'#227'o  '
+                Color = clWhite
+                ItemIndex = 0
+                Items.Strings = (
+                  'Todos T'#237'tulos'
+                  'Parcial T'#237'tulos')
+                ParentBackground = False
+                ParentColor = False
+                TabOrder = 1
+                OnClick = rg_modoExclusaoFinanceiroClick
+              end
+              object rg_selecionarStatusExcluir: TRadioGroup
+                AlignWithMargins = True
+                Left = 232
+                Top = 88
+                Width = 206
+                Height = 80
+                Margins.Left = 0
+                Margins.Top = 0
+                Margins.Right = 0
+                Margins.Bottom = 0
+                Caption = '  Status dos T'#237'tulos  - Excluir'
+                Color = clHighlightText
+                Enabled = False
+                ItemIndex = 1
+                Items.Strings = (
+                  'Abertos'
+                  'Baixados/Cancelados')
+                ParentBackground = False
+                ParentColor = False
+                TabOrder = 0
+              end
+              object rg_filtroPeriodoFinanceiro: TRadioGroup
+                Left = 7
+                Top = 171
+                Width = 206
+                Height = 80
+                Caption = '  Filtro por P'#233'riodo  '
+                Color = clWhite
+                ItemIndex = 0
+                Items.Strings = (
+                  'N'#227'o filtrar por Per'#237'odo'
+                  'Movimenta'#231#227'o por Per'#237'odo')
+                ParentBackground = False
+                ParentColor = False
+                TabOrder = 2
+                OnClick = rg_filtroPeriodoFinanceiroClick
+              end
+              object grp_periodoExclusao: TGroupBox
+                AlignWithMargins = True
+                Left = 7
+                Top = 267
+                Width = 615
+                Height = 93
+                Margins.Left = 5
+                Margins.Top = 5
+                Margins.Right = 5
+                Margins.Bottom = 5
+                Align = alBottom
+                Caption = '  Per'#237'odo para Exclus'#227'o  '
+                Enabled = False
+                TabOrder = 3
+                object Label33: TLabel
+                  Left = 82
+                  Top = 42
+                  Width = 50
+                  Height = 15
+                  Caption = 'Data final'
+                end
+                object Label34: TLabel
+                  Left = 11
+                  Top = 42
+                  Width = 58
+                  Height = 15
+                  Caption = 'Data inicial'
+                end
+                object Label35: TLabel
+                  Left = 157
+                  Top = 42
+                  Width = 58
+                  Height = 15
+                  Caption = 'Data inicial'
+                end
+                object Label36: TLabel
+                  Left = 228
+                  Top = 42
+                  Width = 50
+                  Height = 15
+                  Caption = 'Data final'
+                end
+                object Label37: TLabel
+                  Left = 303
+                  Top = 42
+                  Width = 58
+                  Height = 15
+                  Caption = 'Data inicial'
+                end
+                object Label38: TLabel
+                  Left = 374
+                  Top = 42
+                  Width = 50
+                  Height = 15
+                  Caption = 'Data final'
+                end
+                object Label39: TLabel
+                  Left = 449
+                  Top = 42
+                  Width = 58
+                  Height = 15
+                  Caption = 'Data inicial'
+                end
+                object Label40: TLabel
+                  Left = 520
+                  Top = 42
+                  Width = 50
+                  Height = 15
+                  Caption = 'Data final'
+                end
+                object chk_dtCadastramento: TCheckBox
+                  Left = 11
+                  Top = 19
+                  Width = 140
+                  Height = 17
+                  Caption = 'Cadastramento'
+                  TabOrder = 0
+                end
+                object chk_dtEmissao: TCheckBox
+                  Left = 157
+                  Top = 19
+                  Width = 140
+                  Height = 17
+                  Caption = 'Emiss'#227'o'
+                  TabOrder = 3
+                end
+                object chk_dtVencimento: TCheckBox
+                  Left = 303
+                  Top = 19
+                  Width = 140
+                  Height = 17
+                  Caption = 'Vencimento'
+                  TabOrder = 6
+                end
+                object chk_dtBaixa: TCheckBox
+                  Left = 449
+                  Top = 19
+                  Width = 140
+                  Height = 17
+                  Caption = 'Baixa'
+                  TabOrder = 9
+                end
+                object medt_InicialCadastramento: TMaskEdit
+                  Left = 11
+                  Top = 58
+                  Width = 65
+                  Height = 22
+                  AutoSize = False
+                  Enabled = False
+                  EditMask = '!99/99/9999;1;_'
+                  MaxLength = 10
+                  TabOrder = 1
+                  Text = '  /  /    '
+                end
+                object medt_FinalCadastramento: TMaskEdit
+                  Left = 82
+                  Top = 58
+                  Width = 65
+                  Height = 22
+                  AutoSize = False
+                  Enabled = False
+                  EditMask = '!99/99/9999;1;_'
+                  MaxLength = 10
+                  TabOrder = 2
+                  Text = '  /  /    '
+                end
+                object medt_FinalEmissao: TMaskEdit
+                  Left = 228
+                  Top = 58
+                  Width = 65
+                  Height = 22
+                  AutoSize = False
+                  Enabled = False
+                  EditMask = '!99/99/9999;1;_'
+                  MaxLength = 10
+                  TabOrder = 5
+                  Text = '  /  /    '
+                end
+                object medt_InicialEmissao: TMaskEdit
+                  Left = 157
+                  Top = 58
+                  Width = 65
+                  Height = 22
+                  AutoSize = False
+                  Enabled = False
+                  EditMask = '!99/99/9999;1;_'
+                  MaxLength = 10
+                  TabOrder = 4
+                  Text = '  /  /    '
+                end
+                object medt_FinalVencimento: TMaskEdit
+                  Left = 374
+                  Top = 58
+                  Width = 65
+                  Height = 22
+                  AutoSize = False
+                  Enabled = False
+                  EditMask = '!99/99/9999;1;_'
+                  MaxLength = 10
+                  TabOrder = 8
+                  Text = '  /  /    '
+                end
+                object medt_InicialVencimento: TMaskEdit
+                  Left = 303
+                  Top = 58
+                  Width = 65
+                  Height = 22
+                  AutoSize = False
+                  Enabled = False
+                  EditMask = '!99/99/9999;1;_'
+                  MaxLength = 10
+                  TabOrder = 7
+                  Text = '  /  /    '
+                end
+                object medt_FinalBaixa: TMaskEdit
+                  Left = 520
+                  Top = 58
+                  Width = 65
+                  Height = 22
+                  AutoSize = False
+                  Enabled = False
+                  EditMask = '!99/99/9999;1;_'
+                  MaxLength = 10
+                  TabOrder = 11
+                  Text = '  /  /    '
+                end
+                object medt_InicialBaixa: TMaskEdit
+                  Left = 449
+                  Top = 58
+                  Width = 65
+                  Height = 22
+                  AutoSize = False
+                  Enabled = False
+                  EditMask = '!99/99/9999;1;_'
+                  MaxLength = 10
+                  TabOrder = 10
+                  Text = '  /  /    '
+                end
+              end
+              object rg_tipoCrCp: TRadioGroup
+                AlignWithMargins = True
+                Left = 7
+                Top = 23
+                Width = 615
+                Height = 56
+                Margins.Left = 5
+                Margins.Top = 6
+                Margins.Right = 5
+                Margins.Bottom = 5
+                Align = alTop
+                BiDiMode = bdLeftToRight
+                Caption = '  Tipo Movimento - T'#237'tulos  '
+                Color = clWhite
+                Columns = 3
+                ItemIndex = 0
+                Items.Strings = (
+                  'Todos T'#237'tulos'
+                  'Contas '#224' Receber'
+                  'Contas '#224' Pagar')
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentColor = False
+                TabOrder = 4
+              end
+            end
+          end
+          object Panel8: TPanel
+            Left = 1
+            Top = 417
+            Width = 1214
+            Height = 248
+            Align = alClient
+            Caption = 'Vazio'
+            Color = clMedGray
+            ParentBackground = False
+            TabOrder = 2
           end
         end
       end
@@ -8985,16 +10109,6 @@ object ViewMain: TViewMain
       ImageIndex = 0
       OnExecute = action_deletandoEmpresaExecute
     end
-    object action_editandoEmpresa: TAction
-      Caption = 'Edita Empresa'
-      ImageIndex = 5
-      OnExecute = action_editandoEmpresaExecute
-    end
-    object action_vago: TAction
-      Caption = 'btn_vago1'
-      ImageIndex = 3
-      OnExecute = action_vagoExecute
-    end
     object action_fecharMenuMovimentacao: TAction
       Caption = 'Fechar Menu'
       ImageIndex = 2
@@ -9014,6 +10128,16 @@ object ViewMain: TViewMain
       Caption = 'action_configBD'
       ImageIndex = 4
       OnExecute = action_configBDExecute
+    end
+    object action_DeletaMovimento: TAction
+      Caption = 'Siac aMovimento'
+      ImageIndex = 4
+      OnExecute = action_DeletaMovimentoExecute
+    end
+    object action_MovimentoFinanceiro: TAction
+      Caption = 'Financeiro'
+      ImageIndex = 5
+      OnExecute = action_MovimentoFinanceiroExecute
     end
   end
   object qryEmpresas: TOraQuery

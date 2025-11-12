@@ -27,7 +27,7 @@ type
 implementation
 
 uses
-  Principal, Classe.ConsultaTrocaEmpresa;
+  Principal, Classe.ConsultaEmpresa;
 
 { TScriptGeneratorTrocaEmpresa }
 
