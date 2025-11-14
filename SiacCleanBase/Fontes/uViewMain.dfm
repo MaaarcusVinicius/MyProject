@@ -7480,34 +7480,6 @@
               HeaderFont.Style = []
               ParentFont = False
               TabOrder = 0
-              object lbl_13: TLabel
-                Left = 102
-                Top = 274
-                Width = 50
-                Height = 15
-                Caption = 'Data final'
-              end
-              object lbl_14: TLabel
-                Left = 31
-                Top = 274
-                Width = 58
-                Height = 15
-                Caption = 'Data inicial'
-              end
-              object lbl_12: TLabel
-                Left = 177
-                Top = 274
-                Width = 58
-                Height = 15
-                Caption = 'Data inicial'
-              end
-              object lbl_11: TLabel
-                Left = 248
-                Top = 274
-                Width = 50
-                Height = 15
-                Caption = 'Data final'
-              end
               object chk_limparPedidoTitulos: TCheckBox
                 Left = 16
                 Top = 25
@@ -7531,78 +7503,6 @@
                 Height = 17
                 Caption = 'Alterar Documento_ID'
                 TabOrder = 2
-              end
-              object RadioGroup1: TRadioGroup
-                AlignWithMargins = True
-                Left = -3
-                Top = 72
-                Width = 615
-                Height = 185
-                Margins.Left = 5
-                Margins.Top = 6
-                Margins.Right = 5
-                Margins.Bottom = 5
-                BiDiMode = bdLeftToRight
-                Caption = '  Tipo Movimento - T'#237'tulos  '
-                Color = clWhite
-                Columns = 3
-                ItemIndex = 0
-                Items.Strings = (
-                  'Todos T'#237'tulos'
-                  'Contas '#224' Receber'
-                  'Contas '#224' Pagar')
-                ParentBiDiMode = False
-                ParentBackground = False
-                ParentColor = False
-                TabOrder = 3
-              end
-              object medt_13: TMaskEdit
-                Left = 31
-                Top = 290
-                Width = 62
-                Height = 22
-                AutoSize = False
-                Enabled = False
-                EditMask = '!99/99/9999;1;_'
-                MaxLength = 10
-                TabOrder = 4
-                Text = '  /  /    '
-              end
-              object medt_12: TMaskEdit
-                Left = 102
-                Top = 290
-                Width = 62
-                Height = 22
-                AutoSize = False
-                Enabled = False
-                EditMask = '!99/99/9999;1;_'
-                MaxLength = 10
-                TabOrder = 5
-                Text = '  /  /    '
-              end
-              object medt_11: TMaskEdit
-                Left = 177
-                Top = 290
-                Width = 62
-                Height = 22
-                AutoSize = False
-                Enabled = False
-                EditMask = '!99/99/9999;1;_'
-                MaxLength = 10
-                TabOrder = 6
-                Text = '  /  /    '
-              end
-              object medt_1: TMaskEdit
-                Left = 248
-                Top = 290
-                Width = 62
-                Height = 22
-                AutoSize = False
-                Enabled = False
-                EditMask = '!99/99/9999;1;_'
-                MaxLength = 10
-                TabOrder = 7
-                Text = '  /  /    '
               end
             end
             object grp_tratarMovimentacaoFinanceira2: TGroupBox

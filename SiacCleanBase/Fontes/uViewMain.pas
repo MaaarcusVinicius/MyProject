@@ -301,15 +301,6 @@ type
     chk_limparPedidoTitulos: TCheckBox;
     chk_limparNossoNumero: TCheckBox;
     chk_alterarDocumentoID: TCheckBox;
-    RadioGroup1: TRadioGroup;
-    medt_13: TMaskEdit;
-    medt_12: TMaskEdit;
-    lbl_13: TLabel;
-    lbl_14: TLabel;
-    medt_11: TMaskEdit;
-    lbl_12: TLabel;
-    lbl_11: TLabel;
-    medt_1: TMaskEdit;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
