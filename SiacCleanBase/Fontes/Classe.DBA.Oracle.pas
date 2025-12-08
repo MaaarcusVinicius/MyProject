@@ -1,4 +1,4 @@
-unit Classe.ConsultaBD;
+unit Classe.DBA.Oracle;
 
 interface
 
@@ -14,6 +14,7 @@ type
   TClasseConsultaBD = class
   private
     FVersaoOracle             : TClasseBancoDados;
+    FStartOracle              : TClasseBancoDados;
     FCarregarSessoesAtivas    : TClasseBancoDados;
     FBancoTablespace          : TClasseBancoDados;
     FBancoTablespaceDiretorio : TClasseBancoDados;
@@ -31,6 +32,7 @@ type
     destructor Destroy; override;
 
     procedure CarregarVersaoOracle(ALabel: TLabel);
+    procedure CarregarStartOracle(ALabel: TLabel);
     procedure CarregarSessoesAtivas(ADBGrid: TDBGrid);
     procedure CarregarTablespace(ADBEdit: TDBGrid);
     procedure CarregarBancoTablespaceDiretorio(ADBEdit: TDBGrid);
@@ -61,6 +63,7 @@ begin
 
   // Cada objeto TClasseBancoDados é independente (permite múltiplas consultas simultâneas)
   FVersaoOracle             := TClasseBancoDados.Create(DmModule.orsConexao);
+  FStartOracle              := TClasseBancoDados.Create(DmModule.orsConexao);
   FCarregarSessoesAtivas    := TClasseBancoDados.Create(DmModule.orsConexao);
   FBancoTablespace          := TClasseBancoDados.Create(DmModule.orsConexao);
   FBancoTablespaceDiretorio := TClasseBancoDados.Create(DmModule.orsConexao);
@@ -72,6 +75,7 @@ begin
 
  // Habilita o log em todos os objetos
   //  FVersaoOracle.EnableLog(vLogPath);
+  //  FStartOracle.EnableLog(vLogPath);
   //  FCarregarSessoesAtivas.EnableLog(vLogPath);
   //  FBancoTablespace.EnableLog(vLogPath);
   //  FBancoTablespaceDiretorio.EnableLog(vLogPath);
@@ -85,6 +89,7 @@ end;
 destructor TClasseConsultaBD.Destroy;
 begin
   FVersaoOracle.Free;
+  FStartOracle.Free;
   FCarregarSessoesAtivas.Free;
   FBancoTablespace.Free;
   FBancoTablespaceDiretorio.Free;
@@ -132,7 +137,7 @@ var
 begin
   // Define SQL padrão se o dataset não foi passado
  FExecutarBindsOracle.SetSQL(
-                  ' select upper(parameter) as parameter, value         '+
+                 ' select upper(parameter) as parameter, value         '+
                  '   from (SELECT ''open_cursors'' AS parameter, value '+
                  '           FROM v$parameter                          '+
                  '          WHERE name = ''open_cursors''              '+
@@ -140,6 +145,14 @@ begin
                  '         SELECT ''processes'', value                 '+
                  '           FROM v$parameter                          '+
                  '          WHERE name = ''processes''                 '+
+                 '         UNION ALL                                   '+
+                 '         SELECT name, value                          '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''filesystemio_options''      '+
+                 '         UNION ALL                                   '+
+                 '         SELECT name, value                          '+
+                 '           FROM v$parameter                          '+
+                 '          WHERE name = ''disk_asynch_io''            '+
                  '         UNION ALL                                   '+
                  '         SELECT ''sessions'', value                  '+
                  '           FROM v$parameter                          '+
@@ -231,12 +244,10 @@ begin
                  '         UNION ALL                                             '+
                  '         select t.PARAMETER, t.VALUE                           '+
                  '           from nls_database_parameters t                      '+
-
                  '         UNION ALL                                             '+
                  '         select DIRECTORY_NAME as PARAMETER, DIRECTORY_PATH    '+
                  '           from all_directories                                '+
                  '         UNION ALL                                             '+
-
                  '         select name as parameter,                             '+
                  '                value / 1024 / 1024 / 1024 || '' GB'' VALUE_MB '+
                  '           from v$parameter                                    '+
@@ -351,6 +362,22 @@ begin
     ALabel.Caption := 'Versão não encontrada';
 end;
 
+procedure TClasseConsultaBD.CarregarStartOracle(ALabel: TLabel);
+begin
+  FStartOracle.SetSQL( 'select ''StartOracle : '' || to_char(startup_time, ''dd/mm/yyyy hh24:mi:ss'') || '' -/- '' ||   '+
+                       '       to_char(''Dias Online: '' || (to_date(sysdate, ''dd/mm/yyyy'') - '+
+                       '       to_date(startup_time, ''dd/mm/yyyy''))) as StartOracle           '+
+                       '  from v$instance                                                       ');
+
+  FStartOracle.ExecutarConsulta;
+
+  // Garante que existe pelo menos um registro
+  if not FStartOracle.GetQuery.IsEmpty then
+    ALabel.Caption := FStartOracle.GetQuery.FieldByName('StartOracle').AsString
+  else
+    ALabel.Caption := 'Informação Indisponível';
+end;
+
 procedure TClasseConsultaBD.CarregarSessoesAtivas(ADBGrid: TDBGrid);
 begin
 
@@ -364,7 +391,7 @@ begin
                                 '        PROGRAM,            '+
                                 '        MODULE,             '+
                                 '        LOGON_TIME          '+
-                                '   FROM V$SESSION c         '+
+                                '   FROM V$SESSION C         '+
                                 '  WHERE USERNAME IS NOT NULL'+
                                 '  ORDER BY SID,USERNAME     ');
   FCarregarSessoesAtivas.ExecutarConsulta;

@@ -2,9 +2,9 @@
   AlignWithMargins = True
   Left = 0
   Top = 0
-  Caption = 'Siac Clean Base'
+  Caption = 's'
   ClientHeight = 803
-  ClientWidth = 1424
+  ClientWidth = 1544
   Color = clSkyBlue
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,13 +18,14 @@
   object pnl_topo: TPanel
     Left = 0
     Top = 0
-    Width = 1424
+    Width = 1544
     Height = 57
     Align = alTop
     BevelOuter = bvNone
     Color = 3355443
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 1424
     object pnl_logoMarca: TPanel
       Left = 0
       Top = 0
@@ -346,7 +347,7 @@
       end
     end
     object pnl_User: TPanel
-      Left = 1111
+      Left = 1231
       Top = 0
       Width = 313
       Height = 57
@@ -355,6 +356,7 @@
       Color = 3355443
       ParentBackground = False
       TabOrder = 1
+      ExplicitLeft = 1111
       object pnl_userLogin: TPanel
         Left = 249
         Top = 0
@@ -544,7 +546,7 @@
     object pnl_carregaEmpresa: TPanel
       Left = 200
       Top = 0
-      Width = 911
+      Width = 1031
       Height = 57
       Align = alClient
       BevelOuter = bvNone
@@ -559,10 +561,11 @@
       TabOrder = 2
       OnClick = pnl_carregaEmpresaClick
       OnDblClick = pnl_carregaEmpresaDblClick
+      ExplicitWidth = 911
       object lbl_carregaEmpresa: TLabel
         Left = 0
         Top = 0
-        Width = 911
+        Width = 1031
         Height = 57
         Align = alClient
         Alignment = taCenter
@@ -1083,48 +1086,52 @@
   object pnl_baseCentral: TPanel
     Left = 200
     Top = 57
-    Width = 1224
+    Width = 1344
     Height = 746
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 5
+    ExplicitWidth = 1224
     object PageControl: TPageControl
       Left = 0
       Top = 0
-      Width = 1224
+      Width = 1344
       Height = 746
       ActivePage = PageTratarFinanceiro
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
+      ExplicitWidth = 1224
       object PageInicial: TTabSheet
         Caption = 'PageInicial'
         object TPanel
           Left = 0
           Top = 0
-          Width = 1216
+          Width = 1336
           Height = 713
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
           StyleName = 'Windows'
+          ExplicitWidth = 1216
           object pnl_fundoPrincipal1: TPanel
             Left = 1
             Top = 1
-            Width = 1214
+            Width = 1334
             Height = 439
             Align = alClient
             BevelOuter = bvNone
             Color = clWhite
             ParentBackground = False
             TabOrder = 0
+            ExplicitWidth = 1214
             object dbPrincipalEmpresas: TDBGrid
               Left = 0
               Top = 11
-              Width = 1214
+              Width = 1334
               Height = 288
               Margins.Left = 4
               Margins.Top = 10
@@ -1247,17 +1254,18 @@
             object pnl_telaInicial: TPanel
               Left = 0
               Top = 0
-              Width = 1214
+              Width = 1334
               Height = 11
               Align = alTop
               Color = clTeal
               ParentBackground = False
               TabOrder = 1
+              ExplicitWidth = 1214
               object lbl_telaInicial: TLabel
                 AlignWithMargins = True
                 Left = 4
                 Top = 4
-                Width = 1206
+                Width = 1326
                 Height = 3
                 Align = alClient
                 Alignment = taCenter
@@ -1279,15 +1287,16 @@
           object pnl_fundoPrincipalAlBottom: TPanel
             Left = 1
             Top = 440
-            Width = 1214
+            Width = 1334
             Height = 272
             Align = alBottom
             BevelOuter = bvNone
             Color = clWhite
             ParentBackground = False
             TabOrder = 1
+            ExplicitWidth = 1214
             object pnl_fundoAbrigaImagem: TPanel
-              Left = 413
+              Left = 533
               Top = 0
               Width = 801
               Height = 272
@@ -1295,6 +1304,7 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
+              ExplicitLeft = 413
               object img_fundo: TImage
                 Left = 1
                 Top = 1
@@ -4680,7 +4690,7 @@
           AlignWithMargins = True
           Left = 5
           Top = 5
-          Width = 1206
+          Width = 1326
           Height = 703
           Margins.Left = 5
           Margins.Top = 5
@@ -4691,10 +4701,11 @@
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
+          ExplicitWidth = 1206
           object shpTrocaEmpresaBottom: TShape
             Left = 0
             Top = 656
-            Width = 1206
+            Width = 1326
             Height = 47
             Align = alBottom
             Brush.Color = clTeal
@@ -4705,7 +4716,7 @@
             AlignWithMargins = True
             Left = 3
             Top = 319
-            Width = 1200
+            Width = 1320
             Height = 274
             Align = alTop
             Caption = '    -- Dados do Novo CNPJ --           '
@@ -4720,6 +4731,7 @@
             ParentBackground = False
             ParentColor = False
             TabOrder = 1
+            ExplicitWidth = 1200
             object pnl_novosDadosEmpresa: TPanel
               Left = 2
               Top = 17
@@ -4854,7 +4866,7 @@
             AlignWithMargins = True
             Left = 3
             Top = 44
-            Width = 1200
+            Width = 1320
             Height = 269
             Align = alTop
             Caption = '     -- Dados da Empresa Atual --           '
@@ -4866,6 +4878,7 @@
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 0
+            ExplicitWidth = 1200
             object pnl_dadosEmpresa: TPanel
               Left = 2
               Top = 17
@@ -5283,17 +5296,18 @@
           object pnl_TelaTrocaEmpresa: TPanel
             Left = 0
             Top = 0
-            Width = 1206
+            Width = 1326
             Height = 41
             Align = alTop
             Color = clTeal
             ParentBackground = False
             TabOrder = 2
+            ExplicitWidth = 1206
             object lbl_1: TLabel
               AlignWithMargins = True
               Left = 4
               Top = 4
-              Width = 1198
+              Width = 1318
               Height = 33
               Align = alClient
               Alignment = taCenter
@@ -5316,17 +5330,26 @@
       object PageConfigBD: TTabSheet
         Caption = 'PageConfigBD'
         ImageIndex = 2
+        object shape1: TShape
+          Left = 0
+          Top = 666
+          Width = 1336
+          Height = 47
+          Align = alBottom
+          Brush.Color = clSilver
+          Shape = stRoundRect
+          ExplicitTop = 663
+          ExplicitWidth = 1009
+        end
         object Shape2: TShape
           Left = 0
           Top = 0
-          Width = 1216
-          Height = 50
+          Width = 1336
+          Height = 54
           Align = alTop
           Brush.Color = clSilver
           Shape = stRoundRect
-          ExplicitLeft = 3
-          ExplicitTop = 3
-          ExplicitWidth = 1393
+          ExplicitWidth = 1216
         end
         object LbAlias: TLabel
           Left = 14
@@ -5369,17 +5392,6 @@
           Font.Style = [fsBold]
           ParentFont = False
           Transparent = True
-        end
-        object shape1: TShape
-          Left = 0
-          Top = 666
-          Width = 1216
-          Height = 47
-          Align = alBottom
-          Brush.Color = clSilver
-          Shape = stRoundRect
-          ExplicitTop = 663
-          ExplicitWidth = 1009
         end
         object lbl_versaoOracle: TLabel
           Left = 656
@@ -5456,35 +5468,42 @@
         end
         object pnl_configBancoDados: TPanel
           Left = 0
-          Top = 50
-          Width = 1216
-          Height = 616
+          Top = 54
+          Width = 1336
+          Height = 612
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 5
           Visible = False
+          ExplicitTop = 50
+          ExplicitWidth = 1216
+          ExplicitHeight = 616
           object grp_InfoGerais: TGroupBox
             Left = 1
             Top = 86
-            Width = 1214
-            Height = 529
+            Width = 1334
+            Height = 525
             Align = alClient
             Caption = '    - Informa'#231#245'es Gerais Oracle -    '
             TabOrder = 0
+            ExplicitWidth = 1214
+            ExplicitHeight = 529
             object grp_Session: TGroupBox
               Left = 2
               Top = 17
-              Width = 1210
-              Height = 296
+              Width = 1330
+              Height = 292
               Align = alClient
               Caption = 'Usu'#225'rios '#233' Sess'#245'es'
               TabOrder = 0
+              ExplicitWidth = 1210
+              ExplicitHeight = 296
               object DBGrid_CarregarSession: TDBGrid
                 Left = 593
                 Top = 17
-                Width = 615
-                Height = 277
+                Width = 735
+                Height = 273
                 Cursor = crHandPoint
                 Align = alClient
                 DrawingStyle = gdsGradient
@@ -5588,7 +5607,7 @@
                 Left = 2
                 Top = 17
                 Width = 591
-                Height = 277
+                Height = 273
                 Cursor = crHandPoint
                 Align = alLeft
                 DrawingStyle = gdsGradient
@@ -5659,16 +5678,18 @@
             end
             object grp_TableSpace: TGroupBox
               Left = 2
-              Top = 313
-              Width = 1210
+              Top = 309
+              Width = 1330
               Height = 214
               Align = alBottom
               Caption = 'Informa'#231#245'es Table Space'
               TabOrder = 1
+              ExplicitTop = 313
+              ExplicitWidth = 1210
               object DBGrid_CarregarTablespaceDiretorio: TDBGrid
                 Left = 593
                 Top = 17
-                Width = 366
+                Width = 486
                 Height = 195
                 Cursor = crHandPoint
                 Align = alClient
@@ -5786,7 +5807,7 @@
                   end>
               end
               object pnl_deleteTriggers: TPanel
-                Left = 959
+                Left = 1079
                 Top = 17
                 Width = 249
                 Height = 195
@@ -5795,6 +5816,7 @@
                 ParentBackground = False
                 TabOrder = 2
                 Visible = False
+                ExplicitLeft = 959
                 object Panel2: TPanel
                   Left = 1
                   Top = 121
@@ -6122,15 +6144,40 @@
               end
             end
           end
-          object pnl_criarUsuario: TPanel
+          object pnl_abrigaBotoes: TPanel
             Left = 1
             Top = 1
-            Width = 1214
+            Width = 1334
             Height = 85
             Align = alTop
             Color = clWhite
             ParentBackground = False
             TabOrder = 1
+            ExplicitWidth = 1214
+            object lbl_startOracle: TLabel
+              AlignWithMargins = True
+              Left = 1054
+              Top = 4
+              Width = 143
+              Height = 77
+              Hint = 'Hor'#225'rio que ligou o sevidor.'
+              Margins.Right = 10
+              Align = alRight
+              Alignment = taRightJustify
+              Caption = 'Time Start Oracle'
+              Color = clBlue
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clTeal
+              Font.Height = -17
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+              Layout = tlBottom
+              ExplicitLeft = 944
+              ExplicitTop = 32
+              ExplicitHeight = 52
+            end
             object pnl_bindsOracle: TPanel
               AlignWithMargins = True
               Left = 527
@@ -6310,7 +6357,7 @@
             end
             object pnl_versaoSistema: TPanel
               AlignWithMargins = True
-              Left = 1090
+              Left = 1210
               Top = 4
               Width = 120
               Height = 77
@@ -6320,6 +6367,7 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 4
+              ExplicitLeft = 1090
               object btn_versaoSistema: TSpeedButton
                 AlignWithMargins = True
                 Left = 3
@@ -6352,7 +6400,7 @@
         end
         object pnl_btnInfoOracle: TPanel
           Left = 568
-          Top = 0
+          Top = 2
           Width = 65
           Height = 49
           Align = alCustom
@@ -6384,7 +6432,8 @@
             ParentBiDiMode = False
             StyleName = 'Windows'
             OnClick = btn_detalhesBDClick
-            ExplicitWidth = 75
+            ExplicitLeft = -7
+            ExplicitTop = 2
           end
         end
       end
@@ -6395,7 +6444,7 @@
           AlignWithMargins = True
           Left = 5
           Top = 5
-          Width = 1206
+          Width = 1326
           Height = 703
           Margins.Left = 5
           Margins.Top = 5
@@ -6406,10 +6455,11 @@
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
+          ExplicitWidth = 1206
           object shpDeletaEmpresaBottom: TShape
             Left = 1
             Top = 655
-            Width = 1204
+            Width = 1324
             Height = 47
             Align = alBottom
             Brush.Color = clTeal
@@ -6421,7 +6471,7 @@
             AlignWithMargins = True
             Left = 4
             Top = 320
-            Width = 1198
+            Width = 1318
             Height = 251
             Align = alTop
             Caption = 'A'#231#245'es'
@@ -6433,6 +6483,7 @@
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 0
+            ExplicitWidth = 1198
             object Panel5: TPanel
               Left = 2
               Top = 17
@@ -6744,7 +6795,7 @@
             AlignWithMargins = True
             Left = 4
             Top = 45
-            Width = 1198
+            Width = 1318
             Height = 269
             Align = alTop
             Caption = '     -- Dados da Empresa Atual --           '
@@ -6756,6 +6807,7 @@
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 1
+            ExplicitWidth = 1198
             object Panel3: TPanel
               Left = 2
               Top = 17
@@ -7173,17 +7225,18 @@
           object pnl_TelaDeletaEmpresa: TPanel
             Left = 1
             Top = 1
-            Width = 1204
+            Width = 1324
             Height = 41
             Align = alTop
             Color = clTeal
             ParentBackground = False
             TabOrder = 2
+            ExplicitWidth = 1204
             object Label30: TLabel
               AlignWithMargins = True
               Left = 4
               Top = 4
-              Width = 1196
+              Width = 1316
               Height = 33
               Align = alClient
               Alignment = taCenter
@@ -7209,16 +7262,17 @@
         object pnl_fundoDeleaMovimento: TPanel
           Left = 0
           Top = 0
-          Width = 1216
+          Width = 1336
           Height = 713
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
+          ExplicitWidth = 1216
           object shpDeletaMovimento: TShape
             Left = 1
             Top = 665
-            Width = 1214
+            Width = 1334
             Height = 47
             Align = alBottom
             Brush.Color = clTeal
@@ -7229,17 +7283,18 @@
           object Panel7: TPanel
             Left = 1
             Top = 1
-            Width = 1214
+            Width = 1334
             Height = 41
             Align = alTop
             Color = clTeal
             ParentBackground = False
             TabOrder = 0
+            ExplicitWidth = 1214
             object Label31: TLabel
               AlignWithMargins = True
               Left = 4
               Top = 4
-              Width = 1206
+              Width = 1326
               Height = 33
               Align = alClient
               Alignment = taCenter
@@ -7260,19 +7315,21 @@
           object pnl_sistemas: TPanel
             Left = 1
             Top = 273
-            Width = 1214
+            Width = 1334
             Height = 240
             Align = alTop
             Caption = 'pnl_modulos'
             TabOrder = 1
+            ExplicitWidth = 1214
           end
           object pnl_modulos: TPanel
             Left = 1
             Top = 42
-            Width = 1214
+            Width = 1334
             Height = 231
             Align = alTop
             TabOrder = 2
+            ExplicitWidth = 1214
             object grp_SelecaoModulos: TGroupBox
               Left = 241
               Top = 1
@@ -7313,8 +7370,7 @@
                   'Os'
                   'Siac'
                   'Siac Complaint'
-                  'Siai'
-                  '')
+                  'Siai')
                 ParentBiDiMode = False
                 ParentDoubleBuffered = False
                 ParentFont = False
@@ -7402,16 +7458,17 @@
         object pnl_tratarFinanceiro: TPanel
           Left = 0
           Top = 0
-          Width = 1216
+          Width = 1336
           Height = 713
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
+          ExplicitWidth = 1216
           object Shape3: TShape
             Left = 1
             Top = 665
-            Width = 1214
+            Width = 1334
             Height = 47
             Align = alBottom
             Brush.Color = clTeal
@@ -7422,17 +7479,18 @@
           object Panel9: TPanel
             Left = 1
             Top = 1
-            Width = 1214
+            Width = 1334
             Height = 41
             Align = alTop
             Color = clTeal
             ParentBackground = False
             TabOrder = 0
+            ExplicitWidth = 1214
             object Label32: TLabel
               AlignWithMargins = True
               Left = 4
               Top = 4
-              Width = 1206
+              Width = 1326
               Height = 33
               Align = alClient
               Alignment = taCenter
@@ -7450,68 +7508,24 @@
               ExplicitHeight = 28
             end
           end
-          object Panel11: TPanel
+          object pnl_abrigaPainelFinanceiro: TPanel
             Left = 1
             Top = 42
-            Width = 1214
-            Height = 375
+            Width = 1334
+            Height = 439
             Align = alTop
             Color = clWhite
             ParentBackground = False
             TabOrder = 1
-            object grp_tratarDocumentoFinanceira: TGroupBox
-              AlignWithMargins = True
-              Left = 639
-              Top = 4
-              Width = 629
-              Height = 367
-              Align = alLeft
-              Caption = '    -  Altera'#231#245'es T'#237'tulos  -     '
-              DefaultHeaderFont = False
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clBlack
-              Font.Height = -12
-              Font.Name = 'Segoe UI'
-              Font.Style = []
-              HeaderFont.Charset = DEFAULT_CHARSET
-              HeaderFont.Color = clBlue
-              HeaderFont.Height = -15
-              HeaderFont.Name = 'Segoe UI'
-              HeaderFont.Style = []
-              ParentFont = False
-              TabOrder = 0
-              object chk_limparPedidoTitulos: TCheckBox
-                Left = 16
-                Top = 25
-                Width = 201
-                Height = 17
-                Caption = 'Remover Pedido_Id dos T'#237'tulos'
-                TabOrder = 0
-              end
-              object chk_limparNossoNumero: TCheckBox
-                Left = 16
-                Top = 48
-                Width = 209
-                Height = 17
-                Caption = 'Remover Nosso N'#250'mero'
-                TabOrder = 1
-              end
-              object chk_alterarDocumentoID: TCheckBox
-                Left = 16
-                Top = 71
-                Width = 145
-                Height = 17
-                Caption = 'Alterar Documento_ID'
-                TabOrder = 2
-              end
-            end
+            ExplicitLeft = 2
+            ExplicitTop = 40
+            ExplicitWidth = 1214
             object grp_tratarMovimentacaoFinanceira2: TGroupBox
               AlignWithMargins = True
-              Left = 4
-              Top = 4
-              Width = 629
-              Height = 367
-              Align = alLeft
+              Left = 1
+              Top = 2
+              Width = 616
+              Height = 349
               Caption = '    - Configura'#231#227'o Base para Exclus'#227'o dos T'#237'tulos  -     '
               DefaultHeaderFont = False
               Font.Charset = DEFAULT_CHARSET
@@ -7525,32 +7539,11 @@
               HeaderFont.Name = 'Segoe UI'
               HeaderFont.Style = []
               ParentFont = False
-              TabOrder = 1
-              object rg_modoExclusaoFinanceiro: TRadioGroup
-                AlignWithMargins = True
-                Left = 7
-                Top = 86
-                Width = 206
-                Height = 82
-                Margins.Left = 5
-                Margins.Top = 0
-                Margins.Right = 5
-                Margins.Bottom = 0
-                Caption = '  Modo de Exclus'#227'o  '
-                Color = clWhite
-                ItemIndex = 0
-                Items.Strings = (
-                  'Todos T'#237'tulos'
-                  'Parcial T'#237'tulos')
-                ParentBackground = False
-                ParentColor = False
-                TabOrder = 1
-                OnClick = rg_modoExclusaoFinanceiroClick
-              end
+              TabOrder = 0
               object rg_selecionarStatusExcluir: TRadioGroup
                 AlignWithMargins = True
-                Left = 232
-                Top = 88
+                Left = 7
+                Top = 84
                 Width = 206
                 Height = 80
                 Margins.Left = 0
@@ -7559,9 +7552,9 @@
                 Margins.Bottom = 0
                 Caption = '  Status dos T'#237'tulos  - Excluir'
                 Color = clHighlightText
-                Enabled = False
-                ItemIndex = 1
+                ItemIndex = 0
                 Items.Strings = (
+                  'Todos'
                   'Abertos'
                   'Baixados/Cancelados')
                 ParentBackground = False
@@ -7569,8 +7562,8 @@
                 TabOrder = 0
               end
               object rg_filtroPeriodoFinanceiro: TRadioGroup
-                Left = 7
-                Top = 171
+                Left = 221
+                Top = 84
                 Width = 206
                 Height = 80
                 Caption = '  Filtro por P'#233'riodo  '
@@ -7581,75 +7574,74 @@
                   'Movimenta'#231#227'o por Per'#237'odo')
                 ParentBackground = False
                 ParentColor = False
-                TabOrder = 2
+                TabOrder = 1
                 OnClick = rg_filtroPeriodoFinanceiroClick
               end
               object grp_periodoExclusao: TGroupBox
                 AlignWithMargins = True
                 Left = 7
-                Top = 267
-                Width = 615
-                Height = 93
+                Top = 169
+                Width = 306
+                Height = 173
                 Margins.Left = 5
                 Margins.Top = 5
                 Margins.Right = 5
                 Margins.Bottom = 5
-                Align = alBottom
                 Caption = '  Per'#237'odo para Exclus'#227'o  '
                 Enabled = False
-                TabOrder = 3
-                object Label33: TLabel
+                TabOrder = 2
+                object lbl_dataCadastramentoFinal: TLabel
                   Left = 82
                   Top = 42
                   Width = 50
                   Height = 15
                   Caption = 'Data final'
                 end
-                object Label34: TLabel
+                object lbl_dataCadastramentoInicial: TLabel
                   Left = 11
                   Top = 42
                   Width = 58
                   Height = 15
                   Caption = 'Data inicial'
                 end
-                object Label35: TLabel
+                object lbl_dataEmissaoInicial: TLabel
                   Left = 157
                   Top = 42
                   Width = 58
                   Height = 15
                   Caption = 'Data inicial'
                 end
-                object Label36: TLabel
+                object lbl_dataEmissaoFinal: TLabel
                   Left = 228
                   Top = 42
                   Width = 50
                   Height = 15
                   Caption = 'Data final'
                 end
-                object Label37: TLabel
-                  Left = 303
-                  Top = 42
+                object lbl_dataVencimentoInicial: TLabel
+                  Left = 11
+                  Top = 114
                   Width = 58
                   Height = 15
                   Caption = 'Data inicial'
                 end
-                object Label38: TLabel
-                  Left = 374
-                  Top = 42
+                object lbl_dataVencimentoFinal: TLabel
+                  Left = 82
+                  Top = 114
                   Width = 50
                   Height = 15
                   Caption = 'Data final'
                 end
-                object Label39: TLabel
-                  Left = 449
-                  Top = 42
+                object lbl_dataBaixaInicial: TLabel
+                  Left = 157
+                  Top = 114
                   Width = 58
                   Height = 15
                   Caption = 'Data inicial'
                 end
-                object Label40: TLabel
-                  Left = 520
-                  Top = 42
+                object lbl_dataBaixaFinal: TLabel
+                  Left = 228
+                  Top = 114
                   Width = 50
                   Height = 15
                   Caption = 'Data final'
@@ -7671,16 +7663,16 @@
                   TabOrder = 3
                 end
                 object chk_dtVencimento: TCheckBox
-                  Left = 303
-                  Top = 19
+                  Left = 11
+                  Top = 91
                   Width = 140
                   Height = 17
                   Caption = 'Vencimento'
                   TabOrder = 6
                 end
                 object chk_dtBaixa: TCheckBox
-                  Left = 449
-                  Top = 19
+                  Left = 157
+                  Top = 91
                   Width = 140
                   Height = 17
                   Caption = 'Baixa'
@@ -7735,8 +7727,8 @@
                   Text = '  /  /    '
                 end
                 object medt_FinalVencimento: TMaskEdit
-                  Left = 374
-                  Top = 58
+                  Left = 82
+                  Top = 130
                   Width = 65
                   Height = 22
                   AutoSize = False
@@ -7747,8 +7739,8 @@
                   Text = '  /  /    '
                 end
                 object medt_InicialVencimento: TMaskEdit
-                  Left = 303
-                  Top = 58
+                  Left = 11
+                  Top = 130
                   Width = 65
                   Height = 22
                   AutoSize = False
@@ -7759,8 +7751,8 @@
                   Text = '  /  /    '
                 end
                 object medt_FinalBaixa: TMaskEdit
-                  Left = 520
-                  Top = 58
+                  Left = 228
+                  Top = 130
                   Width = 65
                   Height = 22
                   AutoSize = False
@@ -7771,8 +7763,8 @@
                   Text = '  /  /    '
                 end
                 object medt_InicialBaixa: TMaskEdit
-                  Left = 449
-                  Top = 58
+                  Left = 157
+                  Top = 130
                   Width = 65
                   Height = 22
                   AutoSize = False
@@ -7787,13 +7779,12 @@
                 AlignWithMargins = True
                 Left = 7
                 Top = 23
-                Width = 615
+                Width = 599
                 Height = 56
                 Margins.Left = 5
                 Margins.Top = 6
                 Margins.Right = 5
                 Margins.Bottom = 5
-                Align = alTop
                 BiDiMode = bdLeftToRight
                 Caption = '  Tipo Movimento - T'#237'tulos  '
                 Color = clWhite
@@ -7806,20 +7797,410 @@
                 ParentBiDiMode = False
                 ParentBackground = False
                 ParentColor = False
+                TabOrder = 3
+              end
+              object rg_filtroDeletarAlterar: TRadioGroup
+                Left = 435
+                Top = 84
+                Width = 171
+                Height = 80
+                Caption = '  Filtro por P'#233'riodo  '
+                Color = clWhite
+                ItemIndex = 0
+                Items.Strings = (
+                  'Deletar Movimento'
+                  'Alterar Movimento')
+                ParentBackground = False
+                ParentColor = False
                 TabOrder = 4
+                OnClick = rg_filtroPeriodoFinanceiroClick
+              end
+              object grp_alterarTitulos: TGroupBox
+                AlignWithMargins = True
+                Left = 323
+                Top = 169
+                Width = 283
+                Height = 173
+                Margins.Left = 5
+                Margins.Top = 5
+                Margins.Right = 5
+                Margins.Bottom = 5
+                Caption = '  Per'#237'odo para Exclus'#227'o  '
+                Enabled = False
+                TabOrder = 5
+                object lbl_alterarPreFixo: TLabel
+                  Left = 24
+                  Top = 95
+                  Width = 39
+                  Height = 15
+                  Caption = 'Prefixo '
+                end
+                object lbl_alterarSuFixo: TLabel
+                  Left = 144
+                  Top = 95
+                  Width = 49
+                  Height = 15
+                  Caption = 'Sufixo'
+                end
+                object chk_alterarDocumentoID: TCheckBox
+                  Left = 7
+                  Top = 72
+                  Width = 249
+                  Height = 17
+                  Caption = 'Alterar n'#250'mero do DOCUMENTO_ID'
+                  TabOrder = 0
+                end
+                object chk_limparNossoNumero: TCheckBox
+                  Left = 6
+                  Top = 49
+                  Width = 266
+                  Height = 17
+                  Caption = 'Remover v'#237'nculo NOSSO N'#218'MERO dos Titulos'
+                  TabOrder = 1
+                end
+                object chk_limparPedidoTitulos: TCheckBox
+                  Left = 7
+                  Top = 23
+                  Width = 249
+                  Height = 17
+                  Caption = 'Remover v'#237'nculo do PEDIDO nos T'#237'tulos'
+                  TabOrder = 2
+                end
+                object edt_alterarPreFixo: TEdit
+                  Left = 23
+                  Top = 116
+                  Width = 89
+                  Height = 23
+                  TabOrder = 3
+                  Text = 'PreFixo'
+                end
+                object edt_alterarSuFixo: TEdit
+                  Left = 135
+                  Top = 116
+                  Width = 105
+                  Height = 23
+                  TabOrder = 4
+                  Text = 'Sufixo'
+                end
+              end
+            end
+            object Panel11: TPanel
+              Left = 1
+              Top = 353
+              Width = 1332
+              Height = 85
+              Align = alBottom
+              Color = clSilver
+              ParentBackground = False
+              TabOrder = 1
+              ExplicitLeft = 2
+              ExplicitTop = 9
+              ExplicitWidth = 1212
+              object Panel12: TPanel
+                AlignWithMargins = True
+                Left = 256
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 0
+                ExplicitLeft = 527
+                object SpeedButton1: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Informa'#231#245'es T'#237'tulos'
+                  ImageIndex = 26
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  ExplicitLeft = -2
+                  ExplicitTop = 7
+                end
+              end
+              object Panel13: TPanel
+                AlignWithMargins = True
+                Left = 130
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 1
+                ExplicitLeft = 401
+                object btn_excluirFinanceiro: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Excluir T'#237'tulos'
+                  ImageIndex = 64
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  ExplicitLeft = -2
+                  ExplicitTop = -1
+                  ExplicitWidth = 104
+                end
+              end
+              object Panel14: TPanel
+                AlignWithMargins = True
+                Left = 4
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 2
+                ExplicitLeft = 275
+                object btn_processarFinanceiro: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Processar'
+                  ImageIndex = 21
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  OnClick = btn_processarFinanceiroClick
+                  ExplicitLeft = 9
+                  ExplicitTop = 2
+                  ExplicitWidth = 104
+                  ExplicitHeight = 81
+                end
+              end
+              object Panel16: TPanel
+                AlignWithMargins = True
+                Left = 1208
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alRight
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 3
+                ExplicitLeft = 1088
+                object SpeedButton5: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Vers'#227'o Sistema'
+                  ImageIndex = 43
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  OnClick = btn_versaoSistemaClick
+                  ExplicitLeft = 9
+                  ExplicitTop = 2
+                  ExplicitWidth = 104
+                  ExplicitHeight = 81
+                end
               end
             end
           end
           object Panel8: TPanel
             Left = 1
-            Top = 417
-            Width = 1214
-            Height = 248
+            Top = 481
+            Width = 1334
+            Height = 184
             Align = alClient
             Caption = 'Vazio'
             Color = clMedGray
             ParentBackground = False
             TabOrder = 2
+            ExplicitTop = 417
+            ExplicitWidth = 1214
+            ExplicitHeight = 248
+            object grp_tratarDocumentoFinanceira: TGroupBox
+              AlignWithMargins = True
+              Left = 4
+              Top = 4
+              Width = 1326
+              Height = 176
+              Align = alClient
+              Caption = '    -  T'#237'tulos Listados  -     '
+              Color = clCream
+              DefaultHeaderFont = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              HeaderFont.Charset = DEFAULT_CHARSET
+              HeaderFont.Color = clBlue
+              HeaderFont.Height = -15
+              HeaderFont.Name = 'Segoe UI'
+              HeaderFont.Style = []
+              ParentBackground = False
+              ParentColor = False
+              ParentFont = False
+              TabOrder = 0
+              ExplicitLeft = 12
+              ExplicitTop = 8
+              ExplicitWidth = 629
+              object dbgrd_movimentoFinanceiro: TDBGrid
+                Left = 2
+                Top = 17
+                Width = 1322
+                Height = 157
+                Align = alClient
+                TabOrder = 0
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clBlack
+                TitleFont.Height = -12
+                TitleFont.Name = 'Segoe UI'
+                TitleFont.Style = []
+                Columns = <
+                  item
+                    Expanded = False
+                    FieldName = 'EMPRESA_ID'
+                    Width = 105
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'TIPO_CONTA'
+                    Width = 78
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'TIPO_DOC'
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CADASTRO_ID'
+                    Width = 89
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'COMPL'
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CLIENTE'
+                    Width = 256
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DOCUMENTO_ID'
+                    Width = 101
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'VLR_TITULO'
+                    Width = 88
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'PEDIDO_ID'
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'STATUS'
+                    Width = 49
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DT_CADASTRAMENTO'
+                    Title.Caption = 'DATA CADASTRO'
+                    Width = 100
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DT_EMISSAO'
+                    Width = 83
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DT_VENCTO'
+                    Width = 83
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DT_BAIXA'
+                    ImeName = 'ROWID'
+                    Width = 76
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'ROWID'
+                    Width = 173
+                    Visible = True
+                  end>
+              end
+            end
           end
         end
       end

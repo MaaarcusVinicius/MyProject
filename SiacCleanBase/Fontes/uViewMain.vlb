@@ -541,9 +541,6 @@ Coordinates=10,322,108,58
 [Label7]
 Coordinates=715,798,53,58
 
-[pnl_criarUsuario]
-Coordinates=899,322,109,58
-
 [img_fundo_opacidade]
 Coordinates=1246,10,141,58
 
@@ -715,4 +712,7 @@ Coordinates=465,526,99,58
 
 [grp_AcoesDeletaEmpresa]
 Coordinates=330,730,79,58
+
+[pnl_abrigaBotoes]
+Coordinates=899,322,109,58
 

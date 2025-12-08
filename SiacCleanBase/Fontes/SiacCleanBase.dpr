@@ -15,7 +15,7 @@ uses
   classe.uScriptGeneratorDeleteEmpresas in 'classe.uScriptGeneratorDeleteEmpresas.pas',
   classe.uScriptGeneratorTrocaEmpresas in 'classe.uScriptGeneratorTrocaEmpresas.pas',
   classe.BancoDados in 'classe.BancoDados.pas',
-  Classe.ConsultaBD in 'Classe.ConsultaBD.pas',
+  Classe.DBA.Oracle in 'Classe.DBA.Oracle.pas',
   Classe.AtualizaComponentesTela in 'Classe.AtualizaComponentesTela.pas',
   TelaAguarde in 'C:\sistemas\Repositorio\TelaAguarde.pas' {FormTelaAguarde},
   Classe.ConsultaEmpresa in 'Classe.ConsultaEmpresa.pas',

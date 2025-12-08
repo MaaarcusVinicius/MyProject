@@ -161,7 +161,7 @@
         <DCCReference Include="classe.uScriptGeneratorDeleteEmpresas.pas"/>
         <DCCReference Include="classe.uScriptGeneratorTrocaEmpresas.pas"/>
         <DCCReference Include="classe.BancoDados.pas"/>
-        <DCCReference Include="Classe.ConsultaBD.pas"/>
+        <DCCReference Include="Classe.DBA.Oracle.pas"/>
         <DCCReference Include="Classe.AtualizaComponentesTela.pas"/>
         <DCCReference Include="C:\sistemas\Repositorio\TelaAguarde.pas">
             <Form>FormTelaAguarde</Form>

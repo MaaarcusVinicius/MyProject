@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Data.DB, DBAccess, Ora,
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, DAScript, OraScript,
   Vcl.Imaging.pngimage, Vcl.WinXCtrls, Vcl.CategoryButtons, System.Actions,
-  Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Mask,  Classe.ConsultaBD,
+  Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Mask,  Classe.DBA.Oracle,
   TelaAguarde, System.RegularExpressions, EditNumber, ACBrBase, ACBrEnterTab,
   Vcl.CheckLst;
 
@@ -130,7 +130,7 @@ type
     lbl_carregaEmpresa: TLabel;
     btn_detalhesBD: TSpeedButton;
     OraScriptCriarUsuario: TOraScript;
-    pnl_criarUsuario: TPanel;
+    pnl_abrigaBotoes: TPanel;
     ImageAllSystem: TImageList;
     pnl_bindsOracle: TPanel;
     btn_bindsOracle: TSpeedButton;
@@ -269,22 +269,20 @@ type
     Shape3: TShape;
     Panel9: TPanel;
     Label32: TLabel;
-    Panel11: TPanel;
-    grp_tratarDocumentoFinanceira: TGroupBox;
+    pnl_abrigaPainelFinanceiro: TPanel;
     Panel8: TPanel;
     grp_tratarMovimentacaoFinanceira2: TGroupBox;
-    rg_modoExclusaoFinanceiro: TRadioGroup;
     rg_selecionarStatusExcluir: TRadioGroup;
     rg_filtroPeriodoFinanceiro: TRadioGroup;
     grp_periodoExclusao: TGroupBox;
-    Label33: TLabel;
-    Label34: TLabel;
-    Label35: TLabel;
-    Label36: TLabel;
-    Label37: TLabel;
-    Label38: TLabel;
-    Label39: TLabel;
-    Label40: TLabel;
+    lbl_dataCadastramentoFinal: TLabel;
+    lbl_dataCadastramentoInicial: TLabel;
+    lbl_dataEmissaoInicial: TLabel;
+    lbl_dataEmissaoFinal: TLabel;
+    lbl_dataVencimentoInicial: TLabel;
+    lbl_dataVencimentoFinal: TLabel;
+    lbl_dataBaixaInicial: TLabel;
+    lbl_dataBaixaFinal: TLabel;
     chk_dtCadastramento: TCheckBox;
     chk_dtEmissao: TCheckBox;
     chk_dtVencimento: TCheckBox;
@@ -298,9 +296,27 @@ type
     medt_FinalBaixa: TMaskEdit;
     medt_InicialBaixa: TMaskEdit;
     rg_tipoCrCp: TRadioGroup;
-    chk_limparPedidoTitulos: TCheckBox;
-    chk_limparNossoNumero: TCheckBox;
+    lbl_startOracle: TLabel;
+    rg_filtroDeletarAlterar: TRadioGroup;
+    grp_alterarTitulos: TGroupBox;
     chk_alterarDocumentoID: TCheckBox;
+    chk_limparNossoNumero: TCheckBox;
+    chk_limparPedidoTitulos: TCheckBox;
+    edt_alterarPreFixo: TEdit;
+    edt_alterarSuFixo: TEdit;
+    lbl_alterarPreFixo: TLabel;
+    lbl_alterarSuFixo: TLabel;
+    grp_tratarDocumentoFinanceira: TGroupBox;
+    dbgrd_movimentoFinanceiro: TDBGrid;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel13: TPanel;
+    btn_excluirFinanceiro: TSpeedButton;
+    Panel14: TPanel;
+    btn_processarFinanceiro: TSpeedButton;
+    Panel16: TPanel;
+    SpeedButton5: TSpeedButton;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -365,8 +381,8 @@ type
     procedure btn_FecharMenuMovimento2Click(Sender: TObject);
     procedure btn_movimentacaoSiacClick(Sender: TObject);
     procedure action_MovimentoFinanceiroExecute(Sender: TObject);
-    procedure rg_modoExclusaoFinanceiroClick(Sender: TObject);
     procedure rg_filtroPeriodoFinanceiroClick(Sender: TObject);
+    procedure btn_processarFinanceiroClick(Sender: TObject);
 
   private
     FMostrarBranco: Boolean;
@@ -400,7 +416,8 @@ uses
   uViewProgressBar,
   Classe.AtualizaComponentesTela,
   classe.BancoDados,
-  Classe.ConsultaEmpresa, Classe.MovimentoFinanceiro;
+  Classe.ConsultaEmpresa,
+  Classe.MovimentoFinanceiro;
 
 {$R *.dfm}
 
@@ -467,7 +484,6 @@ begin
 
 
   TClasseMovimentoFinanceiro.InicializarComportamentos(
-    rg_modoExclusaoFinanceiro,       // TRadioGroup modo
     rg_selecionarStatusExcluir,      // TRadioGroup status
     [ chk_dtCadastramento,
       chk_dtEmissao,
@@ -924,22 +940,25 @@ procedure TViewMain.btn_detalhesBDClick(Sender: TObject);
 begin
   FConsultaBD := TClasseConsultaBD.Create;
   try
-    // Exemplo 0: carregar versão do Oracle
+    // Exemplo 1: carregar versão do Oracle
     FConsultaBD.CarregarVersaoOracle(lbl_versaoOracle);
 
-    // Exemplo 1: carregar sessões Ativas
+    // Exemplo 2: carregar Inicialização do Oracle
+    FConsultaBD.CarregarStartOracle(lbl_startOracle);
+
+    // Exemplo 3: carregar sessões Ativas
     FConsultaBD.CarregarSessoesAtivas(DBGrid_CarregarSession);
 
-    // Exemplo 2: carregar tablespace
+    // Exemplo 4: carregar tablespace
      FConsultaBD.CarregarTablespace(DBGrid_CarregarTablespace);
 
-    // Exemplo 3: carregar usuários
+    // Exemplo 5: carregar usuários
      FConsultaBD.CarregarUsuarios(DBGrid_CarregarUsuarios);
 
-    // Exemplo 4: carregar TableSpace Diretorios
+    // Exemplo 6: carregar TableSpace Diretorios
      FConsultaBD.CarregarBancoTablespaceDiretorio(DBGrid_CarregarTablespaceDiretorio);
 
-    // Exemplo 5: atualizar status
+    // Exemplo 7: atualizar status
     // FConsultaBD.AtualizarEmpresaStatus(1, 'ATIVO');
 
   finally
@@ -975,6 +994,21 @@ procedure TViewMain.btn_movimentacaoSiacClick(Sender: TObject);
 begin
   ShowMessage('Delete Movimento - Financeiro');
 end;
+
+procedure TViewMain.btn_processarFinanceiroClick(Sender: TObject);
+var
+  ConsultaFinan: TClasseMovimentoFinanceiro;
+begin
+  ConsultaFinan := TClasseMovimentoFinanceiro.Create;
+  try
+    // Carrega o movimento financeiro no DBGrid
+    ConsultaFinan.CarregarMovimentoFinanceiro(dbgrd_movimentoFinanceiro,vGbl_Empresa_id);
+
+  finally
+   // ConsultaFinan.Free;
+  end;
+end;
+
 
 procedure TViewMain.btn_testeClick(Sender: TObject);
 begin
@@ -1211,14 +1245,6 @@ begin
      grp_periodoExclusao.Enabled := False;
 end;
 
-procedure TViewMain.rg_modoExclusaoFinanceiroClick(Sender: TObject);
-begin
- // Controla o modo de exclusão para o usuario
-  if rg_modoExclusaoFinanceiro.ItemIndex = 1 then
-    rg_selecionarStatusExcluir.Enabled := True
-  else
-    rg_selecionarStatusExcluir.Enabled := False;
-end;
 
 procedure TViewMain.img_closeClick(Sender: TObject);
 begin
