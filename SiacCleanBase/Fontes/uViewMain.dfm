@@ -25,7 +25,6 @@
     Color = 3355443
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1424
     object pnl_logoMarca: TPanel
       Left = 0
       Top = 0
@@ -356,7 +355,6 @@
       Color = 3355443
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 1111
       object pnl_userLogin: TPanel
         Left = 249
         Top = 0
@@ -561,7 +559,6 @@
       TabOrder = 2
       OnClick = pnl_carregaEmpresaClick
       OnDblClick = pnl_carregaEmpresaDblClick
-      ExplicitWidth = 911
       object lbl_carregaEmpresa: TLabel
         Left = 0
         Top = 0
@@ -1093,7 +1090,6 @@
     Color = clWhite
     ParentBackground = False
     TabOrder = 5
-    ExplicitWidth = 1224
     object PageControl: TPageControl
       Left = 0
       Top = 0
@@ -1103,7 +1099,6 @@
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
-      ExplicitWidth = 1224
       object PageInicial: TTabSheet
         Caption = 'PageInicial'
         object TPanel
@@ -1116,7 +1111,6 @@
           ParentBackground = False
           TabOrder = 0
           StyleName = 'Windows'
-          ExplicitWidth = 1216
           object pnl_fundoPrincipal1: TPanel
             Left = 1
             Top = 1
@@ -1127,7 +1121,6 @@
             Color = clWhite
             ParentBackground = False
             TabOrder = 0
-            ExplicitWidth = 1214
             object dbPrincipalEmpresas: TDBGrid
               Left = 0
               Top = 11
@@ -1260,7 +1253,6 @@
               Color = clTeal
               ParentBackground = False
               TabOrder = 1
-              ExplicitWidth = 1214
               object lbl_telaInicial: TLabel
                 AlignWithMargins = True
                 Left = 4
@@ -1294,7 +1286,6 @@
             Color = clWhite
             ParentBackground = False
             TabOrder = 1
-            ExplicitWidth = 1214
             object pnl_fundoAbrigaImagem: TPanel
               Left = 533
               Top = 0
@@ -1304,7 +1295,6 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitLeft = 413
               object img_fundo: TImage
                 Left = 1
                 Top = 1
@@ -4701,7 +4691,6 @@
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1206
           object shpTrocaEmpresaBottom: TShape
             Left = 0
             Top = 656
@@ -4731,7 +4720,6 @@
             ParentBackground = False
             ParentColor = False
             TabOrder = 1
-            ExplicitWidth = 1200
             object pnl_novosDadosEmpresa: TPanel
               Left = 2
               Top = 17
@@ -4878,7 +4866,6 @@
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 0
-            ExplicitWidth = 1200
             object pnl_dadosEmpresa: TPanel
               Left = 2
               Top = 17
@@ -5302,7 +5289,6 @@
             Color = clTeal
             ParentBackground = False
             TabOrder = 2
-            ExplicitWidth = 1206
             object lbl_1: TLabel
               AlignWithMargins = True
               Left = 4
@@ -5476,9 +5462,6 @@
           ParentBackground = False
           TabOrder = 5
           Visible = False
-          ExplicitTop = 50
-          ExplicitWidth = 1216
-          ExplicitHeight = 616
           object grp_InfoGerais: TGroupBox
             Left = 1
             Top = 86
@@ -5487,8 +5470,6 @@
             Align = alClient
             Caption = '    - Informa'#231#245'es Gerais Oracle -    '
             TabOrder = 0
-            ExplicitWidth = 1214
-            ExplicitHeight = 529
             object grp_Session: TGroupBox
               Left = 2
               Top = 17
@@ -5497,8 +5478,6 @@
               Align = alClient
               Caption = 'Usu'#225'rios '#233' Sess'#245'es'
               TabOrder = 0
-              ExplicitWidth = 1210
-              ExplicitHeight = 296
               object DBGrid_CarregarSession: TDBGrid
                 Left = 593
                 Top = 17
@@ -5684,8 +5663,6 @@
               Align = alBottom
               Caption = 'Informa'#231#245'es Table Space'
               TabOrder = 1
-              ExplicitTop = 313
-              ExplicitWidth = 1210
               object DBGrid_CarregarTablespaceDiretorio: TDBGrid
                 Left = 593
                 Top = 17
@@ -5816,7 +5793,6 @@
                 ParentBackground = False
                 TabOrder = 2
                 Visible = False
-                ExplicitLeft = 959
                 object Panel2: TPanel
                   Left = 1
                   Top = 121
@@ -6153,12 +6129,11 @@
             Color = clWhite
             ParentBackground = False
             TabOrder = 1
-            ExplicitWidth = 1214
             object lbl_startOracle: TLabel
               AlignWithMargins = True
-              Left = 1054
+              Left = 1066
               Top = 4
-              Width = 143
+              Width = 131
               Height = 77
               Hint = 'Hor'#225'rio que ligou o sevidor.'
               Margins.Right = 10
@@ -6174,9 +6149,7 @@
               ParentColor = False
               ParentFont = False
               Layout = tlBottom
-              ExplicitLeft = 944
-              ExplicitTop = 32
-              ExplicitHeight = 52
+              ExplicitHeight = 23
             end
             object pnl_bindsOracle: TPanel
               AlignWithMargins = True
@@ -6367,7 +6340,6 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 4
-              ExplicitLeft = 1090
               object btn_versaoSistema: TSpeedButton
                 AlignWithMargins = True
                 Left = 3
@@ -6455,7 +6427,6 @@
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1206
           object shpDeletaEmpresaBottom: TShape
             Left = 1
             Top = 655
@@ -6483,7 +6454,6 @@
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 0
-            ExplicitWidth = 1198
             object Panel5: TPanel
               Left = 2
               Top = 17
@@ -6807,7 +6777,6 @@
             HeaderFont.Style = []
             HeaderFont.Quality = fqProof
             TabOrder = 1
-            ExplicitWidth = 1198
             object Panel3: TPanel
               Left = 2
               Top = 17
@@ -7231,7 +7200,6 @@
             Color = clTeal
             ParentBackground = False
             TabOrder = 2
-            ExplicitWidth = 1204
             object Label30: TLabel
               AlignWithMargins = True
               Left = 4
@@ -7268,7 +7236,6 @@
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1216
           object shpDeletaMovimento: TShape
             Left = 1
             Top = 665
@@ -7289,7 +7256,6 @@
             Color = clTeal
             ParentBackground = False
             TabOrder = 0
-            ExplicitWidth = 1214
             object Label31: TLabel
               AlignWithMargins = True
               Left = 4
@@ -7316,11 +7282,150 @@
             Left = 1
             Top = 273
             Width = 1334
-            Height = 240
-            Align = alTop
+            Height = 392
+            Align = alClient
             Caption = 'pnl_modulos'
             TabOrder = 1
-            ExplicitWidth = 1214
+            object pnl_deletarMovimentoSistema: TPanel
+              Left = 1
+              Top = 1
+              Width = 1332
+              Height = 85
+              Align = alTop
+              Color = clSilver
+              ParentBackground = False
+              TabOrder = 0
+              object Panel17: TPanel
+                AlignWithMargins = True
+                Left = 130
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 0
+                object btn_excluirMovimento: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Excluir Movimento'
+                  ImageIndex = 32
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  OnClick = btn_excluirMovimentoClick
+                  ExplicitLeft = -2
+                  ExplicitTop = -1
+                  ExplicitWidth = 104
+                end
+              end
+              object Panel18: TPanel
+                AlignWithMargins = True
+                Left = 4
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 1
+                object btn_analisarExcluirMovimento: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Analisar Movimento'
+                  ImageIndex = 77
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  ExplicitLeft = 8
+                  ExplicitTop = -1
+                end
+              end
+              object Panel19: TPanel
+                AlignWithMargins = True
+                Left = 1208
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alRight
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 2
+                object SpeedButton4: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Aten'#231#227'o'
+                  ImageIndex = 40
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  OnClick = btn_infTelaClick
+                  ExplicitLeft = 9
+                  ExplicitTop = 2
+                  ExplicitWidth = 104
+                  ExplicitHeight = 81
+                end
+              end
+              object Panel10: TPanel
+                AlignWithMargins = True
+                Left = 256
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 3
+                ExplicitLeft = 382
+              end
+            end
           end
           object pnl_modulos: TPanel
             Left = 1
@@ -7329,7 +7434,6 @@
             Height = 231
             Align = alTop
             TabOrder = 2
-            ExplicitWidth = 1214
             object grp_SelecaoModulos: TGroupBox
               Left = 241
               Top = 1
@@ -7342,13 +7446,13 @@
                 Left = 5
                 Top = 24
                 Width = 380
-                Height = 161
+                Height = 137
                 BevelInner = bvNone
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
                 BorderStyle = bsNone
                 Color = clWhite
-                Columns = 3
+                Columns = 2
                 DoubleBuffered = False
                 Flat = False
                 Font.Charset = DEFAULT_CHARSET
@@ -7427,6 +7531,7 @@
                 Height = 74
                 Caption = '  Tipo de Exclus'#227'o  '
                 Color = clHighlightText
+                ItemIndex = 0
                 Items.Strings = (
                   'Movimenta'#231#227'o Geral'
                   'Movimenta'#231#227'o por Per'#237'odo')
@@ -7441,8 +7546,9 @@
                 Height = 74
                 Caption = '  Modo de Exclus'#227'o  '
                 Color = clHighlightText
+                ItemIndex = 0
                 Items.Strings = (
-                  'Mod'#250'los Todos '
+                  'Mod'#250'lo Siac'
                   'Mod'#250'los Selecionados')
                 ParentBackground = False
                 ParentColor = False
@@ -7464,7 +7570,6 @@
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1216
           object Shape3: TShape
             Left = 1
             Top = 665
@@ -7485,7 +7590,6 @@
             Color = clTeal
             ParentBackground = False
             TabOrder = 0
-            ExplicitWidth = 1214
             object Label32: TLabel
               AlignWithMargins = True
               Left = 4
@@ -7517,15 +7621,13 @@
             Color = clWhite
             ParentBackground = False
             TabOrder = 1
-            ExplicitLeft = 2
-            ExplicitTop = 40
-            ExplicitWidth = 1214
             object grp_tratarMovimentacaoFinanceira2: TGroupBox
               AlignWithMargins = True
-              Left = 1
-              Top = 2
+              Left = 4
+              Top = 4
               Width = 616
-              Height = 349
+              Height = 346
+              Align = alLeft
               Caption = '    - Configura'#231#227'o Base para Exclus'#227'o dos T'#237'tulos  -     '
               DefaultHeaderFont = False
               Font.Charset = DEFAULT_CHARSET
@@ -7540,6 +7642,9 @@
               HeaderFont.Style = []
               ParentFont = False
               TabOrder = 0
+              ExplicitLeft = 1
+              ExplicitTop = 2
+              ExplicitHeight = 349
               object rg_selecionarStatusExcluir: TRadioGroup
                 AlignWithMargins = True
                 Left = 7
@@ -7550,7 +7655,7 @@
                 Margins.Top = 0
                 Margins.Right = 0
                 Margins.Bottom = 0
-                Caption = '  Status dos T'#237'tulos  - Excluir'
+                Caption = '  Status dos T'#237'tulos  '
                 Color = clHighlightText
                 ItemIndex = 0
                 Items.Strings = (
@@ -7571,7 +7676,7 @@
                 ItemIndex = 0
                 Items.Strings = (
                   'N'#227'o filtrar por Per'#237'odo'
-                  'Movimenta'#231#227'o por Per'#237'odo')
+                  'Filtrar por Per'#237'odo')
                 ParentBackground = False
                 ParentColor = False
                 TabOrder = 1
@@ -7800,8 +7905,8 @@
                 TabOrder = 3
               end
               object rg_filtroDeletarAlterar: TRadioGroup
-                Left = 435
-                Top = 84
+                Left = 433
+                Top = 81
                 Width = 171
                 Height = 80
                 Caption = '  Filtro por P'#233'riodo  '
@@ -7813,7 +7918,7 @@
                 ParentBackground = False
                 ParentColor = False
                 TabOrder = 4
-                OnClick = rg_filtroPeriodoFinanceiroClick
+                OnClick = rg_filtroDeletarAlterarClick
               end
               object grp_alterarTitulos: TGroupBox
                 AlignWithMargins = True
@@ -7825,22 +7930,29 @@
                 Margins.Top = 5
                 Margins.Right = 5
                 Margins.Bottom = 5
-                Caption = '  Per'#237'odo para Exclus'#227'o  '
-                Enabled = False
+                Caption = '  Op'#231#245'es para Altera'#231#245'es  '
                 TabOrder = 5
-                object lbl_alterarPreFixo: TLabel
-                  Left = 24
-                  Top = 95
-                  Width = 39
-                  Height = 15
-                  Caption = 'Prefixo '
+                object lbl_exemploDocumento: TLabel
+                  Left = 78
+                  Top = 139
+                  Width = 84
+                  Height = 28
+                  Caption = '1234/01E'
+                  Color = clBlue
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -20
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentColor = False
+                  ParentFont = False
                 end
-                object lbl_alterarSuFixo: TLabel
-                  Left = 144
+                object lbl_textoAdicional: TLabel
+                  Left = 172
                   Top = 95
-                  Width = 49
+                  Width = 81
                   Height = 15
-                  Caption = 'Sufixo'
+                  Caption = 'Texto Adicional'
                 end
                 object chk_alterarDocumentoID: TCheckBox
                   Left = 7
@@ -7849,10 +7961,11 @@
                   Height = 17
                   Caption = 'Alterar n'#250'mero do DOCUMENTO_ID'
                   TabOrder = 0
+                  OnClick = chk_alterarDocumentoIDClick
                 end
                 object chk_limparNossoNumero: TCheckBox
-                  Left = 6
-                  Top = 49
+                  Left = 7
+                  Top = 48
                   Width = 266
                   Height = 17
                   Caption = 'Remover v'#237'nculo NOSSO N'#218'MERO dos Titulos'
@@ -7866,25 +7979,50 @@
                   Caption = 'Remover v'#237'nculo do PEDIDO nos T'#237'tulos'
                   TabOrder = 2
                 end
-                object edt_alterarPreFixo: TEdit
-                  Left = 23
-                  Top = 116
-                  Width = 89
-                  Height = 23
+                object rg_textoAdicionalDocumento: TRadioGroup
+                  Left = 7
+                  Top = 95
+                  Width = 154
+                  Height = 42
+                  Caption = '   Adicionar Texto'
+                  Columns = 2
+                  ItemIndex = 0
+                  Items.Strings = (
+                    'SuFixo'
+                    'PreFixo')
                   TabOrder = 3
-                  Text = 'PreFixo'
                 end
-                object edt_alterarSuFixo: TEdit
-                  Left = 135
-                  Top = 116
-                  Width = 105
+                object edt_textDocumento: TEdit
+                  Left = 167
+                  Top = 114
+                  Width = 98
                   Height = 23
+                  CharCase = ecUpperCase
+                  MaxLength = 5
                   TabOrder = 4
-                  Text = 'Sufixo'
+                  TextHint = 'Texto'
+                end
+                object btn_exemploDocumento: TButton
+                  Left = 7
+                  Top = 137
+                  Width = 65
+                  Height = 34
+                  Caption = 'Exemplo'
+                  DragCursor = crHandPoint
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clNavy
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ModalResult = 1
+                  ParentFont = False
+                  TabOrder = 5
+                  StyleName = 'Windows'
+                  OnClick = btn_exemploDocumentoClick
                 end
               end
             end
-            object Panel11: TPanel
+            object pnl_botoesFinanceiroSistema: TPanel
               Left = 1
               Top = 353
               Width = 1332
@@ -7893,10 +8031,8 @@
               Color = clSilver
               ParentBackground = False
               TabOrder = 1
-              ExplicitLeft = 2
-              ExplicitTop = 9
-              ExplicitWidth = 1212
-              object Panel12: TPanel
+              ExplicitTop = 352
+              object pnl_abriBotaoAlterarTitulos: TPanel
                 AlignWithMargins = True
                 Left = 256
                 Top = 4
@@ -7908,8 +8044,7 @@
                 Color = clWhite
                 ParentBackground = False
                 TabOrder = 0
-                ExplicitLeft = 527
-                object SpeedButton1: TSpeedButton
+                object btn_alterarTitulos: TSpeedButton
                   AlignWithMargins = True
                   Left = 3
                   Top = 3
@@ -7918,8 +8053,8 @@
                   Cursor = crHandPoint
                   Align = alClient
                   BiDiMode = bdLeftToRight
-                  Caption = 'Informa'#231#245'es T'#237'tulos'
-                  ImageIndex = 26
+                  Caption = 'Alterar T'#237'tulos'
+                  ImageIndex = 71
                   Images = ImageAllSystem
                   Flat = True
                   Font.Charset = DEFAULT_CHARSET
@@ -7930,11 +8065,12 @@
                   Layout = blGlyphTop
                   ParentFont = False
                   ParentBiDiMode = False
+                  OnClick = btn_alterarTitulosClick
                   ExplicitLeft = -2
                   ExplicitTop = 7
                 end
               end
-              object Panel13: TPanel
+              object pnl_abriBotaoExcluirTitulos: TPanel
                 AlignWithMargins = True
                 Left = 130
                 Top = 4
@@ -7946,7 +8082,6 @@
                 Color = clWhite
                 ParentBackground = False
                 TabOrder = 1
-                ExplicitLeft = 401
                 object btn_excluirFinanceiro: TSpeedButton
                   AlignWithMargins = True
                   Left = 3
@@ -7968,12 +8103,13 @@
                   Layout = blGlyphTop
                   ParentFont = False
                   ParentBiDiMode = False
+                  OnClick = btn_excluirFinanceiroClick
                   ExplicitLeft = -2
                   ExplicitTop = -1
                   ExplicitWidth = 104
                 end
               end
-              object Panel14: TPanel
+              object pnl_abriBotaoProcessarTitulos: TPanel
                 AlignWithMargins = True
                 Left = 4
                 Top = 4
@@ -7985,7 +8121,6 @@
                 Color = clWhite
                 ParentBackground = False
                 TabOrder = 2
-                ExplicitLeft = 275
                 object btn_processarFinanceiro: TSpeedButton
                   AlignWithMargins = True
                   Left = 3
@@ -8026,8 +8161,7 @@
                 Color = clWhite
                 ParentBackground = False
                 TabOrder = 3
-                ExplicitLeft = 1088
-                object SpeedButton5: TSpeedButton
+                object btn_infTela: TSpeedButton
                   AlignWithMargins = True
                   Left = 3
                   Top = 3
@@ -8036,8 +8170,8 @@
                   Cursor = crHandPoint
                   Align = alClient
                   BiDiMode = bdLeftToRight
-                  Caption = 'Vers'#227'o Sistema'
-                  ImageIndex = 43
+                  Caption = 'Aten'#231#227'o'
+                  ImageIndex = 40
                   Images = ImageAllSystem
                   Flat = True
                   Font.Charset = DEFAULT_CHARSET
@@ -8048,12 +8182,207 @@
                   Layout = blGlyphTop
                   ParentFont = False
                   ParentBiDiMode = False
-                  OnClick = btn_versaoSistemaClick
+                  OnClick = btn_infTelaClick
                   ExplicitLeft = 9
                   ExplicitTop = 2
                   ExplicitWidth = 104
                   ExplicitHeight = 81
                 end
+              end
+              object Panel11: TPanel
+                AlignWithMargins = True
+                Left = 382
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clSilver
+                ParentBackground = False
+                TabOrder = 4
+                ExplicitLeft = 520
+              end
+              object Panel13: TPanel
+                AlignWithMargins = True
+                Left = 508
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clSilver
+                ParentBackground = False
+                TabOrder = 5
+                ExplicitLeft = 784
+                ExplicitTop = 3
+              end
+              object Panel14: TPanel
+                AlignWithMargins = True
+                Left = 760
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clSilver
+                ParentBackground = False
+                TabOrder = 6
+                ExplicitLeft = 728
+                ExplicitTop = 3
+              end
+              object Panel15: TPanel
+                AlignWithMargins = True
+                Left = 634
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 7
+                ExplicitLeft = 728
+                ExplicitTop = 3
+                object btn_deletarCreditos: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Excluir Cr'#233'ditos'
+                  ImageIndex = 58
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  OnClick = btn_deletarCreditosClick
+                  ExplicitLeft = 6
+                  ExplicitTop = 6
+                end
+              end
+              object Panel20: TPanel
+                AlignWithMargins = True
+                Left = 1012
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clSilver
+                ParentBackground = False
+                TabOrder = 8
+                ExplicitLeft = 728
+                ExplicitTop = 3
+              end
+              object Panel21: TPanel
+                AlignWithMargins = True
+                Left = 886
+                Top = 4
+                Width = 120
+                Height = 77
+                Align = alLeft
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clSilver
+                ParentBackground = False
+                TabOrder = 9
+                ExplicitLeft = 728
+                ExplicitTop = 3
+              end
+            end
+            object grp_tratarCreditoFinanceira: TGroupBox
+              AlignWithMargins = True
+              Left = 626
+              Top = 4
+              Width = 384
+              Height = 346
+              Align = alLeft
+              BiDiMode = bdLeftToRight
+              Caption = '    - Configura'#231#227'o Base para Exclus'#227'o dos Cr'#233'idtos  -     '
+              DefaultHeaderFont = False
+              HeaderFont.Charset = DEFAULT_CHARSET
+              HeaderFont.Color = clRed
+              HeaderFont.Height = -15
+              HeaderFont.Name = 'Segoe UI'
+              HeaderFont.Style = []
+              ParentBiDiMode = False
+              TabOrder = 2
+              ExplicitTop = 2
+              object lbl_dataFinalCredito: TLabel
+                Left = 82
+                Top = 106
+                Width = 50
+                Height = 15
+                Caption = 'Data final'
+              end
+              object Label34: TLabel
+                Left = 11
+                Top = 106
+                Width = 58
+                Height = 15
+                Caption = 'Data inicial'
+              end
+              object edt_dataInicialCredito: TMaskEdit
+                Left = 12
+                Top = 127
+                Width = 64
+                Height = 22
+                AutoSize = False
+                Enabled = False
+                EditMask = '!99/99/9999;1;_'
+                MaxLength = 10
+                TabOrder = 0
+                Text = '  /  /    '
+              end
+              object edt_dataFinalCredito: TMaskEdit
+                Left = 82
+                Top = 127
+                Width = 65
+                Height = 22
+                AutoSize = False
+                Enabled = False
+                EditMask = '!99/99/9999;1;_'
+                MaxLength = 10
+                TabOrder = 1
+                Text = '  /  /    '
+              end
+              object chk_filtroDataCredito: TCheckBox
+                Left = 11
+                Top = 83
+                Width = 140
+                Height = 17
+                Caption = 'Filtrar por P'#233'riodo'
+                TabOrder = 2
+                OnClick = chk_filtroDataCreditoClick
+              end
+              object chk_deletarCredito: TCheckBox
+                Left = 12
+                Top = 31
+                Width = 249
+                Height = 17
+                Caption = 'Excluir cr'#233'ditos do sistema'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 3
+                OnClick = chk_deletarCreditoClick
               end
             end
           end
@@ -8067,9 +8396,6 @@
             Color = clMedGray
             ParentBackground = False
             TabOrder = 2
-            ExplicitTop = 417
-            ExplicitWidth = 1214
-            ExplicitHeight = 248
             object grp_tratarDocumentoFinanceira: TGroupBox
               AlignWithMargins = True
               Left = 4
@@ -8094,9 +8420,6 @@
               ParentColor = False
               ParentFont = False
               TabOrder = 0
-              ExplicitLeft = 12
-              ExplicitTop = 8
-              ExplicitWidth = 629
               object dbgrd_movimentoFinanceiro: TDBGrid
                 Left = 2
                 Top = 17

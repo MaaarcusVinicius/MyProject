@@ -302,21 +302,44 @@ type
     chk_alterarDocumentoID: TCheckBox;
     chk_limparNossoNumero: TCheckBox;
     chk_limparPedidoTitulos: TCheckBox;
-    edt_alterarPreFixo: TEdit;
-    edt_alterarSuFixo: TEdit;
-    lbl_alterarPreFixo: TLabel;
-    lbl_alterarSuFixo: TLabel;
     grp_tratarDocumentoFinanceira: TGroupBox;
     dbgrd_movimentoFinanceiro: TDBGrid;
-    Panel11: TPanel;
-    Panel12: TPanel;
-    SpeedButton1: TSpeedButton;
-    Panel13: TPanel;
+    pnl_botoesFinanceiroSistema: TPanel;
+    pnl_abriBotaoAlterarTitulos: TPanel;
+    btn_alterarTitulos: TSpeedButton;
+    pnl_abriBotaoExcluirTitulos: TPanel;
     btn_excluirFinanceiro: TSpeedButton;
-    Panel14: TPanel;
+    pnl_abriBotaoProcessarTitulos: TPanel;
     btn_processarFinanceiro: TSpeedButton;
     Panel16: TPanel;
-    SpeedButton5: TSpeedButton;
+    btn_infTela: TSpeedButton;
+    rg_textoAdicionalDocumento: TRadioGroup;
+    edt_textDocumento: TEdit;
+    lbl_exemploDocumento: TLabel;
+    lbl_textoAdicional: TLabel;
+    btn_exemploDocumento: TButton;
+    pnl_deletarMovimentoSistema: TPanel;
+    Panel17: TPanel;
+    btn_excluirMovimento: TSpeedButton;
+    Panel18: TPanel;
+    btn_analisarExcluirMovimento: TSpeedButton;
+    Panel19: TPanel;
+    SpeedButton4: TSpeedButton;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    btn_deletarCreditos: TSpeedButton;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    grp_tratarCreditoFinanceira: TGroupBox;
+    edt_dataInicialCredito: TMaskEdit;
+    edt_dataFinalCredito: TMaskEdit;
+    lbl_dataFinalCredito: TLabel;
+    Label34: TLabel;
+    chk_filtroDataCredito: TCheckBox;
+    chk_deletarCredito: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -383,6 +406,16 @@ type
     procedure action_MovimentoFinanceiroExecute(Sender: TObject);
     procedure rg_filtroPeriodoFinanceiroClick(Sender: TObject);
     procedure btn_processarFinanceiroClick(Sender: TObject);
+    procedure btn_alterarTitulosClick(Sender: TObject);
+    procedure rg_filtroDeletarAlterarClick(Sender: TObject);
+    procedure chk_alterarDocumentoIDClick(Sender: TObject);
+    procedure btn_exemploDocumentoClick(Sender: TObject);
+    procedure btn_excluirFinanceiroClick(Sender: TObject);
+    procedure btn_infTelaClick(Sender: TObject);
+    procedure btn_excluirMovimentoClick(Sender: TObject);
+    procedure btn_deletarCreditosClick(Sender: TObject);
+    procedure chk_filtroDataCreditoClick(Sender: TObject);
+    procedure chk_deletarCreditoClick(Sender: TObject);
 
   private
     FMostrarBranco: Boolean;
@@ -495,6 +528,22 @@ begin
       medt_InicialBaixa,     medt_FinalBaixa ] // 8 mask edits (2 por check)
   );
 
+  // Adicionando camada de comportamento dos botões da Financeiro
+  btn_excluirFinanceiro.Enabled := False;
+  btn_alterarTitulos.Enabled := False;
+
+  // Aparência inicial (neutra)
+  btn_excluirFinanceiro.Font.Color := clGray;
+  btn_alterarTitulos.Font.Color := clGray;
+  btn_excluirFinanceiro.Cursor := crDefault;
+  btn_alterarTitulos.Cursor := crDefault;
+
+  grp_alterarTitulos.Enabled := False;
+  rg_textoAdicionalDocumento.Enabled := False;
+  edt_textDocumento.Enabled := False;
+  lbl_exemploDocumento.visible := False;
+  lbl_textoAdicional.Enabled := False;
+  btn_deletarCreditos.Enabled:= False;
 end;
 
 procedure TViewMain.tmr_trocaLogoEmpresaTimer(Sender: TObject);
@@ -684,6 +733,8 @@ end;
 
 procedure TViewMain.action_MovimentoFinanceiroExecute(Sender: TObject);
 begin
+  if not ValidaAtivacaoProcedimentos then
+    Exit;
   // Deleta Movimento Financeiro   - PageTratarFinanceiro
   PageControl.ActivePageIndex := 5;
   AlternaSplitViewClose(SplitViewMenu);
@@ -852,6 +903,47 @@ begin
   end;
 end;
 
+procedure TViewMain.btn_deletarCreditosClick(Sender: TObject);
+var
+  Movimento: TClasseMovimentoFinanceiro;
+  FiltroData: Boolean;
+  DataIni, DataFim: TDateTime;
+begin
+  Movimento := TClasseMovimentoFinanceiro.Create;
+  try
+    // 🔹 Verifica se o filtro de data está ativo
+    FiltroData := chk_filtroDataCredito.Checked;
+
+    // 🔹 Converte as datas apenas se o filtro estiver ativo
+    if FiltroData then
+    begin
+      if not TryStrToDate(edt_dataInicialCredito.Text, DataIni) then
+      begin
+        MessageDlg('Informe uma data inicial válida.', mtWarning, [mbOK], 0);
+        edt_dataInicialCredito.SetFocus;
+        Exit;
+      end;
+
+      if not TryStrToDate(edt_dataFinalCredito.Text, DataFim) then
+      begin
+        MessageDlg('Informe uma data final válida.', mtWarning, [mbOK], 0);
+        edt_dataFinalCredito.SetFocus;
+        Exit;
+      end;
+
+      // 🔸 Primeiro carrega os créditos filtrados para gerar o SQL base
+      Movimento.CarregarCreditosFinanceiro(vGbl_Empresa_id, True, DataIni, DataFim);
+    end;
+
+    // 🔸 Agora executa a exclusão (truncate ou delete por período)
+    Movimento.ExcluirCreditosFinanceiro(FiltroData);
+
+  finally
+    Movimento.Free;
+  end;
+end;
+
+
 procedure TViewMain.btn_deleteTriggersClick(Sender: TObject);
 var
   ScriptGen: TScriptGeneratorTriggers;
@@ -975,6 +1067,56 @@ begin
 end;
 
 
+procedure TViewMain.btn_excluirFinanceiroClick(Sender: TObject);
+var
+  Movimento: TClasseMovimentoFinanceiro;
+  DS: TDataSet;
+begin
+  DS := dbgrd_movimentoFinanceiro.DataSource.DataSet;
+
+  if not Assigned(DS) or DS.IsEmpty then
+  begin
+    MessageDlg('Nenhum registro disponível no grid para exclusão.', mtWarning, [mbOK], 0);
+    Exit;
+  end;
+
+  Movimento := TClasseMovimentoFinanceiro.Create;
+  try
+    Movimento.ExcluirRegistrosFinanceiro(DS);
+  finally
+    Movimento.Free;
+  end;
+
+  // Atualiza o grid após a exclusão
+  btn_processarFinanceiro.Click;
+end;
+
+
+procedure TViewMain.btn_excluirMovimentoClick(Sender: TObject);
+begin
+  ShowMessage('botão Oficial');
+end;
+
+procedure TViewMain.btn_exemploDocumentoClick(Sender: TObject);
+var
+  doc_original: string;
+  New_Documento: string;
+begin
+  doc_original := '1234/01E';
+
+  // Cria o novo valor baseado no modo do RadioGroup
+  case rg_textoAdicionalDocumento.ItemIndex of
+    0: New_Documento := doc_original + ' ' + edt_textDocumento.Text;   // Prefixo
+    1: New_Documento := edt_textDocumento.Text + ' ' + doc_original;   // Sufixo
+  else
+    New_Documento := doc_original;
+  end;
+
+  // Exibe o resultado no label de exemplo
+  lbl_exemploDocumento.Caption := New_Documento;
+end;
+
+
 procedure TViewMain.btn_expBkpClick(Sender: TObject);
 begin
   ShowMessage('Em construção ...');
@@ -990,6 +1132,16 @@ begin
   ShowMessage('Em construção ...');
 end;
 
+procedure TViewMain.btn_infTelaClick(Sender: TObject);
+begin
+  // Mostra a advertencia do sistema, procedimento irreversivel.
+  fnc_criar_menssagem('SIAC CLEAN BASE',
+                      'A exclusão/alteração do movimento financeiro é permanente.',
+                      'Após confirmar esta operação, não será possível restaurar as informações excluídas/alteradas.',
+                      ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
+                      'OK');
+end;
+
 procedure TViewMain.btn_movimentacaoSiacClick(Sender: TObject);
 begin
   ShowMessage('Delete Movimento - Financeiro');
@@ -998,16 +1150,71 @@ end;
 procedure TViewMain.btn_processarFinanceiroClick(Sender: TObject);
 var
   ConsultaFinan: TClasseMovimentoFinanceiro;
+  DS: TDataSet;
 begin
   ConsultaFinan := TClasseMovimentoFinanceiro.Create;
   try
-    // Carrega o movimento financeiro no DBGrid
-    ConsultaFinan.CarregarMovimentoFinanceiro(dbgrd_movimentoFinanceiro,vGbl_Empresa_id);
+    ConsultaFinan.CarregarMovimentoFinanceiro(
+      dbgrd_movimentoFinanceiro,
+      vGbl_Empresa_id,
+      rg_tipoCrCp.ItemIndex,
+      rg_selecionarStatusExcluir.ItemIndex,
+      rg_filtroPeriodoFinanceiro.ItemIndex
+    );
+
+    //  Após carregar a consulta, verifica se há registros no dataset
+    DS := dbgrd_movimentoFinanceiro.DataSource.DataSet;
+    if not Assigned(DS) or DS.IsEmpty then
+    begin
+      MessageDlg('Nenhum resultado encontrado para os parâmetros definidos.', mtInformation, [mbOK], 0);
+
+      //  Desabilita botões, pois não há dados para ação
+      btn_excluirFinanceiro.Enabled := False;
+      btn_alterarTitulos.Enabled := False;
+      btn_excluirFinanceiro.Font.Color := clGray;
+      btn_alterarTitulos.Font.Color := clGray;
+      btn_excluirFinanceiro.Cursor := crDefault;
+      btn_alterarTitulos.Cursor := crDefault;
+
+      Exit;
+    end;
 
   finally
-   // ConsultaFinan.Free;
+  //  ConsultaFinan.Free;
+  end;
+
+  //  Comportamento visual e funcional conforme o modo
+  case rg_filtroDeletarAlterar.ItemIndex of
+    0: // Deletar Movimento
+      begin
+        btn_excluirFinanceiro.Enabled := True;
+        btn_excluirFinanceiro.Font.Color := clRed;
+        btn_excluirFinanceiro.Cursor := crHandPoint;
+
+        btn_alterarTitulos.Enabled := False;
+        btn_alterarTitulos.Font.Color := clGray;
+        btn_alterarTitulos.Cursor := crDefault;
+      end;
+    1: // Alterar Movimento
+      begin
+        btn_excluirFinanceiro.Enabled := False;
+        btn_excluirFinanceiro.Font.Color := clGray;
+        btn_excluirFinanceiro.Cursor := crDefault;
+
+        btn_alterarTitulos.Enabled := True;
+        btn_alterarTitulos.Font.Color := clGreen;
+        btn_alterarTitulos.Cursor := crHandPoint;
+      end;
+  else
+    btn_excluirFinanceiro.Enabled := False;
+    btn_alterarTitulos.Enabled := False;
+    btn_excluirFinanceiro.Font.Color := clGray;
+    btn_alterarTitulos.Font.Color := clGray;
+    btn_excluirFinanceiro.Cursor := crDefault;
+    btn_alterarTitulos.Cursor := crDefault;
   end;
 end;
+
 
 
 procedure TViewMain.btn_testeClick(Sender: TObject);
@@ -1126,6 +1333,109 @@ begin
                       'OK');
 end;
 
+procedure TViewMain.chk_alterarDocumentoIDClick(Sender: TObject);
+begin
+  if chk_alterarDocumentoID.Checked then
+  begin
+    rg_textoAdicionalDocumento.Enabled := True;
+    edt_textDocumento.Enabled := True;
+    lbl_exemploDocumento.Visible := True;
+    lbl_textoAdicional.Enabled := True;
+  end
+  else
+  begin
+    rg_textoAdicionalDocumento.Enabled := False;
+    edt_textDocumento.Enabled := False;
+    lbl_exemploDocumento.Visible := False;
+    lbl_textoAdicional.Enabled := False;
+  end;
+
+end;
+
+
+procedure TViewMain.chk_deletarCreditoClick(Sender: TObject);
+begin
+   if chk_deletarCredito.Checked then
+   begin
+     btn_deletarCreditos.Enabled:=True;
+   end
+     else
+   begin
+     btn_deletarCreditos.Enabled:=False;
+   end;
+end;
+
+procedure TViewMain.chk_filtroDataCreditoClick(Sender: TObject);
+begin
+   if chk_filtroDataCredito.Checked then
+   begin
+      edt_dataInicialCredito.Enabled := True;
+      edt_dataFinalCredito.Enabled := True;
+   end
+   else
+   begin
+      edt_dataInicialCredito.Enabled := false;
+      edt_dataFinalCredito.Enabled:= false;
+   end;
+end;
+
+procedure TViewMain.btn_alterarTitulosClick(Sender: TObject);
+var
+  Movimento: TClasseMovimentoFinanceiro;
+  TextoAdicional: String;
+  ModoTexto: Integer;
+  DS: TDataSet;
+begin
+  DS := dbgrd_movimentoFinanceiro.DataSource.DataSet;
+
+  if not Assigned(DS) or DS.IsEmpty then
+  begin
+    MessageDlg('Nenhum registro carregado no grid.', mtWarning, [mbOK], 0);
+    Exit;
+  end;
+
+  // 🔸 Validação centralizada — apenas uma vez
+  if chk_alterarDocumentoID.Checked then
+  begin
+    if Trim(edt_textDocumento.Text) = '' then
+    begin
+      MessageDlg('Digite um texto adicional para alterar o DOCUMENTO_ID.', mtWarning, [mbOK], 0);
+      edt_textDocumento.SetFocus;
+      Exit;
+    end;
+  end;
+
+  // 🔸 Confirmação do usuário
+  if MessageDlg('Aplicar as alterações definidas a todos os registros exibidos?',
+     mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    Exit;
+
+  Movimento := TClasseMovimentoFinanceiro.Create;
+  try
+    TextoAdicional := Trim(edt_textDocumento.Text);
+    ModoTexto := rg_textoAdicionalDocumento.ItemIndex;
+
+    Movimento.AplicarAlteracoesEmLote(
+      DS,
+      chk_limparPedidoTitulos.Checked,
+      chk_limparNossoNumero.Checked,
+      chk_alterarDocumentoID.Checked,
+      TextoAdicional,
+      ModoTexto
+    );
+  finally
+    Movimento.Free;
+  end;
+
+  // 🔸 Atualiza o grid
+  btn_processarFinanceiro.Click;
+end;
+
+
+
+
+
+
 procedure TViewMain.btn_bindsOracleClick(Sender: TObject);
 begin
   try
@@ -1236,6 +1546,44 @@ begin
  AlternaSplitViewClose(SplitViewMenu);
 end;
 
+procedure TViewMain.rg_filtroDeletarAlterarClick(Sender: TObject);
+begin
+
+begin
+  case rg_filtroDeletarAlterar.ItemIndex of
+    0:
+      begin
+        grp_alterarTitulos.Enabled := False;
+        btn_excluirFinanceiro.Enabled := True;
+        btn_excluirFinanceiro.Font.Color := clRed;
+        btn_excluirFinanceiro.Cursor := crHandPoint;
+
+        btn_alterarTitulos.Enabled := False;
+        btn_alterarTitulos.Font.Color := clGray;
+        btn_alterarTitulos.Cursor := crDefault;
+      end;
+    1:
+      begin
+        grp_alterarTitulos.Enabled := True;
+        btn_excluirFinanceiro.Enabled := False;
+        btn_excluirFinanceiro.Font.Color := clGray;
+        btn_excluirFinanceiro.Cursor := crDefault;
+
+        btn_alterarTitulos.Enabled := True;
+        btn_alterarTitulos.Font.Color := clGreen;
+        btn_alterarTitulos.Cursor := crHandPoint;
+      end;
+  else
+    btn_excluirFinanceiro.Enabled := False;
+    btn_alterarTitulos.Enabled := False;
+    btn_excluirFinanceiro.Font.Color := clGray;
+    btn_alterarTitulos.Font.Color := clGray;
+    btn_excluirFinanceiro.Cursor := crDefault;
+    btn_alterarTitulos.Cursor := crDefault;
+  end;
+end;
+end;
+
 procedure TViewMain.rg_filtroPeriodoFinanceiroClick(Sender: TObject);
 begin
  // Controla as opções de datas para o usuario
@@ -1243,6 +1591,7 @@ begin
      grp_periodoExclusao.Enabled := True
   else
      grp_periodoExclusao.Enabled := False;
+
 end;
 
 

@@ -1,4 +1,4 @@
-unit classe.BancoDados;
+unit Classe.BancoDados;
 
 interface
 
@@ -19,18 +19,28 @@ type
     constructor Create(AConnection: TOraSession);
     destructor Destroy; override;
 
-    // Configurações
+    // Configurações de LOG
     procedure EnableLog(const AFilePath: string);
     procedure DisableLog;
 
-    // Métodos principais
+    // SQL base
     procedure SetSQL(const ASQL: string);
+    procedure AddSQL(const ASQL: string);
+    procedure AddWhere(const ACond: string);
+    procedure AddDateBetween(const AField, AParamIni, AParamFim: string;
+                             const ADataIni, ADataFim: TDateTime);
+
     procedure AddParam(const AParamName: string; const AValue: Variant);
     procedure ClearParams;
 
-    // Execuções
-    procedure ExecutarConsulta;          // SELECT
-    procedure ExecutarComando;           // INSERT / UPDATE / DELETE
+    // Execução
+    procedure ExecutarConsulta;
+    procedure ExecutarComando;
+
+    // Transações (NOVOS MÉTODOS)
+    procedure IniciarTransacao;
+    procedure ConfirmarTransacao;
+    procedure CancelarTransacao;
 
     // Acesso a dados
     function GetDataSource: TDataSource;
@@ -76,6 +86,7 @@ begin
 
   try
     AssignFile(LFile, FLogFile);
+
     if FileExists(FLogFile) then
       Append(LFile)
     else
@@ -84,8 +95,7 @@ begin
     Writeln(LFile, FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + ' - ' + AMsg);
     CloseFile(LFile);
   except
-    // Em caso de falha no log, apenas ignora
-    ShowMessage('erro log exec Sql');
+    // Ignorar falhas de log silenciosamente
   end;
 end;
 
@@ -95,6 +105,54 @@ begin
   FQuery.SQL.Clear;
   FQuery.SQL.Add(ASQL);
   Log('SQL definido: ' + ASQL);
+end;
+
+procedure TClasseBancoDados.AddSQL(const ASQL: string);
+begin
+  if FQuery.Active then
+    FQuery.Close;
+
+  FQuery.SQL.Add(ASQL);
+  Log('SQL adicionado: ' + ASQL);
+end;
+
+procedure TClasseBancoDados.AddWhere(const ACond: string);
+var
+  HasWhere: Boolean;
+  SQLText: string;
+begin
+  SQLText := UpperCase(FQuery.SQL.Text);
+  HasWhere := Pos(' WHERE ', SQLText) > 0;
+
+  if not HasWhere then
+    AddSQL(' WHERE ' + ACond)
+  else
+    AddSQL('   AND ' + ACond);
+end;
+
+procedure TClasseBancoDados.AddDateBetween(const AField,
+                                           AParamIni, AParamFim: string;
+                                           const ADataIni, ADataFim: TDateTime);
+begin
+  if (ADataIni = 0) and (ADataFim = 0) then
+    Exit;
+
+  if (ADataIni <> 0) and (ADataFim <> 0) then
+  begin
+    AddWhere(Format('%s BETWEEN :%s AND :%s', [AField, AParamIni, AParamFim]));
+    AddParam(AParamIni, ADataIni);
+    AddParam(AParamFim, ADataFim);
+  end
+  else if (ADataIni <> 0) then
+  begin
+    AddWhere(Format('%s >= :%s', [AField, AParamIni]));
+    AddParam(AParamIni, ADataIni);
+  end
+  else if (ADataFim <> 0) then
+  begin
+    AddWhere(Format('%s <= :%s', [AField, AParamFim]));
+    AddParam(AParamFim, ADataFim);
+  end;
 end;
 
 procedure TClasseBancoDados.AddParam(const AParamName: string; const AValue: Variant);
@@ -107,7 +165,7 @@ end;
 
 procedure TClasseBancoDados.ClearParams;
 begin
- // FQuery.Params.ClearValues;
+  //FQuery.Params.ClearValues;
 end;
 
 procedure TClasseBancoDados.ExecutarConsulta;
@@ -116,7 +174,6 @@ begin
     FQuery.Close;
     FQuery.Open;
     Log('Consulta executada com sucesso');
-
   except
     on E: Exception do
     begin
@@ -148,6 +205,35 @@ end;
 function TClasseBancoDados.GetQuery: TOraQuery;
 begin
   Result := FQuery;
+end;
+
+{ ============================ NOVOS MÉTODOS ============================ }
+
+procedure TClasseBancoDados.IniciarTransacao;
+begin
+  if Assigned(FQuery.Session) and not FQuery.Session.InTransaction then
+  begin
+    FQuery.Session.StartTransaction;
+    Log('Transação iniciada.');
+  end;
+end;
+
+procedure TClasseBancoDados.ConfirmarTransacao;
+begin
+  if Assigned(FQuery.Session) and FQuery.Session.InTransaction then
+  begin
+    FQuery.Session.Commit;
+    Log('Transação confirmada (commit).');
+  end;
+end;
+
+procedure TClasseBancoDados.CancelarTransacao;
+begin
+  if Assigned(FQuery.Session) and FQuery.Session.InTransaction then
+  begin
+    FQuery.Session.Rollback;
+    Log('Transação cancelada (rollback).');
+  end;
 end;
 
 end.

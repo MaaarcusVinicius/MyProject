@@ -16,6 +16,7 @@ type
     procedure Start(AMax: Integer; const ACaption: string = '');
     procedure Step(const AMessage: string = '');
     procedure Finish;
+    procedure UpdateCaption(const ACaption: string);
   end;
 
 implementation
@@ -62,6 +63,16 @@ procedure TProgressHelper.Finish;
 begin
   FProgressForm.Hide;
 end;
+
+procedure TProgressHelper.UpdateCaption(const ACaption: string);
+begin
+  if Assigned(FProgressForm) then
+  begin
+    FProgressForm.Caption := ACaption;
+    FProgressForm.Update;
+  end;
+end;
+
 
 end.
 
