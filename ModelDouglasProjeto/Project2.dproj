@@ -1,15 +1,15 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{CAD8B8B0-75A3-42CD-9C92-E23615D33322}</ProjectGuid>
+        <ProjectGuid>{DB943F38-A4B1-4ADA-ADBE-33CFD4E8B34A}</ProjectGuid>
         <ProjectVersion>20.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <ProjectName Condition="'$(ProjectName)'==''">SiacCleanBase</ProjectName>
+        <ProjectName Condition="'$(ProjectName)'==''">Project2</ProjectName>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
-        <MainSource>SiacCleanBase.dpr</MainSource>
+        <MainSource>Project2.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -70,10 +70,10 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>SiacCleanBase</SanitizedProjectName>
+        <SanitizedProjectName>Project2</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>vclwinx;DataSnapServer;ACBr_TCP;fs29;fmx;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;ACBr_OpenSSL;appanalytics;IndyProtocols;vclx;Skia.Package.RTL;dbxcds;vcledge;FmxTeeUI;DBXFirebirdDriver;TagEditor;dacvcl290;FireDACSqliteDriver;DbxClientDriver;soapmidas;frxODAC29;siacPack;TeeUI;ACBr_PagFor;dbexpress;ACBr_Reinf;inet;vacommPkgDXE7;vcltouch;FireDACDBXDriver;fmxdae;spdGovBase_D12A;CustomIPTransport;FireDACMSSQLDriver;odacvcl290;IndySystem;ACBr_Diversos;frxe29;odacfmx290;VirtualTreesR;fsDB29;vclFireDAC;ACBr_CTe;office2K;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;bindcompdbx;rtl;FireDACMySQLDriver;DBXSqliteDriver;DBXSybaseASEDriver;ACBr_Comum;spdNFCeGov_D12A;vclimg;DataSnapFireDAC;inetdbxpress;FireDAC;xmlrtl;odac290;spdNFSeGov_D12A;dsnap;FireDACDb2Driver;DBXOracleDriver;DBXInformixDriver;spdNFE_D12A;fmxobj;bindcompvclsmp;DataSnapNativeClient;frx29;DatasnapConnectorsFreePascal;spdMDFeDataSet_D12A;emshosting;frxDB29;FireDACCommonDriver;IndyIPClient;bindcompvclwinx;emsedge;bindcompfmx;crcontrols290;inetdb;FireDACASADriver;Tee;vclactnband;fmxFireDAC;FireDACInfxDriver;DBXMySQLDriver;VclSmp;DataSnapCommon;fmxase;DBXOdbcDriver;dbrtl;FireDACOracleDriver;Skia.Package.FMX;TeeDB;FireDACMSAccDriver;DataSnapIndy10ServerTransport;DataSnapConnectors;vcldsnap;DBXInterBaseDriver;FireDACMongoDBDriver;FireDACTDataDriver;Skia.Package.VCL;spdMDFe_D12A;vcldb;ACBr_Integrador;ACBr_PIXCD;SynEditDR;spdNFeGov_D12A;dacfmx290;ACBr_BoletoFR;bindcomp;IndyCore;RESTBackendComponents;frxDAC29;spdMDFeGov_D12A;FireDACADSDriver;RESTComponents;IndyIPServer;vcl;dsnapxml;adortl;dsnapcon;DataSnapClient;DataSnapProviderClient;spdNFSe_D12A;dac290;DBXDb2Driver;spdNFCe_D12A;ACBr_Boleto;emsclientfiredac;FireDACPgDriver;FireDACDSDriver;tethering;bindcompvcl;CloudService;DBXSybaseASADriver;FMXTee;soaprtl;soapserver;FireDACIBDriver;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>vclwinx;DataSnapServer;ACBr_TCP;fs29;fmx;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;ACBr_OpenSSL;appanalytics;IndyProtocols;vclx;Skia.Package.RTL;dbxcds;vcledge;FmxTeeUI;DBXFirebirdDriver;TagEditor;dacvcl290;FireDACSqliteDriver;DbxClientDriver;JclVcl;soapmidas;frxODAC29;siacPack;TeeUI;ACBr_PagFor;Jcl;dbexpress;ACBr_Reinf;inet;vacommPkgDXE7;vcltouch;FireDACDBXDriver;fmxdae;spdGovBase_D12A;CustomIPTransport;FireDACMSSQLDriver;odacvcl290;IndySystem;ACBr_Diversos;frxe29;odacfmx290;VirtualTreesR;JclContainers;fsDB29;vclFireDAC;ACBr_CTe;office2K;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;bindcompdbx;rtl;FireDACMySQLDriver;frce;DBXSqliteDriver;DBXSybaseASEDriver;ACBr_Comum;spdNFCeGov_D12A;vclimg;DataSnapFireDAC;inetdbxpress;FireDAC;xmlrtl;odac290;spdNFSeGov_D12A;dsnap;FireDACDb2Driver;DBXOracleDriver;DBXInformixDriver;spdNFE_D12A;fmxobj;bindcompvclsmp;DataSnapNativeClient;frx29;DatasnapConnectorsFreePascal;spdMDFeDataSet_D12A;emshosting;frxDB29;FireDACCommonDriver;IndyIPClient;bindcompvclwinx;emsedge;bindcompfmx;crcontrols290;inetdb;gigasoft;FireDACASADriver;Tee;vclactnband;fmxFireDAC;FireDACInfxDriver;DBXMySQLDriver;VclSmp;DataSnapCommon;fmxase;DBXOdbcDriver;dbrtl;FireDACOracleDriver;Skia.Package.FMX;TeeDB;FireDACMSAccDriver;DataSnapIndy10ServerTransport;JclDeveloperTools;DataSnapConnectors;vcldsnap;DBXInterBaseDriver;FireDACMongoDBDriver;FireDACTDataDriver;Skia.Package.VCL;spdMDFe_D12A;vcldb;ACBr_Integrador;ACBr_PIXCD;SynEditDR;spdNFeGov_D12A;dacfmx290;ACBr_BoletoFR;bindcomp;IndyCore;RESTBackendComponents;frxDAC29;spdMDFeGov_D12A;FireDACADSDriver;RESTComponents;IndyIPServer;vcl;dsnapxml;adortl;dsnapcon;DataSnapClient;DataSnapProviderClient;spdNFSe_D12A;dac290;DBXDb2Driver;spdNFCe_D12A;ACBr_Boleto;emsclientfiredac;FireDACPgDriver;FireDACDSDriver;tethering;bindcompvcl;CloudService;DBXSybaseASADriver;FMXTee;soaprtl;soapserver;FireDACIBDriver;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -103,12 +103,6 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_HppOutput>C:\MyProjeto\SiacCleanBase\Fontes\dcu\</DCC_HppOutput>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>SiacCleanBase_Icon.ico</Icon_MainIcon>
-        <UWP_DelphiLogo44>Win32\Debug\Arquivos\icones\Logo_sistema.320.px.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>Win32\Debug\Arquivos\icones\Logo_sistema.320.px.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -129,47 +123,10 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uViewMain.pas">
-            <Form>ViewMain</Form>
-        </DCCReference>
-        <DCCReference Include="Principal.pas">
-            <Form>frmPrincipal</Form>
+        <DCCReference Include="Unit1.pas">
+            <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uDataModule.pas">
-            <Form>DmModule</Form>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="uViewlogin.pas">
-            <Form>form_login</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_empresasDados.pas">
-            <Form>form_empresaDados</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uViewMensagens.pas">
-            <Form>ViewMensagens</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Classe.funcoes.pas"/>
-        <DCCReference Include="uViewProgressBar.pas">
-            <Form>frmProgressBar</Form>
-        </DCCReference>
-        <DCCReference Include="Classe.ProgressHelper.pas"/>
-        <DCCReference Include="classe.uScriptGeneratorTriggers.pas"/>
-        <DCCReference Include="classe.uScriptGeneratorDeleteEmpresas.pas"/>
-        <DCCReference Include="classe.uScriptGeneratorTrocaEmpresas.pas"/>
-        <DCCReference Include="classe.BancoDados.pas"/>
-        <DCCReference Include="Classe.DBA.Oracle.pas"/>
-        <DCCReference Include="Classe.AtualizaComponentesTela.pas"/>
-        <DCCReference Include="C:\sistemas\Repositorio\TelaAguarde.pas">
-            <Form>FormTelaAguarde</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Classe.ConsultaEmpresa.pas"/>
-        <DCCReference Include="Classe.MovimentoFinanceiro.pas"/>
-        <DCCReference Include="Classe.LimparMovimento.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -188,23 +145,13 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">SiacCleanBase.dpr</Source>
+                    <Source Name="MainSource">Project2.dpr</Source>
                 </Source>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp290.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="Win32\Debug\Arquivos\icones\Logo_sistema.320.px.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                <DeployFile LocalName="Win32\Debug\Project2.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteDir>Assets\</RemoteDir>
-                        <RemoteName>Logo44x44.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Win32\Debug\SiacCleanBase.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>SiacCleanBase.exe</RemoteName>
+                        <RemoteName>Project2.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1163,7 +1110,6 @@
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
             </Platforms>
-            <ModelSupport>False</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

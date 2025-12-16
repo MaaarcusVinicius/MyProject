@@ -215,7 +215,7 @@ begin
     '        F.PEDIDO_ID, ' +
     '        F.VLR_TITULO, ' +
     '        F.STATUS, ' +
-    '        F.DT_CADASTRAMENTO, ' +
+    '        trunc(F.DT_CADASTRAMENTO) as DT_CADASTRAMENTO, ' +
     '        F.DT_EMISSAO, ' +
     '        F.DT_VENCTO, ' +
     '        F.DT_BAIXA, ' +
@@ -227,17 +227,22 @@ begin
 
   FCarregarMovimentoFinanceiro.AddParam('vEMPRESA_ID', AEmpresaID);
 
+  // Tipo de conta
   case ATipoContaIndex of
     0: FCarregarMovimentoFinanceiro.AddSQL('AND F.TIPO_CONTA IN (''CR'',''CP'')');
     1: FCarregarMovimentoFinanceiro.AddSQL('AND F.TIPO_CONTA = ''CR''');
     2: FCarregarMovimentoFinanceiro.AddSQL('AND F.TIPO_CONTA = ''CP''');
   end;
 
+  // Status
   case AStatusIndex of
     1: FCarregarMovimentoFinanceiro.AddSQL('AND F.STATUS = ''A''');
     2: FCarregarMovimentoFinanceiro.AddSQL('AND F.STATUS IN (''B'',''C'')');
+    3: FCarregarMovimentoFinanceiro.AddSQL('AND F.STATUS = ''D''');
+    4: FCarregarMovimentoFinanceiro.AddSQL('AND F.STATUS = ''P''');
   end;
 
+  //  Filtro por período (agora funcional)
   if AFiltroPeriodoIndex = 1 then
   begin
     if Assigned(FInstance) then
@@ -252,23 +257,37 @@ begin
       if not HasAnyCheck then
       begin
         MessageDlg('Selecione pelo menos um tipo de data.', mtWarning, [mbOK], 0);
+        Exit;
       end;
 
       for i := 0 to 3 do
       begin
         if FInstance.FChecks[i].Checked then
         begin
-          if TryStrToDate(FInstance.FMaskEdits[i, 0].Text, LDataIni) or
+          if TryStrToDate(FInstance.FMaskEdits[i, 0].Text, LDataIni) and
              TryStrToDate(FInstance.FMaskEdits[i, 1].Text, LDataFim) then
           begin
             HasAnyDate := True;
-            Break;
+
+            case i of
+              0: FCarregarMovimentoFinanceiro.AddSQL('AND F.DT_CADASTRAMENTO BETWEEN :pDataIni AND :pDataFim');
+              1: FCarregarMovimentoFinanceiro.AddSQL('AND F.DT_EMISSAO BETWEEN :pDataIni AND :pDataFim');
+              2: FCarregarMovimentoFinanceiro.AddSQL('AND F.DT_VENCTO BETWEEN :pDataIni AND :pDataFim');
+              3: FCarregarMovimentoFinanceiro.AddSQL('AND F.DT_BAIXA BETWEEN :pDataIni AND :pDataFim');
+            end;
+
+            FCarregarMovimentoFinanceiro.AddParam('pDataIni', LDataIni);
+            FCarregarMovimentoFinanceiro.AddParam('pDataFim', LDataFim);
+            Break; // só um tipo de data será usado
           end;
         end;
       end;
 
       if not HasAnyDate then
-        MessageDlg('Informe pelo menos uma data válida.', mtError, [mbOK], 0);
+      begin
+        MessageDlg('Informe uma data inicial e final válidas.', mtError, [mbOK], 0);
+        Exit;
+      end;
     end;
   end;
 
@@ -277,7 +296,7 @@ begin
   ADBGrid.DataSource := FCarregarMovimentoFinanceiro.GetDataSource;
 end;
 
-{ 🔧 Método corrigido — garante que o dataset esteja aberto e pronto }
+
 procedure TClasseMovimentoFinanceiro.CarregarCreditosFinanceiro(
   const AEmpresaID: string;
   const FiltroData: Boolean;
@@ -308,7 +327,7 @@ begin
   FCarregarCreditoFinanceiro.AddSQL('ORDER BY C.DATA_CADASTRO DESC');
   FCarregarCreditoFinanceiro.ExecutarConsulta;
 
-  // 🔒 Garantia adicional
+  // Garantia adicional
   if not FCarregarCreditoFinanceiro.GetQuery.Active then
     FCarregarCreditoFinanceiro.GetQuery.Open;
 end;
@@ -437,7 +456,7 @@ end;
 
 procedure TClasseMovimentoFinanceiro.ExcluirRegistrosFinanceiro(ADataset: TDataSet);
 var
-  RowID: String;
+  RowID, EmpresaID, DocumentoID: String;
   Total, Contador, Percentual: Integer;
   Progress: TProgressHelper;
   StartTime, Elapsed: TDateTime;
@@ -470,16 +489,32 @@ begin
       while not ADataset.Eof do
       begin
         Inc(Contador);
-        RowID := ADataset.FieldByName('ROWID').AsString;
 
-        if Trim(RowID) <> '' then
+        RowID := ADataset.FieldByName('ROWID').AsString;
+        EmpresaID := ADataset.FieldByName('EMPRESA_ID').AsString;
+        DocumentoID := ADataset.FieldByName('DOCUMENTO_ID').AsString;
+
+        if (Trim(RowID) <> '') and (Trim(EmpresaID) <> '') and (Trim(DocumentoID) <> '') then
         begin
+          // 🔹 Primeiro: remove os registros vinculados na tabela FINANCEIRO_FLUXO
           FCarregarMovimentoFinanceiro.SetSQL(
-            'DELETE FROM FINANCEIRO WHERE ROWID = :AROWID');
+            'DELETE FROM FINANCEIRO_FLUXO ' +
+            ' WHERE EMPRESA_ID = :PEMPRESA_ID ' +
+            '   AND DOCUMENTO_ID = :PDOCUMENTO_ID'
+          );
+          FCarregarMovimentoFinanceiro.AddParam('PEMPRESA_ID', EmpresaID);
+          FCarregarMovimentoFinanceiro.AddParam('PDOCUMENTO_ID', DocumentoID);
+          FCarregarMovimentoFinanceiro.ExecutarComando;
+
+          // 🔹 Depois: exclui o registro principal da tabela FINANCEIRO
+          FCarregarMovimentoFinanceiro.SetSQL(
+            'DELETE FROM FINANCEIRO WHERE ROWID = :AROWID'
+          );
           FCarregarMovimentoFinanceiro.AddParam('AROWID', RowID);
           FCarregarMovimentoFinanceiro.ExecutarComando;
         end;
 
+        // 🕒 Atualização visual do progresso
         if Contador > 1 then
         begin
           Elapsed := (Now - StartTime) * 24 * 60 * 60;
@@ -505,7 +540,7 @@ begin
       end;
 
       FCarregarMovimentoFinanceiro.ConfirmarTransacao;
-      MessageDlg('Todos os registros foram excluídos com sucesso.', mtInformation, [mbOK], 0);
+      MessageDlg('Todos os registros e seus fluxos foram excluídos com sucesso.', mtInformation, [mbOK], 0);
     except
       on E: Exception do
       begin
@@ -519,6 +554,7 @@ begin
     ADataset.EnableControls;
   end;
 end;
+
 
 procedure TClasseMovimentoFinanceiro.ExcluirCreditosFinanceiro(
   const FiltroData: Boolean);

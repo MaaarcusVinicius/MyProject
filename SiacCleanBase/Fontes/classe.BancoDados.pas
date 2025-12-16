@@ -34,7 +34,7 @@ type
     procedure ClearParams;
 
     // Execução
-    procedure ExecutarConsulta;
+    procedure ExecutarConsulta; overload;
     procedure ExecutarComando;
 
     // Transações (NOVOS MÉTODOS)

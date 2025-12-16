@@ -1,4 +1,4 @@
-﻿object ViewMain: TViewMain
+object ViewMain: TViewMain
   AlignWithMargins = True
   Left = 0
   Top = 0
@@ -13,6 +13,8 @@
   Font.Style = []
   WindowState = wsMaximized
   OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   TextHeight = 15
   object pnl_topo: TPanel
@@ -1095,7 +1097,7 @@
       Top = 0
       Width = 1344
       Height = 746
-      ActivePage = PageTratarFinanceiro
+      ActivePage = PageDeletaMovimento
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -7265,7 +7267,7 @@
               Align = alClient
               Alignment = taCenter
               AutoSize = False
-              Caption = 'Limpar Movimento Siac'#13#10
+              Caption = 'Limpar Movimento Sistema'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWhite
               Font.Height = -20
@@ -7280,11 +7282,10 @@
           end
           object pnl_sistemas: TPanel
             Left = 1
-            Top = 273
+            Top = 42
             Width = 1334
-            Height = 392
+            Height = 623
             Align = alClient
-            Caption = 'pnl_modulos'
             TabOrder = 1
             object pnl_deletarMovimentoSistema: TPanel
               Left = 1
@@ -7319,9 +7320,10 @@
                   Caption = 'Excluir Movimento'
                   ImageIndex = 32
                   Images = ImageAllSystem
+                  Enabled = False
                   Flat = True
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
+                  Font.Color = clRed
                   Font.Height = -11
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
@@ -7331,7 +7333,6 @@
                   OnClick = btn_excluirMovimentoClick
                   ExplicitLeft = -2
                   ExplicitTop = -1
-                  ExplicitWidth = 104
                 end
               end
               object Panel18: TPanel
@@ -7356,7 +7357,7 @@
                   Align = alClient
                   BiDiMode = bdLeftToRight
                   Caption = 'Analisar Movimento'
-                  ImageIndex = 77
+                  ImageIndex = 35
                   Images = ImageAllSystem
                   Flat = True
                   Font.Charset = DEFAULT_CHARSET
@@ -7367,8 +7368,9 @@
                   Layout = blGlyphTop
                   ParentFont = False
                   ParentBiDiMode = False
+                  OnClick = btn_analisarExcluirMovimentoClick
                   ExplicitLeft = 8
-                  ExplicitTop = -1
+                  ExplicitTop = 6
                 end
               end
               object Panel19: TPanel
@@ -7383,7 +7385,7 @@
                 Color = clWhite
                 ParentBackground = False
                 TabOrder = 2
-                object SpeedButton4: TSpeedButton
+                object btn_infClickMovimentoDelete: TSpeedButton
                   AlignWithMargins = True
                   Left = 3
                   Top = 3
@@ -7404,156 +7406,139 @@
                   Layout = blGlyphTop
                   ParentFont = False
                   ParentBiDiMode = False
-                  OnClick = btn_infTelaClick
+                  OnClick = btn_infClickMovimentoDeleteClick
                   ExplicitLeft = 9
                   ExplicitTop = 2
                   ExplicitWidth = 104
                   ExplicitHeight = 81
                 end
               end
-              object Panel10: TPanel
-                AlignWithMargins = True
-                Left = 256
-                Top = 4
-                Width = 120
-                Height = 77
-                Align = alLeft
-                BevelKind = bkFlat
-                BevelOuter = bvNone
-                Color = clWhite
-                ParentBackground = False
-                TabOrder = 3
-                ExplicitLeft = 382
-              end
             end
-          end
-          object pnl_modulos: TPanel
-            Left = 1
-            Top = 42
-            Width = 1334
-            Height = 231
-            Align = alTop
-            TabOrder = 2
-            object grp_SelecaoModulos: TGroupBox
-              Left = 241
-              Top = 1
-              Width = 408
-              Height = 229
+            object DBGrid_movimentoDeleteSiac: TDBGrid
+              Left = 345
+              Top = 125
+              Width = 416
+              Height = 497
               Align = alLeft
-              Caption = '    Selecionar Mod'#250'los Exclus'#227'o    '
-              TabOrder = 0
-              object CheckListSiacModulos: TCheckListBox
-                Left = 5
-                Top = 24
-                Width = 380
-                Height = 137
-                BevelInner = bvNone
-                BevelOuter = bvNone
-                BiDiMode = bdLeftToRight
-                BorderStyle = bsNone
-                Color = clWhite
-                Columns = 2
-                DoubleBuffered = False
-                Flat = False
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clBlack
-                Font.Height = -15
-                Font.Name = 'Segoe UI'
-                Font.Style = []
-                HeaderColor = clBlue
-                HeaderBackgroundColor = clTeal
-                ItemHeight = 20
-                Items.Strings = (
-                  'Checkout'
-                  'Consigna'#231#227'o'
-                  'Cont'#225'bil'
-                  'Fluxo'
-                  'Licita'#231#227'o'
-                  'Livros'
-                  'MDF-e'
-                  'Os'
-                  'Siac'
-                  'Siac Complaint'
-                  'Siai')
-                ParentBiDiMode = False
-                ParentDoubleBuffered = False
-                ParentFont = False
-                StyleName = 'Windows'
-                TabOrder = 0
-              end
-            end
-            object grp_ConfiguracaoBase: TGroupBox
-              Left = 1
-              Top = 1
-              Width = 240
-              Height = 229
-              Align = alLeft
-              Caption = '    Configura'#231#227'o Base    '
+              Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
               TabOrder = 1
-              object lblPeriodo: TLabel
-                Left = 5
-                Top = 170
-                Width = 116
-                Height = 15
-                Caption = 'Per'#237'odo Base Exclus'#227'o'
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -12
+              TitleFont.Name = 'Segoe UI'
+              TitleFont.Style = []
+              OnDrawColumnCell = DBGrid_movimentoDeleteSiacDrawColumnCell
+              OnDblClick = DBGrid_movimentoDeleteSiacDblClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'TABELA'
+                  Title.Caption = 'Lista de Tabelas - Remover Dados'
+                  Width = 279
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'QTD_LINHAS'
+                  Title.Caption = 'QTD LINHAS'
+                  Width = 95
+                  Visible = True
+                end>
+            end
+            object DBGrid_listaTabelasEssenciais: TDBGrid
+              Left = 1
+              Top = 125
+              Width = 344
+              Height = 497
+              Align = alLeft
+              TabOrder = 2
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -12
+              TitleFont.Name = 'Segoe UI'
+              TitleFont.Style = []
+              OnDrawColumnCell = DBGrid_listaTabelasEssenciaisDrawColumnCell
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'TABELA_PROTEGIDA'
+                  ImeName = 'Portuguese (Brazilian ABNT)'
+                  Title.Caption = 'Lista de Tabelas Protegidas'
+                  Width = 304
+                  Visible = True
+                end>
+            end
+            object pnl_separarCabecario: TPanel
+              Left = 1
+              Top = 86
+              Width = 1332
+              Height = 39
+              Align = alTop
+              Color = clTeal
+              ParentBackground = False
+              TabOrder = 3
+              object lbl_tituloTabelasDeletadas: TLabel
+                AlignWithMargins = True
+                Left = 358
+                Top = 4
+                Width = 747
+                Height = 31
+                Align = alLeft
+                AutoSize = False
+                Caption = 'Tabelas Deletadas'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWhite
+                Font.Height = -20
+                Font.Name = 'Segoe UI'
+                Font.Style = [fsBold]
+                ParentFont = False
               end
-              object lblA: TLabel
-                Left = 103
-                Top = 190
-                Width = 6
-                Height = 15
-                Caption = 'a'
+              object lbl_tituloTabelasProtegidas: TLabel
+                AlignWithMargins = True
+                Left = 4
+                Top = 4
+                Width = 325
+                Height = 31
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Tabelas Protegidas'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWhite
+                Font.Height = -20
+                Font.Name = 'Segoe UI'
+                Font.Style = [fsBold]
+                ParentFont = False
+                ExplicitTop = 2
               end
-              object edtDataInicial: TMaskEdit
-                Left = 3
-                Top = 185
-                Width = 90
-                Height = 23
-                EditMask = '99/99/9999;1;_'
-                MaxLength = 10
-                TabOrder = 0
-                Text = '  /  /    '
-              end
-              object edtDataFinal: TMaskEdit
-                Left = 127
-                Top = 185
-                Width = 90
-                Height = 23
-                EditMask = '99/99/9999;1;_'
-                MaxLength = 10
-                TabOrder = 1
-                Text = '  /  /    '
-              end
-              object rg_tipoExclusão: TRadioGroup
-                Left = 3
-                Top = 95
-                Width = 214
-                Height = 74
-                Caption = '  Tipo de Exclus'#227'o  '
-                Color = clHighlightText
-                ItemIndex = 0
-                Items.Strings = (
-                  'Movimenta'#231#227'o Geral'
-                  'Movimenta'#231#227'o por Per'#237'odo')
-                ParentBackground = False
+              object lbl_separador: TLabel
+                AlignWithMargins = True
+                Left = 335
+                Top = 4
+                Width = 17
+                Height = 31
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = '|'
+                Color = clWhite
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWhite
+                Font.Height = -24
+                Font.Name = 'Segoe UI'
+                Font.Style = [fsBold]
                 ParentColor = False
-                TabOrder = 2
+                ParentFont = False
+                ExplicitLeft = 343
               end
-              object rg_modo: TRadioGroup
-                Left = 3
-                Top = 15
-                Width = 214
-                Height = 74
-                Caption = '  Modo de Exclus'#227'o  '
-                Color = clHighlightText
-                ItemIndex = 0
-                Items.Strings = (
-                  'Mod'#250'lo Siac'
-                  'Mod'#250'los Selecionados')
-                ParentBackground = False
-                ParentColor = False
-                TabOrder = 3
-              end
+            end
+            object pnl_abrigaTmemoTabelas: TPanel
+              Left = 761
+              Top = 125
+              Width = 572
+              Height = 497
+              Align = alClient
+              TabOrder = 4
             end
           end
         end
@@ -7642,14 +7627,11 @@
               HeaderFont.Style = []
               ParentFont = False
               TabOrder = 0
-              ExplicitLeft = 1
-              ExplicitTop = 2
-              ExplicitHeight = 349
               object rg_selecionarStatusExcluir: TRadioGroup
                 AlignWithMargins = True
                 Left = 7
                 Top = 84
-                Width = 206
+                Width = 256
                 Height = 80
                 Margins.Left = 0
                 Margins.Top = 0
@@ -7657,19 +7639,22 @@
                 Margins.Bottom = 0
                 Caption = '  Status dos T'#237'tulos  '
                 Color = clHighlightText
+                Columns = 2
                 ItemIndex = 0
                 Items.Strings = (
                   'Todos'
                   'Abertos'
-                  'Baixados/Cancelados')
+                  'Baixado/Cancelado'
+                  'Descontado'
+                  'Prorrogado')
                 ParentBackground = False
                 ParentColor = False
                 TabOrder = 0
               end
               object rg_filtroPeriodoFinanceiro: TRadioGroup
-                Left = 221
+                Left = 270
                 Top = 84
-                Width = 206
+                Width = 163
                 Height = 80
                 Caption = '  Filtro por P'#233'riodo  '
                 Color = clWhite
@@ -7692,7 +7677,7 @@
                 Margins.Top = 5
                 Margins.Right = 5
                 Margins.Bottom = 5
-                Caption = '  Per'#237'odo para Exclus'#227'o  '
+                Caption = '  Per'#237'odo para Exclus'#227'o/Altera'#231#227'o  '
                 Enabled = False
                 TabOrder = 2
                 object lbl_dataCadastramentoFinal: TLabel
@@ -7905,11 +7890,11 @@
                 TabOrder = 3
               end
               object rg_filtroDeletarAlterar: TRadioGroup
-                Left = 433
-                Top = 81
-                Width = 171
+                Left = 440
+                Top = 84
+                Width = 164
                 Height = 80
-                Caption = '  Filtro por P'#233'riodo  '
+                Caption = '  Tipo Procedimento  '
                 Color = clWhite
                 ItemIndex = 0
                 Items.Strings = (
@@ -7994,7 +7979,7 @@
                 end
                 object edt_textDocumento: TEdit
                   Left = 167
-                  Top = 114
+                  Top = 112
                   Width = 98
                   Height = 23
                   CharCase = ecUpperCase
@@ -8031,7 +8016,6 @@
               Color = clSilver
               ParentBackground = False
               TabOrder = 1
-              ExplicitTop = 352
               object pnl_abriBotaoAlterarTitulos: TPanel
                 AlignWithMargins = True
                 Left = 256
@@ -8201,7 +8185,6 @@
                 Color = clSilver
                 ParentBackground = False
                 TabOrder = 4
-                ExplicitLeft = 520
               end
               object Panel13: TPanel
                 AlignWithMargins = True
@@ -8215,8 +8198,6 @@
                 Color = clSilver
                 ParentBackground = False
                 TabOrder = 5
-                ExplicitLeft = 784
-                ExplicitTop = 3
               end
               object Panel14: TPanel
                 AlignWithMargins = True
@@ -8230,8 +8211,6 @@
                 Color = clSilver
                 ParentBackground = False
                 TabOrder = 6
-                ExplicitLeft = 728
-                ExplicitTop = 3
               end
               object Panel15: TPanel
                 AlignWithMargins = True
@@ -8245,8 +8224,6 @@
                 Color = clWhite
                 ParentBackground = False
                 TabOrder = 7
-                ExplicitLeft = 728
-                ExplicitTop = 3
                 object btn_deletarCreditos: TSpeedButton
                   AlignWithMargins = True
                   Left = 3
@@ -8261,7 +8238,7 @@
                   Images = ImageAllSystem
                   Flat = True
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
+                  Font.Color = clRed
                   Font.Height = -11
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
@@ -8285,8 +8262,6 @@
                 Color = clSilver
                 ParentBackground = False
                 TabOrder = 8
-                ExplicitLeft = 728
-                ExplicitTop = 3
               end
               object Panel21: TPanel
                 AlignWithMargins = True
@@ -8300,17 +8275,14 @@
                 Color = clSilver
                 ParentBackground = False
                 TabOrder = 9
-                ExplicitLeft = 728
-                ExplicitTop = 3
               end
             end
             object grp_tratarCreditoFinanceira: TGroupBox
               AlignWithMargins = True
               Left = 626
               Top = 4
-              Width = 384
-              Height = 346
-              Align = alLeft
+              Width = 381
+              Height = 141
               BiDiMode = bdLeftToRight
               Caption = '    - Configura'#231#227'o Base para Exclus'#227'o dos Cr'#233'idtos  -     '
               DefaultHeaderFont = False
@@ -8321,24 +8293,23 @@
               HeaderFont.Style = []
               ParentBiDiMode = False
               TabOrder = 2
-              ExplicitTop = 2
               object lbl_dataFinalCredito: TLabel
                 Left = 82
-                Top = 106
+                Top = 77
                 Width = 50
                 Height = 15
                 Caption = 'Data final'
               end
               object Label34: TLabel
-                Left = 11
-                Top = 106
+                Left = 12
+                Top = 77
                 Width = 58
                 Height = 15
                 Caption = 'Data inicial'
               end
               object edt_dataInicialCredito: TMaskEdit
                 Left = 12
-                Top = 127
+                Top = 98
                 Width = 64
                 Height = 22
                 AutoSize = False
@@ -8350,7 +8321,7 @@
               end
               object edt_dataFinalCredito: TMaskEdit
                 Left = 82
-                Top = 127
+                Top = 98
                 Width = 65
                 Height = 22
                 AutoSize = False
@@ -8362,7 +8333,7 @@
               end
               object chk_filtroDataCredito: TCheckBox
                 Left = 11
-                Top = 83
+                Top = 54
                 Width = 140
                 Height = 17
                 Caption = 'Filtrar por P'#233'riodo'
@@ -23529,5 +23500,14 @@
     Session = DmModule.orsConexao
     Left = 648
     Top = 752
+  end
+  object qryTabelasProtegidas: TOraQuery
+    Session = DmModule.orsConexao
+    Left = 376
+    Top = 344
+  end
+  object OraDataSource1: TOraDataSource
+    Left = 376
+    Top = 400
   end
 end

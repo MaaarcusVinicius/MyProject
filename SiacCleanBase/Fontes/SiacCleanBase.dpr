@@ -19,7 +19,8 @@ uses
   Classe.AtualizaComponentesTela in 'Classe.AtualizaComponentesTela.pas',
   TelaAguarde in 'C:\sistemas\Repositorio\TelaAguarde.pas' {FormTelaAguarde},
   Classe.ConsultaEmpresa in 'Classe.ConsultaEmpresa.pas',
-  Classe.MovimentoFinanceiro in 'Classe.MovimentoFinanceiro.pas';
+  Classe.MovimentoFinanceiro in 'Classe.MovimentoFinanceiro.pas',
+  Classe.LimparMovimento in 'Classe.LimparMovimento.pas';
 
 {$R *.res}
 
