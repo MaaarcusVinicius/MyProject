@@ -19,6 +19,8 @@ uses
   procedure MakeRounded(Control: TWinControl);
   function ValidarCaracterString(const S: string): Boolean;
   procedure prcLimparCamposEditaveis(AOwner: TWinControl);
+  function fnc_contar_registros_tabela(const NomeTabela: string): Integer;
+
 
 implementation
 
@@ -252,6 +254,62 @@ begin
     else if AOwner.Controls[I] is TWinControl then
       prcLimparCamposEditaveis(AOwner.Controls[I] as TWinControl);
   end;
+end;
+
+function fnc_contar_registros_tabela(const NomeTabela: string): Integer;
+var
+  Qry: TOraQuery;
+  SQL: string;
+  TabelaSegura: string;
+begin
+  Result := -1; // valor padrão em caso de erro
+
+  // 🔹 Valida nome da tabela (evita SQL Injection)
+  if not TRegEx.IsMatch(NomeTabela, '^[A-Za-z0-9_]+$') then
+  begin
+    MessageDlg('Nome de tabela inválido: ' + NomeTabela, mtError, [mbOK], 0);
+    Exit;
+  end;
+
+  // 🔹 Garante que o módulo de dados e a conexão estejam ativos
+  if (not Assigned(DmModule)) or (not Assigned(DmModule.orsConexao)) then
+  begin
+    MessageDlg('Módulo de dados não inicializado.', mtError, [mbOK], 0);
+    Exit;
+  end;
+
+  if not DmModule.orsConexao.Connected then
+  begin
+    MessageDlg('Conexão com o banco de dados não está ativa.', mtWarning, [mbOK], 0);
+    Exit;
+  end;
+
+  // 🔹 Executa a contagem de registros
+  Qry := TOraQuery.Create(nil);
+  try
+    Qry.Session := DmModule.orsConexao;
+    TabelaSegura := UpperCase(Trim(NomeTabela));
+
+    SQL := Format('SELECT COUNT(*) AS QTD FROM %s', [TabelaSegura]);
+    Qry.SQL.Text := SQL;
+    Qry.Open;
+
+    if not Qry.FieldByName('QTD').IsNull then
+      Result := Qry.FieldByName('QTD').AsInteger
+    else
+      Result := 0;
+
+  except
+    on E: Exception do
+    begin
+      MessageDlg('Erro ao contar registros na tabela "' + NomeTabela + '":' + sLineBreak + E.Message,
+                 mtError, [mbOK], 0);
+      Result := -1;
+    end;
+  end; // <-- fechamento correto do try..except
+
+  // 🔹 Libera memória (fora do bloco try..except)
+  Qry.Free;
 end;
 
 

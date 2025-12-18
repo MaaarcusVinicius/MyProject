@@ -2,7 +2,7 @@ object ViewMain: TViewMain
   AlignWithMargins = True
   Left = 0
   Top = 0
-  Caption = 's'
+  Caption = 'Siac Clean Base'
   ClientHeight = 803
   ClientWidth = 1544
   Color = clSkyBlue
@@ -7267,17 +7267,15 @@ object ViewMain: TViewMain
               Align = alClient
               Alignment = taCenter
               AutoSize = False
-              Caption = 'Limpar Movimento Sistema'
+              Caption = 'Limpar Movimento { Base de Dados }'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWhite
               Font.Height = -20
               Font.Name = 'Segoe UI'
               Font.Style = [fsBold]
               ParentFont = False
-              ExplicitLeft = 5
-              ExplicitTop = 13
-              ExplicitWidth = 1204
-              ExplicitHeight = 28
+              ExplicitLeft = 1
+              ExplicitTop = 3
             end
           end
           object pnl_sistemas: TPanel
@@ -7296,7 +7294,7 @@ object ViewMain: TViewMain
               Color = clSilver
               ParentBackground = False
               TabOrder = 0
-              object Panel17: TPanel
+              object pnl_abrigaBtnExcluirMovimentoSiac: TPanel
                 AlignWithMargins = True
                 Left = 130
                 Top = 4
@@ -7332,10 +7330,10 @@ object ViewMain: TViewMain
                   ParentBiDiMode = False
                   OnClick = btn_excluirMovimentoClick
                   ExplicitLeft = -2
-                  ExplicitTop = -1
+                  ExplicitTop = 6
                 end
               end
-              object Panel18: TPanel
+              object pnl_abrigaBtnAnaliseMovSiac: TPanel
                 AlignWithMargins = True
                 Left = 4
                 Top = 4
@@ -7356,7 +7354,7 @@ object ViewMain: TViewMain
                   Cursor = crHandPoint
                   Align = alClient
                   BiDiMode = bdLeftToRight
-                  Caption = 'Analisar Movimento'
+                  Caption = 'Iniciar Analisar '#13#10'Movimento'
                   ImageIndex = 35
                   Images = ImageAllSystem
                   Flat = True
@@ -7413,37 +7411,43 @@ object ViewMain: TViewMain
                   ExplicitHeight = 81
                 end
               end
-            end
-            object DBGrid_movimentoDeleteSiac: TDBGrid
-              Left = 345
-              Top = 125
-              Width = 416
-              Height = 497
-              Align = alLeft
-              Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
-              TabOrder = 1
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -12
-              TitleFont.Name = 'Segoe UI'
-              TitleFont.Style = []
-              OnDrawColumnCell = DBGrid_movimentoDeleteSiacDrawColumnCell
-              OnDblClick = DBGrid_movimentoDeleteSiacDblClick
-              Columns = <
-                item
-                  Expanded = False
-                  FieldName = 'TABELA'
-                  Title.Caption = 'Lista de Tabelas - Remover Dados'
-                  Width = 279
-                  Visible = True
+              object pnl_abrigaBtnAddListaProtegida: TPanel
+                AlignWithMargins = True
+                Left = 256
+                Top = 4
+                Width = 120
+                Height = 77
+                BevelKind = bkFlat
+                BevelOuter = bvNone
+                Color = clWhite
+                ParentBackground = False
+                TabOrder = 3
+                object btn_addListaProtegida: TSpeedButton
+                  AlignWithMargins = True
+                  Left = 3
+                  Top = 3
+                  Width = 110
+                  Height = 67
+                  Cursor = crHandPoint
+                  Align = alClient
+                  BiDiMode = bdLeftToRight
+                  Caption = 'Add Lista Protegida'
+                  ImageIndex = 63
+                  Images = ImageAllSystem
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  Layout = blGlyphTop
+                  ParentFont = False
+                  ParentBiDiMode = False
+                  OnClick = btn_addListaProtegidaClick
+                  ExplicitLeft = -2
+                  ExplicitTop = 7
                 end
-                item
-                  Expanded = False
-                  FieldName = 'QTD_LINHAS'
-                  Title.Caption = 'QTD LINHAS'
-                  Width = 95
-                  Visible = True
-                end>
+              end
             end
             object DBGrid_listaTabelasEssenciais: TDBGrid
               Left = 1
@@ -7451,13 +7455,28 @@ object ViewMain: TViewMain
               Width = 344
               Height = 497
               Align = alLeft
+              DrawingStyle = gdsGradient
+              FixedColor = clSkyBlue
+              GradientEndColor = clTeal
+              GradientStartColor = clMedGray
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ImeMode = imOpen
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+              ParentFont = False
               TabOrder = 2
               TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -12
+              TitleFont.Color = clWhite
+              TitleFont.Height = -15
               TitleFont.Name = 'Segoe UI'
+              TitleFont.Pitch = fpVariable
               TitleFont.Style = []
+              TitleFont.Quality = fqProof
               OnDrawColumnCell = DBGrid_listaTabelasEssenciaisDrawColumnCell
+              OnDblClick = DBGrid_listaTabelasEssenciaisDblClick
               Columns = <
                 item
                   Expanded = False
@@ -7532,13 +7551,49 @@ object ViewMain: TViewMain
                 ExplicitLeft = 343
               end
             end
-            object pnl_abrigaTmemoTabelas: TPanel
-              Left = 761
+            object DBGrid_movimentoDeleteSiac: TDBGrid
+              Left = 345
               Top = 125
-              Width = 572
+              Width = 416
               Height = 497
-              Align = alClient
-              TabOrder = 4
+              Align = alLeft
+              DrawingStyle = gdsGradient
+              FixedColor = clSkyBlue
+              GradientEndColor = clTeal
+              GradientStartColor = clMedGray
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ImeMode = imOpen
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+              ParentFont = False
+              TabOrder = 1
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWhite
+              TitleFont.Height = -15
+              TitleFont.Name = 'Segoe UI'
+              TitleFont.Pitch = fpVariable
+              TitleFont.Style = []
+              TitleFont.Quality = fqProof
+              OnDrawColumnCell = DBGrid_movimentoDeleteSiacDrawColumnCell
+              OnDblClick = DBGrid_movimentoDeleteSiacDblClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'TABELA'
+                  Title.Caption = 'Lista de Tabelas - Remover Dados'
+                  Width = 279
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'QTD_LINHAS'
+                  Title.Caption = 'QTD LINHAS'
+                  Width = 95
+                  Visible = True
+                end>
             end
           end
         end
@@ -23500,14 +23555,5 @@ object ViewMain: TViewMain
     Session = DmModule.orsConexao
     Left = 648
     Top = 752
-  end
-  object qryTabelasProtegidas: TOraQuery
-    Session = DmModule.orsConexao
-    Left = 376
-    Top = 344
-  end
-  object OraDataSource1: TOraDataSource
-    Left = 376
-    Top = 400
   end
 end

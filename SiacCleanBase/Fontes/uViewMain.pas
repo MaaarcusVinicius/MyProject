@@ -309,9 +309,9 @@ type
     lbl_textoAdicional: TLabel;
     btn_exemploDocumento: TButton;
     pnl_deletarMovimentoSistema: TPanel;
-    Panel17: TPanel;
+    pnl_abrigaBtnExcluirMovimentoSiac: TPanel;
     btn_excluirMovimento: TSpeedButton;
-    Panel18: TPanel;
+    pnl_abrigaBtnAnaliseMovSiac: TPanel;
     btn_analisarExcluirMovimento: TSpeedButton;
     Panel19: TPanel;
     btn_infClickMovimentoDelete: TSpeedButton;
@@ -335,9 +335,8 @@ type
     lbl_tituloTabelasDeletadas: TLabel;
     lbl_tituloTabelasProtegidas: TLabel;
     lbl_separador: TLabel;
-    pnl_abrigaTmemoTabelas: TPanel;
-    qryTabelasProtegidas: TOraQuery;
-    OraDataSource1: TOraDataSource;
+    pnl_abrigaBtnAddListaProtegida: TPanel;
+    btn_addListaProtegida: TSpeedButton;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -426,11 +425,15 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure DBGrid_movimentoDeleteSiacDblClick(Sender: TObject);
+    procedure DBGrid_listaTabelasEssenciaisDblClick(Sender: TObject);
+    procedure btn_addListaProtegidaClick(Sender: TObject);
+    procedure btn_addListaDeletarClick(Sender: TObject);
 
   private
     FMostrarBranco: Boolean;
     ActiveAlternaLogo: Boolean;
     FLimpar: TClasseLimparMovimento;
+    FBtnLimpar: TClasseLimparMovimento;
 
     procedure AlternarAtivo;
     procedure EnsureEventBindings;
@@ -488,11 +491,13 @@ end;
 procedure TViewMain.FormCreate(Sender: TObject);
 begin
   FLimpar := TClasseLimparMovimento.Create;
+  FBtnLimpar := TClasseLimparMovimento.Create;
 end;
 
 procedure TViewMain.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(FLimpar);
+  FreeAndNil(FBtnLimpar);
 end;
 
 procedure TViewMain.FormShow(Sender: TObject);
@@ -1117,20 +1122,29 @@ end;
 
 procedure TViewMain.btn_excluirMovimentoClick(Sender: TObject);
 begin
-  if not Assigned(FLimpar) then Exit;
+  if not Assigned(FBtnLimpar) then Exit;
 
  // DBGrid_movimentoDeleteSiac.SelectedRows
 
   DBGrid_movimentoDeleteSiac.DataSource.DataSet.First;
-  FLimpar.GetListaDeletaveis.Clear;
+  FBtnLimpar.GetListaDeletaveis.Clear;
   while not DBGrid_movimentoDeleteSiac.DataSource.DataSet.Eof do
   begin
-    FLimpar.GetListaDeletaveis.Add(DBGrid_movimentoDeleteSiac.DataSource.DataSet.FieldByName('TABELA').AsString);
+    FBtnLimpar.GetListaDeletaveis.Add(DBGrid_movimentoDeleteSiac.DataSource.DataSet.FieldByName('TABELA').AsString);
     DBGrid_movimentoDeleteSiac.DataSource.DataSet.Next;
   end;
 
-  FLimpar.ExecutarAnaliseTabelas;
-  FLimpar.TruncarTabelasDeletaveis;
+  FBtnLimpar.TruncarTabelasDeletaveis(DBGrid_movimentoDeleteSiac);
+
+  //  Mensagem de sucesso
+  fnc_criar_menssagem(' SIAC MOVIMENTO - LIMPAR DADOS',
+                      ' OS DADOS DO BANCO DE DADOS FORAM DELETADOS.',
+                      ' O PROCEDIMENTO FOI REALIZADO COM SUCESSO !!',
+                      ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
+                      'OK');
+
+  // Reinicia a pesquisa da tela
+  btn_analisarExcluirMovimentoClick(Sender);
 end;
 
 procedure TViewMain.btn_exemploDocumentoClick(Sender: TObject);
@@ -1590,7 +1604,7 @@ begin
   finally
     Screen.Cursor := crDefault;
   end;
-
+  // Habilita o botão para excluir o movimento,
   btn_excluirMovimento.Enabled := True;
 end;
 
@@ -1606,7 +1620,7 @@ end;
 
 procedure TViewMain.img_logoEmpresaBrancoClick(Sender: TObject);
 begin
-  // quando usuário clicar na imagem branca pause/retorna a alternância
+  // quando usuário clicar na imagem Azul pause/retorna a alternância
   AlternarAtivo;
 end;
 
@@ -1618,7 +1632,6 @@ end;
 
 procedure TViewMain.img_logoEnableClick(Sender: TObject);
 begin
-//   AlternaSplitView(SplitViewMenu);
   AlternaSplitViewOpen(SplitViewMenu);
 end;
 
@@ -1749,6 +1762,106 @@ begin
      grp_periodoExclusao.Enabled := True
   else
      grp_periodoExclusao.Enabled := False;
+end;
+
+
+procedure TViewMain.btn_addListaDeletarClick(Sender: TObject);
+begin
+  ShowMessage('Adicionar lista para Remover');
+end;
+
+procedure TViewMain.btn_addListaProtegidaClick(Sender: TObject);
+var
+  MemoForm: TForm;
+  MemoInput: TMemo;
+  BtnOk, BtnCancel: TButton;
+  Lista: TStringList;
+begin
+  // Cria form temporário
+  MemoForm := TForm.Create(nil);
+  try
+    MemoForm.Caption := 'Adicionar Tabelas Protegidas';
+    MemoForm.BorderStyle := bsSizeable;
+    MemoForm.Position := poScreenCenter;
+    MemoForm.Width := 600;
+    MemoForm.Height := 400;
+    MemoForm.Color := clTeal;
+    MemoForm.Font.Name := 'Segoe UI';
+    MemoForm.Font.Size := 10;
+
+    // 🔹 Cria o TMemo para digitação
+    MemoInput := TMemo.Create(MemoForm);
+    MemoInput.Parent := MemoForm;
+    MemoInput.Align := alClient;
+    MemoInput.ScrollBars := ssVertical;
+    MemoInput.WordWrap := False;
+    MemoInput.Font.Name := 'Consolas';
+    MemoInput.Font.Size := 11;
+    MemoInput.Font.Color := clGreen;
+    MemoInput.Lines.Add('Digite aqui os nomes das tabelas que deseja proteger...');
+    MemoInput.Lines.Add('Um nome de tabela por linha.');
+    MemoInput.Lines.Add('TABELA1');
+    MemoInput.Lines.Add('TABELA2');
+    MemoInput.Lines.Add('TABELA3');
+    MemoInput.Lines.Add('TABELA4');
+    MemoInput.SelStart := 0;
+
+    // 🔹 Botão OK
+    BtnOk := TButton.Create(MemoForm);
+    BtnOk.Parent := MemoForm;
+    BtnOk.Caption := 'Confirmar';
+    BtnOk.ModalResult := mrOk;
+    BtnOk.Default := True;
+    BtnOk.Top := MemoForm.ClientHeight - 45;
+    BtnOk.Left := MemoForm.ClientWidth - 180;
+    BtnOk.Width := 80;
+    BtnOk.Anchors := [akRight, akBottom];
+
+    // 🔹 Botão Cancelar
+    BtnCancel := TButton.Create(MemoForm);
+    BtnCancel.Parent := MemoForm;
+    BtnCancel.Caption := 'Cancelar';
+    BtnCancel.ModalResult := mrCancel;
+    BtnCancel.Cancel := True;
+    BtnCancel.Top := BtnOk.Top;
+    BtnCancel.Left := BtnOk.Left + BtnOk.Width + 10;
+    BtnCancel.Width := 80;
+    BtnCancel.Anchors := [akRight, akBottom];
+
+    if BtnCancel.ModalResult = mrOk then
+       // Desabilita o botão para excluir o movimento
+    btn_excluirMovimento.Enabled := False;
+
+
+
+    // 🔹 Mostra o formulário de forma modal
+    if MemoForm.ShowModal = mrOk then
+    begin
+      // Cria lista e preenche com o conteúdo digitado
+      Lista := TStringList.Create;
+      try
+        // Remove linhas vazias e espaços extras
+        Lista.Text := Trim(MemoInput.Lines.Text);
+        Lista.StrictDelimiter := True;
+
+        // 🔹 Aqui você pode chamar seu método existente:
+        // AdicionarTabelasProtegidasPersonalizadas(Lista);
+        FLimpar.AdicionarTabelasProtegidasPersonalizadas(Lista);
+
+        // E atualizar o grid visual
+        FLimpar.CarregarListaProtegidas(DBGrid_listaTabelasEssenciais);
+
+        // Desabilita o botão para excluir o movimento
+        btn_excluirMovimento.Enabled := False;
+
+      finally
+        Lista.Free;
+      end;
+    end;
+
+  finally
+    MemoForm.Free;
+  end;
 end;
 
 
@@ -1938,6 +2051,59 @@ begin
     Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
+procedure TViewMain.DBGrid_listaTabelasEssenciaisDblClick(Sender: TObject);
+var
+  TotalLinhas: Integer;
+begin
+  DBGrid_listaTabelasEssenciais.DataSource.DataSet.DisableControls;
+  DBGrid_movimentoDeleteSiac.DataSource.DataSet.DisableControls;
+  try
+    if DBGrid_listaTabelasEssenciais.DataSource.DataSet.IsEmpty then
+      Exit;
+
+    DBGrid_movimentoDeleteSiac.DataSource.DataSet.Insert;
+    DBGrid_movimentoDeleteSiac.DataSource.DataSet.FieldByName('TABELA').AsString :=
+      DBGrid_listaTabelasEssenciais.DataSource.DataSet.FieldByName('TABELA_PROTEGIDA').AsString;
+
+    DBGrid_movimentoDeleteSiac.DataSource.DataSet.FieldByName('QTD_LINHAS').AsInteger :=
+      fnc_contar_registros_tabela(DBGrid_movimentoDeleteSiac.DataSource.DataSet.FieldByName('TABELA').AsString);
+
+    // 🔹 NOVO: Marca o tipo de origem do item adicionado
+    if DBGrid_movimentoDeleteSiac.DataSource.DataSet.FindField('TIPO_ITEM') <> nil then
+      DBGrid_movimentoDeleteSiac.DataSource.DataSet.FieldByName('TIPO_ITEM').AsString := 'PERSONALIZADA';
+
+    DBGrid_movimentoDeleteSiac.DataSource.DataSet.Post;
+    DBGrid_listaTabelasEssenciais.DataSource.DataSet.Delete;
+
+    // 🔹 Atualiza labels
+    TotalLinhas := 0;
+    DBGrid_movimentoDeleteSiac.DataSource.DataSet.First;
+    while not DBGrid_movimentoDeleteSiac.DataSource.DataSet.Eof do
+    begin
+      if not DBGrid_movimentoDeleteSiac.DataSource.DataSet.FieldByName('QTD_LINHAS').IsNull then
+        Inc(TotalLinhas, DBGrid_movimentoDeleteSiac.DataSource.DataSet.FieldByName('QTD_LINHAS').AsInteger);
+      DBGrid_movimentoDeleteSiac.DataSource.DataSet.Next;
+    end;
+
+    lbl_tituloTabelasDeletadas.Caption := Format(
+      'Tabelas deletáveis: %d | Total de linhas: %s',
+      [DBGrid_movimentoDeleteSiac.DataSource.DataSet.RecordCount, FormatFloat('#,##0', TotalLinhas)]
+    );
+
+    lbl_tituloTabelasProtegidas.Caption := Format(
+      'Tabelas protegidas: %d',
+      [DBGrid_listaTabelasEssenciais.DataSource.DataSet.RecordCount]
+    );
+
+  finally
+    DBGrid_movimentoDeleteSiac.DataSource.DataSet.First;
+    DBGrid_listaTabelasEssenciais.DataSource.DataSet.First;
+    DBGrid_movimentoDeleteSiac.DataSource.DataSet.EnableControls;
+    DBGrid_listaTabelasEssenciais.DataSource.DataSet.EnableControls;
+  end;
+end;
+
+
 procedure TViewMain.DBGrid_listaTabelasEssenciaisDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer;
   Column: TColumn; State: TGridDrawState);
@@ -2011,27 +2177,50 @@ begin
   lbl_tituloTabelasProtegidas.Caption := Format('Tabelas protegidas: %d', [DBGrid_listaTabelasEssenciais.DataSource.DataSet.RecordCount]);
 end;
 
-procedure TViewMain.DBGrid_movimentoDeleteSiacDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TViewMain.DBGrid_movimentoDeleteSiacDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer;
+  Column: TColumn; State: TGridDrawState);
+var
+  TipoItem: string;
+  Canvas: TCanvas;
 begin
-  with (Sender as TDBGrid).Canvas do
+  Canvas := (Sender as TDBGrid).Canvas;
+
+  if (Column.Field = nil) or (Column.Field.DataSet = nil) then
+    Exit;
+
+  TipoItem := '';
+  if Column.Field.DataSet.FindField('TIPO_ITEM') <> nil then
+    TipoItem := UpperCase(Column.Field.DataSet.FieldByName('TIPO_ITEM').AsString);
+
+  // 🔹 Cores por tipo de item
+  if not (gdSelected in State) then
   begin
-    if not (gdSelected in State) then
+    if TipoItem = 'PERSONALIZADA' then
     begin
-      //  Fundo vermelho para tabelas deletáveis
-      Brush.Color := $CCCCFF; // Azul-claro avermelhado (pode trocar para $CCCCFF, $9999FF etc.)
-      Font.Color := clBlack;
+      Canvas.Brush.Color := RGB(255, 255, 180); // Amarelo claro
+      Canvas.Font.Style := [fsBold];
+    end
+    else if TipoItem = 'SISTEMA' then
+    begin
+      Canvas.Brush.Color := RGB(255, 220, 220); // Vermelho claro
+      Canvas.Font.Style := [];
     end
     else
-    begin
-      Brush.Color := clHighlight;
-      Font.Color := clHighlightText;
-    end;
+      Canvas.Brush.Color := clWindow;
 
-    FillRect(Rect);
-    TextOut(Rect.Left + 4, Rect.Top + 2, Column.Field.AsString);
+    Canvas.Font.Color := clBlack;
+  end
+  else
+  begin
+    Canvas.Brush.Color := clHighlight;
+    Canvas.Font.Color := clHighlightText;
   end;
+
+  Canvas.FillRect(Rect);
+  Canvas.TextOut(Rect.Left + 4, Rect.Top + 2, Column.Field.AsString);
 end;
+
 
 procedure TViewMain.ExecutarOpcaoDeletarUser;
 var

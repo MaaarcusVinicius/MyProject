@@ -41,7 +41,7 @@ type
 
     //  Métodos principais
     procedure ExecutarAnaliseTabelas;
-    procedure TruncarTabelasDeletaveis;
+    procedure TruncarTabelasDeletaveis(ADBGrid: TDBGrid);
     procedure CarregarTabelasComDados(ADBGrid: TDBGrid);
     procedure CarregarListaProtegidas(ADBGrid: TDBGrid);
     procedure AtualizarResumoLabels(ALabelProtegidas, ALabelDeletadas: TLabel);
@@ -59,7 +59,7 @@ type
 implementation
 
 uses
-  Vcl.Forms;
+  Vcl.Forms, uViewMain;
 
 { ===========================================================
   CONSTRUTOR / DESTRUTOR
@@ -149,7 +149,7 @@ begin
   FListaProtegidas.Add('SITUACAO_ESPECIAL');            FListaProtegidas.Add('SIAC_INDICACOES');
   FListaProtegidas.Add('PRODUTOS_CLIENTES');            FListaProtegidas.Add('CLIENTES_AUTORIZACAO_NFE');
   FListaProtegidas.Add('SEGMENTOS');                    FListaProtegidas.Add('RELACIONAMENTOS');
-  FListaProtegidas.Add('RELACIONA_CLIENTE_AVALISTA  '); FListaProtegidas.Add('SIAC_AGENDAMENTO_CLIENTE');
+  FListaProtegidas.Add('RELACIONA_CLIENTE_AVALISTA');   FListaProtegidas.Add('SIAC_AGENDAMENTO_CLIENTE');
   FListaProtegidas.Add('SIAC_CLIENTE_OCORRENCIAS');     FListaProtegidas.Add('CONTATOS_CLIENTES');
   FListaProtegidas.Add('ITENS_GRUPO_CLIENTES');         FListaProtegidas.Add('CLIENTE_OBSERVACAO');
   FListaProtegidas.Add('CLIENTES_VENDEDORES');          FListaProtegidas.Add('TIPOS_FUNCIONARIOS');
@@ -165,6 +165,11 @@ begin
   FListaProtegidas.Add('MOTIVOS_RETIRADA');             FListaProtegidas.Add('CONTAS_BOLETOS');
   FListaProtegidas.Add('SIAC_LEMBRETES');               FListaProtegidas.Add('CARTAO');
   FListaProtegidas.Add('CARTAO_ITENS_TAXAS');           FListaProtegidas.Add('REGRAS_DESCONTOS');
+  FListaProtegidas.Add('REL_AUTORIZACAO');              FListaProtegidas.Add('REL_GRUPOS');
+  FListaProtegidas.Add('REL_PESQUISAS');                FListaProtegidas.Add('REL_RELATORIOS');
+  FListaProtegidas.Add('AUTORIZACAO_RELACAO_VENDAS');   FListaProtegidas.Add('SIAC_RELATORIOS_COMANDOS');
+  FListaProtegidas.Add('SIAC_RELATORIOS_DINAMICOS');    FListaProtegidas.Add('FILTROS_GER_REL_GRAF');
+  FListaProtegidas.Add('SIAC_AUTORIZACAO_REL_DINAMICOS');
 
   FSQLProtegidas := 'Lista estática local definida pelo sistema.';
 end;
@@ -239,7 +244,7 @@ procedure TClasseLimparMovimento.ExecutarAnaliseTabelas;
 var
   ListaBackupPersonalizadas: TStringList;
 begin
-  // 🔹 Faz backup das tabelas personalizadas antes de recriar listas
+  //  Faz backup das tabelas personalizadas antes de recriar listas
   ListaBackupPersonalizadas := TStringList.Create;
   try
     ListaBackupPersonalizadas.Assign(FListaProtegidasPersonalizadas);
@@ -248,11 +253,11 @@ begin
     GerarListaTabelasProtegidas;
     CarregarTodasTabelasBanco;
 
-    // 🔹 Reinsere as tabelas personalizadas do usuário
+    //  Reinsere as tabelas personalizadas do usuário
     if ListaBackupPersonalizadas.Count > 0 then
       AdicionarTabelasProtegidasPersonalizadas(ListaBackupPersonalizadas);
 
-    // 🔹 Finalmente recalcula as deletáveis com base na lista atualizada
+    //  Finalmente recalcula as deletáveis com base na lista atualizada
     GerarListaTabelasDeletaveis;
   finally
     ListaBackupPersonalizadas.Free;
@@ -260,59 +265,89 @@ begin
 end;
 
 
-procedure TClasseLimparMovimento.FecharQuery;
-begin
-  FConsulta.GetQuery.Close;
-end;
-
 { ===========================================================
   5. Truncar tabelas deletáveis
   =========================================================== }
-procedure TClasseLimparMovimento.TruncarTabelasDeletaveis;
+procedure TClasseLimparMovimento.TruncarTabelasDeletaveis(ADBGrid: TDBGrid);
 var
   Progress: TProgressHelper;
-  i: Integer;
   NomeTabela, SQLTruncate: string;
+  DataSet: TDataSet;
+  TotalTabelas: Integer;
 begin
-  if FListaDeletaveis.Count = 0 then
+  // 🔹 Verifica parâmetros
+  if (not Assigned(ADBGrid)) or (not Assigned(ADBGrid.DataSource)) or
+     (not Assigned(ADBGrid.DataSource.DataSet)) then
   begin
-    MessageDlg('Nenhuma tabela deletável foi identificada.' + sLineBreak +
-               'Execute "Executar Análise" antes.', mtWarning, [mbOK], 0);
+    MessageDlg('Grid de tabelas deletáveis não está associado a um DataSet válido.',
+               mtWarning, [mbOK], 0);
     Exit;
   end;
 
-  if MessageDlg(Format('Foram encontradas %d tabelas deletáveis.' + sLineBreak +
+  DataSet := ADBGrid.DataSource.DataSet;
+
+  if DataSet.IsEmpty then
+  begin
+    MessageDlg('Nenhuma tabela foi listada para truncar.', mtWarning, [mbOK], 0);
+    Exit;
+  end;
+
+  //  Conta total de tabelas
+  TotalTabelas := DataSet.RecordCount;
+
+  //  Confirma truncamento com o usuário
+  if MessageDlg(Format('Foram encontradas %d tabelas no grid.' + sLineBreak +
                        'Deseja realmente executar o truncamento?' + sLineBreak +
                        '⚠️ Esta ação é irreversível!',
-                       [FListaDeletaveis.Count]),
+                       [TotalTabelas]),
                 mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
-    Exit;
+  Exit;
 
+  // Por algum motivo a classe do banco de dados esta sendo deletada
+  // Adicionei o codigo abaixo como solução paliativa até resolver o caso.
+  if Assigned(DmModule) and Assigned(DmModule.orsConexao)
+   and (DmModule.orsConexao.Connected) and (FConsulta= nil) then
+  FConsulta := TClasseBancoDados.Create(DmModule.orsConexao);
+
+
+
+  // Inicializa progresso
   Progress := TProgressHelper.Create;
   try
-    Progress.Start(FListaDeletaveis.Count, 'Executando truncamento...');
+    Progress.Start(TotalTabelas, 'Executando truncamento das tabelas do grid...');
 
-    for i := 0 to FListaDeletaveis.Count - 1 do
-    begin
-      NomeTabela := FListaDeletaveis[i];
-      SQLTruncate := Format('TRUNCATE TABLE %s', [NomeTabela]);
+    DataSet.DisableControls;
+    try
+      DataSet.First;
+      while not DataSet.Eof do
+      begin
+        NomeTabela := Trim(DataSet.FieldByName('TABELA').AsString);
 
-      try
-        FConsulta.SetSQL(SQLTruncate);
-        FConsulta.ExecutarComando;
-        Progress.Step(Format('Truncada: %s', [NomeTabela]));
-      except
-        on E: Exception do
-          Progress.Step(Format('Erro ao truncar %s: %s', [NomeTabela, E.Message]));
+        if NomeTabela <> '' then
+        begin
+          SQLTruncate := Format('TRUNCATE TABLE %s', [NomeTabela]);
+          try
+            FConsulta.SetSQL(SQLTruncate);
+            FConsulta.ExecutarComando;
+            Progress.Step(Format('Truncada: %s', [NomeTabela]));
+          except
+            on E: Exception do
+              Progress.Step(Format('Erro ao truncar %s: %s', [NomeTabela, E.Message]));
+          end;
+        end;
+
+        DataSet.Next;
       end;
+    finally
+      DataSet.EnableControls;
     end;
 
-    MessageDlg('Truncamento concluído com sucesso.', mtInformation, [mbOK], 0);
   finally
     Progress.Finish;
     Progress.Free;
   end;
 end;
+
 
 { ===========================================================
   6. SQL de contagem de registros
@@ -369,12 +404,13 @@ procedure TClasseLimparMovimento.CarregarTabelasComDados(ADBGrid: TDBGrid);
 var
   SQLContagem, SQLFinal: string;
   Query: TOraQuery;
+  CDS: TClientDataSet;
+  DS: TDataSource;
   Tabela: string;
   QtdLinhas: Integer;
-  MaiorQtdLinhas: Integer;       // 🔹 Novo: controla a maior quantidade de linhas
-  NomeMaiorTabela: string;       // 🔹 Novo: guarda o nome da tabela com mais registros
+  MaiorQtdLinhas: Integer;
+  NomeMaiorTabela: string;
 begin
-  // 🔹 Garante que o grid e a conexão estão válidos
   if (not Assigned(ADBGrid)) or (not Assigned(FConsulta)) then
     Exit;
 
@@ -385,10 +421,8 @@ begin
     Exit;
   end;
 
-  // 🔹 Limpa a lista anterior
   FListaDeletaveis.Clear;
 
-  // 🔹 Monta SQL de contagem
   SQLContagem := GerarSQLContagemTabelas;
 
   if SQLContagem.Trim = '' then
@@ -397,85 +431,82 @@ begin
     Exit;
   end;
 
-  // 🔹 Adiciona filtro e ordenação (somente tabelas com dados)
   SQLFinal :=
     'SELECT TABELA, QTD_LINHAS FROM (' + sLineBreak +
      SQLContagem + sLineBreak +
     ') WHERE QTD_LINHAS > 0 ORDER BY QTD_LINHAS DESC';
 
   try
-    // 🔹 Executa a consulta
     FConsulta.SetSQL(SQLFinal);
     FConsulta.ExecutarConsulta();
 
     Query := FConsulta.GetQuery;
-    Query.First;
 
-    // 🔹 Inicializa controle da tabela com mais registros
+    // 🔹 Cria ClientDataSet temporário para exibir no grid
+    CDS := TClientDataSet.Create(nil);
+    DS := TDataSource.Create(nil);
+
+    // 🔹 Define campos manualmente
+    CDS.FieldDefs.Clear;
+    CDS.FieldDefs.Add('TABELA', ftString, 200);
+    CDS.FieldDefs.Add('QTD_LINHAS', ftInteger);
+    CDS.FieldDefs.Add('TIPO_ITEM', ftString, 20);
+    CDS.CreateDataSet;
+
+    // 🔹 Preenche o ClientDataSet com os dados do Oracle
+    Query.First;
     MaiorQtdLinhas := -1;
     NomeMaiorTabela := '';
 
-    //  Itera e armazena apenas tabelas deletáveis com registros
     while not Query.Eof do
     begin
       Tabela := UpperCase(Trim(Query.FieldByName('TABELA').AsString));
       QtdLinhas := Query.FieldByName('QTD_LINHAS').AsInteger;
 
-      // 🔹 Guarda a tabela com maior número de linhas
       if QtdLinhas > MaiorQtdLinhas then
       begin
         MaiorQtdLinhas := QtdLinhas;
         NomeMaiorTabela := Tabela;
       end;
 
-      // Ignora as protegidas (fixas e personalizadas)
       if (FListaProtegidas.IndexOf(Tabela) = -1) and
          (FListaProtegidasPersonalizadas.IndexOf(Tabela) = -1) then
       begin
+        CDS.Append;
+        CDS.FieldByName('TABELA').AsString := Tabela;
+        CDS.FieldByName('QTD_LINHAS').AsInteger := QtdLinhas;
+        CDS.FieldByName('TIPO_ITEM').AsString := 'SISTEMA'; // 🔹 Campo novo adicionado com sucesso
+        CDS.Post;
+
         FListaDeletaveis.Add(Tabela);
       end;
 
       Query.Next;
     end;
 
-    // 🔹 Exibe no grid (somente se houver registros)
-    if FConsulta.GetQuery.IsEmpty then
-      MessageDlg('Nenhuma tabela com registros foi encontrada.', mtInformation, [mbOK], 0)
-    else
-    begin
-      ADBGrid.DataSource := FConsulta.GetDataSource;
+    // 🔹 Vincula o dataset ao grid
+    DS.DataSet := CDS;
+    ADBGrid.DataSource := DS;
 
-      // =====================================================
-      // 🔹 NOVO: posiciona o foco no registro com maior QTD_LINHAS
-      // =====================================================
-      if (NomeMaiorTabela <> '') and Assigned(ADBGrid.DataSource) and
-         Assigned(ADBGrid.DataSource.DataSet) then
+    // 🔹 Mantém foco no item de maior volume de registros
+    if (NomeMaiorTabela <> '') and (not CDS.IsEmpty) then
+    begin
+      CDS.Locate('TABELA', NomeMaiorTabela, []);
+      Application.ProcessMessages;
+      if ADBGrid.Visible then
       begin
-        try
-          // Localiza a tabela de maior volume de registros
-          ADBGrid.DataSource.DataSet.Locate('TABELA', NomeMaiorTabela, []);
-          // Garante foco visual e de teclado
-          Application.ProcessMessages;
-          if ADBGrid.Visible then
-          begin
-            ADBGrid.SetFocus;
-            ADBGrid.Refresh;
-          end;
-        except
-          on E: Exception do
-            MessageDlg('Falha ao focar a tabela com mais registros: ' + E.Message,
-                       mtWarning, [mbOK], 0);
-        end;
+        ADBGrid.SetFocus;
+        ADBGrid.Refresh;
       end;
     end;
 
   except
     on E: Exception do
-    begin
       MessageDlg('Erro ao carregar tabelas com dados: ' + E.Message, mtError, [mbOK], 0);
-    end;
   end;
 end;
+
+
 
 
 procedure TClasseLimparMovimento.CarregarListaProtegidas(ADBGrid: TDBGrid);
@@ -615,6 +646,11 @@ end;
 function TClasseLimparMovimento.GetListaProtegidasPersonalizadas: TStringList;
 begin
   Result := FListaProtegidasPersonalizadas;
+end;
+
+procedure TClasseLimparMovimento.FecharQuery;
+begin
+  FConsulta.GetQuery.Close;
 end;
 
 end.

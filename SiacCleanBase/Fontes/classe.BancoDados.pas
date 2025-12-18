@@ -55,6 +55,7 @@ constructor TClasseBancoDados.Create(AConnection: TOraSession);
 begin
   FQuery := TOraQuery.Create(nil);
   FQuery.Session := AConnection;
+  FQuery.CachedUpdates := True;
 
   FDataSource := TDataSource.Create(nil);
   FDataSource.DataSet := FQuery;
@@ -101,7 +102,9 @@ end;
 
 procedure TClasseBancoDados.SetSQL(const ASQL: string);
 begin
-  FQuery.Close;
+//  if Assigned(FQuery) then
+//    FQuery := TOraQuery.Create(nil);
+
   FQuery.SQL.Clear;
   FQuery.SQL.Add(ASQL);
   Log('SQL definido: ' + ASQL);
