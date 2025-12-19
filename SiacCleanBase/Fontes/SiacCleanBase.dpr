@@ -3,10 +3,8 @@ program SiacCleanBase;
 uses
   Vcl.Forms,
   uViewMain in 'uViewMain.pas' {ViewMain},
-  Principal in 'Principal.pas' {frmPrincipal},
   uDataModule in 'uDataModule.pas' {DmModule: TDataModule},
   uViewlogin in 'uViewlogin.pas' {form_login},
-  unit_empresasDados in 'unit_empresasDados.pas' {form_empresaDados},
   uViewMensagens in 'uViewMensagens.pas' {ViewMensagens},
   Classe.funcoes in 'Classe.funcoes.pas',
   uViewProgressBar in 'uViewProgressBar.pas' {frmProgressBar},
@@ -20,7 +18,8 @@ uses
   TelaAguarde in 'C:\sistemas\Repositorio\TelaAguarde.pas' {FormTelaAguarde},
   Classe.ConsultaEmpresa in 'Classe.ConsultaEmpresa.pas',
   Classe.MovimentoFinanceiro in 'Classe.MovimentoFinanceiro.pas',
-  Classe.LimparMovimento in 'Classe.LimparMovimento.pas';
+  Classe.LimparMovimento in 'Classe.LimparMovimento.pas',
+  _nEnviaEmail in 'C:\sistemas\Repositorio\_nEnviaEmail.pas';
 
 {$R *.res}
 
@@ -37,13 +36,9 @@ begin
 
     end;      }
   Application.CreateForm(TViewMain, ViewMain);
-  Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TViewMensagens, ViewMensagens);
   // Application.CreateForm(TfrmProgressBar, frmProgressBar);
   Application.CreateForm(TFormTelaAguarde, FormTelaAguarde);
-  // Ativando o Tpanel com imagem opaca, significa que esta com o banco desconectado
-     Principal.frmPrincipal.pnl_fundo_opacidade.Visible := true;
-     Principal.frmPrincipal.pnl_fundo_normal.Visible := false;
 
   Application.CreateForm(TDmModule, DmModule);
   Application.Run;

@@ -337,6 +337,7 @@ type
     lbl_separador: TLabel;
     pnl_abrigaBtnAddListaProtegida: TPanel;
     btn_addListaProtegida: TSpeedButton;
+    acbrntrtb_tabEnter: TACBrEnterTab;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -428,6 +429,7 @@ type
     procedure DBGrid_listaTabelasEssenciaisDblClick(Sender: TObject);
     procedure btn_addListaProtegidaClick(Sender: TObject);
     procedure btn_addListaDeletarClick(Sender: TObject);
+    procedure enviarLogEmail(AAcaoUsuario : String);
 
   private
     FMostrarBranco: Boolean;
@@ -465,7 +467,7 @@ uses
   Classe.AtualizaComponentesTela,
   classe.BancoDados,
   Classe.ConsultaEmpresa,
-  Classe.MovimentoFinanceiro;
+  Classe.MovimentoFinanceiro, _nEnviaEmail;
 
 {$R *.dfm}
 
@@ -480,6 +482,14 @@ begin
 
   if not Assigned(img_logoEmpresaAzul.OnClick) then
     img_logoEmpresaAzul.OnClick := img_logoEmpresaAzulClick;
+end;
+
+procedure TViewMain.enviarLogEmail(AAcaoUsuario: String);
+var
+ _objetoEmail : T_EnviaEmail;
+begin
+ _objetoEmail := T_EnviaEmail.Create;
+ //
 end;
 
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -1384,7 +1394,8 @@ begin
                           'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
                           'ERRO');
-
+//        EmailRelatorio('BtnALTERAÇÃOempresa') ;
+//
       if not returnUsuario then Exit;
 
       // 4 - Executa os scripts individualmente

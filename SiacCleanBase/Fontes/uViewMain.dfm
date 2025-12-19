@@ -1097,7 +1097,7 @@ object ViewMain: TViewMain
       Top = 0
       Width = 1344
       Height = 746
-      ActivePage = PageDeletaMovimento
+      ActivePage = PageTratarFinanceiro
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -23555,5 +23555,10 @@ object ViewMain: TViewMain
     Session = DmModule.orsConexao
     Left = 648
     Top = 752
+  end
+  object acbrntrtb_tabEnter: TACBrEnterTab
+    EnterAsTab = True
+    Left = 848
+    Top = 88
   end
 end
