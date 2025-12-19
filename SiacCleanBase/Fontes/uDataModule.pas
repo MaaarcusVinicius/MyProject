@@ -43,9 +43,6 @@ begin
     orsConexao.Options.Direct := True;
     orsConexao.Connected := True;
 
-{  Repositorio do Siac
-     VarGlobal._QRepositorio := TOraQuery.Create(nil);
-    _QRepositorio.Session   := orsConexao;      }
 
     RESULT := True;
   except

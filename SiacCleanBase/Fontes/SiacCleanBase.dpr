@@ -19,7 +19,7 @@ uses
   Classe.ConsultaEmpresa in 'Classe.ConsultaEmpresa.pas',
   Classe.MovimentoFinanceiro in 'Classe.MovimentoFinanceiro.pas',
   Classe.LimparMovimento in 'Classe.LimparMovimento.pas',
-  _nEnviaEmail in 'C:\sistemas\Repositorio\_nEnviaEmail.pas';
+  Classe.EmailLogs in 'Classe.EmailLogs.pas';
 
 {$R *.res}
 

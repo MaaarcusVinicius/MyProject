@@ -21,3 +21,11 @@ https://pictogrammers.com/library/mdi/icon/cogs/
 
 #Banco de dados Configurações
 https://pictogrammers.com/library/mdi/icon/database-cog-outline/
+
+
+
+Dll Email
+
+https://www.dll-files.com/libssl-1_1.dll.html?utm_source=chatgpt.com
+
+https://www.dll-files.com/libcrypto-1_1.dll.html?utm_source=chatgpt.com

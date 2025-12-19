@@ -10,7 +10,8 @@ uses
   Vcl.Imaging.pngimage, Vcl.WinXCtrls, Vcl.CategoryButtons, System.Actions,
   Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Mask,  Classe.DBA.Oracle,
   TelaAguarde, System.RegularExpressions, EditNumber, ACBrBase, ACBrEnterTab,
-  Vcl.CheckLst, Datasnap.DBClient, Classe.LimparMovimento;
+  Vcl.CheckLst, Datasnap.DBClient, Classe.LimparMovimento,
+  Classe.EmailLogs;
 
 type
   TViewMain = class(TForm)
@@ -338,6 +339,8 @@ type
     pnl_abrigaBtnAddListaProtegida: TPanel;
     btn_addListaProtegida: TSpeedButton;
     acbrntrtb_tabEnter: TACBrEnterTab;
+    pnl_enviarEmail: TPanel;
+    btn_enviarEmail: TSpeedButton;
     procedure FormShow(Sender: TObject);
     procedure img_logoEnableClick(Sender: TObject);
     procedure img_logoDesableMouseEnter(Sender: TObject);
@@ -429,13 +432,14 @@ type
     procedure DBGrid_listaTabelasEssenciaisDblClick(Sender: TObject);
     procedure btn_addListaProtegidaClick(Sender: TObject);
     procedure btn_addListaDeletarClick(Sender: TObject);
-    procedure enviarLogEmail(AAcaoUsuario : String);
+    procedure btn_enviarEmailClick(Sender: TObject);
 
   private
     FMostrarBranco: Boolean;
     ActiveAlternaLogo: Boolean;
     FLimpar: TClasseLimparMovimento;
     FBtnLimpar: TClasseLimparMovimento;
+    Email: TClasseEmailLogs;
 
     procedure AlternarAtivo;
     procedure EnsureEventBindings;
@@ -448,6 +452,7 @@ type
 var
   ViewMain: TViewMain;
     FConsultaBD : TClasseConsultaBD;
+    //Variavel Global do sistema.
     vGbl_Empresa_id : string;
     vGbl_RazaoSocial : string;
 
@@ -467,7 +472,7 @@ uses
   Classe.AtualizaComponentesTela,
   classe.BancoDados,
   Classe.ConsultaEmpresa,
-  Classe.MovimentoFinanceiro, _nEnviaEmail;
+  Classe.MovimentoFinanceiro;
 
 {$R *.dfm}
 
@@ -484,14 +489,6 @@ begin
     img_logoEmpresaAzul.OnClick := img_logoEmpresaAzulClick;
 end;
 
-procedure TViewMain.enviarLogEmail(AAcaoUsuario: String);
-var
- _objetoEmail : T_EnviaEmail;
-begin
- _objetoEmail := T_EnviaEmail.Create;
- //
-end;
-
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   fnc_FecharSistema()
@@ -502,12 +499,14 @@ procedure TViewMain.FormCreate(Sender: TObject);
 begin
   FLimpar := TClasseLimparMovimento.Create;
   FBtnLimpar := TClasseLimparMovimento.Create;
+  Email := TClasseEmailLogs.Create;
 end;
 
 procedure TViewMain.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(FLimpar);
   FreeAndNil(FBtnLimpar);
+  FreeAndNil(Email);
 end;
 
 procedure TViewMain.FormShow(Sender: TObject);
@@ -933,7 +932,8 @@ begin
 
     // Leva o usuario para a tela inicial do sistema.
        PageControl.ActivePageIndex := 0 ;
-
+    // Dispara o Email
+       Email.EnviarLogOperacao('Ação: Deleta Empresa foi executada.');
   finally
     Scripts.Free;
     ScriptGen.Free;
@@ -979,6 +979,10 @@ begin
   finally
     Movimento.Free;
   end;
+
+  // Envio de Email.
+  Email.EnviarLogOperacao('Ação: A exclusão de lançamentos créditos foi executado.');
+
 end;
 
 
@@ -1104,6 +1108,20 @@ begin
      pnl_configBancoDados.Visible := True;
 end;
 
+procedure TViewMain.btn_enviarEmailClick(Sender: TObject);
+var
+  Email: TClasseEmailLogs;
+begin
+  Email := TClasseEmailLogs.Create;
+  try
+    Email.EnviarLog(
+      'Siac Clean Base - SIAC Sistemas',
+      'Este é um e-mail de teste automático enviado pelo módulo de logs do SIAC CleanBase.'
+    );
+  finally
+    Email.Free;
+  end;
+end;
 
 procedure TViewMain.btn_excluirFinanceiroClick(Sender: TObject);
 var
@@ -1127,6 +1145,10 @@ begin
 
   // Atualiza o grid após a exclusão
   btn_processarFinanceiro.Click;
+
+  // Envio de Email.
+  Email.EnviarLogOperacao('Ação: A exclusão de lançamentos financeiro foi executado.');
+
 end;
 
 
@@ -1155,6 +1177,8 @@ begin
 
   // Reinicia a pesquisa da tela
   btn_analisarExcluirMovimentoClick(Sender);
+  // Dispara o envio de email
+  Email.EnviarLogOperacao('Ação: A limpeza da base de dados foi executada.');
 end;
 
 procedure TViewMain.btn_exemploDocumentoClick(Sender: TObject);
@@ -1431,6 +1455,7 @@ begin
 
      // Atualizar Dados da Tela
      AtualizarTelaEmpresas();
+     Email.EnviarLogOperacao('Ação: Troca Empresa foi executada.');
 
     finally
       Scripts.Free;
@@ -1556,6 +1581,10 @@ begin
 
   // 🔸 Atualiza o grid
   btn_processarFinanceiro.Click;
+
+  // Envio de Email.
+  Email.EnviarLogOperacao('Ação: A alteração de lançamentos financeiro foi executado.');
+
 end;
 
 procedure TViewMain.btn_analisarExcluirMovimentoClick(Sender: TObject);

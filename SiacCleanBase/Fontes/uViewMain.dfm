@@ -6187,7 +6187,8 @@ object ViewMain: TViewMain
                 ParentFont = False
                 ParentBiDiMode = False
                 OnClick = btn_bindsOracleClick
-                ExplicitHeight = 78
+                ExplicitLeft = -53
+                ExplicitTop = 6
               end
             end
             object pnl_expBackup: TPanel
@@ -6368,6 +6369,44 @@ object ViewMain: TViewMain
                 ExplicitTop = 2
                 ExplicitWidth = 104
                 ExplicitHeight = 81
+              end
+            end
+            object pnl_enviarEmail: TPanel
+              AlignWithMargins = True
+              Left = 653
+              Top = 4
+              Width = 120
+              Height = 77
+              Align = alLeft
+              BevelKind = bkFlat
+              BevelOuter = bvNone
+              Color = clWhite
+              ParentBackground = False
+              TabOrder = 5
+              object btn_enviarEmail: TSpeedButton
+                AlignWithMargins = True
+                Left = 3
+                Top = 3
+                Width = 110
+                Height = 67
+                Cursor = crHandPoint
+                Align = alClient
+                BiDiMode = bdLeftToRight
+                Caption = 'Enviar E-mail'
+                ImageIndex = 39
+                Images = ImageAllSystem
+                Flat = True
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -11
+                Font.Name = 'Segoe UI'
+                Font.Style = [fsBold]
+                Layout = blGlyphTop
+                ParentFont = False
+                ParentBiDiMode = False
+                OnClick = btn_enviarEmailClick
+                ExplicitLeft = 6
+                ExplicitTop = 6
               end
             end
           end
@@ -6735,8 +6774,8 @@ object ViewMain: TViewMain
                     ParentFont = False
                     StyleName = 'Windows'
                     OnClick = btn_deletandoEmpresasClick
-                    ExplicitWidth = 80
-                    ExplicitHeight = 64
+                    ExplicitLeft = 2
+                    ExplicitTop = 6
                   end
                 end
                 object chk_saveScriptDeletando: TCheckBox
