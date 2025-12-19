@@ -115,7 +115,7 @@ begin
   FListaProtegidas.Add('SIAI_RELACIONAMENTO_PRODUTO');  FListaProtegidas.Add('RELACIONA_CLIENTE_AVALISTA');
   FListaProtegidas.Add('RELACIONAMENTO_NIVEIS');        FListaProtegidas.Add('RELACIONAMENTOS');
   FListaProtegidas.Add('RELACIONAMENTOS_APLICACAO');    FListaProtegidas.Add('RELACIONAMENTOS_UTILIZACAO');
-  FListaProtegidas.Add('ACESSO_EMPRESA');               FListaProtegidas.Add('REL_CONFIGURACOES');
+  FListaProtegidas.Add('ACESSO_EMPRESA');               FListaProtegidas.Add('FILTROS_GER_REL_GRAF');
   FListaProtegidas.Add('SIAC_CONFIG_BLOQUEIO');         FListaProtegidas.Add('RELACIONAMENTO_NIVEIS');
   FListaProtegidas.Add('AUTORIZACAO_RELACAO_VENDAS');   FListaProtegidas.Add('AUTORIZACAO');
   FListaProtegidas.Add('SIAC_LOG_SENHAS');              FListaProtegidas.Add('PRODUTOS');
@@ -168,8 +168,7 @@ begin
   FListaProtegidas.Add('REL_AUTORIZACAO');              FListaProtegidas.Add('REL_GRUPOS');
   FListaProtegidas.Add('REL_PESQUISAS');                FListaProtegidas.Add('REL_RELATORIOS');
   FListaProtegidas.Add('AUTORIZACAO_RELACAO_VENDAS');   FListaProtegidas.Add('SIAC_RELATORIOS_COMANDOS');
-  FListaProtegidas.Add('SIAC_RELATORIOS_DINAMICOS');    FListaProtegidas.Add('FILTROS_GER_REL_GRAF');
-  FListaProtegidas.Add('SIAC_AUTORIZACAO_REL_DINAMICOS');
+  FListaProtegidas.Add('SIAC_RELATORIOS_DINAMICOS');    FListaProtegidas.Add('SIAC_AUTORIZACAO_REL_DINAMICOS');
 
   FSQLProtegidas := 'Lista estática local definida pelo sistema.';
 end;

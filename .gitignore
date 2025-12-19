@@ -108,3 +108,10 @@ OracleConnectionTest/tnsnames.ora
 OracleConnectionTest/ucp.jar
 OracleConnectionTest/uidrvci.sym
 OracleConnectionTest/xstreams.jar
+ExeDelphi/delphi-envia-email-main/Logo-Embarcadero.png
+ExeDelphi/delphi-envia-email-main/README.md
+ExeDelphi/delphi-envia-email-main/SendMail.dpr
+ExeDelphi/delphi-envia-email-main/SendMail.dproj
+ExeDelphi/delphi-envia-email-main/SendMail.res
+ExeDelphi/delphi-envia-email-main/USendMail.dfm
+ExeDelphi/delphi-envia-email-main/USendMail.pas
