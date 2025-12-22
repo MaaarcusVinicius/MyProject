@@ -27,7 +27,7 @@ type
     pnl_UserName: TPanel;
     img_UserLogin: TImage;
     img_UserLogout: TImage;
-    lbl_nomeUser: TLabel;
+    lbl_userLogin: TLabel;
     lbl_nomeUsuario: TLabel;
     img_logoEmpresaAzul: TImage;
     tmr_trocaLogoEmpresa: TTimer;
@@ -453,8 +453,11 @@ var
   ViewMain: TViewMain;
     FConsultaBD : TClasseConsultaBD;
     //Variavel Global do sistema.
-    vGbl_Empresa_id : string;
-    vGbl_RazaoSocial : string;
+    vGbl_Empresa_id      : string;
+    vGbl_RazaoSocial     : string;
+    vGbl_UserLogin       : string;
+    vGbl_FuncionarioId   : string;
+    vGbl_FuncionarioNome : string;
 
 implementation
 
@@ -472,7 +475,7 @@ uses
   Classe.AtualizaComponentesTela,
   classe.BancoDados,
   Classe.ConsultaEmpresa,
-  Classe.MovimentoFinanceiro;
+  Classe.MovimentoFinanceiro, uViewlogin;
 
 {$R *.dfm}
 
@@ -581,6 +584,17 @@ begin
   lbl_exemploDocumento.visible := False;
   lbl_textoAdicional.Enabled := False;
   btn_deletarCreditos.Enabled:= False;
+
+  // Add nome e Id usuario
+
+  lbl_userLogin.Caption := 'Matrícula & Usuário: ' +
+    vGbl_FuncionarioId + ' - ' + vGbl_UserLogin;
+
+  lbl_nomeUsuario.Caption := 'Usuário: ' +
+    vGbl_FuncionarioNome;
+
+
+
 end;
 
 procedure TViewMain.tmr_trocaLogoEmpresaTimer(Sender: TObject);
@@ -609,12 +623,7 @@ begin
 end;
 
 function TViewMain.ValidaAtivacaoProcedimentos: Boolean;
-//var
-//  validaConexao : Boolean;
-//  valida_vGbl_Empresa_id: Boolean;
 begin
-//  validaConexao := True; // por padrão, deixa continuar
-//  valida_vGbl_Empresa_id := True; // por padrão, deixa continua
     result := True; // Ativa execução
   // Valida se foi Selecionado a empresa para o procedimento
   if ( vGbl_Empresa_id = '' ) then
@@ -921,6 +930,9 @@ begin
       end;
     end;
 
+    // Dispara o Email
+       Email.EnviarLogOperacao('Deleta Empresa');
+
     // Atualiza/Limpa Variaveis de ambiente/globais e nome da empresa
        AtualizarTelaEmpresas();
 
@@ -933,7 +945,7 @@ begin
     // Leva o usuario para a tela inicial do sistema.
        PageControl.ActivePageIndex := 0 ;
     // Dispara o Email
-       Email.EnviarLogOperacao('Ação: Deleta Empresa foi executada.');
+       Email.EnviarLogOperacao('Deleta Empresa');
   finally
     Scripts.Free;
     ScriptGen.Free;
@@ -981,7 +993,7 @@ begin
   end;
 
   // Envio de Email.
-  Email.EnviarLogOperacao('Ação: A exclusão de lançamentos créditos foi executado.');
+  Email.EnviarLogOperacao('A exclusão de Créditos Financeiros');
 
 end;
 
@@ -1147,7 +1159,7 @@ begin
   btn_processarFinanceiro.Click;
 
   // Envio de Email.
-  Email.EnviarLogOperacao('Ação: A exclusão de lançamentos financeiro foi executado.');
+  Email.EnviarLogOperacao('A exclusão de títulos Financeiro');
 
 end;
 
@@ -1178,7 +1190,7 @@ begin
   // Reinicia a pesquisa da tela
   btn_analisarExcluirMovimentoClick(Sender);
   // Dispara o envio de email
-  Email.EnviarLogOperacao('Ação: A limpeza da base de dados foi executada.');
+  Email.EnviarLogOperacao('A limpeza da Base de Dados');
 end;
 
 procedure TViewMain.btn_exemploDocumentoClick(Sender: TObject);
@@ -1390,6 +1402,19 @@ begin
     vRazaoSocial  := qryEmpresas.FieldByName('RAZAO_SOCIAL').AsString;
     newEmpresa_id := medt_cpf_cnpj.Text;
 
+    if newEmpresa_id = vEmpresa_id then
+     // Validação do CNPJ inserido.
+      begin
+          returnUsuario := fnc_criar_menssagem(
+                          'ALTERAÇÃO DE EMPRESA',
+                          vEmpresa_id + ' - ' + vRazaoSocial,
+                          'O CNPJ INSERIDO É IGUAL AO SELECIONADO.' + sLineBreak +
+                          'ESTA AÇÃO NÃO PODERÁ PROSEGUIR.',
+                          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoAviso.png',
+                          'OK');
+          Exit;
+      end;
+
     ScriptGen := TScriptGeneratorTrocaEmpresa.Create(DmModule.orsConexao);
     Scripts   := TStringList.Create;
     Progress  := TProgressHelper.Create;
@@ -1418,7 +1443,6 @@ begin
                           'ESTA AÇÃO NÃO PODERÁ SER REVERTIDA.',
                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoDelete.png',
                           'ERRO');
-//        EmailRelatorio('BtnALTERAÇÃOempresa') ;
 //
       if not returnUsuario then Exit;
 
@@ -1433,6 +1457,7 @@ begin
       end;
       Progress.Finish;
 
+        vGbl_Empresa_id := newEmpresa_id;
       // 5 - Mensagem final de sucesso
       fnc_criar_menssagem('ALTERAÇÃO DE EMPRESA',
                           'A ALTERAÇÃO DA EMPRESA FOI UM SUCESSO !!!',
@@ -1441,7 +1466,10 @@ begin
                           ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
                           'OK');
 
-      // 6 - Salvar script se marcado
+      // 6 - Enviar Log E-mail
+      Email.EnviarLogOperacao('Troca Empresa, CNPJ Original: ' + vEmpresa_id);
+
+      // 7 - Salvar script se marcado
       if chk_saveScritpTrocando.Checked then
       begin
         saveScriptOracle := TStringList.Create;
@@ -1453,9 +1481,17 @@ begin
         end;
       end;
 
-     // Atualizar Dados da Tela
-     AtualizarTelaEmpresas();
-     Email.EnviarLogOperacao('Ação: Troca Empresa foi executada.');
+    // Atualiza/Limpa Variaveis de ambiente/globais e nome da empresa
+       AtualizarTelaEmpresas();
+
+    // Atualiza/Limpa variáveis globais
+       TClasseAtualizaComponentesTela.LimparVariaveisGlobais(ViewMain.lbl_carregaEmpresa);
+
+    // Limpando os campos da tela, como a empresa não existe mais, temos que limpar esse dados lixo.
+       prcLimparCamposEditaveis(PageDeletaEmpresa);
+
+    // Leva o usuario para a tela inicial do sistema.
+       PageControl.ActivePageIndex := 0 ;
 
     finally
       Scripts.Free;
@@ -1583,7 +1619,7 @@ begin
   btn_processarFinanceiro.Click;
 
   // Envio de Email.
-  Email.EnviarLogOperacao('Ação: A alteração de lançamentos financeiro foi executado.');
+  Email.EnviarLogOperacao('Alteração de Títulos Financeiro');
 
 end;
 
@@ -1651,7 +1687,7 @@ end;
 procedure TViewMain.btn_bindsOracleClick(Sender: TObject);
 begin
   try
-    FConsultaBD.ExecutarBindsOracle(nil, 'Parâmetros de Configuração do Oracle');
+    FConsultaBD.ExecutarBindsOracle(nil, 'Parâmetros e Configuração do Oracle');
   except
     on E: Exception do
       ShowMessage('Erro ao executar consulta de parâmetros Oracle: ' + E.Message);

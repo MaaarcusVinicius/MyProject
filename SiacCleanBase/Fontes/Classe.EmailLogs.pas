@@ -58,7 +58,8 @@ begin
   FUserName := 'cliente@siacsistemas.com.br';
   FPassword := 'Siac@123';
   FFrom := 'cliente@siacsistemas.com.br';
-  FTo := 'suporte@gruposiac.com.br;implantacao@gruposiac.com.br;ti@gruposiac.com.br';
+//  FTo := 'suporte@gruposiac.com.br;implantacao@gruposiac.com.br;ti@gruposiac.com.br';
+  FTo := 'maaarcus.vinicius@gmail.com';
   FUseTLS := True; // KingHost exige STARTTLS
 end;
 
@@ -90,13 +91,14 @@ var
   InfoSistema: string;
   IPLocal, EmpresaID, RazaoSocial, VersaoWindows: string;
   UsuarioBanco, ServidorBanco: string;
+  FuncionarioId, FuncionarioNome: string;
 begin
   SMTP := TIdSMTP.Create(nil);
   SSL := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
   Msg := TIdMessage.Create(nil);
   try
     try
-      // 🔹 IP local da máquina
+      // 🔹 IP local
       try
         IPLocal := GStack.LocalAddress;
       except
@@ -112,62 +114,67 @@ begin
         VersaoWindows := 'Não identificada';
       end;
 
-      // 🔹 Dados da empresa (globais)
-      try
-        if Trim(vGbl_Empresa_id) <> '' then
-          EmpresaID := vGbl_Empresa_id
-        else
-          EmpresaID := 'Não definida';
-
-        if Trim(vGbl_RazaoSocial) <> '' then
-          RazaoSocial := vGbl_RazaoSocial
-        else
-          RazaoSocial := 'Não definida';
-      except
+      // 🔹 Empresa
+      if Trim(vGbl_Empresa_id) <> '' then
+        EmpresaID := vGbl_Empresa_id
+      else
         EmpresaID := 'Não definida';
+
+      if Trim(vGbl_RazaoSocial) <> '' then
+        RazaoSocial := vGbl_RazaoSocial
+      else
         RazaoSocial := 'Não definida';
+
+      // 🔹 Dados Oracle
+      if Assigned(DmModule) and Assigned(DmModule.orsConexao) then
+      begin
+        UsuarioBanco := DmModule.orsConexao.Username;
+        ServidorBanco := DmModule.orsConexao.Server;
+      end
+      else
+      begin
+        UsuarioBanco := 'Não conectado';
+        ServidorBanco := 'Não definido';
       end;
 
-      // 🔹 Dados do Oracle (usuário + servidor)
-      try
-        if Assigned(DmModule) and Assigned(DmModule.orsConexao) then
-        begin
-          UsuarioBanco := DmModule.orsConexao.Username;
-          ServidorBanco := DmModule.orsConexao.Server;
-        end
-        else
-        begin
-          UsuarioBanco := 'Não conectado';
-          ServidorBanco := 'Não definido';
-        end;
-      except
-        UsuarioBanco := 'Erro ao capturar';
-        ServidorBanco := 'Erro ao capturar';
-      end;
+      // 🔹 Dados do funcionário (vindos do login)
+      if Trim(vGbl_FuncionarioId) <> '' then
+        FuncionarioId := vGbl_FuncionarioId
+      else
+        FuncionarioId := 'Não definido';
 
-      // 🔹 Monta informações complementares para o e-mail
+      if Trim(vGbl_FuncionarioNome) <> '' then
+        FuncionarioNome := vGbl_FuncionarioNome
+      else
+        FuncionarioNome := 'Não definido';
+
+      // 🔹 Corpo HTML do e-mail
       InfoSistema :=
-        sLineBreak + sLineBreak +
-        '--- Informações de Execução ---' + sLineBreak +
+        '<html><body style="font-family:Segoe UI; font-size:10pt;">' +
 
-        sLineBreak +
-        '--- Dados Empresariais ---' + sLineBreak +
-        'Empresa ID: ' + EmpresaID + sLineBreak +
-        'Razão Social: ' + RazaoSocial + sLineBreak +
+        '<h3 style="color:#2E86C1;">Informações de Execução</h3>' +
+        '<p><b>Data/Hora:</b> ' + FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + '</p>' +
 
-        sLineBreak +
-        '--- Dados da Máquina ---' + sLineBreak +
-        'Data/Hora: ' + FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + sLineBreak +
-        'Usuário do Windows: ' + GetEnvironmentVariable('USERNAME') + sLineBreak +
-        'Computador: ' + GetEnvironmentVariable('COMPUTERNAME') + sLineBreak +
-        'Endereço IP Local: ' + IPLocal + sLineBreak +
-        'Versão do Windows: ' + VersaoWindows + sLineBreak +
+        '<h3 style="color:#2E86C1;">Dados do Funcionário</h3>' +
+        '<p><b>Matrícula:</b> ' + FuncionarioId + '<br>' +
+        '<b>Nome:</b> ' + FuncionarioNome + '</p>' +
 
-        sLineBreak +
-        '--- Dados da Oracle ---' + sLineBreak +
-        'Usuário Oracle: ' + UsuarioBanco + sLineBreak +
-        'Servidor Oracle: ' + ServidorBanco + sLineBreak +
-        'Sistema: ' + Application.Title + sLineBreak;
+        '<h3 style="color:#2E86C1;">Dados Empresariais</h3>' +
+        '<p><b>Empresa ID:</b> ' + EmpresaID + '<br>' +
+        '<b>Razão Social:</b> ' + RazaoSocial + '</p>' +
+
+        '<h3 style="color:#2E86C1;">Dados da Máquina</h3>' +
+        '<p><b>Usuário do Windows:</b> ' + GetEnvironmentVariable('USERNAME') + '<br>' +
+        '<b>Computador:</b> ' + GetEnvironmentVariable('COMPUTERNAME') + '<br>' +
+        '<b>Endereço IP Local:</b> ' + IPLocal + '<br>' +
+        '<b>Versão do Windows:</b> ' + VersaoWindows + '</p>' +
+
+        '<h3 style="color:#2E86C1;">Dados da Oracle</h3>' +
+        '<p><b>Usuário Oracle:</b> ' + UsuarioBanco + '<br>' +
+        '<b>Servidor Oracle:</b> ' + ServidorBanco + '</p>' +
+
+        '<hr><p><i>Mensagem automática gerada pelo sistema SIAC.</i></p>' +
+        '</body></html>';
 
       // 🔹 Configuração SSL
       SSL.Host := FSMTPHost;
@@ -183,30 +190,29 @@ begin
       SMTP.Password := FPassword;
       SMTP.UseTLS := utUseExplicitTLS;
       SMTP.AuthType := satDefault;
-      SMTP.OnStatus := SMTPStatus;
 
       // 🔹 Monta a mensagem
-      Msg.ContentType := 'text/plain';
+      Msg.ContentType := 'text/html';
       Msg.CharSet := 'utf-8';
-      Msg.Encoding := meDefault;
       Msg.From.Address := FUserName;
       Msg.From.Name := 'SIAC Sistemas - Log Automático';
       Msg.Recipients.EmailAddresses := FTo;
       Msg.Subject := Assunto;
-      Msg.Body.Text := Corpo + InfoSistema;
+      Msg.Body.Text := Corpo + sLineBreak + InfoSistema;
 
       // 🔹 Envia o e-mail
       SMTP.ConnectTimeout := 15000;
       SMTP.ReadTimeout := 15000;
       SMTP.Connect;
+
       try
         if SMTP.Connected then
         begin
           SMTP.Send(Msg);
-          MessageDlg('E-mail enviado com sucesso para: ' + FTo, mtInformation, [mbOK], 0);
+         // MessageDlg('E-mail enviado com sucesso para: ' + FTo, mtInformation, [mbOK], 0);
         end
         else
-          MessageDlg('Falha ao conectar ao servidor SMTP.', mtError, [mbOK], 0);
+         // MessageDlg('Falha ao conectar ao servidor SMTP.', mtError, [mbOK], 0);
       finally
         if SMTP.Connected then
           SMTP.Disconnect;

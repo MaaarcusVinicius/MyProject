@@ -21,6 +21,12 @@ uses
   procedure prcLimparCamposEditaveis(AOwner: TWinControl);
   function fnc_contar_registros_tabela(const NomeTabela: string): Integer;
 
+            { SIAC - Add. function Siac Criptografar senha Login}
+  function SIAC_CriptografarSenha(Senha:string):string;
+  function SIAC_Padr(StringEsquerda:string;Tam:Word;cDireita:Char=' ';cSeMenor:String=''):string;
+  function SIAC_Repetir(Quantidade:integer;Texto:string):string;
+  function SIAC_IIfInt(Condicao:boolean;Verdadeiro:integer;Falso:integer = 0):integer;
+  function SIAC_IIf(Condicao:boolean;Verdadeiro,Falso:variant):variant;
 
 implementation
 
@@ -264,14 +270,14 @@ var
 begin
   Result := -1; // valor padrão em caso de erro
 
-  // 🔹 Valida nome da tabela (evita SQL Injection)
+  //  Valida nome da tabela (evita SQL Injection)
   if not TRegEx.IsMatch(NomeTabela, '^[A-Za-z0-9_]+$') then
   begin
     MessageDlg('Nome de tabela inválido: ' + NomeTabela, mtError, [mbOK], 0);
     Exit;
   end;
 
-  // 🔹 Garante que o módulo de dados e a conexão estejam ativos
+  //  Garante que o módulo de dados e a conexão estejam ativos
   if (not Assigned(DmModule)) or (not Assigned(DmModule.orsConexao)) then
   begin
     MessageDlg('Módulo de dados não inicializado.', mtError, [mbOK], 0);
@@ -284,7 +290,7 @@ begin
     Exit;
   end;
 
-  // 🔹 Executa a contagem de registros
+  //  Executa a contagem de registros
   Qry := TOraQuery.Create(nil);
   try
     Qry.Session := DmModule.orsConexao;
@@ -308,11 +314,83 @@ begin
     end;
   end; // <-- fechamento correto do try..except
 
-  // 🔹 Libera memória (fora do bloco try..except)
+  //  Libera memória (fora do bloco try..except)
   Qry.Free;
 end;
 
+function SIAC_CriptografarSenha(Senha:string):string;
+var
+  Codificado: TStringList;
+  i,j,n,Complemento: Integer;
+begin
+  // Ajustando senha ao tamanho maximo
+  Senha:=SIAC_Padr(Senha,15);
+  // Gerando lista que guardará o valor codificado
+  Codificado:=TStringList.Create;
 
+  // Gerando codificação da senha
+  for j:=1 to Length(Senha) do begin
+    i:=j-1;
+    if Codificado.Count=0 then
+      Complemento:=0
+    else
+      Complemento:=StrToInt(Codificado[Codificado.Count - 1]) + (i * i - i);
+
+    n:=( 17 * i ) +
+       ( Ord(Senha[j]) * 13 ) +
+       259 +
+       ( i * Ord(Senha[j]) ) +
+       ( i * i * i * i  -  i * i ) +
+       SIAC_IIfInt( (i mod 2)=0 ,i * 3,i + 7) +
+       Complemento;
+    Codificado.Add( FormatFloat('000000',n) );
+  end;
+
+  // Gerando resposta
+  Result:='';
+  for i:=0 to Codificado.Count - 1 do
+    Result:=Result + Codificado[i];
+
+  // Destruindo lista que guardou o valor codificado
+  Codificado.Free;
+end;
+
+function SIAC_Padr(StringEsquerda:string;Tam:Word;cDireita:Char=' ';cSeMenor:String=''):string;
+begin
+  if (cSeMenor <> '') and (Length(StringEsquerda)>Tam) then begin
+    Result:= SIAC_Repetir(Tam,cSeMenor)
+  end else begin
+    Result:=Copy(StringEsquerda+SIAC_Repetir(Tam-Length(StringEsquerda),cDireita),1,Tam);
+  end;
+end;
+
+function SIAC_Repetir(Quantidade:integer;Texto:string):string;
+{Função que tem o objetivo repetir a String de Entrada
+(Variável "Texto") "Quantidade" vezes}
+var
+  i:integer;
+begin
+  Result:='';
+  if Quantidade>0 then begin
+    for i:=1 to Quantidade do begin
+      Result:=Result + Texto;
+    end;
+  end;
+end;
+
+function SIAC_IIfInt(Condicao:boolean;Verdadeiro:integer;Falso:integer = 0):integer;
+begin
+  Result:=SIAC_IIf(Condicao,Verdadeiro,Falso);
+end;
+
+function SIAC_IIf(Condicao:boolean;Verdadeiro,Falso:variant):variant;
+begin
+  if Condicao then begin
+    Result:=Verdadeiro
+  end else begin
+    Result:=Falso;
+  end;
+end;
 
 end.
 

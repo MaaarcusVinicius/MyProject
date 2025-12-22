@@ -100,9 +100,6 @@ Coordinates=10,958,141,36
 [pnl_dadosEmpresa]
 Coordinates=1124,730,125,58
 
-[lbl_nomeUser]
-Coordinates=1726,322,94,58
-
 [edt_FONE_WHATSAPP_d]
 Coordinates=722,322,167,58
 
@@ -715,4 +712,7 @@ Coordinates=330,730,79,58
 
 [pnl_abrigaBotoes]
 Coordinates=899,322,109,58
+
+[lbl_userLogin]
+Coordinates=1726,322,94,58
 

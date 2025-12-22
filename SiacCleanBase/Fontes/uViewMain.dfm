@@ -348,9 +348,9 @@ object ViewMain: TViewMain
       end
     end
     object pnl_User: TPanel
-      Left = 1231
+      Left = 1144
       Top = 0
-      Width = 313
+      Width = 400
       Height = 57
       Align = alRight
       BevelOuter = bvNone
@@ -358,7 +358,7 @@ object ViewMain: TViewMain
       ParentBackground = False
       TabOrder = 1
       object pnl_userLogin: TPanel
-        Left = 249
+        Left = 336
         Top = 0
         Width = 64
         Height = 57
@@ -368,6 +368,7 @@ object ViewMain: TViewMain
         Color = 3355443
         ParentBackground = False
         TabOrder = 0
+        ExplicitLeft = 249
         object img_UserLogout: TImage
           Left = 0
           Top = 0
@@ -492,23 +493,24 @@ object ViewMain: TViewMain
       object pnl_UserName: TPanel
         Left = 0
         Top = 0
-        Width = 248
+        Width = 336
         Height = 57
-        Align = alLeft
+        Align = alClient
         BevelOuter = bvNone
         Color = 3355443
         ParentBackground = False
         TabOrder = 1
-        object lbl_nomeUser: TLabel
+        ExplicitWidth = 305
+        object lbl_userLogin: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 5
-          Width = 242
+          Width = 330
           Height = 21
           Margins.Top = 5
           Align = alTop
           Alignment = taRightJustify
-          Caption = 'Usu'#225'rio:'
+          Caption = 'Login Usu'#225'rio: '
           Color = 3355443
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
@@ -517,15 +519,14 @@ object ViewMain: TViewMain
           Font.Style = []
           ParentColor = False
           ParentFont = False
-          ExplicitLeft = 188
-          ExplicitWidth = 57
+          ExplicitWidth = 246
         end
         object lbl_nomeUsuario: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 29
-          Width = 242
-          Height = 23
+          Top = 35
+          Width = 330
+          Height = 17
           Margins.Bottom = 5
           Align = alBottom
           Alignment = taRightJustify
@@ -533,20 +534,21 @@ object ViewMain: TViewMain
           Color = 3355443
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
-          Font.Height = -17
+          Font.Height = -13
           Font.Name = 'Segoe UI'
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          ExplicitLeft = 132
-          ExplicitWidth = 113
+          ExplicitLeft = 157
+          ExplicitTop = 29
+          ExplicitWidth = 88
         end
       end
     end
     object pnl_carregaEmpresa: TPanel
       Left = 200
       Top = 0
-      Width = 1031
+      Width = 944
       Height = 57
       Align = alClient
       BevelOuter = bvNone
@@ -561,15 +563,15 @@ object ViewMain: TViewMain
       TabOrder = 2
       OnClick = pnl_carregaEmpresaClick
       OnDblClick = pnl_carregaEmpresaDblClick
+      ExplicitWidth = 1031
       object lbl_carregaEmpresa: TLabel
         Left = 0
         Top = 0
-        Width = 1031
+        Width = 944
         Height = 57
         Align = alClient
         Alignment = taCenter
-        ExplicitWidth = 6
-        ExplicitHeight = 30
+        ExplicitWidth = 969
       end
     end
   end
@@ -1097,7 +1099,7 @@ object ViewMain: TViewMain
       Top = 0
       Width = 1344
       Height = 746
-      ActivePage = PageTratarFinanceiro
+      ActivePage = PageDeletaEmpresa
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0

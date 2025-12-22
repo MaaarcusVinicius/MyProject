@@ -1,4 +1,4 @@
-unit Classe.DBA.Oracle;
+Ôªøunit Classe.DBA.Oracle;
 
 interface
 
@@ -57,11 +57,11 @@ begin
   // Caminho do arquivo de log
   vLogPath := 'C:\CleanBaseLogs\Banco.log';
 
-  // Garante que o diretÛrio exista
+  // Garante que o diret√≥rio exista
   if not DirectoryExists(ExtractFilePath(vLogPath)) then
     ForceDirectories(ExtractFilePath(vLogPath));
 
-  // Cada objeto TClasseBancoDados È independente (permite m˙ltiplas consultas simult‚neas)
+  // Cada objeto TClasseBancoDados √© independente (permite m√∫ltiplas consultas simult√¢neas)
   FVersaoOracle             := TClasseBancoDados.Create(DmModule.orsConexao);
   FStartOracle              := TClasseBancoDados.Create(DmModule.orsConexao);
   FCarregarSessoesAtivas    := TClasseBancoDados.Create(DmModule.orsConexao);
@@ -100,15 +100,121 @@ begin
   inherited;
 end;
 
+//procedure TClasseConsultaBD.ListViewCustomDrawItem(Sender: TCustomListView;
+//  Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
+//begin
+//  // Estilo "zebra" nas linhas
+//  if Odd(Item.Index) then
+//    Sender.Canvas.Brush.Color := $00F0F0F0 // cinza claro
+//  else
+//    Sender.Canvas.Brush.Color := clWhite;
+//end;
+
 procedure TClasseConsultaBD.ListViewCustomDrawItem(Sender: TCustomListView;
   Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
+var
+  Parametro, Valor: string;
+  Canvas: TCanvas;
+  CorFundo: TColor;
+  EhParametroCritico: Boolean;
+  ValorCorreto: Boolean;
 begin
-  // Estilo "zebra" nas linhas
-  if Odd(Item.Index) then
-    Sender.Canvas.Brush.Color := $00F0F0F0 // cinza claro
+  Canvas := Sender.Canvas;
+  Parametro := UpperCase(Trim(Item.Caption));
+  if Item.SubItems.Count > 0 then
+    Valor := UpperCase(Trim(Item.SubItems[0]))
   else
-    Sender.Canvas.Brush.Color := clWhite;
+    Valor := '';
+
+  // üîπ Define cor padr√£o "zebra"
+  if Odd(Item.Index) then
+    CorFundo := $00F0F0F0 // Cinza claro
+  else
+    CorFundo := clWhite;
+
+  // üîπ Identifica se √© um par√¢metro cr√≠tico e avalia seu valor
+  EhParametroCritico := False;
+  ValorCorreto := False;
+
+  if Parametro = 'NLS_CHARACTERSET' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'WEB8ISO8859P15');
+  end
+  else if Parametro = 'NLS_DATE_LANGUAGE' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'AMERICAN');
+  end
+  else if Parametro = 'NLS_LANGUAGE' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'AMERICAN');
+  end
+  else if Parametro = 'NLS_TERRITORY' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'AMERICA');
+  end
+  else if Parametro = 'NLS_RDBMS_VERSION' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := Valor.StartsWith('19.');
+  end
+  else if Parametro = 'OPTIMIZER_MODE' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'ALL_ROWS');
+  end
+  else if Parametro = 'LOG_MODE' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'NOARCHIVELOG');
+  end
+  else if Parametro = 'FILESYSTEMIO_OPTIONS' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'SETALL');
+  end
+  else if Parametro = 'DISK_ASYNCH_IO' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'TRUE');
+  end;
+
+  // üîπ Define a cor de fundo conforme o resultado
+  if EhParametroCritico then
+  begin
+    if ValorCorreto then
+    begin
+      CorFundo := RGB(200, 230, 255); // üîµ Azul pastel ‚Üí valor correto
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Style := [];
+    end
+    else
+    begin
+      CorFundo := RGB(255, 200, 200); // üî¥ Vermelho claro ‚Üí valor incorreto
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Style := [fsBold];
+    end;
+  end;
+
+  // üîπ Desenha c√©lula com a cor definida
+  Canvas.Brush.Color := CorFundo;
+  Canvas.FillRect(Item.DisplayRect(drBounds));
+
+  // üîπ Escreve o texto (par√¢metro e valor)
+  Canvas.TextOut(Item.DisplayRect(drLabel).Left + 4, Item.DisplayRect(drLabel).Top,
+                 Item.Caption);
+
+  if Item.SubItems.Count > 0 then
+    Canvas.TextOut(Item.DisplayRect(drLabel).Left + 310, Item.DisplayRect(drLabel).Top,
+                   Item.SubItems[0]);
+
+  DefaultDraw := False; // Evita desenho padr√£o
 end;
+
+
 
 procedure TClasseConsultaBD.ExecutarBindsOracle(AQuery: TDataSet; const ATitulo: string);
 var
@@ -135,7 +241,7 @@ var
   end;
 
 begin
-  // Define SQL padr„o se o dataset n„o foi passado
+  // Define SQL padr√£o se o dataset n√£o foi passado
  FExecutarBindsOracle.SetSQL(
                  ' select upper(parameter) as parameter, value         '+
                  '   from (SELECT ''open_cursors'' AS parameter, value '+
@@ -248,6 +354,14 @@ begin
                  '         select DIRECTORY_NAME as PARAMETER, DIRECTORY_PATH    '+
                  '           from all_directories                                '+
                  '         UNION ALL                                             '+
+                 '         SELECT ''A_INSTALL_ORACLE''  as PARAMETER,            '+
+                 '                TO_CHAR(created, ''DD/MM/YYYY HH24:MI:SS'')    '+
+                 '         FROM v$database                                       '+
+                 '         UNION ALL                                             '+
+                 '         SELECT ''A_PLATAFORM'' as PARAMETER, platform_name    '+
+                 '         FROM v$database                                       '+
+                 '         UNION ALL                                             '+
+
                  '         select name as parameter,                             '+
                  '                value / 1024 / 1024 / 1024 || '' GB'' VALUE_MB '+
                  '           from v$parameter                                    '+
@@ -270,10 +384,10 @@ begin
   if not Assigned(LQuery) then
     Exit;
 
-  // Cria form tempor·rio
+  // Cria form tempor√°rio
   ListViewForm := TForm.Create(nil);
   try
-    ListViewForm.Caption := IfThen(ATitulo <> '', ATitulo, 'Par‚metros Oracle');
+    ListViewForm.Caption := IfThen(ATitulo <> '', ATitulo, 'Par√¢metros Oracle');
     ListViewForm.BorderStyle := bsSizeToolWin;
     ListViewForm.Position := poScreenCenter;
     ListViewForm.Width := 700;
@@ -293,7 +407,7 @@ begin
     ListView.MultiSelect := False;
 
     // Define colunas
-    ListView.Columns.Add.Caption := 'Par‚metro';
+    ListView.Columns.Add.Caption := 'Par√¢metro';
     ListView.Columns.Add.Caption := 'Valor';
     ListView.Columns[0].Width := 300;
     ListView.Columns[1].Width := 350;
@@ -311,11 +425,11 @@ begin
     // Aplica evento custom draw (zebra)
     ListView.OnCustomDrawItem := ListViewCustomDrawItem;
 
-    // Ordena por par‚metro (coluna 0)
+    // Ordena por par√¢metro (coluna 0)
     if ListView.Items.Count > 1 then
       ListView.CustomSort(@ListCompare, 0);
 
-    // Exibe o formul·rio modal
+    // Exibe o formul√°rio modal
     ListViewForm.ShowModal;
   finally
     ListViewForm.Free;
@@ -359,7 +473,7 @@ begin
   if not FVersaoOracle.GetQuery.IsEmpty then
     ALabel.Caption := FVersaoOracle.GetQuery.FieldByName('VERSAO').AsString
   else
-    ALabel.Caption := 'Vers„o n„o encontrada';
+    ALabel.Caption := 'Vers√£o n√£o encontrada';
 end;
 
 procedure TClasseConsultaBD.CarregarStartOracle(ALabel: TLabel);
@@ -375,7 +489,7 @@ begin
   if not FStartOracle.GetQuery.IsEmpty then
     ALabel.Caption := FStartOracle.GetQuery.FieldByName('StartOracle').AsString
   else
-    ALabel.Caption := 'InformaÁ„o IndisponÌvel';
+    ALabel.Caption := 'Informa√ß√£o Indispon√≠vel';
 end;
 
 procedure TClasseConsultaBD.CarregarSessoesAtivas(ADBGrid: TDBGrid);
@@ -403,7 +517,7 @@ procedure TClasseConsultaBD.CarregarBancoTablespaceDiretorio(ADBEdit: TDBGrid);
 begin
   FBancoTablespaceDiretorio.SetSQL(
     ' SELECT TABLESPACE_NAME AS "TableSpace_Name",                 '+
-    '        C.FILE_NAME AS "DiretÛrio FÌsico",                    '+
+    '        C.FILE_NAME AS "Diret√≥rio F√≠sico",                    '+
     '        ROUND(BYTES / 1024 / 1024 / 1024, 2) AS "Tamanho GB", '+
     '        C.ONLINE_STATUS AS "OnlineStatus",                    '+
     '        C.AUTOEXTENSIBLE  AS "AutoExtensible"                 '+
@@ -443,7 +557,7 @@ procedure TClasseConsultaBD.CarregarUsuarios(ADBGrid: TDBGrid);
 begin
   FBancoUsuarios.SetSQL(
 ' SELECT DBA_USER.USERNAME,                                                  '+
-'        DBA_USER.DT_CRIACAO AS "DT CRIA«√O",                                '+
+'        DBA_USER.DT_CRIACAO AS "DT CRIA√á√ÉO",                                '+
 '        DBA_USER.ULTIMO_LOGIN,                                              '+
 '        DBA_USER.DIAS_SEM_LOGIN,                                            '+
 '        DBA_SEG.TAMANHO_GB,                                                 '+

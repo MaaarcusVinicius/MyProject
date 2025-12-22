@@ -163,6 +163,7 @@
         <DCCReference Include="Classe.MovimentoFinanceiro.pas"/>
         <DCCReference Include="Classe.LimparMovimento.pas"/>
         <DCCReference Include="Classe.EmailLogs.pas"/>
+        <DCCReference Include="Api.Base.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

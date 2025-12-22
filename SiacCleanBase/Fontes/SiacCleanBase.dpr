@@ -19,14 +19,15 @@ uses
   Classe.ConsultaEmpresa in 'Classe.ConsultaEmpresa.pas',
   Classe.MovimentoFinanceiro in 'Classe.MovimentoFinanceiro.pas',
   Classe.LimparMovimento in 'Classe.LimparMovimento.pas',
-  Classe.EmailLogs in 'Classe.EmailLogs.pas';
+  Classe.EmailLogs in 'Classe.EmailLogs.pas',
+  Api.Base in 'Api.Base.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
- {   begin
+    begin
 
      form_login := Tform_login.Create(nil);
      form_login.ShowModal;
@@ -34,7 +35,7 @@ begin
      form_login.Hide;
      form_login.Free;
 
-    end;      }
+    end;
   Application.CreateForm(TViewMain, ViewMain);
   Application.CreateForm(TViewMensagens, ViewMensagens);
   // Application.CreateForm(TfrmProgressBar, frmProgressBar);

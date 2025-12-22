@@ -12,8 +12,9 @@ object form_login: Tform_login
   Font.Style = []
   KeyPreview = True
   Position = poMainFormCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
-  OnShow = FormShow
   TextHeight = 15
   object pnl_fundo: TPanel
     Left = 0
@@ -1792,7 +1793,6 @@ object form_login: Tform_login
           Align = alRight
           BevelOuter = bvNone
           BorderStyle = bsNone
-          CharCase = ecUpperCase
           Color = clWhite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1801,6 +1801,7 @@ object form_login: Tform_login
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          OnExit = edt_userNameExit
         end
       end
       object pnl_userSenha: TPanel
@@ -1887,7 +1888,6 @@ object form_login: Tform_login
           Align = alRight
           BevelOuter = bvNone
           BorderStyle = bsNone
-          CharCase = ecUpperCase
           Color = clWhite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
