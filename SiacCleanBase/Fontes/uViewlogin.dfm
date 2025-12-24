@@ -1801,7 +1801,6 @@ object form_login: Tform_login
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
-          OnExit = edt_userNameExit
         end
       end
       object pnl_userSenha: TPanel

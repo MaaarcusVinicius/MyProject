@@ -6,10 +6,10 @@
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <ProjectName Condition="'$(ProjectName)'==''">SiacCleanBase</ProjectName>
+        <ProjectName Condition="'$(ProjectName)'==''">SiacDBManager</ProjectName>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
-        <MainSource>SiacCleanBase.dpr</MainSource>
+        <MainSource>SiacDBManager.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -70,7 +70,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>SiacCleanBase</SanitizedProjectName>
+        <SanitizedProjectName>SiacDBManager</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>vclwinx;DataSnapServer;ACBr_TCP;fs29;fmx;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;ACBr_OpenSSL;appanalytics;IndyProtocols;vclx;Skia.Package.RTL;dbxcds;vcledge;FmxTeeUI;DBXFirebirdDriver;TagEditor;dacvcl290;FireDACSqliteDriver;DbxClientDriver;soapmidas;frxODAC29;siacPack;TeeUI;ACBr_PagFor;dbexpress;ACBr_Reinf;inet;vacommPkgDXE7;vcltouch;FireDACDBXDriver;fmxdae;spdGovBase_D12A;CustomIPTransport;FireDACMSSQLDriver;odacvcl290;IndySystem;ACBr_Diversos;frxe29;odacfmx290;VirtualTreesR;fsDB29;vclFireDAC;ACBr_CTe;office2K;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;bindcompdbx;rtl;FireDACMySQLDriver;DBXSqliteDriver;DBXSybaseASEDriver;ACBr_Comum;spdNFCeGov_D12A;vclimg;DataSnapFireDAC;inetdbxpress;FireDAC;xmlrtl;odac290;spdNFSeGov_D12A;dsnap;FireDACDb2Driver;DBXOracleDriver;DBXInformixDriver;spdNFE_D12A;fmxobj;bindcompvclsmp;DataSnapNativeClient;frx29;DatasnapConnectorsFreePascal;spdMDFeDataSet_D12A;emshosting;frxDB29;FireDACCommonDriver;IndyIPClient;bindcompvclwinx;emsedge;bindcompfmx;crcontrols290;inetdb;FireDACASADriver;Tee;vclactnband;fmxFireDAC;FireDACInfxDriver;DBXMySQLDriver;VclSmp;DataSnapCommon;fmxase;DBXOdbcDriver;dbrtl;FireDACOracleDriver;Skia.Package.FMX;TeeDB;FireDACMSAccDriver;DataSnapIndy10ServerTransport;DataSnapConnectors;vcldsnap;DBXInterBaseDriver;FireDACMongoDBDriver;FireDACTDataDriver;Skia.Package.VCL;spdMDFe_D12A;vcldb;ACBr_Integrador;ACBr_PIXCD;SynEditDR;spdNFeGov_D12A;dacfmx290;ACBr_BoletoFR;bindcomp;IndyCore;RESTBackendComponents;frxDAC29;spdMDFeGov_D12A;FireDACADSDriver;RESTComponents;IndyIPServer;vcl;dsnapxml;adortl;dsnapcon;DataSnapClient;DataSnapProviderClient;spdNFSe_D12A;dac290;DBXDb2Driver;spdNFCe_D12A;ACBr_Boleto;emsclientfiredac;FireDACPgDriver;FireDACDSDriver;tethering;bindcompvcl;CloudService;DBXSybaseASADriver;FMXTee;soaprtl;soapserver;FireDACIBDriver;$(DCC_UsePackage)</DCC_UsePackage>
@@ -182,7 +182,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">SiacCleanBase.dpr</Source>
+                    <Source Name="MainSource">SiacDBManager.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp290.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
@@ -196,9 +196,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\SiacCleanBase.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\SiacDBManager.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>SiacCleanBase.exe</RemoteName>
+                        <RemoteName>SiacDBManager.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -2,7 +2,7 @@ object ViewMain: TViewMain
   AlignWithMargins = True
   Left = 0
   Top = 0
-  Caption = 'Siac Clean Base'
+  Caption = 'Siac DBManager'
   ClientHeight = 803
   ClientWidth = 1544
   Color = clSkyBlue
@@ -368,7 +368,6 @@ object ViewMain: TViewMain
         Color = 3355443
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = 249
         object img_UserLogout: TImage
           Left = 0
           Top = 0
@@ -500,7 +499,6 @@ object ViewMain: TViewMain
         Color = 3355443
         ParentBackground = False
         TabOrder = 1
-        ExplicitWidth = 305
         object lbl_userLogin: TLabel
           AlignWithMargins = True
           Left = 3
@@ -519,7 +517,8 @@ object ViewMain: TViewMain
           Font.Style = []
           ParentColor = False
           ParentFont = False
-          ExplicitWidth = 246
+          ExplicitLeft = 229
+          ExplicitWidth = 104
         end
         object lbl_nomeUsuario: TLabel
           AlignWithMargins = True
@@ -539,8 +538,7 @@ object ViewMain: TViewMain
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          ExplicitLeft = 157
-          ExplicitTop = 29
+          ExplicitLeft = 245
           ExplicitWidth = 88
         end
       end
@@ -563,7 +561,6 @@ object ViewMain: TViewMain
       TabOrder = 2
       OnClick = pnl_carregaEmpresaClick
       OnDblClick = pnl_carregaEmpresaDblClick
-      ExplicitWidth = 1031
       object lbl_carregaEmpresa: TLabel
         Left = 0
         Top = 0
@@ -571,7 +568,8 @@ object ViewMain: TViewMain
         Height = 57
         Align = alClient
         Alignment = taCenter
-        ExplicitWidth = 969
+        ExplicitWidth = 6
+        ExplicitHeight = 30
       end
     end
   end
@@ -1099,7 +1097,7 @@ object ViewMain: TViewMain
       Top = 0
       Width = 1344
       Height = 746
-      ActivePage = PageDeletaEmpresa
+      ActivePage = PageConfigBD
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -5796,7 +5794,6 @@ object ViewMain: TViewMain
                 Color = clWhite
                 ParentBackground = False
                 TabOrder = 2
-                Visible = False
                 object Panel2: TPanel
                   Left = 1
                   Top = 121
@@ -6385,6 +6382,7 @@ object ViewMain: TViewMain
               Color = clWhite
               ParentBackground = False
               TabOrder = 5
+              Visible = False
               object btn_enviarEmail: TSpeedButton
                 AlignWithMargins = True
                 Left = 3
@@ -6394,7 +6392,7 @@ object ViewMain: TViewMain
                 Cursor = crHandPoint
                 Align = alClient
                 BiDiMode = bdLeftToRight
-                Caption = 'Enviar E-mail'
+                Caption = 'Enviar E-mail'#13#10'    Teste'
                 ImageIndex = 39
                 Images = ImageAllSystem
                 Flat = True

@@ -52,7 +52,7 @@ constructor TConsultaEmpresa.Create;
 var
   vLogPath: string;
 begin
-  vLogPath := 'C:\CleanBaseLogs\Banco.log';
+  vLogPath := 'C:\SiacDBManagerLogs\Banco.log';
 
   if not DirectoryExists(ExtractFilePath(vLogPath)) then
     ForceDirectories(ExtractFilePath(vLogPath));

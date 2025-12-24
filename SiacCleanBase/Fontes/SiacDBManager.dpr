@@ -1,4 +1,4 @@
-program SiacCleanBase;
+program SiacDBManager;
 
 uses
   Vcl.Forms,

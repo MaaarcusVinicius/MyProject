@@ -55,7 +55,7 @@ var
   vLogPath: string;
 begin
   // Caminho do arquivo de log
-  vLogPath := 'C:\CleanBaseLogs\Banco.log';
+  vLogPath := 'C:\SiacDBManagerLogs\Banco.log';
 
   // Garante que o diretório exista
   if not DirectoryExists(ExtractFilePath(vLogPath)) then
@@ -100,16 +100,6 @@ begin
   inherited;
 end;
 
-//procedure TClasseConsultaBD.ListViewCustomDrawItem(Sender: TCustomListView;
-//  Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
-//begin
-//  // Estilo "zebra" nas linhas
-//  if Odd(Item.Index) then
-//    Sender.Canvas.Brush.Color := $00F0F0F0 // cinza claro
-//  else
-//    Sender.Canvas.Brush.Color := clWhite;
-//end;
-
 procedure TClasseConsultaBD.ListViewCustomDrawItem(Sender: TCustomListView;
   Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
 var
@@ -126,26 +116,42 @@ begin
   else
     Valor := '';
 
-  // 🔹 Define cor padrão "zebra"
+  //  Define cor padrão "zebra"
   if Odd(Item.Index) then
     CorFundo := $00F0F0F0 // Cinza claro
   else
     CorFundo := clWhite;
 
-  // 🔹 Identifica se é um parâmetro crítico e avalia seu valor
+  // Identifica se é um parâmetro crítico e avalia seu valor
   EhParametroCritico := False;
   ValorCorreto := False;
 
   if Parametro = 'NLS_CHARACTERSET' then
   begin
     EhParametroCritico := True;
-    ValorCorreto := (Valor = 'WEB8ISO8859P15');
+     if (SameText(Valor, 'WE8ISO8859P15')) or
+       (SameText(Valor, 'WE8ISO8859P1')) then
+      ValorCorreto := True;
   end
   else if Parametro = 'NLS_DATE_LANGUAGE' then
   begin
     EhParametroCritico := True;
     ValorCorreto := (Valor = 'AMERICAN');
   end
+
+  else if Parametro = 'NLS_NCHAR_CHARACTERSET' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = 'UTF8');
+  end
+
+
+  else if Parametro = 'NLS_NUMERIC_CHARACTERS' then
+  begin
+    EhParametroCritico := True;
+    ValorCorreto := (Valor = '.,');
+  end
+
   else if Parametro = 'NLS_LANGUAGE' then
   begin
     EhParametroCritico := True;
@@ -354,11 +360,11 @@ begin
                  '         select DIRECTORY_NAME as PARAMETER, DIRECTORY_PATH    '+
                  '           from all_directories                                '+
                  '         UNION ALL                                             '+
-                 '         SELECT ''A_INSTALL_ORACLE''  as PARAMETER,            '+
+                 '         SELECT ''0_INSTALL_ORACLE''  as PARAMETER,            '+
                  '                TO_CHAR(created, ''DD/MM/YYYY HH24:MI:SS'')    '+
                  '         FROM v$database                                       '+
                  '         UNION ALL                                             '+
-                 '         SELECT ''A_PLATAFORM'' as PARAMETER, platform_name    '+
+                 '         SELECT ''0_PLATAFORM'' as PARAMETER, platform_name    '+
                  '         FROM v$database                                       '+
                  '         UNION ALL                                             '+
 

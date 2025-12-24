@@ -446,7 +446,8 @@ type
 
   public
     function fnc_FecharSistema: Boolean;
-
+    procedure AplicarPermissoesUsuario(const NomeUsuario: string);
+    procedure ValidarPermissaoAcao(const NomeAcao: string);
   end;
 
 var
@@ -458,6 +459,8 @@ var
     vGbl_UserLogin       : string;
     vGbl_FuncionarioId   : string;
     vGbl_FuncionarioNome : string;
+    vGbl_FListaUsuarios: TStringList;
+    vGbl_UsuarioAutorizado: Boolean = False;
 
 implementation
 
@@ -593,7 +596,11 @@ begin
   lbl_nomeUsuario.Caption := 'Usuário: ' +
     vGbl_FuncionarioNome;
 
-
+    // Se houver usuário logado, aplica permissões
+  if Trim(vGbl_UserLogin) <> '' then
+  begin
+    AplicarPermissoesUsuario(vGbl_UserLogin);
+  end;
 
 end;
 
@@ -796,6 +803,8 @@ end;
 
 procedure TViewMain.act_EmpresasExecute(Sender: TObject);
 begin
+  ValidarPermissaoAcao('Menu: Empresas');
+
   if SplitViewEmpresas.Opened then
     SplitViewEmpresas.close
   else
@@ -810,6 +819,8 @@ end;
 
 procedure TViewMain.act_MovimentacaoExecute(Sender: TObject);
 begin
+  ValidarPermissaoAcao('Menu: Movimentação');
+
   if SplitViewMovimento.Opened then
     SplitViewMovimento.close
   else
@@ -924,7 +935,7 @@ begin
       saveScriptOracle := TStringList.Create;
       try
         saveScriptOracle.Text := Scripts.Text;
-        saveScriptOracle.SaveToFile('C:\CleanBaseLogs\sqlExport_DeleteEmpresa.txt', TEncoding.UTF8);
+        saveScriptOracle.SaveToFile('C:\SiacDBManagerLogs\sqlExport_DeleteEmpresa.txt', TEncoding.UTF8);
       finally
         saveScriptOracle.Free;
       end;
@@ -1007,6 +1018,8 @@ var
   Progress: TProgressHelper;
   i: Integer;
 begin
+  ValidarPermissaoAcao('Botão: Deletar Triggers');
+
   ScriptGen := TScriptGeneratorTriggers.Create(DmModule.orsConexao); // já vem com SQL configurado
   Scripts := TStringList.Create;
   Progress := TProgressHelper.Create;
@@ -1069,7 +1082,7 @@ begin
       saveScriptOracle := TStringList.Create;
       try
         saveScriptOracle.Text := Scripts.Text;
-        saveScriptOracle.SaveToFile('C:\CleanBaseLogs\sqlExport_DesativarTriggers.txt', TEncoding.UTF8);
+        saveScriptOracle.SaveToFile('C:\SiacDBManagerLogs\sqlExport_DesativarTriggers.txt', TEncoding.UTF8);
       finally
         saveScriptOracle.Free;
       end;
@@ -1127,8 +1140,8 @@ begin
   Email := TClasseEmailLogs.Create;
   try
     Email.EnviarLog(
-      'Siac Clean Base - SIAC Sistemas',
-      'Este é um e-mail de teste automático enviado pelo módulo de logs do SIAC CleanBase.'
+      'Siac DBManager - SIAC Sistemas',
+      'Este é um e-mail de teste automático enviado pelo módulo de logs do SiacDBManager.'
     );
   finally
     Email.Free;
@@ -1231,7 +1244,7 @@ end;
 procedure TViewMain.btn_infClickMovimentoDeleteClick(Sender: TObject);
 begin
   // Mostra a advertencia do sistema, procedimento irreversivel.
-  fnc_criar_menssagem('SIAC CLEAN BASE',
+  fnc_criar_menssagem('Siac DBManager',
                       'A exclusão do movimento é permanente.',
                       'Seguir com esta operação, não será possível restaurar o movimento excluído.',
                       ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
@@ -1241,7 +1254,7 @@ end;
 procedure TViewMain.btn_infTelaClick(Sender: TObject);
 begin
   // Mostra a advertencia do sistema, procedimento irreversivel.
-  fnc_criar_menssagem('SIAC CLEAN BASE',
+  fnc_criar_menssagem('Siac DBManager',
                       'A exclusão/alteração do movimento financeiro é permanente.',
                       'Após confirmar esta operação, não será possível restaurar as informações excluídas/alteradas.',
                       ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
@@ -1475,7 +1488,7 @@ begin
         saveScriptOracle := TStringList.Create;
         try
           saveScriptOracle.Text := Scripts.Text;
-          saveScriptOracle.SaveToFile('C:\CleanBaseLogs\sqlExport_TrocaEmpresa.txt', TEncoding.UTF8);
+          saveScriptOracle.SaveToFile('C:\SiacDBManager\sqlExport_TrocaEmpresa.txt', TEncoding.UTF8);
         finally
           saveScriptOracle.Free;
         end;
@@ -1514,7 +1527,7 @@ end;
 procedure TViewMain.btn_versaoSistemaClick(Sender: TObject);
 begin
   // Mostra a Versão do sistema, somente pra preencher a tela com botões.
-  fnc_criar_menssagem('SIAC CLEAN BASE',
+  fnc_criar_menssagem('Siac DBManager',
                       'Versão do Sistema  -  1.1.5.3 - R07  -  @2025',
                       'Todos direitos reservados à: www.siacsistemas.com.br',
                       ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
@@ -2519,6 +2532,54 @@ begin
   OraScriptCriarUsuario.SQL.Text := OraScriptCriarUsuarioOriginal.SQL.Text;
 
 end;
+
+procedure TViewMain.AplicarPermissoesUsuario(const NomeUsuario: string);
+var
+  i: Integer;
+  Autorizado: Boolean;
+begin
+  Autorizado := False;
+
+  if Assigned(vGbl_FListaUsuarios) then
+  begin
+    for i := 0 to vGbl_FListaUsuarios.Count - 1 do
+    begin
+      if SameText(LowerCase(vGbl_FListaUsuarios[i]), LowerCase(Trim(NomeUsuario))) then
+      begin
+        Autorizado := True;
+        Break;
+      end;
+    end;
+  end;
+
+  //  Guarda se o usuário atual é autorizado globalmente
+  vGbl_UsuarioAutorizado := Autorizado;
+
+  //  Mantém tudo habilitado, mas a verificação será feita no clique
+  act_Empresas.Enabled := True;
+  act_Movimentacao.Enabled := True;
+  act_Configuracao.Enabled := True;
+  btn_deleteTriggers.Enabled := True;
+end;
+
+
+
+procedure TViewMain.ValidarPermissaoAcao(const NomeAcao: string);
+begin
+  // 🔹 Se o usuário não for autorizado, exibe aviso e bloqueia a ação
+  if not vGbl_UsuarioAutorizado then
+  begin
+    MessageDlg(
+      '🚫 Acesso negado!' + sLineBreak +
+      'Usuário "' + vGbl_UserLogin + '" não possui permissão para acessar "' + NomeAcao + '".' + sLineBreak +
+      'Entre em contato com o administrador do sistema.',
+      mtWarning, [mbOK], 0
+    );
+    Abort; // ⚠️ Impede a continuação da execução
+  end;
+end;
+
+
 
 end.
 

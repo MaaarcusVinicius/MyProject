@@ -58,8 +58,7 @@ begin
   FUserName := 'cliente@siacsistemas.com.br';
   FPassword := 'Siac@123';
   FFrom := 'cliente@siacsistemas.com.br';
-//  FTo := 'suporte@gruposiac.com.br;implantacao@gruposiac.com.br;ti@gruposiac.com.br';
-  FTo := 'maaarcus.vinicius@gmail.com';
+  FTo := 'suporte@gruposiac.com.br;implantacao@gruposiac.com.br;ti@gruposiac.com.br';
   FUseTLS := True; // KingHost exige STARTTLS
 end;
 
@@ -173,7 +172,7 @@ begin
         '<p><b>Usuário Oracle:</b> ' + UsuarioBanco + '<br>' +
         '<b>Servidor Oracle:</b> ' + ServidorBanco + '</p>' +
 
-        '<hr><p><i>Mensagem automática gerada pelo sistema SIAC.</i></p>' +
+        '<hr><p><i>Mensagem automática gerada pelo sistema SiacDBManager.</i></p>' +
         '</body></html>';
 
       // 🔹 Configuração SSL
@@ -248,7 +247,7 @@ begin
   // 🔹 Corpo do e-mail padronizado
   Corpo :=
     Format('A rotina "%s" foi executada com sucesso.' + sLineBreak + sLineBreak +
-           'Este é um registro automático do sistema SIAC CleanBase.' + sLineBreak +
+           'Este é um registro automático do sistema Siac DBManager.' + sLineBreak +
            'Nenhuma ação do usuário é necessária.' + sLineBreak,
            [NomeAcao]);
 

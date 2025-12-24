@@ -33,7 +33,7 @@ type
     procedure btn_fecharClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edt_userSenhaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure edt_userNameExit(Sender: TObject);
+
   private
     FListaUsuarios: TStringList;
   public
@@ -55,6 +55,11 @@ procedure Tform_login.FormCreate(Sender: TObject);
 begin
   FListaUsuarios := TStringList.Create;
   GerarListaUsuarios;
+
+  if not Assigned(vGbl_FListaUsuarios) then
+    vGbl_FListaUsuarios := TStringList.Create;
+
+  vGbl_FListaUsuarios.Assign(FListaUsuarios);
 end;
 
 procedure Tform_login.FormDestroy(Sender: TObject);
@@ -84,26 +89,12 @@ end;
 
 function Tform_login.UsuarioAutorizado(const NomeUsuario: string): Boolean;
 var
-  I: Integer;
-  NomeDigitado, NomeLista: string;
-  ListaUsuarios: TStringList;
+  i: Integer;
 begin
   Result := False;
-
-  //  Obtém a lista através do método getter
-  ListaUsuarios := GetFListaUsuarios;
-
-  if not Assigned(ListaUsuarios) then
-    Exit;
-
-  NomeDigitado := Trim(NomeUsuario);
-
-  for I := 0 to ListaUsuarios.Count - 1 do
+  for i := 0 to GetFListaUsuarios.Count - 1 do
   begin
-    NomeLista := Trim(ListaUsuarios[I]);
-
-    // 🔹 Comparação exata (case-sensitive)
-    if SameStr(NomeDigitado, NomeLista) then
+    if SameText(GetFListaUsuarios[i], Trim(NomeUsuario)) then
     begin
       Result := True;
       Break;
@@ -122,13 +113,6 @@ begin
   // 🔹 Validação inicial
   if Trim(edt_userName.Text) = '' then
     Exit;
-
-  if not UsuarioAutorizado(edt_userName.Text) then
-  begin
-    ShowMessage('Usuário "' + edt_userName.Text + '" não possui permissão para logar no sistema.');
-    edt_userName.SetFocus;
-    Exit;
-  end;
 
   // 🔹 Validação básica de campos obrigatórios
   if (Trim(edt_userName.Text) = '') or (Trim(edt_userSenha.Text) = '') then
@@ -176,6 +160,14 @@ begin
     // 🔹 Fecha o formulário com sucesso
     ModalResult := mrOk;
 
+    if Resposta then
+      begin
+        // Atualiza tela principal com dados do usuário logado
+        if Assigned(ViewMain) then
+        begin
+          ViewMain.AplicarPermissoesUsuario(Trim(edt_userName.Text));
+        end;
+      end;
   except
     on E: Exception do
       ShowMessage('Erro ao validar login via WebService: ' + E.Message);
@@ -190,18 +182,6 @@ begin
   Application.Terminate;
 end;
 
-procedure Tform_login.edt_userNameExit(Sender: TObject);
-begin
-  if Trim(edt_userName.Text) = '' then
-    Exit;
-
-  if not UsuarioAutorizado(edt_userName.Text) then
-  begin
-    ShowMessage('Usuário "' + edt_userName.Text + '" não possui permissão para logar no sistema.');
-    edt_userName.SetFocus;
-    Exit;
-  end;
-end;
 
 procedure Tform_login.edt_userSenhaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
