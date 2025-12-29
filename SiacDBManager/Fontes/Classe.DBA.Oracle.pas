@@ -145,7 +145,6 @@ begin
     ValorCorreto := (Valor = 'UTF8');
   end
 
-
   else if Parametro = 'NLS_NUMERIC_CHARACTERS' then
   begin
     EhParametroCritico := True;
@@ -188,28 +187,28 @@ begin
     ValorCorreto := (Valor = 'TRUE');
   end;
 
-  // 🔹 Define a cor de fundo conforme o resultado
+  //  Define a cor de fundo conforme o resultado
   if EhParametroCritico then
   begin
     if ValorCorreto then
     begin
-      CorFundo := RGB(200, 230, 255); // 🔵 Azul pastel → valor correto
+      CorFundo := RGB(200, 230, 255); //  Azul pastel → valor correto
       Canvas.Font.Color := clBlack;
       Canvas.Font.Style := [];
     end
     else
     begin
-      CorFundo := RGB(255, 200, 200); // 🔴 Vermelho claro → valor incorreto
+      CorFundo := RGB(255, 200, 200); //  Vermelho claro → valor incorreto
       Canvas.Font.Color := clBlack;
       Canvas.Font.Style := [fsBold];
     end;
   end;
 
-  // 🔹 Desenha célula com a cor definida
+  //  Desenha célula com a cor definida
   Canvas.Brush.Color := CorFundo;
   Canvas.FillRect(Item.DisplayRect(drBounds));
 
-  // 🔹 Escreve o texto (parâmetro e valor)
+  //  Escreve o texto (parâmetro e valor)
   Canvas.TextOut(Item.DisplayRect(drLabel).Left + 4, Item.DisplayRect(drLabel).Top,
                  Item.Caption);
 
@@ -367,7 +366,6 @@ begin
                  '         SELECT ''0_PLATAFORM'' as PARAMETER, platform_name    '+
                  '         FROM v$database                                       '+
                  '         UNION ALL                                             '+
-
                  '         select name as parameter,                             '+
                  '                value / 1024 / 1024 / 1024 || '' GB'' VALUE_MB '+
                  '           from v$parameter                                    '+
