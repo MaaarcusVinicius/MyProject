@@ -44,6 +44,7 @@ type
     dataSet_dbgridImp: TClientDataSet;
     lbl_status_pasta: TLabel;
     cbb_addExclude: TComboBox;
+    pnl_containerTop: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btn_carregarArquivoClick(Sender: TObject);
@@ -451,7 +452,8 @@ begin
     if not DirectoryExists('C:\SiacDBManagerLogs') then
       ForceDirectories('C:\SiacDBManagerLogs');
 
-    // 6. Monta lista TABLES ou EXCLUDE se houver
+
+// 6. Monta lista TABLES ou EXCLUDE se houver
     ParamTabelas := '';
     ListaPreview := '';
 
@@ -466,7 +468,6 @@ begin
           begin
             if Trim(dataSet_dbgridImp.FieldByName('NOME_TABELA').AsString) <> '' then
             begin
-              // impdp precisa de prefixo com schema, imp não
               if chk_UtilizarImpDP.Checked then
                 ListaTabelas.Add(UpperCase(Trim(FOracleImpExp.FromUser + '.' +
                                  dataSet_dbgridImp.FieldByName('NOME_TABELA').AsString)))
@@ -482,18 +483,25 @@ begin
 
             if cbb_addExclude.ItemIndex = 1 then
             begin
-              // --- EXCLUDE ---
-              // remove schema se impdp (somente o nome da tabela deve ir na cláusula IN)
+              // --- EXCLUDE --- (aprimorado)
               var ListaNomes := TStringList.Create;
               try
                 for var i := 0 to ListaTabelas.Count - 1 do
-                  ListaNomes.Add(
-                    Copy(ListaTabelas[i], Pos('.', ListaTabelas[i]) + 1, MaxInt)
-                  );
+                  ListaNomes.Add(Copy(ListaTabelas[i], Pos('.', ListaTabelas[i]) + 1, MaxInt));
 
-                ParamTabelas := ' EXCLUDE=TABLE:"IN(''' +
-                                StringReplace(ListaNomes.CommaText, ',', ''',''', [rfReplaceAll]) +
-                                ''')"';
+                ParamTabelas := ''; // zera o parâmetro
+
+                if chk_UtilizarImpDP.Checked then
+                begin
+                  // Gera um EXCLUDE=TABLE:"IN('TABELA')" para cada tabela
+                  for var i := 0 to ListaNomes.Count - 1 do
+                    ParamTabelas := ParamTabelas + ' EXCLUDE=TABLE:"IN(''' + ListaNomes[i] + ''')"';
+                end
+                else
+                begin
+                  // ignora EXCLUDE no modo clássico (imp)
+                  ParamTabelas := '';
+                end;
               finally
                 ListaNomes.Free;
               end;
@@ -519,8 +527,6 @@ begin
         Exit;
       end;
     end;
-
-
 
     // 7. Monta o comando completo (Oracle log)
       if chk_UtilizarImpDP.Checked then

@@ -2024,14 +2024,30 @@ begin
   begin
     CtrlBotoes(True);
 
-    //Ativando a qry do DBGridEmpresas
-     qryEmpresas.Open;
-     dbPrincipalEmpresas.Visible:=True;
-
-    fnc_criar_menssagem('CONFIGURAÇÃO AO BANCO DE DADOS ORACLE',
+        fnc_criar_menssagem('CONFIGURAÇÃO AO BANCO DE DADOS ORACLE',
                'Configuração de banco de dados',
                'Conexão com o banco de dados estabelecida com sucesso!',
                 ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_connection.png', 'OK');
+
+    //Ativando a qry do DBGridEmpresas
+    try
+      qryEmpresas.Open;
+
+      dbPrincipalEmpresas.Visible:=True;
+    except
+      on E: Exception do
+      begin
+        fnc_criar_menssagem(
+          'ALERTA',
+          'Falha ao carregar empresas',
+          'Não foi possível abrir a consulta "Empresas".' + sLineBreak +
+          'Verifique se as tabelas existem no banco de dados logado.' + sLineBreak +
+          'Detalhes técnicos: ' + E.Message,
+          ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
+          'OK'
+        );
+      end;
+    end;
 
 
     // Troca a imagem da tela Main/Tela princial

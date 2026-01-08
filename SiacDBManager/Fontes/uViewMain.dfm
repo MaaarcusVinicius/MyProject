@@ -1097,7 +1097,7 @@ object ViewMain: TViewMain
       Top = 0
       Width = 1344
       Height = 746
-      ActivePage = PageTratarFinanceiro
+      ActivePage = PageConfigBD
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0

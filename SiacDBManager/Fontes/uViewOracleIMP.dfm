@@ -5,7 +5,7 @@ object ViewOracleIMP: TViewOracleIMP
   BorderStyle = bsSizeToolWin
   BorderWidth = 1
   Caption = ' DBA Oracle - Importar Banco de Dados'
-  ClientHeight = 542
+  ClientHeight = 597
   ClientWidth = 571
   Color = clTeal
   CustomTitleBar.Height = 31
@@ -42,7 +42,7 @@ object ViewOracleIMP: TViewOracleIMP
     Left = 3
     Top = 3
     Width = 565
-    Height = 536
+    Height = 591
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -54,49 +54,52 @@ object ViewOracleIMP: TViewOracleIMP
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitHeight = 536
     object pnl_containerOpcoes: TPanel
       Left = 0
       Top = 0
       Width = 565
-      Height = 536
+      Height = 591
       Align = alClient
       BorderStyle = bsSingle
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 536
       object pnl_container: TPanel
         Left = 1
         Top = 1
         Width = 559
-        Height = 206
+        Height = 261
         Align = alClient
-        Color = clSilver
+        Color = clWhite
         ParentBackground = False
         TabOrder = 0
+        ExplicitHeight = 206
         object lbl_userExport: TLabel
           Left = 8
-          Top = 16
+          Top = 68
           Width = 96
           Height = 15
           Caption = 'Usu'#225'rio Exportado'
         end
         object lbl_diretorioArquivo: TLabel
           Left = 8
-          Top = 60
+          Top = 112
           Width = 108
           Height = 15
           Caption = 'Diret'#243'rio do Arquivo'
         end
         object lbl_usuarioDestino: TLabel
           Left = 132
-          Top = 16
+          Top = 68
           Width = 83
           Height = 15
           Caption = 'Usu'#225'rio Destino'
         end
         object lbl_status: TLabel
           Left = 483
-          Top = 185
+          Top = 241
           Width = 67
           Height = 15
           Alignment = taRightJustify
@@ -112,14 +115,14 @@ object ViewOracleIMP: TViewOracleIMP
         end
         object lbl_oracleServer: TLabel
           Left = 275
-          Top = 16
+          Top = 68
           Width = 43
           Height = 15
           Caption = 'Servidor'
         end
         object lbl_status_pasta: TLabel
           Left = 12
-          Top = 100
+          Top = 156
           Width = 67
           Height = 15
           Caption = 'Informativo'
@@ -134,7 +137,7 @@ object ViewOracleIMP: TViewOracleIMP
         end
         object edt_userExport: TEdit
           Left = 8
-          Top = 33
+          Top = 85
           Width = 121
           Height = 23
           CharCase = ecUpperCase
@@ -143,7 +146,7 @@ object ViewOracleIMP: TViewOracleIMP
         end
         object edt_diretorioArquivo: TEdit
           Left = 8
-          Top = 75
+          Top = 127
           Width = 545
           Height = 23
           CharCase = ecUpperCase
@@ -151,7 +154,7 @@ object ViewOracleIMP: TViewOracleIMP
         end
         object pnl_containerBotoes: TPanel
           Left = 336
-          Top = 120
+          Top = 176
           Width = 217
           Height = 67
           Color = clTeal
@@ -238,7 +241,7 @@ object ViewOracleIMP: TViewOracleIMP
         end
         object edt_userDestino: TEdit
           Left = 132
-          Top = 33
+          Top = 85
           Width = 121
           Height = 23
           CharCase = ecUpperCase
@@ -247,7 +250,7 @@ object ViewOracleIMP: TViewOracleIMP
         end
         object chk_UtilizarImpDP: TCheckBox
           Left = 456
-          Top = 36
+          Top = 88
           Width = 94
           Height = 17
           Caption = 'Utilizar IMPDP'
@@ -256,29 +259,43 @@ object ViewOracleIMP: TViewOracleIMP
         end
         object cbx_tnsAlias: TComboBox
           Left = 275
-          Top = 33
+          Top = 85
           Width = 175
           Height = 23
           TabOrder = 5
           Text = 'TnsAliasOracle'
         end
+        object pnl_containerTop: TPanel
+          Left = 1
+          Top = 1
+          Width = 557
+          Height = 41
+          Align = alTop
+          Color = clTeal
+          ParentBackground = False
+          TabOrder = 6
+          ExplicitLeft = 360
+          ExplicitTop = 16
+          ExplicitWidth = 185
+        end
       end
       object pnl_containerTabelas: TPanel
         Left = 1
-        Top = 207
+        Top = 262
         Width = 559
         Height = 324
         Align = alBottom
         Color = clPapayawhip
         ParentBackground = False
         TabOrder = 1
+        ExplicitTop = 207
         object pnl_containerAddTabelas: TPanel
           Left = 1
           Top = 1
           Width = 557
           Height = 40
           Align = alTop
-          Color = clSilver
+          Color = clWhite
           ParentBackground = False
           TabOrder = 0
           object btn_addTabelas: TSpeedButton
@@ -383,7 +400,7 @@ object ViewOracleIMP: TViewOracleIMP
           Height = 282
           Align = alRight
           BevelOuter = bvNone
-          Color = clSilver
+          Color = clWhite
           ParentBackground = False
           TabOrder = 2
           object btn_excluirItem: TSpeedButton
