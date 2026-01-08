@@ -9,7 +9,7 @@ uses
   Vcl.Grids, Vcl.DBGrids, MemDS, Vcl.Imaging.jpeg, DAScript, OraScript,
   Vcl.Imaging.pngimage, Vcl.WinXCtrls, Vcl.CategoryButtons, System.Actions,
   Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Mask, classe.BancoDados,
-  uViewlogin, Classe.ProgressHelper, uViewMensagens, uViewProgressBar;
+  uViewlogin, Classe.ProgressHelper, uViewMensagens, uViewProgressBar, Classe.EmailLogs;
 
 type
   TClasseMovimentoFinanceiro = class
@@ -62,7 +62,7 @@ type
 implementation
 
 uses
-  uDataModule, uViewMain;
+  uDataModule, uViewMain, Classe.funcoes;
 
 { TClasseMovimentoFinanceiro }
 
@@ -462,18 +462,30 @@ var
   StartTime, Elapsed: TDateTime;
   RemainingSecs, EstimatedTotalSecs: Double;
   MsgStatus, MsgCaption: String;
+  ResultUser: Boolean;
 begin
   if not Assigned(ADataset) or ADataset.IsEmpty then
   begin
     MessageDlg('Nenhum registro encontrado para exclusão.', mtWarning, [mbOK], 0);
-    Exit;
+    Abort;
   end;
 
   Total := ADataset.RecordCount;
-
+  {
   if MessageDlg(Format('Deseja realmente excluir %d registro(s)?', [Total]),
      mtConfirmation, [mbYes, mbNo], 0) = mrNo then
-    Exit;
+    Abort;    }
+
+  ResultUser := fnc_criar_menssagem('ALERTA',
+                                    'EXCLUIR TÍTULOS',
+                                    'DESEJA REALMENTE EXLUIR, '+ IntToStr(Total) + ' REGISTRO(s)?',
+                                    ExtractFilePath(Application.ExeName) +
+                                    'Arquivos\icones\icon_aviso.png', 'ERRO');
+
+  // Se o usuário clicou em "Não" ou "Cancelar", interrompe todo fluxo
+  if not ResultUser then
+   Abort;
+
 
   Progress := TProgressHelper.Create;
   try
@@ -496,7 +508,7 @@ begin
 
         if (Trim(RowID) <> '') and (Trim(EmpresaID) <> '') and (Trim(DocumentoID) <> '') then
         begin
-          // 🔹 Primeiro: remove os registros vinculados na tabela FINANCEIRO_FLUXO
+          //  Primeiro: remove os registros vinculados na tabela FINANCEIRO_FLUXO
           FCarregarMovimentoFinanceiro.SetSQL(
             'DELETE FROM FINANCEIRO_FLUXO ' +
             ' WHERE EMPRESA_ID = :PEMPRESA_ID ' +
@@ -506,7 +518,7 @@ begin
           FCarregarMovimentoFinanceiro.AddParam('PDOCUMENTO_ID', DocumentoID);
           FCarregarMovimentoFinanceiro.ExecutarComando;
 
-          // 🔹 Depois: exclui o registro principal da tabela FINANCEIRO
+          //  Depois: exclui o registro principal da tabela FINANCEIRO
           FCarregarMovimentoFinanceiro.SetSQL(
             'DELETE FROM FINANCEIRO WHERE ROWID = :AROWID'
           );
@@ -514,7 +526,7 @@ begin
           FCarregarMovimentoFinanceiro.ExecutarComando;
         end;
 
-        // 🕒 Atualização visual do progresso
+        //  Atualização visual do progresso
         if Contador > 1 then
         begin
           Elapsed := (Now - StartTime) * 24 * 60 * 60;
@@ -540,7 +552,7 @@ begin
       end;
 
       FCarregarMovimentoFinanceiro.ConfirmarTransacao;
-      MessageDlg('Todos os registros e seus fluxos foram excluídos com sucesso.', mtInformation, [mbOK], 0);
+      MessageDlg('Todos os registros foram excluídos com sucesso.', mtInformation, [mbOK], 0);
     except
       on E: Exception do
       begin
@@ -563,15 +575,22 @@ var
   Progress: TProgressHelper;
   Query: TOraQuery;
   Total, Contador: Integer;
+  ResultUser: Boolean;
 begin
   Progress := TProgressHelper.Create;
   try
     if not FiltroData then
     begin
-      if MessageDlg('Você optou por excluir TODOS os créditos (sem filtro de data).' + sLineBreak +
-                    'Esta ação irá EXCLUIR completamente os dados das tabelas CREDITOS e CREDITOS_MOVIMENTOS.' + sLineBreak +
-                    'Deseja continuar?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
-        Exit;
+        ResultUser := fnc_criar_menssagem('ALERTA',
+                                          'Você optou por excluir TODOS os créditos (sem filtro de data).',
+                                          'Esta ação irá EXCLUIR completamente os dados das tabelas CRÉDITOS' + sLineBreak +
+                                          'Deseja continuar?',
+                                          ExtractFilePath(Application.ExeName) +
+                                          'Arquivos\icones\icon_aviso.png', 'ERRO');
+
+      // Se o usuário clicou em "Não" ou "Cancelar", interrompe todo fluxo
+      if not ResultUser then
+       Abort;
 
       try
         Progress.Start(2, 'Executando limpeza total das tabelas de crédito...');

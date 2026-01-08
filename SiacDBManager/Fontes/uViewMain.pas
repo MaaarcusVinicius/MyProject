@@ -137,7 +137,7 @@ type
     btn_bindsOracle: TSpeedButton;
     OraScriptCriarUsuarioOriginal: TOraScript;
     pnl_expBackup: TPanel;
-    btn_expBkp: TSpeedButton;
+    btn_exportBkp: TSpeedButton;
     pnl_importarBackup: TPanel;
     btn_importBkp: TSpeedButton;
     pnl_abrigaCriarUsuario: TPanel;
@@ -398,7 +398,7 @@ type
     procedure btn_criarUsuarioClick(Sender: TObject);
     procedure ExecutarScriptCriarUsuario;
     procedure btn_importBkpClick(Sender: TObject);
-    procedure btn_expBkpClick(Sender: TObject);
+    procedure btn_exportBkpClick(Sender: TObject);
     procedure btn_bindsOracleClick(Sender: TObject);
     procedure btn_versaoSistemaClick(Sender: TObject);
     procedure action_DeletaMovimentoExecute(Sender: TObject);
@@ -433,6 +433,8 @@ type
     procedure btn_addListaProtegidaClick(Sender: TObject);
     procedure btn_addListaDeletarClick(Sender: TObject);
     procedure btn_enviarEmailClick(Sender: TObject);
+    procedure edt_novoUsuarioKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
   private
     FMostrarBranco: Boolean;
@@ -459,6 +461,7 @@ var
     vGbl_UserLogin       : string;
     vGbl_FuncionarioId   : string;
     vGbl_FuncionarioNome : string;
+    vGbl_FuncionarioAtivo: string;
     vGbl_FListaUsuarios: TStringList;
     vGbl_UsuarioAutorizado: Boolean = False;
 
@@ -478,7 +481,7 @@ uses
   Classe.AtualizaComponentesTela,
   classe.BancoDados,
   Classe.ConsultaEmpresa,
-  Classe.MovimentoFinanceiro, uViewlogin;
+  Classe.MovimentoFinanceiro, uViewlogin, uViewOracleEXP, uViewOracleIMP;
 
 {$R *.dfm}
 
@@ -928,6 +931,8 @@ begin
                         '. ESTA AÇÃO É IRREVERSÍVEL!!!',
                         ExtractFilePath(Application.ExeName) + 'Arquivos\icones\HumanoConfirma.png',
                         'OK');
+         // Dispara o Email
+       Email.EnviarLogOperacao('Deleta Empresa');
 
     // 6 - Salvar script se marcado
     if chk_saveScriptDeletando.Checked then
@@ -941,9 +946,6 @@ begin
       end;
     end;
 
-    // Dispara o Email
-       Email.EnviarLogOperacao('Deleta Empresa');
-
     // Atualiza/Limpa Variaveis de ambiente/globais e nome da empresa
        AtualizarTelaEmpresas();
 
@@ -955,8 +957,7 @@ begin
 
     // Leva o usuario para a tela inicial do sistema.
        PageControl.ActivePageIndex := 0 ;
-    // Dispara o Email
-       Email.EnviarLogOperacao('Deleta Empresa');
+
   finally
     Scripts.Free;
     ScriptGen.Free;
@@ -972,10 +973,10 @@ var
 begin
   Movimento := TClasseMovimentoFinanceiro.Create;
   try
-    // 🔹 Verifica se o filtro de data está ativo
+    //  Verifica se o filtro de data está ativo
     FiltroData := chk_filtroDataCredito.Checked;
 
-    // 🔹 Converte as datas apenas se o filtro estiver ativo
+    //  Converte as datas apenas se o filtro estiver ativo
     if FiltroData then
     begin
       if not TryStrToDate(edt_dataInicialCredito.Text, DataIni) then
@@ -992,11 +993,11 @@ begin
         Exit;
       end;
 
-      // 🔸 Primeiro carrega os créditos filtrados para gerar o SQL base
+      //  Primeiro carrega os créditos filtrados para gerar o SQL base
       Movimento.CarregarCreditosFinanceiro(vGbl_Empresa_id, True, DataIni, DataFim);
     end;
 
-    // 🔸 Agora executa a exclusão (truncate ou delete por período)
+    //  Agora executa a exclusão (truncate ou delete por período)
     Movimento.ExcluirCreditosFinanceiro(FiltroData);
 
   finally
@@ -1004,7 +1005,7 @@ begin
   end;
 
   // Envio de Email.
-  Email.EnviarLogOperacao('A exclusão de Créditos Financeiros');
+  Email.EnviarLogOperacao('Exclusão de Créditos Financeiros');
 
 end;
 
@@ -1172,7 +1173,7 @@ begin
   btn_processarFinanceiro.Click;
 
   // Envio de Email.
-  Email.EnviarLogOperacao('A exclusão de títulos Financeiro');
+  Email.EnviarLogOperacao('Exclusão de títulos Financeiro');
 
 end;
 
@@ -1203,7 +1204,7 @@ begin
   // Reinicia a pesquisa da tela
   btn_analisarExcluirMovimentoClick(Sender);
   // Dispara o envio de email
-  Email.EnviarLogOperacao('A limpeza da Base de Dados');
+  Email.EnviarLogOperacao('Limpeza da Base de Dados');
 end;
 
 procedure TViewMain.btn_exemploDocumentoClick(Sender: TObject);
@@ -1225,20 +1226,36 @@ begin
   lbl_exemploDocumento.Caption := New_Documento;
 end;
 
-
-procedure TViewMain.btn_expBkpClick(Sender: TObject);
+procedure TViewMain.btn_exportBkpClick(Sender: TObject);
+var
+  ViewOracleEXP: TViewOracleEXP;
 begin
-  ShowMessage('Em construção ...');
+  ViewOracleEXP := TViewOracleEXP.Create(Self);
+  try
+    ViewOracleEXP.ShowModal;
+    MakeRounded(ViewOracleEXP);
+  finally
+    ViewOracleEXP.Free;
+  end;
 end;
+
+procedure TViewMain.btn_importBkpClick(Sender: TObject);
+var
+  ViewOracleIMP: TViewOracleIMP;
+begin
+  ViewOracleIMP := TViewOracleIMP.Create(Self);
+  try
+    ViewOracleIMP.ShowModal;
+    MakeRounded(ViewOracleIMP);
+  finally
+    ViewOracleIMP.Free;
+  end;
+end;
+
 
 procedure TViewMain.btn_FecharMenuMovimento2Click(Sender: TObject);
 begin
  ShowMessage('Deleta movimentação');
-end;
-
-procedure TViewMain.btn_importBkpClick(Sender: TObject);
-begin
-  ShowMessage('Em construção ...');
 end;
 
 procedure TViewMain.btn_infClickMovimentoDeleteClick(Sender: TObject);
@@ -1488,11 +1505,12 @@ begin
         saveScriptOracle := TStringList.Create;
         try
           saveScriptOracle.Text := Scripts.Text;
-          saveScriptOracle.SaveToFile('C:\SiacDBManager\sqlExport_TrocaEmpresa.txt', TEncoding.UTF8);
+          saveScriptOracle.SaveToFile('C:\SiacDBManagerLogs\sqlExport_TrocaEmpresa.txt', TEncoding.UTF8);
         finally
           saveScriptOracle.Free;
         end;
       end;
+
 
     // Atualiza/Limpa Variaveis de ambiente/globais e nome da empresa
        AtualizarTelaEmpresas();
@@ -2404,8 +2422,6 @@ begin
   if Column.Title.Caption = 'DROP USER' then
   begin
    // Pega o nome do usuario do Banco de dados a ser deletado.
-   //ShowMessage(DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString );
-
      returnUsuario := fnc_criar_menssagem(
                       'Administração Banco de Dados',
                      'O usuário ' + DBGrid_CarregarUsuarios.DataSource.DataSet.FieldByName('USERNAME').AsString + ' foi selecionado para ser Excluído.',
@@ -2474,6 +2490,17 @@ begin
        TClasseAtualizaComponentesTela.AtualizarVariaveisGlobais(ViewMain.lbl_carregaEmpresa,
                                                                 ViewMain.qryEmpresas);
      end;
+
+end;
+
+procedure TViewMain.edt_novoUsuarioKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if Key = VK_RETURN then
+  begin
+    btn_criarUsuarioClick(btn_criarUsuario); // chama o evento do botão
+    Key := 0; // impede o beep padrão do Enter
+  end;
 
 end;
 
@@ -2579,7 +2606,4 @@ begin
   end;
 end;
 
-
-
 end.
-

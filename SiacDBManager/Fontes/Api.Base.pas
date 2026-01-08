@@ -85,6 +85,7 @@ var
   ValorTag: string;
   InicioFunc, FimFunc, InicioNome, FimNome: Integer;
   FuncionarioId, NomeFuncionario: string;
+  FuncionarioAtivo: string;
 begin
   Result := False; // Valor padrão (falha)
   HttpClient := THTTPClient.Create;
@@ -97,7 +98,7 @@ begin
       Response := HttpClient.Post(FURL, ST, nil, nil);
       RetornoXML := Response.ContentAsString(TEncoding.UTF8);
 
-      // 🔹 Extrai o resultado do login
+      //  Extrai o resultado do login
       InicioTag := Pos('<LoginTecnicoArqBaseResult>', RetornoXML);
       FimTag := Pos('</LoginTecnicoArqBaseResult>', RetornoXML);
 
@@ -110,7 +111,7 @@ begin
         Result := (ValorTag = 'true');
       end;
 
-      // 🔹 Mesmo se falhar no login, tentamos capturar informações adicionais
+      //  Mesmo se falhar no login, tentamos capturar informações adicionais
       // Captura o <FuncionarioId>
       InicioFunc := Pos('<FuncionarioId>', RetornoXML);
       FimFunc := Pos('</FuncionarioId>', RetornoXML);
@@ -131,11 +132,27 @@ begin
       else
         NomeFuncionario := '';
 
-      // 🔹 Exemplo: salvar em variáveis globais (caso tenha definido no projeto)
+      //  Exemplo: salvar em variáveis globais (caso tenha definido no projeto)
       if FuncionarioId <> '' then
         vGbl_FuncionarioId := FuncionarioId;
       if NomeFuncionario <> '' then
         vGbl_FuncionarioNome := NomeFuncionario;
+
+      // Captura o <Funcionario Ativo>
+      InicioFunc := Pos('<Ativo>', RetornoXML);
+      FimFunc := Pos('</Ativo>', RetornoXML);
+      if (InicioFunc > 0) and (FimFunc > InicioFunc) then
+        FuncionarioAtivo := Copy(RetornoXML,
+                              InicioFunc + Length('<Ativo>'),
+                              FimFunc - (InicioFunc + Length('<Ativo>')))
+      else
+        FuncionarioAtivo := 'False';
+
+      if UpperCase(FuncionarioAtivo) = 'FALSE' then
+       Result:= False
+       else
+       Result := True;
+
 
     finally
       ST.Free;

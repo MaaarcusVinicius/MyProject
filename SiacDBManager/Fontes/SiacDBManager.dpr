@@ -20,24 +20,28 @@ uses
   Classe.MovimentoFinanceiro in 'Classe.MovimentoFinanceiro.pas',
   Classe.LimparMovimento in 'Classe.LimparMovimento.pas',
   Classe.EmailLogs in 'Classe.EmailLogs.pas',
-  Api.Base in 'Api.Base.pas';
+  Api.Base in 'Api.Base.pas',
+  Classe.OracleImp in 'Classe.OracleImp.pas',
+  uViewOracleIMP in 'uViewOracleIMP.pas' {ViewOracleIMP},
+  uViewOracleEXP in 'uViewOracleEXP.pas' {ViewOracleEXP},
+  Classe.OracleExp in 'Classe.OracleExp.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-    begin
 
-     form_login := Tform_login.Create(nil);
-     form_login.ShowModal;
-
-     form_login.Hide;
-     form_login.Free;
-
+   begin
+       form_login := Tform_login.Create(nil);
+       form_login.ShowModal;
+       form_login.Hide;
+       form_login.Free;
     end;
+
   Application.CreateForm(TViewMain, ViewMain);
   Application.CreateForm(TViewMensagens, ViewMensagens);
+  //Application.CreateForm(TViewOracleIMP, ViewOracleIMP);
   // Application.CreateForm(TfrmProgressBar, frmProgressBar);
   Application.CreateForm(TFormTelaAguarde, FormTelaAguarde);
 

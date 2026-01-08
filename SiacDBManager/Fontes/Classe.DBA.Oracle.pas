@@ -564,8 +564,8 @@ begin
 '        DBA_USER.DT_CRIACAO AS "DT CRIAÇÃO",                                '+
 '        DBA_USER.ULTIMO_LOGIN,                                              '+
 '        DBA_USER.DIAS_SEM_LOGIN,                                            '+
-'        DBA_SEG.TAMANHO_GB,                                                 '+
-'        DBA_USER.DROP_USER                                                 '+
+'        nvl(DBA_SEG.TAMANHO_GB,0) as TAMANHO_GB,                            '+
+'        DBA_USER.DROP_USER                                                  '+
 '   FROM (SELECT ROUND(SUM(BYTES) / 1024 / 1024 / 1024, 2) AS TAMANHO_GB,    '+
 '                OWNER                                                       '+
 '           FROM DBA_SEGMENTS                                                '+

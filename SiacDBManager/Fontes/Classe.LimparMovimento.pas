@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, System.Variants, System.StrUtils,
   Vcl.Dialogs, Data.DB, DBAccess, Ora, MemDS,
   classe.BancoDados, uDataModule, Classe.ProgressHelper, Vcl.Controls,
-  Vcl.DBGrids, Datasnap.DBClient, Vcl.StdCtrls;
+  Vcl.DBGrids, Datasnap.DBClient, Vcl.StdCtrls, Classe.funcoes;
 
 type
   TClasseLimparMovimento = class
@@ -273,6 +273,7 @@ var
   NomeTabela, SQLTruncate: string;
   DataSet: TDataSet;
   TotalTabelas: Integer;
+  ResultUser: Boolean;
 begin
   // 🔹 Verifica parâmetros
   if (not Assigned(ADBGrid)) or (not Assigned(ADBGrid.DataSource)) or
@@ -295,12 +296,23 @@ begin
   TotalTabelas := DataSet.RecordCount;
 
   //  Confirma truncamento com o usuário
-  if MessageDlg(Format('Foram encontradas %d tabelas no grid.' + sLineBreak +
-                       'Deseja realmente executar o truncamento?' + sLineBreak +
-                       '⚠️ Esta ação é irreversível!',
-                       [TotalTabelas]),
-                mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
-  Exit;
+//  if MessageDlg(Format('Foram encontradas %d tabelas no grid.' + sLineBreak +
+//                       'Deseja realmente executar o truncamento?' + sLineBreak +
+//                       '⚠️ Esta ação é irreversível!',
+//                       [TotalTabelas]),
+//                mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
+//  Exit;
+
+    ResultUser := fnc_criar_menssagem('ALERTA',
+                                      'DESEJA REALMENTE EXCLUIR MOVIMENTO',
+                                      'FOI SELECIONADO, '+ IntToStr(TotalTabelas) + ' TABELA(s)?',
+                                      ExtractFilePath(Application.ExeName) +
+                                      'Arquivos\icones\icon_aviso.png', 'ERRO');
+
+  // Se o usuário clicou em "Não" ou "Cancelar", interrompe todo fluxo
+  if not ResultUser then
+   Abort;
+
 
   // Por algum motivo a classe do banco de dados esta sendo deletada
   // Adicionei o codigo abaixo como solução paliativa até resolver o caso.

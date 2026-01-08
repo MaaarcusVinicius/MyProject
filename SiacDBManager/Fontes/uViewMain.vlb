@@ -241,9 +241,6 @@ Coordinates=1365,390,60,58
 [DBGrid_CarregarTablespace]
 Coordinates=1072,912,181,36
 
-[btn_expBkp]
-Coordinates=980,912,82,36
-
 [mmo_infoDesativaBD]
 Coordinates=804,10,139,58
 
@@ -715,4 +712,7 @@ Coordinates=899,322,109,58
 
 [lbl_userLogin]
 Coordinates=1726,322,94,58
+
+[btn_exportBkp]
+Coordinates=980,912,82,36
 

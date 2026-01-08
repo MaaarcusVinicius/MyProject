@@ -1097,7 +1097,7 @@ object ViewMain: TViewMain
       Top = 0
       Width = 1344
       Height = 746
-      ActivePage = PageConfigBD
+      ActivePage = PageTratarFinanceiro
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -6202,7 +6202,7 @@ object ViewMain: TViewMain
               Color = clWhite
               ParentBackground = False
               TabOrder = 1
-              object btn_expBkp: TSpeedButton
+              object btn_exportBkp: TSpeedButton
                 AlignWithMargins = True
                 Left = 3
                 Top = 3
@@ -6223,7 +6223,7 @@ object ViewMain: TViewMain
                 Layout = blGlyphTop
                 ParentFont = False
                 ParentBiDiMode = False
-                OnClick = btn_expBkpClick
+                OnClick = btn_exportBkpClick
                 ExplicitLeft = -2
                 ExplicitTop = -1
                 ExplicitWidth = 104
@@ -6328,6 +6328,7 @@ object ViewMain: TViewMain
                 CharCase = ecUpperCase
                 TabOrder = 0
                 TextHint = 'Usu'#225'rio'
+                OnKeyDown = edt_novoUsuarioKeyDown
               end
             end
             object pnl_versaoSistema: TPanel
@@ -6382,7 +6383,6 @@ object ViewMain: TViewMain
               Color = clWhite
               ParentBackground = False
               TabOrder = 5
-              Visible = False
               object btn_enviarEmail: TSpeedButton
                 AlignWithMargins = True
                 Left = 3

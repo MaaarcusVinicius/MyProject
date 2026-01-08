@@ -69,20 +69,20 @@ end;
 
 procedure Tform_login.GerarListaUsuarios;
 begin
-  // Se a Lista não estiver criada por algum motivo, forço a criação.
+  // Se a Lista não estiver criada por algum motivo, força a criação.
   if not Assigned(FListaUsuarios) then
     FListaUsuarios := TStringList.Create
   else
+
   // Limpa a Lista
   FListaUsuarios.Clear;
 
-  // Lista base — Todos os Usuários autorizados
+  // Lista base — Usuários autorizados - Acesso Full
   FListaUsuarios.Add('marcus');          // Analista de Sistemas
   FListaUsuarios.Add('wandersonb');      // Analista Implantação
   FListaUsuarios.Add('FILEMON');         // Analista Implantação
   FListaUsuarios.Add('ricardogomes');    // Analista Implantação
   FListaUsuarios.Add('LUCASARAUJO');     // Analista Suporte
-  FListaUsuarios.Add('fabriciojs212');   // Analista Suporte
   FListaUsuarios.Add('victor');          // Gerente de Suporte
   FListaUsuarios.Add('KLEYSON');         // Gerente de Implantação
 end;
@@ -110,18 +110,18 @@ var
   Resposta: Boolean;
   vSenhaEncriptada: string;
 begin
-  // 🔹 Validação inicial
+  //  Validação inicial
   if Trim(edt_userName.Text) = '' then
     Exit;
 
-  // 🔹 Validação básica de campos obrigatórios
+  //  Validação básica de campos obrigatórios
   if (Trim(edt_userName.Text) = '') or (Trim(edt_userSenha.Text) = '') then
   begin
     ShowMessage('Informe o usuário e a senha.');
     Exit;
   end;
 
-  // 🔹 Criptografa a senha conforme padrão SIAC
+  //  Criptografa a senha conforme padrão SIAC
   vSenhaEncriptada := SIAC_CriptografarSenha(edt_userSenha.Text);
   // ShowMessage(vSenhaEncriptada); // debug opcional
 
@@ -130,7 +130,7 @@ begin
     Api.URL := 'https://host.siacsistemas.com.br/WsSiacSistemas/WebServiceSS.asmx';
     Api.Authorization := ''; // SOAP não usa Bearer Token
 
-    // 🔹 Monta o XML SOAP com senha criptografada
+    //  Monta o XML SOAP com senha criptografada
     XMLRequest :=
       '<?xml version="1.0" encoding="utf-8"?>' +
       '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
@@ -144,20 +144,20 @@ begin
       '</soap12:Body>' +
       '</soap12:Envelope>';
 
-    // 🔹 Envia a requisição SOAP
+    //  Envia a requisição SOAP
     Resposta := Api.Post(XMLRequest);
 
-    // 🔹 Validação do retorno
+    //  Validação do retorno
     if not Resposta then
     begin
-      ShowMessage('Usuário ou senha inválidos. Verifique as credenciais e tente novamente.');
+      ShowMessage('Usuário ou senha inválidos, ou usuário desativado. Verifique as credenciais e tente novamente.');
       Exit;
     end;
 
     // Alimenta o nome do User Login do sistema
     vGbl_UserLogin :=  Trim(edt_userName.Text);
 
-    // 🔹 Fecha o formulário com sucesso
+    //  Fecha o formulário com sucesso
     ModalResult := mrOk;
 
     if Resposta then

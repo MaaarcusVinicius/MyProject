@@ -164,6 +164,16 @@
         <DCCReference Include="Classe.LimparMovimento.pas"/>
         <DCCReference Include="Classe.EmailLogs.pas"/>
         <DCCReference Include="Api.Base.pas"/>
+        <DCCReference Include="Classe.OracleImp.pas"/>
+        <DCCReference Include="uViewOracleIMP.pas">
+            <Form>ViewOracleIMP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uViewOracleEXP.pas">
+            <Form>ViewOracleEXP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Classe.OracleExp.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

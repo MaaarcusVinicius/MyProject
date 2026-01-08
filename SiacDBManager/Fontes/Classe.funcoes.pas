@@ -20,7 +20,7 @@ uses
   function ValidarCaracterString(const S: string): Boolean;
   procedure prcLimparCamposEditaveis(AOwner: TWinControl);
   function fnc_contar_registros_tabela(const NomeTabela: string): Integer;
-
+  procedure AppendToFile(const FileName: string; const Lines: TStrings);
             { SIAC - Add. function Siac Criptografar senha Login}
   function SIAC_CriptografarSenha(Senha:string):string;
   function SIAC_Padr(StringEsquerda:string;Tam:Word;cDireita:Char=' ';cSeMenor:String=''):string;
@@ -57,7 +57,7 @@ begin
 
   Result := False;
 
-  ViewMensagens := TViewMensagens.Create(nil);
+   ViewMensagens := TViewMensagens.Create(Application);
 
   ViewMensagens.sTituloJanela := TituloJanela;
   ViewMensagens.sTituloMSG := TituloMSG;
@@ -65,6 +65,7 @@ begin
   ViewMensagens.sCaminhoIcone := Icone;
   ViewMensagens.sTipo := Tipo;
 
+   ViewMensagens.BringToFront;
   ViewMensagens.ShowModal;
 
   Result := ViewMensagens.bRespostaMSG;
@@ -389,6 +390,25 @@ begin
     Result:=Verdadeiro
   end else begin
     Result:=Falso;
+  end;
+end;
+
+procedure AppendToFile(const FileName: string; const Lines: TStrings);
+var
+  F: TextFile;
+  i: Integer;
+begin
+  AssignFile(F, FileName);
+  try
+    if FileExists(FileName) then
+      Append(F)
+    else
+      Rewrite(F);
+
+    for i := 0 to Lines.Count - 1 do
+      Writeln(F, Lines[i]);
+  finally
+    CloseFile(F);
   end;
 end;
 
