@@ -45,6 +45,7 @@ type
     lbl_status_pasta: TLabel;
     cbb_addExclude: TComboBox;
     pnl_containerTop: TPanel;
+    lbl_oracleImport: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btn_carregarArquivoClick(Sender: TObject);
@@ -453,7 +454,7 @@ begin
       ForceDirectories('C:\SiacDBManagerLogs');
 
 
-// 6. Monta lista TABLES ou EXCLUDE se houver
+    // 6. Monta lista TABLES ou EXCLUDE se houver
     ParamTabelas := '';
     ListaPreview := '';
 

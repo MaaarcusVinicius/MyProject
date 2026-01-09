@@ -42,6 +42,8 @@ type
     chk_UtilizarExpDP: TCheckBox;
     cbb_addExcludeExp: TComboBox;
     cbb_userExport: TComboBox;
+    pnl_containerTop: TPanel;
+    lbl_oracleExport: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btn_salvarArquivoClick(Sender: TObject);

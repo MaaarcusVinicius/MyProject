@@ -6383,6 +6383,7 @@ object ViewMain: TViewMain
               Color = clWhite
               ParentBackground = False
               TabOrder = 5
+              Visible = False
               object btn_enviarEmail: TSpeedButton
                 AlignWithMargins = True
                 Left = 3

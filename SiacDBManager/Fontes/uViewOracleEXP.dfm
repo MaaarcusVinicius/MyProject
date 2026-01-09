@@ -5,9 +5,9 @@ object ViewOracleEXP: TViewOracleEXP
   BorderStyle = bsSizeToolWin
   BorderWidth = 1
   Caption = ' DBA Oracle - Exportar Banco de Dados'
-  ClientHeight = 542
+  ClientHeight = 597
   ClientWidth = 571
-  Color = clTeal
+  Color = clTomato
   CustomTitleBar.Height = 31
   CustomTitleBar.SystemHeight = False
   CustomTitleBar.ShowCaption = False
@@ -42,7 +42,7 @@ object ViewOracleEXP: TViewOracleEXP
     Left = 3
     Top = 3
     Width = 565
-    Height = 536
+    Height = 591
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -54,42 +54,46 @@ object ViewOracleEXP: TViewOracleEXP
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitHeight = 536
     object pnl_containerOpcoes: TPanel
       Left = 0
       Top = 0
       Width = 565
-      Height = 536
+      Height = 591
       Align = alClient
       BorderStyle = bsSingle
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 536
       object pnl_container: TPanel
         Left = 1
         Top = 1
         Width = 559
-        Height = 206
+        Height = 261
         Align = alClient
-        Color = clTomato
+        BevelInner = bvLowered
+        BevelOuter = bvSpace
+        Color = clWhite
         ParentBackground = False
         TabOrder = 0
         object lbl_userExport: TLabel
-          Left = 8
-          Top = 16
+          Left = 10
+          Top = 72
           Width = 96
           Height = 15
           Caption = 'Usu'#225'rio Exportado'
         end
         object lbl_diretorioArquivo: TLabel
-          Left = 8
-          Top = 60
+          Left = 10
+          Top = 116
           Width = 108
           Height = 15
           Caption = 'Diret'#243'rio do Arquivo'
         end
         object lbl_statusExp: TLabel
-          Left = 483
-          Top = 185
+          Left = 485
+          Top = 241
           Width = 67
           Height = 15
           Alignment = taRightJustify
@@ -104,15 +108,15 @@ object ViewOracleEXP: TViewOracleEXP
           ParentFont = False
         end
         object lbl_oracleServer: TLabel
-          Left = 227
-          Top = 16
+          Left = 229
+          Top = 72
           Width = 43
           Height = 15
           Caption = 'Servidor'
         end
         object lbl_status_pastaExp: TLabel
-          Left = 12
-          Top = 100
+          Left = 14
+          Top = 156
           Width = 67
           Height = 15
           Caption = 'Informativo'
@@ -126,19 +130,19 @@ object ViewOracleEXP: TViewOracleEXP
           ParentFont = False
         end
         object edt_diretorioArquivoExp: TEdit
-          Left = 8
-          Top = 75
+          Left = 10
+          Top = 131
           Width = 545
           Height = 23
           CharCase = ecUpperCase
           TabOrder = 0
         end
         object pnl_containerBotoes: TPanel
-          Left = 336
-          Top = 120
+          Left = 338
+          Top = 176
           Width = 217
           Height = 67
-          Color = clTeal
+          Color = clTomato
           ParentBackground = False
           TabOrder = 2
           object pnl_containerBtnProcessar: TPanel
@@ -222,8 +226,8 @@ object ViewOracleEXP: TViewOracleEXP
           end
         end
         object chk_UtilizarExpDP: TCheckBox
-          Left = 456
-          Top = 34
+          Left = 458
+          Top = 90
           Width = 94
           Height = 17
           Caption = 'Utilizar EXPDP'
@@ -231,38 +235,69 @@ object ViewOracleEXP: TViewOracleEXP
           OnClick = chk_UtilizarExpDPClick
         end
         object cbx_tnsAlias: TComboBox
-          Left = 226
-          Top = 31
+          Left = 228
+          Top = 87
           Width = 224
           Height = 23
           TabOrder = 3
           Text = 'TnsAliasOracle'
         end
         object cbb_userExport: TComboBox
-          Left = 8
-          Top = 31
+          Left = 10
+          Top = 87
           Width = 169
           Height = 23
           TabOrder = 4
           Text = 'cbb_userExport'
         end
+        object pnl_containerTop: TPanel
+          Left = 2
+          Top = 2
+          Width = 555
+          Height = 41
+          Align = alTop
+          Color = clTomato
+          ParentBackground = False
+          TabOrder = 5
+          ExplicitTop = 9
+          ExplicitWidth = 557
+          object lbl_oracleExport: TLabel
+            AlignWithMargins = True
+            Left = 4
+            Top = 4
+            Width = 547
+            Height = 33
+            Align = alClient
+            Alignment = taCenter
+            Caption = 'Exporta'#231#227'o Banco de da Dados'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -20
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+            ExplicitWidth = 294
+            ExplicitHeight = 28
+          end
+        end
       end
       object pnl_containerTabelas: TPanel
         Left = 1
-        Top = 207
+        Top = 262
         Width = 559
         Height = 324
         Align = alBottom
         Color = clPapayawhip
         ParentBackground = False
         TabOrder = 1
+        ExplicitTop = 207
         object pnl_containerAddTabelas: TPanel
           Left = 1
           Top = 1
           Width = 557
           Height = 40
           Align = alTop
-          Color = clTomato
+          Color = clWhite
           ParentBackground = False
           TabOrder = 0
           object btn_addTabelasExp: TSpeedButton
@@ -367,7 +402,7 @@ object ViewOracleEXP: TViewOracleEXP
           Height = 282
           Align = alRight
           BevelOuter = bvNone
-          Color = clTomato
+          Color = clWhite
           ParentBackground = False
           TabOrder = 2
           object btn_excluirItemExp: TSpeedButton

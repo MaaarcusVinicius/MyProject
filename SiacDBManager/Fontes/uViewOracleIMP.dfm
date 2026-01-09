@@ -54,7 +54,6 @@ object ViewOracleIMP: TViewOracleIMP
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitHeight = 536
     object pnl_containerOpcoes: TPanel
       Left = 0
       Top = 0
@@ -65,7 +64,6 @@ object ViewOracleIMP: TViewOracleIMP
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 536
       object pnl_container: TPanel
         Left = 1
         Top = 1
@@ -75,7 +73,6 @@ object ViewOracleIMP: TViewOracleIMP
         Color = clWhite
         ParentBackground = False
         TabOrder = 0
-        ExplicitHeight = 206
         object lbl_userExport: TLabel
           Left = 8
           Top = 68
@@ -274,9 +271,24 @@ object ViewOracleIMP: TViewOracleIMP
           Color = clTeal
           ParentBackground = False
           TabOrder = 6
-          ExplicitLeft = 360
-          ExplicitTop = 16
-          ExplicitWidth = 185
+          object lbl_oracleImport: TLabel
+            AlignWithMargins = True
+            Left = 4
+            Top = 4
+            Width = 549
+            Height = 33
+            Align = alClient
+            Alignment = taCenter
+            Caption = 'Importa'#231#227'o Banco de da Dados'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -20
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+            ExplicitWidth = 296
+            ExplicitHeight = 28
+          end
         end
       end
       object pnl_containerTabelas: TPanel
@@ -288,7 +300,6 @@ object ViewOracleIMP: TViewOracleIMP
         Color = clPapayawhip
         ParentBackground = False
         TabOrder = 1
-        ExplicitTop = 207
         object pnl_containerAddTabelas: TPanel
           Left = 1
           Top = 1
