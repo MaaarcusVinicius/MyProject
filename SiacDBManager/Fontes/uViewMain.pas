@@ -2020,6 +2020,38 @@ end;
 
 procedure TViewMain.BtConectarClick(Sender: TObject);
 begin
+
+  if (eUsuario.Text = '') then
+  begin
+      fnc_criar_menssagem('CONFIGURAÇÃO AO BANCO DE DADOS ORACLE',
+               'Parâmetros de acesso inválidos...',
+               'Informe o USUÁRIO para conectar ao banco de dados.',
+                ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png', 'OK');
+                eUsuario.SetFocus;
+                abort;
+  end;
+
+  if (eServidor.Text = '')then
+  begin
+      fnc_criar_menssagem('CONFIGURAÇÃO AO BANCO DE DADOS ORACLE',
+               'Parâmetros de acesso inválidos...',
+               'Informe o SERVIDOR para conectar ao banco de dados.',
+                ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png', 'OK');
+                eServidor.SetFocus;
+                abort;
+  end;
+
+  if ( eSenha.Text = '' ) then
+  begin
+      fnc_criar_menssagem('CONFIGURAÇÃO AO BANCO DE DADOS ORACLE',
+               'Parâmetros de acesso inválidos...',
+               'Informe a SENHA para conectar ao banco de dados.',
+                ExtractFilePath(Application.ExeName) + 'Arquivos\icones\database_error.png', 'OK');
+                eSenha.SetFocus;
+                abort;
+  end;
+
+
   if uDataModule.DmModule.ConectarBd(eUsuario.Text, eSenha.Text, eServidor.Text) then
   begin
     CtrlBotoes(True);

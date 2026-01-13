@@ -5428,7 +5428,6 @@ object ViewMain: TViewMain
           AutoSize = False
           CharCase = ecUpperCase
           TabOrder = 2
-          Text = '192.168.0.206'
         end
         object eSenha: TEdit
           Left = 120
@@ -5452,7 +5451,6 @@ object ViewMain: TViewMain
           AutoSize = False
           CharCase = ecUpperCase
           TabOrder = 0
-          Text = 'ADMIN_IND'
         end
         object pnl_configBancoDados: TPanel
           Left = 0

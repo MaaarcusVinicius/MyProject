@@ -115,3 +115,13 @@ ExeDelphi/delphi-envia-email-main/SendMail.dproj
 ExeDelphi/delphi-envia-email-main/SendMail.res
 ExeDelphi/delphi-envia-email-main/USendMail.dfm
 ExeDelphi/delphi-envia-email-main/USendMail.pas
+CieloEDIProject_FullDynamic/CieloEDIProject.res
+CieloEDIProject_FullDynamic/CieloEDIProjectAll.dpr
+CieloEDIProject_FullDynamic/CieloEDIProjectAll.dproj
+CieloEDIProject_FullDynamic/CieloEDIProjectAll.res
+CieloEDIProject_FullDynamic/UCieloEDIReaderFullDynamic.dfm
+CieloEDIProject_FullDynamic/UCieloEDIReaderFullDynamic.pas
+CieloEDIProject_FullDynamic/UDetalheRegistro.dfm
+CieloEDIProject_FullDynamic/UDetalheRegistro.pas
+CieloEDIProject_FullDynamic/UPesquisaEDI.dfm
+CieloEDIProject_FullDynamic/UPesquisaEDI.pas

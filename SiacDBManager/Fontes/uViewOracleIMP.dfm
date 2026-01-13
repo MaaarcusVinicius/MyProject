@@ -243,7 +243,6 @@ object ViewOracleIMP: TViewOracleIMP
           Height = 23
           CharCase = ecUpperCase
           TabOrder = 1
-          Text = 'IMPORT'
         end
         object chk_UtilizarImpDP: TCheckBox
           Left = 456
