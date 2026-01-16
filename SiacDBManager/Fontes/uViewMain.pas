@@ -347,7 +347,6 @@ type
     procedure img_logoEnableMouseLeave(Sender: TObject);
     procedure img_UserLoginMouseEnter(Sender: TObject);
     procedure img_UserLogoutMouseLeave(Sender: TObject);
-    procedure img_UserLogoutClick(Sender: TObject);
     procedure tmr_trocaLogoEmpresaTimer(Sender: TObject);
     procedure img_logoEmpresaBrancoClick(Sender: TObject);
     procedure img_logoEmpresaAzulClick(Sender: TObject);
@@ -1739,13 +1738,28 @@ end;
 
 procedure TViewMain.img_logoEnableClick(Sender: TObject);
 begin
-  AlternaSplitViewOpen(SplitViewMenu);
+  if vGbl_UsuarioAutorizado then
+  begin
+    AlternaSplitViewOpen(SplitViewMenu);
+  end
+  else
+  begin
+    MessageDlg(
+      '🚫 Acesso negado!' + sLineBreak +
+      'Usuário "' + vGbl_UserLogin + '" não possui permissão para acessar o controle de Menus.' + sLineBreak +
+      'Entre em contato com o administrador do sistema.',
+      mtWarning, [mbOK], 0
+    );
+    Abort; // Impede execução de qualquer ação adicional
+  end;
 end;
 
 procedure TViewMain.img_logoEnableDblClick(Sender: TObject);
 begin
   AlternaSplitViewClose(SplitViewMenu);
 end;
+
+
 
 procedure TViewMain.img_logoEnableMouseEnter(Sender: TObject);
 begin
@@ -1780,11 +1794,6 @@ procedure TViewMain.img_UserLoginMouseEnter(Sender: TObject);
 begin
   img_UserLogout.Visible := True;
   img_UserLogin.Visible := False;
-end;
-
-procedure TViewMain.img_UserLogoutClick(Sender: TObject);
-begin
-  ShowMessage('Fazer Logout');
 end;
 
 procedure TViewMain.img_UserLogoutMouseLeave(Sender: TObject);
@@ -1979,8 +1988,22 @@ end;
 
 procedure TViewMain.img_logoDesableClick(Sender: TObject);
 begin
-  AlternaSplitViewOpen(SplitViewMenu);
+  if vGbl_UsuarioAutorizado then
+  begin
+    AlternaSplitViewOpen(SplitViewMenu);
+  end
+  else
+  begin
+    MessageDlg(
+      '🚫 Acesso negado!' + sLineBreak +
+      'Usuário "' + vGbl_UserLogin + '" não possui permissão para acessar o controle de Menus.' + sLineBreak +
+      'Entre em contato com o administrador do sistema.',
+      mtWarning, [mbOK], 0
+    );
+    Abort; // Impede execução de qualquer ação adicional
+  end;
 end;
+
 
 procedure TViewMain.img_logoDesableMouseEnter(Sender: TObject);
 begin
@@ -2636,8 +2659,6 @@ begin
   act_Configuracao.Enabled := True;
   btn_deleteTriggers.Enabled := True;
 end;
-
-
 
 procedure TViewMain.ValidarPermissaoAcao(const NomeAcao: string);
 begin

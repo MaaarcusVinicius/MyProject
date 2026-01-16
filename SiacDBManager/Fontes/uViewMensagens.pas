@@ -87,6 +87,7 @@ begin
   begin
     pnl_nao.Visible := False;
     btn_sim.Caption := 'OK (Enter)' ;
+    pnl_sim.Align := alRight ;
   end;
 end;
 

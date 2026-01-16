@@ -83,22 +83,6 @@ object ViewMensagens: TViewMensagens
       ParentFont = False
       WordWrap = True
     end
-    object pnl_linhaCabecario: TPanel
-      Left = 0
-      Top = 35
-      Width = 675
-      Height = 1
-      BevelOuter = bvNone
-      Color = clBackground
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentBackground = False
-      ParentFont = False
-      TabOrder = 0
-    end
     object pnl_botoes: TPanel
       Left = 387
       Top = 168
@@ -109,11 +93,11 @@ object ViewMensagens: TViewMensagens
       ParentBackground = False
       TabOrder = 1
       object pnl_nao: TPanel
-        Left = 0
+        Left = 138
         Top = 0
-        Width = 137
+        Width = 132
         Height = 41
-        Align = alLeft
+        Align = alRight
         BevelOuter = bvNone
         Color = clCrimson
         Font.Charset = DEFAULT_CHARSET
@@ -127,7 +111,7 @@ object ViewMensagens: TViewMensagens
         object btn_nao: TSpeedButton
           Left = 0
           Top = 0
-          Width = 137
+          Width = 132
           Height = 41
           Align = alClient
           Caption = 'N'#195'O ( ESC )'
@@ -139,18 +123,16 @@ object ViewMensagens: TViewMensagens
           Font.Style = [fsBold]
           ParentFont = False
           OnClick = btn_naoClick
-          ExplicitLeft = 24
-          ExplicitTop = 8
-          ExplicitWidth = 23
-          ExplicitHeight = 22
+          ExplicitLeft = -32
+          ExplicitWidth = 137
         end
       end
       object pnl_sim: TPanel
-        Left = 138
+        Left = 0
         Top = 0
         Width = 132
         Height = 41
-        Align = alRight
+        Align = alLeft
         BevelOuter = bvNone
         Color = clSkyBlue
         Font.Charset = DEFAULT_CHARSET
@@ -176,9 +158,25 @@ object ViewMensagens: TViewMensagens
           Font.Style = [fsBold]
           ParentFont = False
           OnClick = btn_simClick
-          ExplicitLeft = 5
+          ExplicitLeft = -56
         end
       end
+    end
+    object pnl_linhaCabecario: TPanel
+      Left = 0
+      Top = 35
+      Width = 675
+      Height = 1
+      BevelOuter = bvNone
+      Color = clBackground
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 0
     end
   end
 end

@@ -426,7 +426,6 @@ object ViewMain: TViewMain
             0D11F3A13E74812524CDC31AD89172B01F2A7EBC66482988A723D4E556227C1B
             973C03CFD4D370714FC7A3E9B4DE77EC5F6B8454437EFDEB63AFC503E05F0314
             433C0132793F0000000049454E44AE426082}
-          OnClick = img_UserLogoutClick
           OnMouseLeave = img_UserLogoutMouseLeave
           ExplicitLeft = 8
           ExplicitTop = -16
