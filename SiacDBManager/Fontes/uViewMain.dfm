@@ -5423,7 +5423,7 @@ object ViewMain: TViewMain
           Top = 20
           Width = 100
           Height = 22
-          Hint = 'Servidor do Banco de Dados'
+          Hint = 'IP/HOST NAME'
           AutoSize = False
           CharCase = ecUpperCase
           TabOrder = 2

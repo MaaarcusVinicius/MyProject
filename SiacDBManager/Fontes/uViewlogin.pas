@@ -78,7 +78,7 @@ begin
   FListaUsuarios.Clear;
 
   // Lista base — Usuários autorizados - Acesso Full
-//  FListaUsuarios.Add('marcus');          // Analista de Sistemas
+  FListaUsuarios.Add('marcus');          // Analista de Sistemas
   FListaUsuarios.Add('EMILIO');          // Analista de Sistemas - Teste
 
   FListaUsuarios.Add('wandersonb');      // Analista Implantação
