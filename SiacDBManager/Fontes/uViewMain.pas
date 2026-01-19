@@ -1545,7 +1545,7 @@ procedure TViewMain.btn_versaoSistemaClick(Sender: TObject);
 begin
   // Mostra a Versão do sistema, somente pra preencher a tela com botões.
   fnc_criar_menssagem('Siac DBManager',
-                      'Versão do Sistema  -  1.1.5.3 - R07  -  @2025',
+                      'Versão do Sistema  -  1.1.5.3 - R08  -  @2026',
                       'Todos direitos reservados à: www.siacsistemas.com.br',
                       ExtractFilePath(Application.ExeName) + 'Arquivos\icones\icon_aviso.png',
                       'OK');
